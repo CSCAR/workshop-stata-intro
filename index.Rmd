@@ -1,4 +1,4 @@
---- 
+---
 title: "Introduction to Stata"
 author: "Josh Errickson"
 date: "`r Sys.Date()`"
@@ -9,4 +9,35 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# Introduction
+# Preface
+
+## Contact Information
+
+### CSCAR
+
+- Office Hours: Monday-Friday 9am to 5pm (Closed Tuesday 12-1pm)
+- Phone: 734.764.7828
+- Statistical Assistance: stats-consulting@umich.edu
+- Data Science Assistance: ds-consulting@umich.edu
+- High Performance Computing: hpc-consulting@umich.edu
+- http://cscar.research.umich.edu/
+
+### Author
+
+- Josh Errickson
+- 3550 Rackham Building
+- 915 E. Washington Street
+- Ann Arbor, MI 48109-1070
+- Email: jerrick@umich.edu
+
+## Acknowledgments
+
+These notes have evolved over the years thanks to many CSCAR
+statisticians, including Giselle Kolenic, Brady West, Heidi Reichert,
+and Lingling Zhang.
+
+This material was created for use in workshops and short courses
+presented by faculty and staff from the Consulting for Statistics,
+Computing \& Analytics Research (CSCAR) at the University of
+Michigan. No part of this material may be used for other purposes,
+copied, changed, or sold.
