@@ -3,7 +3,10 @@ title: "Introduction to Stata"
 author: "Josh Errickson"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output:
+  bookdown::gitbook:
+    config:
+      sharing: null
 documentclass: book
 link-citations: yes
 github-repo: rstudio/bookdown-demo
