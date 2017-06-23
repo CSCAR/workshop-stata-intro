@@ -7,3 +7,4 @@ _bookdown_files
 rsconnect
 0*.Rmd
 *.log
+.DS_Store
