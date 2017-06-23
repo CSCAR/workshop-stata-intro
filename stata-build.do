@@ -2,5 +2,5 @@ local files 01-basics 02-working-with-data-sets 03-data-management ///
 			04-data-manipulation 05-programming
 
 foreach f in `files' {
-	dyndoc stata_do/`f'.do, saving("`f'.Rmd") replace
+	dyndoc raw_stata/`f'.do, saving("`f'.Rmd") replace
 }
