@@ -314,7 +314,7 @@ independent. (In other words, the variable is of one type, the remainder (in any
 - We are fitting the model on on the subset where `z > 5`.
 - There are two options, `vce(robust)` which changes how the model is estimated and `beta` which changes how the output is displayed.
 
-^#^^#^^#^ referring to variables
+^#^^#^^#^ Referring to variables
 
 In the example of the `regress` command above, we refered to 4 variables, `x1` through `x4`. If you have only a few variables to refer to, typing each
 in (or double-clicking on their entry in the Variables window) is sufficient. However, if the number of variables grows, this becomes
