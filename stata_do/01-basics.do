@@ -1,7 +1,6 @@
-Basics
-============
+^#^ Basics
 
-## The Stata Environment
+^#^^#^ The Stata Environment
 
 [![](../images/stata_main_screen.png)](../images/stata_main_screen.png)
 
@@ -52,7 +51,7 @@ where Stata will look to find data files and other associated Stata
 files unless the user specifies another directory. We will cover
 examples of changing the working directory.
 
-## One Data
+^#^^#^ One Data
 
 One functionality where Stata differs than most other statistical or
 data analysis software is that Stata can only have a single data set
@@ -71,7 +70,7 @@ If you have multiple data sets you need to work with, you can either
 
 2. Merge the data sets, the better option. We'll discuss [merging](#merge) later.
 
-## Give Stata a command
+^#^^#^ Give Stata a command
 
 Let's try running a Stata command. In the command window, type (or copy) the following:
 
@@ -94,7 +93,7 @@ In this document, if you see a single command without a period, it indicates som
 first line is the command prefaced by the `.`, that was run in Stata and only the Results are included since they include the command. The command can
 still be run, *but should be run without the `.`*.
 
-## Updating
+^#^^#^ Updating
 
 If you have administrative access on your computer (e.g. if it is your personal machine, or your IT department has given you the ability), you can
 update Stata freely. Major point upgrades such as the newly released 15.0 require reinstallation, but minor upgrades (such as the 14.1 and 14.2
@@ -114,7 +113,7 @@ update all
 
 If you do not have administrative access on your computer, you'll need to reach out to your IT administrators to update.
 
-## Installing user-written commands
+^#^^#^ Installing user-written commands
 
 In addition to built in commands, Stata supports user-written programs, know as "ado-files"^[As we'll see in [a bit](#do-files), you can save Stata
 commands in a "do-file". While I've never seen an official definition, I tend to think of "ado" as "automatic do".]. Once installed, these
@@ -154,7 +153,7 @@ adoupdate, update
 
 to update any.
 
-## Do-files
+^#^^#^ Do-files
 
 We [saw](#the-stata-environment) that commands can be typed interactively, one command at a time, and the results immediately observed. From this, the
 output can be copied/exported/printed, or the results can be saved. However, a better paradigm would save all the commands run separately so that the
@@ -199,11 +198,20 @@ compress
 We will cover in later sections what each of these commands does ([`sysuse`](working-with-data-sets.html#sysuse), [`summarize`](#summarize), [`compress`](#compress)).
 
 
-### Comments
-### Version control
-## Basic command syntax
-### referring to variables (`var1 var2 var3` vs `var1-var3` vs `var*`)
-## Stata Help
-### Short commands
-## `set more off`
-## Working directory
+^#^^#^^#^ Comments
+
+^#^^#^^#^ Version control
+
+^#^^#^ Basic command syntax
+
+^#^^#^^#^ referring to variables
+
+(`var1 var2 var3` vs `var1-var3` vs `var*`)
+
+^#^^#^ Stata Help
+
+^#^^#^^#^ Short commands
+
+^#^^#^ `set more off`
+
+^#^^#^ Working directory
