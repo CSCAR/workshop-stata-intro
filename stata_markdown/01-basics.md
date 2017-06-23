@@ -200,13 +200,136 @@ We will cover in later sections what each of these commands does ([`sysuse`](wor
 
 ^#^^#^^#^ Comments
 
+Comments are information in a Do-file which Stata will ignore. They can be used to stop a command from running without deleting it, or more usefully,
+to add information about the code which may be useful for others (or yourself in the future) to understand how some code works or to justify you made
+choices you did. In generaly, comments can also help readability. There are three different ways to enter comments (and one additional special way).
+
+First, to comment out an entire line, precede it by `*`:
+
+~~~~
+<<dd_do>>
+* This is a comment
+<</dd_do>>
+~~~~
+
+Second, you can add a comment to the end of a line with `//``
+
+~~~~
+<<dd_do>>
+version // Returns the Stata version number
+// You can also use it to comment out an entire line.
+<</dd_do>>
+~~~~
+
+Note that there must be a space before the `//` if it comes after a command:
+
+~~~~
+<<dd_do>>
+version// Returns the Stata version number
+<</dd_do>>
+~~~~
+
+Thirdly, you can comment out a section by wrapping it in `/*` and `*/`
+
+~~~~
+<<dd_do>>
+/* Here's a several
+line comment.
+It just keeps going. */
+summarize /* comment in the middle of a command! */ price
+<</dd_do>>
+~~~~
+
+Finally, there's the special comment, `///`. Stata commands must be on a single line. However, complicated commands may get very long, such that its
+hard to read them on a single line. Using `///` instead of `//` allows wrapping onto the next line.
+
+~~~~
+<<dd_do>>
+summarize ///
+price
+<</dd_do>>
+~~~~
+
+As with `//`, there needs to be a space before the `///`.
+
+Note, only the `*` works on interactive commands entered in the Command window. All four versions work in Do-files.
+
 ^#^^#^^#^ Version control
+
+When writing a Do-file, you generally are creating it while using a single version of Stata. If a new version of Stata were released, its possible
+that your code may operate differently with the new version. If you add
+
+```
+version 14.2
+```
+
+to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you've updated to Stata 15. This
+works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 15 when you only have Stata 14 installed.)
+
+Note that this `version` is the same command as the `version` we've been discussing [before](#giving-stata-a-command). It operates in this special
+fashion only when included at the top of a Do-file.
+
+Best practices is to always include a `version ##.#` line at the top of each Do-file, but if its code that will continue to see use, you should test
+it with the newer releases and update the code as neccessary!
 
 ^#^^#^ Basic command syntax
 
+Most commands which operate on variables (as opposed to system commands such as `version` that we've been discussing) follow the same general
+format. Recognizing this format will make it easier to understand new commands that you are introduced.
+
+The basic syntax is
+
+```
+command <variable(s)>, <options>
+```
+
+The command can take on more than one word; e.g. to create a scatter plot, the command is `graph twoway scatter`.
+
+Depending on the command, the list of variables can contain 0 variables, 1 variable, or many variables separated by spaces. Whether the order of
+variables matters depends on the specific command.
+
+The options are not reqiured, but if they are given, they too are separated by spaces. There are some options that are consistent across a number of
+commands, and some options are specific to commands.
+
+There's an additional piece; if you want to run a command on a subset of the data, we add to the syntax:
+
+```
+command <variable(s)> if <condition>, <options>
+```
+
+We will cover this [in more detail](data-manipulation.html#subsetting) later, including how to specify the condition.
+
+As an example, if we were to fit a linear regression model^[This course does not cover fitting statistical models, see the follow-up course for
+further detail], the command might be
+
+```
+regress y x1 x2 x3 x4 if z > 5, vce(robust) beta
+```
+
+Without getting too into the details of how the command works, we can see examine the command.
+
+- The command is `regress`.
+- In the list of variables, the first position (the `y`) in a privleged position as the depenedent variable, and all remaining variables are
+independent. (In other words, the variable is of one type, the remainder (in any order) are another type.)
+- We are fitting the model on on the subset where `z > 5`.
+- There are two options, `vce(robust)` which changes how the model is estimated and `beta` which changes how the output is displayed.
+
 ^#^^#^^#^ referring to variables
 
-(`var1 var2 var3` vs `var1-var3` vs `var*`)
+In the example of the `regress` command above, we refered to 4 variables, `x1` through `x4`. If you have only a few variables to refer to, typing each
+in (or double-clicking on their entry in the Variables window) is sufficient. However, if the number of variables grows, this becomes
+tedious. Thankfully there are two alternatives.
+
+First, we can use the wildcard `\*`^[This is the reason why `*` as a comment does not work in the middle of a line (and we use `//` instead).] For
+example, we could refer to those 4 `x#` variables as `x*`. However, be careful, as this would also match `x5`, `x6`, `xage`, `xcats`, etc. It can also
+be used in the middle or beginning, e.g.:
+
+- `c*t` would match `cat`, `caught` and `ct`
+- `*2` would match `age2`, `gender2` and `salary2012`.
+
+Alternatively, if the variables we want to include are next to each other in the data (e.g. in the Variables window), we can refer to a list of
+them. If the variables in the window are `a` through `z`, alphabetically, then `b-e` would include `b`, `c`, `d`, and `e`. We will discuss
+the `[order](#order)` command later to re-order variables.
 
 ^#^^#^ Stata Help
 
