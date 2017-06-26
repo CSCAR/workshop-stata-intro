@@ -329,7 +329,8 @@ help summarize
 
 Each help page has numerous features, I will merely point out a few here.
 
-1. The "Title" section contains a link (in <span style="color:blue">blue</span>) to a PDF which contains more detail and examples than the help file alone.
+1. The "Title" section contains a link (in <span style="color:blue">blue</span>) to a PDF which contains the Manual, which has more detail and
+   examples than the help file alone.
 2. The syntax section shows the basic syntax. Any part written in square brackets (`[...]`) are optional.
 3. The examples in the help are great but basic; the PDF help (see #1) usually has more detailed examples.
 4. We will discuss the "Stored results" in the [Programming](programming.html) section.
