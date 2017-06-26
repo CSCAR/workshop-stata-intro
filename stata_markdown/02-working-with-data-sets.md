@@ -46,11 +46,55 @@ webuse hiwaym
 <</dd_do>>
 ~~~~
 
+`webuse` supports the `clear` option as well.
+
 The exercises in this workshop will be using mostly built-in data sets as it makes distribution easy!
 
 ^#^^#^ Opening data
 
-^#^^#^^#^ `use` vs open
+As you may have deduced from the `sysuse` and `webuse` commands above, the command to load local data is `use`:
+
+```
+use <filename>
+```
+
+As discussed in the [working directory](basics.html#working-directory) section, Stata can see only files in its working directory, so only the name of
+the file needs to be passed. If the file exists in a different directory, you will need to give the full (or relative path). For example, if your
+working directory is "C:\Documents\Stata" and the file you are looking for, "mydata", is in the "Project" subfolder, you could open it with any of the
+following:
+
+```
+use C:\Documents\Stata\Project\mydata
+use Project\mydata
+cd Project
+use mydata
+```
+
+If the location of your file is much different than your working directory, it can be quicker just to use the menu "File -> Open" and use the file
+open dialog box instead. As with all commands, the `use` command will be echoed in the Results after using the dialog box, allowing you to add it to a
+Do-file.
+
+As with `sysuse` and `webuse`, the `clear` option discards the existing data regardless of unsaved changes.
+
+^#^^#^^#^ File paths
+
+There are some distinctions between Windows and Mac in regards to file paths, the most blatant that Windows uses forward slashs (`\\`) whereas Mac uses
+back slashes (`\/`). You can see full details of this by running `help filename`.
+
+^#^^#^^#^ Loading subsets of the data
+
+Though I would rarely recommend its use, you can load only a subset of the data into the program at a time. Generally I would recommend loading the
+full data and then [discarding](data-manipulation.html#keep-drop) the extraneous information. However, if your data is very large, it might be handy
+to only load in some of it rather than the entire thing. As this is a lesser-used option we won't go into too much detail, but as an example, if I
+wanted to load only the variables named "bp", "heartrate" and "date" from the data set "patientdata", restricted to male patients, I might use
+something like
+
+```
+use bp heartrate date if gender == "male" using patientdata
+```
+
+Here, `using` and `if` are subcommands, which we will see used more as the day goes on. For further details, see `help use`, specifically the manual
+which goes into further detail.
 
 ^#^^#^ Saving data
 
