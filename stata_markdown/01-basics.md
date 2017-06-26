@@ -333,8 +333,101 @@ the `[order](#order)` command later to re-order variables.
 
 ^#^^#^ Stata Help
 
+Stata has, hands down, the best built-in help files of any of the "Big 4" statisical software^[I consider the "Big 4" as Stata, SAS, SPSS, and R. Both
+SAS and SPSS have terrible help; R's is very hit-or-miss.] Stata's help should be your first stop for any of the following:
+
+- Understanding the syntax of a command
+- Exploring the options available for a given command
+- Looking at examples of the command in use
+- Understanding the theoretical statistics behind the command.
+
+Help can be accessed by calling `help <command>`, such as
+
+```
+help summarize
+```
+
+Each help page has numerous features, I will merely point out a few here.
+
+1. The "Title" section contains a link (in <span style="color:blue">blue</span>) to a PDF which contains more detail and examples than the help file alone.
+2. The syntax section shows the basic syntax. Any part written in square brakcets (`[...]`) are optional.
+3. The examples in the help are great but basic; the PDF help (see #1) usually has more detailed examples.
+4. We will discuss the "Stored results" in the [Programming](programming.html) section.
+
+Finally, `help help` works and brings up some more information on the `help` command.
+
+
 ^#^^#^^#^ Short commands
+
+You'll frequently see commands with partial underlining; for example `summarize` has the "su" underlined. Only the underlined part needs to be given
+for Stata to understand the command; e.g. the following are all equivalent:
+
+```
+summarize
+summ
+su
+```
+
+This is often true for options as well; `detail` (to report far more summary details) has the "d" underlined. So these are equivalent:
+
+```
+summarize, detail
+su, detail
+summarize, d
+su, d
+```
+
+The short commands are very useful for quickly writing commands, but not so great at reading them. If you came across someone else's Stata Do-file and
+saw `su, d`, you might have trouble figuring that out unless you already knew that short command. Thankfully, the short commands can be used with
+`help`, so `help su` will bring up the full `summarize` documentation.
 
 ^#^^#^ `set more off`
 
+Stata has an option, `more`, which, if a command were to produce voluminous output, breaks the output into "pages" so that you can see it page-by-page.
+
+![](../images/s14v15.png)
+
+Through Stata 14, the default was that this was on. Starting with Stata 15, the default is off. You can turn this on or off,
+
+```
+set more on
+set more off
+```
+
+This settings will only last as long as Stata is open. To make the change persist, use the `permanently` options:
+
+```
+set more on, permanently
+set more off, permanently
+```
+
 ^#^^#^ Working directory
+
+We mentioned [earlier](#the-stata-environment) the notion of a "working directory", the current one you can see in the bottom left of the Stata
+window. You can think of a working directory as an open folder inside Windows Explorer (or Finder if you're on a Mac). You can easily access any file
+within that folder without any additional trouble. You can access files in other folders (directories), but it requires moving to that folder.
+
+In the same sense, when referring to files, any file in the working directory can be referred to buy its name. For example, to open a file (we'll go
+into detail about doing this [later](working-with-data-sets.html#opening-data)) named "mydata.dta" which is in your current working directory, you
+need only enter
+
+```
+use mydata.dta
+```
+
+If you were in a different working directory, you need to specify the full path to the file:
+
+```
+use C:\Documents\Stata\Project\mydata.dta
+```
+
+Similarly, when saving files, the working directory is the default choice.
+
+The working directory can be changed with the `cd` command
+
+```
+cd C:\Documents\Stata\Project
+```
+
+Alternatively and perhaps more easily, you can change the working directory by the menus, choosing "Files -> Change working directory". After
+selecting the appropriate directory, the full `cd` command will be printed in the Results, so you can save it in a Do-file for later use.
