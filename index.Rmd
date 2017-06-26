@@ -27,6 +27,13 @@ The table of contents is found on the left hand side, with subsections expanding
 
 All images should link to full-size versions to see detail if needed.
 
+### Stata 14 vs Stata 15
+
+Given that Stata 15 has been released relatively recently to this workshop (July 2017), while the workshop is designed with and taught towards Stata
+15, we will flag areas where Stata 14 performs differently. Look for the following image to designate such areas:
+
+![](../images/s14v15.png)
+
 ## Contact information
 
 ### CSCAR
