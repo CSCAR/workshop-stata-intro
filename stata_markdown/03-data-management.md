@@ -62,7 +62,18 @@ help formats
 "value label" and "variable label" are used to display more information when running analyses using these variables. See [the label](#labels) section
 for further details.
 
-If you have a very large number of variables you may wish to suppress the table of variables:
+Finally, if the data is sorted, `describe` will provide information about the sorting.
+
+`describe` can also be used on a per variable basis:
+
+~~~~
+<<dd_do>>
+describe mpg
+describe rep78-turn
+<</dd_do>>
+~~~~
+
+If you have a very large number of variables you may wish to suppress the table of variables entirely:
 
 ~~~~
 <<dd_do>>
@@ -140,11 +151,124 @@ automatically change types. So don't hesitate to run `compress` occasionally!
 
 ^#^^#^ Labels
 
+A raw data set is very sparse on context. In addition to the data itself, it will have at most a variable name, which in Stata cannot include spaces
+and is limited to 32 characters. All other context associated with the data must either be documented in a data dictionary or exist in the
+recollection of the analyst.
+
+In an Excel file, to get around this, you might add additional content to the sheet outside of the raw data - a note here, a subtitle there,
+etc. However, Stata does not allow such arbitrary storage. In contrast, Stata allows you to directly **label** parts of the data with context
+information which will be displayed in the appropriate Results, to make Stata output much easier to read. All three different versions use the `label`
+command.
+
 ^#^^#^^#^ `label data`
 
 ^#^^#^^#^ `label variable`
 
+Variables names, as mentioned, are limited to 32 characters and do not allow spaces (or several other special characters). This is to encourage you to
+choose short, simple, and memorable variable names, since you'll likely be typing them a lot!
+
+We can easily add more information with a variable label. If you look at the `describe` output, you'll notice that the auto data set already has
+variable labels applied to it.
+
+~~~~
+<<dd_do>>
+describe
+<</dd_do>>
+~~~~
+
+We can see variable `rep78` (an utterly incomprehensible name at first glance, as opposed to `mpg`) has the label "--------". You can apply your own
+variable labels (or overwrite existing by using the command:
+
+```
+label variable <variable name> "Variable label"
+```
+
+For example,
+
+~~~~
+<<dd_do>>
+label variable turn "Some new label for turn"
+describe turn
+<</dd_do>>
+~~~~
+
 ^#^^#^^#^ `label values`
+
+It is tempting to store categorical variables as strings. If you ask, for example, for someone's state of residence, you might store the answers as
+"MI", "OH", "FL", etc. However, Stata (like most statistical software) cannot handle string variables.^[In the few situations where it can, it doesn't
+handle them cleanly.] A much better way to store this data would be to assign each state a numerical value, say MI = 1, OH = 2, FL = 3, etc, then keep
+a data dictionary linking the values to the labels they represent.
+
+Stata allows you to store this value labels information within the data set, such that whenever the values are output, the labels are printed
+instead. Let's take a look at the `foreign` variable. This variable takes on two levels, and we can tabulate it to see how many cars are in each
+category.
+
+~~~~
+<<dd_do>>
+tab foreign
+<</dd_do>>
+~~~~
+
+Here it appears that `foreign` is stored as two strings, but we know from `describe` that it is not:
+
+~~~~
+<<dd_do>>
+describe foreign
+<</dd_do>>
+~~~~
+
+Instead, let's look at that table ignoring the value labels:
+
+~~~~
+<<dd_do>>
+tab foreign, nolabel
+<</dd_do>>
+~~~~
+
+Now we see the values which are actually stored.
+
+If you look at the `describe` output above, you'll notice that in the "value labels" category has "country". In Stata, the value labels information
+are *stored separately* from the variables. They are two separate components - there is a variable and there is a value label. You connect the value
+label to a variable to use it.
+
+The benefit of this separated structure is that if you have several variables which have the same coding scheme (e.g. a series of Likert scale
+questions, where 1-5 represents "Strongly Disagree"-"Strongly Agree"), you can create a single value label and rapidly apply it to all variables
+necessary.
+
+Correspondingly, this process requires two commands. First we define the value labels, using
+
+```
+label define <label name> <value> "<label>" <value> "<label>" .....
+```
+
+For example, if we wanted to recreate the value label associated with `foreign`,
+
+~~~~
+<<dd_do>>
+label define foreign_label 0 "Foreign" 1 "Domestic"
+<</dd_do>>
+~~~~
+
+Value labels exist in the data set, regardless of whether they are attached to any variables, we can see all value labels with
+
+~~~~
+<<dd_do>>
+label list
+<</dd_do>>
+~~~~
+
+Here we see the original ------- as well as our new `foreign_label`. To attach it to the variable `foreign`,
+
+~~~~
+<<dd_do>>
+label values foreign foreign_label
+<</dd_do>>
+~~~~
+
+
+
+
+
 
 ^#^^#^ rename, order
 
