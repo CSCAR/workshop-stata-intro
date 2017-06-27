@@ -86,7 +86,7 @@ As with `sysuse` and `webuse`, the `clear` option discards the existing data reg
 
 ^#^^#^^#^ File paths
 
-There are some distinctions between Windows and Mac in regards to file paths, the most blatant that Windows uses forward slashs (`\\`) whereas Mac uses
+There are some distinctions between Windows and Mac in regards to file paths, the most blatant that Windows uses forward slash (`\\`) whereas Mac uses
 back slashes (`\/`). You can see full details of this by running `help filename`.
 
 ^#^^#^^#^ Loading subsets of the data
@@ -143,7 +143,7 @@ technically none of these are "required", ignoring them will lead to a lot more 
 - Ensure each column is of one "type" - if the column is supposed to be numbers, don't include any words!
 - Make missing values blank (unless you are interested in types of missingness, in which case be sure to have a coherent coding scheme).
 
-Once you have cleanaed your data, you can choose "File -> Import -> Excel Spreadsheet (*.xls, *.xlsx)". The next dialog allows you to tweak the
+Once you have cleaned your data, you can choose "File -> Import -> Excel Spreadsheet (*.xls, *.xlsx)". The next dialog allows you to tweak the
 options. Important options include
 
 - *Worksheet*: Make sure you are importing the correct sheet!

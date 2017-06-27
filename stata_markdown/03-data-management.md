@@ -8,7 +8,7 @@ sysuse auto
 <</dd_do>>
 ~~~~
 
-You can reload it as neccessary (if you modify it and want the original) by re-running this with the `clear` option. Feel free to make frequent use
+You can reload it as necessary (if you modify it and want the original) by re-running this with the `clear` option. Feel free to make frequent use
 of [`preserve` and `restore`](working-with-data-sets.html#preserverestore).
 
 
@@ -21,7 +21,7 @@ questions (even if some of them are approximations):
     - Is there a variable which uniquely identifies each unit of analysis?
     - If the data is repeated measures in some form (multiple rows per person, or data is students across several classrooms), what variable(s)
       identify the levels and groups?
-- Are there any variables which are strings (non-numeric) that you plan on using in some statistical analysis (and will need to be converetd to numeric)?
+- Are there any variables which are strings (non-numeric) that you plan on using in some statistical analysis (and will need to be converted to numeric)?
 - Which variables are continuous (can take on any value in some reasonable range, such as weight) vs which are categorical (take on a set number of
   values where each represents something).
 
@@ -51,7 +51,7 @@ Next, there is a table listing each variable in the data and some information ab
 they all represent numeric variables. String variables are represented as `str##` where the `##` represent the number of characters that the string
 can be, e.g. `str18` shows that `make` has a maximum of 18 letters. (This limit is irrelevant, again, see [`compress`](#compress) for details.)
 
-The "display format" column cotains format information about each variable which only control how the variables are displayed in data view. For the
+The "display format" column contains format information about each variable which only control how the variables are displayed in data view. For the
 most part you can ignore these and leave them at the default, though you may need to work with this if you have date or time information. For further
 details see
 
