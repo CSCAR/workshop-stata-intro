@@ -76,7 +76,7 @@ Note that if the path (or file name) contains any spaces, you need to wrap the e
 use "C:\Documents\Stata\My Project\My Data"
 ```
 
-It is not wrong to always use quotes, so perhaps that's a safer option.
+It is never wrong to use quotes (just not always required), so perhaps that's a safer option.
 
 If the location of your file is much different than your working directory, it can be quicker just to use the menu "File -> Open" and use the file
 open dialog box instead. As with all commands, the `use` command will be echoed in the Results after using the dialog box, allowing you to add it to a
@@ -102,7 +102,7 @@ use bp heartrate date if gender == "male" using patientdata
 ```
 
 Here, `using` and `if` are subcommands, which we will see used more as the day goes on. For further details, see `help use`, specifically the manual
-which goes into further detail.
+which has the full documentation.
 
 ^#^^#^ Saving data
 
@@ -156,9 +156,9 @@ options. Important options include
 
 Stata reads all the data and tries to predict whether each column represents a number or a string. To do so, it goes through some logic.
 
-1) Is anything in the column non-numeric? If yes, it is a String. If no, continue.
-2) Is anything in the column formatted as a Date or Time? If yes, it is a Date or Time. If no, continue.
-3) It is a number.
+1. Is anything in the column non-numeric? If yes, it is a String. If no, continue.
+2. Is anything in the column formatted as a Date or Time? If yes, it is a Date or Time. If no, continue.
+3. It is a number.
 
 If Stata makes mistakes here (usually because the data is formatted oddly), things can go wrong. The last option, "Import all data as strings" can be
 used to force Stata to treat everything as a string so that it reads in the data *exactly* as stored in the Excel sheet so that you can clean it up
