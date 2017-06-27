@@ -13,3 +13,6 @@ clean:
 	@rm -rf 0*.Rmd _book build-stata.log
 
 fresh: clean default
+
+open:
+	@open _book/index.html
