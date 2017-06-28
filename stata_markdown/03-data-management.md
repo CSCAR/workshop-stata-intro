@@ -81,6 +81,15 @@ describe, short
 <</dd_do>>
 ~~~~
 
+Alternatively, the `simple` option returns only the names of the variables, in column-dominant order (meaning you read down the columns not across the
+rows).
+
+~~~~
+<<dd_do>>
+describe, simple
+<</dd_do>>
+~~~~
+
 ^#^^#^ Data Notes
 
 You can attach notes to a data set, which will be saved along with the data and reloaded when you open it again. This can be handy to use in place of
@@ -157,8 +166,8 @@ recollection of the analyst.
 
 In an Excel file, to get around this, you might add additional content to the sheet outside of the raw data - a note here, a subtitle there,
 etc. However, Stata does not allow such arbitrary storage. In contrast, Stata allows you to directly **label** parts of the data with context
-information which will be displayed in the appropriate Results, to make Stata output much easier to read. All three different versions use the `label`
-command.
+information which will be displayed in the appropriate Results, to make Stata output much easier to read as well as removing the need for an external
+data dictionary. All three different versions use the `label` command.
 
 ^#^^#^^#^ `label data`
 
@@ -176,14 +185,14 @@ describe
 <</dd_do>>
 ~~~~
 
-We can see variable `rep78` (an utterly incomprehensible name at first glance, as opposed to `mpg`) has the label "--------". You can apply your own
-variable labels (or overwrite existing by using the command:
+We can see variable `rep78` (an utterly incomprehensible name at first glance, as opposed to `mpg`) has the label "Repair Record 1978". You can apply
+your own variable labels (or overwrite existing by using the command:
 
 ```
 label variable <variable name> "Variable label"
 ```
 
-For example,
+For example:
 
 ~~~~
 <<dd_do>>
@@ -227,29 +236,36 @@ tab foreign, nolabel
 
 Now we see the values which are actually stored.
 
-If you look at the `describe` output above, you'll notice that in the "value labels" category has "country". In Stata, the value labels information
-are *stored separately* from the variables. They are two separate components - there is a variable and there is a value label. You connect the value
-label to a variable to use it.
+Look at the `describe` output:
+
+~~~~
+<<dd_do>>
+describe foreign
+<</dd_do>>
+~~~~
+
+You'll notice that in the "value label" column has `origin` attached to `foreign`. In Stata, the value labels information are *stored separately* from
+the variables. They are two separate components - there is a variable and there is a value label. You connect the value label to a variable to use it.
 
 The benefit of this separated structure is that if you have several variables which have the same coding scheme (e.g. a series of Likert scale
 questions, where 1-5 represents "Strongly Disagree"-"Strongly Agree"), you can create a single value label and rapidly apply it to all variables
 necessary.
 
-Correspondingly, this process requires two commands. First we define the value labels, using
+Correspondingly, this process requires two commands. First we define the value labels:
 
 ```
 label define <label name> <value> "<label>" <value> "<label>" .....
 ```
 
-For example, if we wanted to recreate the value label associated with `foreign`,
+For example, if we wanted to recreate the value label associated with `foreign`:
 
 ~~~~
 <<dd_do>>
-label define foreign_label 0 "Foreign" 1 "Domestic"
+label define foreign_label 0 "Domestic" 1 "Foreign"
 <</dd_do>>
 ~~~~
 
-Value labels exist in the data set, regardless of whether they are attached to any variables, we can see all value labels with
+Value labels exist in the data set, regardless of whether they are attached to any variables, we can see all value labels:
 
 ~~~~
 <<dd_do>>
@@ -257,7 +273,7 @@ label list
 <</dd_do>>
 ~~~~
 
-Here we see the original ------- as well as our new `foreign_label`. To attach it to the variable `foreign`,
+Here we see the original `origin` as well as our new `foreign_label`. To attach it to the variable `foreign`:
 
 ~~~~
 <<dd_do>>
@@ -265,13 +281,227 @@ label values foreign foreign_label
 <</dd_do>>
 ~~~~
 
+If we wanted to attach a single value label to multiple variables, we could simply provide a list of variables:
+
+```
+label values <var1> <var2> <var3> <label>
+```
 
 
+To remove the value labels from a variable, use the `label values` command with no label name following the variable name:
 
+~~~~
+<<dd_do>>
+label values foreign
+describe foreign
+<</dd_do>>
+~~~~
 
+You can view all value labels in the data set:
 
-^#^^#^ rename, order
+~~~~
+<<dd_do>>
+label list
+<</dd_do>>
+~~~~
 
-^#^^#^ `summary`
+Note that value labels exist within a data set regardless of whether they are attached to a variable. If there is a label value that you no longer
+want to keep in the data-set, you can drop it:
 
-^#^^#^ `codebook`
+~~~~
+<<dd_do>>
+label drop foreign_label
+label list
+<</dd_do>>
+~~~~
+
+This will *not* remove the value labels from any variables, but they will no longer be active (i.e. if you run `describe` it will still show that the
+value labels are attached, but running `tab` will not use them). So in order to completely remove a value label, you'll need to both remove it from
+the variable as well as the data.
+
+**Do not forget** that modifying value labels counts as modifying the data. Make sure you `save, replace` after making these modifications (if you
+want to keep them) or they'll be lost!
+
+^#^^#^ Managing variables
+
+In Stata, managing the names and order of variables is important to make entering commands easier due to
+the [shortcuts for referring to variables](basics.html#referring-to-variables). Recall that variables can be referred to using wildcards (e.g. `a*` to
+include `age`, `address` or `a10`, or using `var1-var10` to include all variables between `var1` and `var10` as they are ordered). Of course, you may
+also want to rename or re-order variables for other reasons such as making the data easier to look at.
+
+To rename variables:
+
+```
+rename <oldname> <newname>
+```
+
+For example:
+
+~~~~
+<<dd_do>>
+rename rep78 repair_record_1978
+describe, simple
+<</dd_do>>
+~~~~
+
+The output truncated the name because it was so long.
+
+To rename multiple variables, you can run multiple `rename` commands, or else you can give multiple old and new names:
+
+~~~~
+<<dd_do>>
+rename (mpg trunk turn) (mpg2 trunk2 turn2)
+describe, simple
+<</dd_do>>
+~~~~
+
+The first old variable is renamed to the first new variable, the second to the second, etc. The parantheses are required.
+
+Variable names are unique; if you wanted to swap to variable names, you'd have to name one to a temporary name, rename the second, then rename the
+first again. Alternately, you can do it simultaneously:
+
+```
+rename (var1 var2) (var2 var1)
+```
+
+You can use wildcards in the renaming too. For example, imagine you had a collection of variables from a longitudinal data set, "visit1\_age",
+"visit1\_weight", "visit1\_height", etc. To simplify variable names, we'd prefer to use "age1", "weight1", etc.
+
+```
+rename visit1_* *1
+```
+
+Finally, you can change a variable name to upper/lower/proper case easily by passing `upper`/`lower`/`proper` as an argument and giving no new
+variable name.
+
+~~~~
+<<dd_do>>
+rename length, upper
+describe, simple
+<</dd_do>>
+~~~~
+
+Turning to variable ordering, the `order` command takes a list of variables and moves them to the front/end/before a certain variable/after a certain
+variable. The options `first`, `last`, `before(<variable>)` and `after(<variable>)` control this.
+
+~~~~
+<<dd_do>>
+order foreign // The default is `first`
+describe, simple
+order weight, last
+describe, simple
+order mpg2 trunk2, before(displacement)
+describe, simple
+<</dd_do>>
+~~~~
+
+^#^^#^ Summarizing the data
+
+While these notes will not cover anything statistical, it can be handy from a data management perspective to look at some summary statistics, mostly
+to identify problematic variables. Among other things, we can try and detect
+
+- Unexpectedly missing data
+- Incorrectly coded data
+- Errors/typos in input data
+- Incorrect assumptions about variable values
+
+There are numerous ways to look at summary statistics, from obtaining one-number summaries to visualizations, but we will focus on two Stata commands,
+`summarize` and `codebook`.
+
+`summarize` produces basic summary statistics *for numeric variables
+
+~~~~
+<<dd_do>>
+summarize
+<</dd_do>>
+~~~~
+
+The table reports the total number of non-missing values (`make` appears to be entirely missing because it is non-numeric), the mean (the average
+value), the standard deviation (a measure of how spread out the data is) and the minimum and maximum non-missing^[As we
+discuss [later](data-manipulation.html#gen), in Stata, missing values (represented by `.` in the data) are considered to be higher than any other
+number (so 99999 < .).] values observed.
+
+Here's some suggestions of how to look at these values.
+
+- Make sure the amount of missing data is expected. If the number of observations is lower than anticpated, is it an issue with the data collection?
+  Or did the import into Stata cause issues? 5 cars have no `repair_record_1978`.
+- The mean should be a reasonable number, somewhere in the rough middle of the range of possible values for the variable. If you have age recorded for
+  a random selection of adults and the mean age is 18, something has gone wrong. If the mean age is -18, something has gone tragically wrong!
+- The standard deviation is hard to interpret precisely, but in a very rough sense, 2/3rds of the values should lie within 1 standard deviation of the
+  mean. For example, consider `mpg2`. The mean is ~21 and the standard deviation is ~6, so roughly 2/3rds of the cars have `mpg2` between 15
+  and 27. Does this seems reasonable? If the standard deviation is very high compared to the mean (e.g. if `mpg2`'s standard deviation was 50) or
+  close to 0, that could indicate an issue.
+- Are the max and min reasonable? If the minimum `LENGTH` was -9, that's problematic. Maybe -9 is the code for missing values? If the range of
+  `LENGTH` is 14 to 2500, maybe the units differ? They measured in feet for some cars and inches for others?
+
+`summarize` can also take a list of variables, e.g.
+
+~~~~
+<<dd_do>>
+summarize t*
+<</dd_do>>
+~~~~
+
+For more detailed information, we can look at the codebook. `codebook` works similarly to `describe` and `summarize` in the sense that without any
+additional arguments, it displays information on every variable; you can pass it a list of variables to only operate on those. Because `codebook`'s
+output is quite long, we only demonstrate the restricted version. Before we do that, we reload the "auto" data because we messed with it quite a bit
+earlier!
+
+First, categorical data:
+
+~~~~
+<<dd_do>>
+sysuse auto, clear
+codebook rep78
+<</dd_do>>
+~~~~
+
+We see that `rep78` takes on six unique values (Up to 5 repairs, plus the missing data represented by `.`). If the unique values is more than
+expected, it's something to investigate.
+
+Next, continuous variables:
+
+~~~~
+<<dd_do>>
+codebook price
+<</dd_do>>
+~~~~
+
+We still see the number of unique values reported, but here every observation has a unique value (74 unique values, 74 rows in the data). There is no
+missing data. The percentiles should be checked to see if they're reasonable, if 90% of the cars had a price under $100, something's not right.
+
+Finally, string variables:
+
+~~~~
+<<dd_do>>
+codebook make
+<</dd_do>>
+~~~~
+
+We get less information here, but still useful to check that the data is as expected. There are no empty strings nor any repeated strings. The warning
+about "embedded blanks" is spaces; it's telling us that there are spaces in some of the cars (e.g. "Dodge Magnum"). The reason it is a warning is that
+"Dodge_Magnum" and "Dodge__Magnum" read the same to us, but that extra space means Stata recognizes these as two different variables.
+
+Two options for `codebook` which come in handy:
+
+~~~~
+<<dd_do>>
+codebook, compact
+<</dd_do>>
+~~~~
+
+`compact` shows a reduced size version, most useful for the "Unique" column. (Useful if that's the only thing you're running the codebook for.)
+
+~~~~
+<<dd_do>>
+codebook, problems
+<</dd_do>>
+~~~~
+
+This reports potential issues Stata has discovered in the data. In this data, neither are really concerns (We can run `compress`, but this isn't a
+"problem" so much as a suggestion. We already saw above the concern about "embedded blanks.") More serious problems that it can detect include:
+
+- Constant columns (all entries being the same value, including all missing).
+- Issues with value labels (if you've attached a value label to a variable and subsequently deleted the value label without detaching it; or if your
+  variable takes on values unaccounted for in the value label).
+- Issues with date variables.
