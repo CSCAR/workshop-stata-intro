@@ -355,7 +355,7 @@ describe, simple
 <</dd_do>>
 ~~~~
 
-The first old variable is renamed to the first new variable, the second to the second, etc. The parantheses are required.
+The first old variable is renamed to the first new variable, the second to the second, etc. The parentheses are required.
 
 Variable names are unique; if you wanted to swap to variable names, you'd have to name one to a temporary name, rename the second, then rename the
 first again. Alternately, you can do it simultaneously:
@@ -423,7 +423,7 @@ number (so 99999 < .).] values observed.
 
 Here's some suggestions of how to look at these values.
 
-- Make sure the amount of missing data is expected. If the number of observations is lower than anticpated, is it an issue with the data collection?
+- Make sure the amount of missing data is expected. If the number of observations is lower than anticipated, is it an issue with the data collection?
   Or did the import into Stata cause issues? 5 cars have no `repair_record_1978`.
 - The mean should be a reasonable number, somewhere in the rough middle of the range of possible values for the variable. If you have age recorded for
   a random selection of adults and the mean age is 18, something has gone wrong. If the mean age is -18, something has gone tragically wrong!
