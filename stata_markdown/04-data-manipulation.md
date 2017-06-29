@@ -97,9 +97,9 @@ help functions
 `_n`, `_N`
 
 
-^#^^#^ replace
+^#^^#^ `replace`
 
-blah
+^#^^#^^#^ Conditional generation
 
 ^#^^#^ `egen`
 
