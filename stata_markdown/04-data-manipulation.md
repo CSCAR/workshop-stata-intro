@@ -92,6 +92,17 @@ help functions
 
 ^#^^#^^#^ Creating dummies
 
+Dummy variables (also known as indicator variables or binary variables) are variables which take on two values, 0 and 1^[Technically and mathmetically
+they can take on any two values, but your life will be easier if you stick with the 0/1 convention.]. These are typically used in a setting where the
+0 represents an absence of something (or an answer of "no") and 1 represents the presence (or an answer of "yes"). When naming dummy variables, you
+should keep this in mind to make understanding the variable easier, as well as extracting interpretations regarding the variable in a model.
+
+For example, "gender" is a poor dummy variable - what does 0 gender or 1 gender represent? Obviously we could (and should)
+use [value labels](data-management.html#value-labels) to associate 0 and 1 with particular genders, but it is more straightforward to use "female" as
+the dummy variable - a 0 represents "no" to the question of "Female?", hence male; and a 1 represents a "yes" or "female".
+
+
+
 ^#^^#^^#^ Hidden variables
 
 `_n`, `_N`
