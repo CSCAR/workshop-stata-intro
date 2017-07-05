@@ -99,9 +99,24 @@ should keep this in mind to make understanding the variable easier, as well as e
 
 For example, "gender" is a poor dummy variable - what does 0 gender or 1 gender represent? Obviously we could (and should)
 use [value labels](data-management.html#value-labels) to associate 0 and 1 with particular genders, but it is more straightforward to use "female" as
-the dummy variable - a 0 represents "no" to the question of "Female?", hence male; and a 1 represents a "yes" or "female".
+the dummy variable - a 0 represents "no" to the question of "Female?", hence male; and a 1 represents a "yes", hence female.
+
+If you are collecting data, consider collecting data as dummies where appropriate - if the question has a binary response, encode it as a dummy
+instead of strings. If a question has categorical responses, consider encoding them as a series of dummy variables instead (e.g. "Are you from MI?",
+"Are you from OH?" etc). These changes will (usually) need to be made later anyways.
+
+Before we discuss creating dummy variables, we need to understand logical operators. Consider the following statements
+
+^$$^
+  4 > 2
+^$$^
+^$$^
+  1 > 2
+^$$^
 
 
+Remembering back to middle school math classes that ^$^>^$^ means "greater than", clearly the first statement is true and the second statement is
+false.
 
 ^#^^#^^#^ Hidden variables
 
