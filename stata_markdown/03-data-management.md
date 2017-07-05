@@ -418,8 +418,8 @@ summarize
 
 The table reports the total number of non-missing values (`make` appears to be entirely missing because it is non-numeric), the mean (the average
 value), the standard deviation (a measure of how spread out the data is) and the minimum and maximum non-missing^[As we
-discuss [later](data-manipulation.html#gen), in Stata, missing values (represented by `.` in the data) are considered to be higher than any other
-number (so 99999 < .).] values observed.
+discuss [later](data-manipulation.html#conditional-variable-generation), in Stata, missing values (represented by `.` in the data) are considered to
+be higher than any other number (so 99999 < .).] values observed.
 
 Here's some suggestions of how to look at these values.
 
