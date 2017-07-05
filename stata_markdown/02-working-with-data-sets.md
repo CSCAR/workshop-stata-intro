@@ -42,7 +42,7 @@ as [http://www.stata-press.com/data/r15/](http://www.stata-press.com/data/r15/).
 
 ~~~~
 <<dd_do>>
-webuse hiwaym
+webuse hiway
 <</dd_do>>
 ~~~~
 
