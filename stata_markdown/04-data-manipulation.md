@@ -181,18 +181,12 @@ list make if _n <= 2
 
 A more useful example is to save the initial row numbering in your data. When we discuss [sorting](#sorting) later, it may be useful to be able to
 return to the original ordering. Since `_n` changes when the data is re-sorted, if we save the initial row numbers to a permanent variable, we can
-always re-sort by it later.
+always re-sort by it later. `_N` is slightly less useful but can be used similarly.
+
 
 ~~~~
 <<dd_do>>
 gen row = _n
-<</dd_do>>
-~~~~
-
-`_N` is slightly less useful but operates similarly:
-
-~~~~
-<<dd_do>>
 gen totalobs = _N
 list row totalobs in 1/5
 <</dd_do>>
