@@ -192,6 +192,20 @@ list row totalobs in 1/5
 <</dd_do>>
 ~~~~
 
+^#^^#^^#^ Extension to `generate`
+
+The command `egen` offers some functionality that `generate` lacks, for example creating the mean of several variables
+
+```
+egen <newvar> = rowmean(var1, var2, var3)
+```
+
+The functions which `egen` support are fairly esoteric; you can see the full list in the help:
+
+```
+help egen
+```
+
 ^#^^#^ `replace`
 
 [Earlier](#generate) we created the `weight2` variable which changed the units on weight from pounds to tons. What if, instead of creating a new variable,
@@ -308,8 +322,6 @@ replace cost_maint = 3 if rep78 > 3
 ```
 
 Of course, we could also generate it in the reverse order (3 to 1).
-
-^#^^#^ `egen`
 
 ^#^^#^ Subsetting
 
