@@ -128,6 +128,19 @@ false. We can assign values of true and false to any such conditional statements
 | \&         | and (both statements are true) | ^$^(4 > 2)^$^ \& ^$^(3 == 3)^$^     | ^$^(4 > 2)^$^ \& ^$^(1 > 2)^$^ |
 | ^$^\|^$^   | or (either statement is true)  | ^$^(3 == 2) \| (1 \geq 2)^$^        | ^$^(4 < 2) \| (1 > 2)^$^       |
 
+Now here's the catch: In Stata^[This is true of most statistical software in fact], conditional statements return 1 (True) and 0 (False). So we can
+use them in `gen` statements to create binary variables easily.
+
+~~~~
+<<dd_do>>
+gen price_over_40k = price > 4000
+list price price_over_40k in 1/5, abbr(100)
+<</dd_do>>
+~~~~
+
+(Note that `list` truncates variable names to 8 characters by default. The `abbr(#)` argument abbreviates to other lengths; setting it to a large
+number removes abbreviating at all.)
+
 ^#^^#^^#^ Hidden variables
 
 `_n`, `_N`
