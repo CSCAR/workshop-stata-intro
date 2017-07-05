@@ -9,10 +9,10 @@ sysuse auto, clear
 ~~~~
 
 
-^#^^#^ `gen`
+^#^^#^ `generate`
 
-The `gen` command can be used to create new variables which are functions of existing variables. For example, if we look at the variable label for
-`weight`, we see that it is measured in pounds.
+The `generate` command can be used to create new variables which are functions of existing variables. For example, if we look at the variable label
+for `weight`, we see that it is measured in pounds.
 
 ~~~~
 <<dd_do>>
@@ -20,15 +20,15 @@ describe weight
 <</dd_do>>
 ~~~~
 
-Let's create a second weight variable measured in tons. The syntax for `gen` is straightforward,
+Let's create a second weight variable measured in tons. The syntax for `generate` is straightforward,
 
 ```
-gen <new varname> = <function of old variables>
+generate <new varname> = <function of old variables>
 ```
 
 ~~~~
 <<dd_do>>
-gen weight2 = weight/2000
+generate weight2 = weight/2000
 <</dd_do>>
 ~~~~
 
@@ -56,7 +56,7 @@ very right-skewed - most people make $30k-50k, and a few people make 6 or 7 digi
 
 ~~~~
 <<dd_do>>
-gen logprice = log(price)
+generate logprice = log(price)
 label variable logprice "Log price"
 list *price in 1/5
 <</dd_do>>
@@ -131,11 +131,11 @@ false. We can assign values of true and false to any such conditional statements
 You can also use paranthese in combination with \& and ^$^\|^$^ to create more logical statements (e.g. TRUE \& (FALSE ^$^\|^$^ TRUE) returns true).
 
 Now here's the catch: In Stata^[This is true of most statistical software in fact], conditional statements return 1 (True) and 0 (False). So we can
-use them in `gen` statements to create binary variables easily.
+use them in `generate` statements to create binary variables easily.
 
 ~~~~
 <<dd_do>>
-gen price_over_40k = price > 4000
+generate price_over_40k = price > 4000
 list price price_over_40k in 1/5, abbr(100)
 <</dd_do>>
 ~~~~
@@ -150,7 +150,7 @@ which have a low cost, or cars which have low maintenance costs (high mileage an
 
 ~~~~
 <<dd_do>>
-gen cheap = price < 3500 | (rep78 <= 2 & mpg > 20)
+generate cheap = price < 3500 | (rep78 <= 2 & mpg > 20)
 list make price rep78 mpg if cheap == 1
 <</dd_do>>
 ~~~~
