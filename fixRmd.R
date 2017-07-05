@@ -22,8 +22,8 @@ for (f in files) {
   text[sections] <- str_replace_all(text[sections], fixed(inline_regexp), "$")
 
   # Fix > and <
-  text <- str_replace_all(text, fixed("&gt;"), ">")
-  text <- str_replace_all(text, fixed("&lt;"), "<")
+  #text <- str_replace_all(text, fixed("&gt;"), ">")
+  #text <- str_replace_all(text, fixed("&lt;"), "<")
 
 
   write.table(text, f, row.names = FALSE, col.names = FALSE, quote = FALSE)

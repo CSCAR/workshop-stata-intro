@@ -108,25 +108,25 @@ instead of strings. If a question has categorical responses, consider encoding t
 Before we discuss creating dummy variables, we need to understand logical operators. Consider the following statements
 
 ^$$^
-  4 > 2
+  4 \gt 2
 ^$$^
 ^$$^
-  1 > 2
+  1 \gt 2
 ^$$^
 
 
-Remembering back to middle school math classes that ^$^>^$^ means "greater than", clearly the first statement is true and the second statement is
+Remembering back to middle school math classes that ^$^\gt^$^ means "greater than", clearly the first statement is true and the second statement is
 false. We can assign values of true and false to any such conditional statements, which use the following set of conditional operators:
 
-| Sign       | Definition                     | True example                        | False example                  |
-|:----------:|:-------------------------------|:-----------------------------------:|:------------------------------:|
-| ^$^==^$^   | equality                       | ^$^3 == 3^$^                        | ^$^3 == 2^$^                   |
-| ^$^>^$^    | greater than                   | ^$^4 > 2^$^                         | ^$^1 > 2^$^                    |
-| ^$^<^$^    | less  than                     | ^$^1 < 2^$^                         | ^$^4 < 2^$^                    |
-| ^$^\geq^$^ | greater than or equal to       | ^$^4 \geq 4^$^                      | ^$^1 \geq 2^$^                 |
-| ^$^\leq^$^ | less than or equal to          | ^$^1 \leq 1^$^                      | ^$^4 \leq 2^$^                 |
-| \&         | and (both statements are true) | ^$^(4 > 2)^$^ \& ^$^(3 == 3)^$^     | ^$^(4 > 2)^$^ \& ^$^(1 > 2)^$^ |
-| ^$^\|^$^   | or (either statement is true)  | ^$^(3 == 2) \| (1 \geq 2)^$^        | ^$^(4 < 2) \| (1 > 2)^$^       |
+| Sign       | Definition                     | True example                        | False example                      |
+|:----------:|:-------------------------------|:-----------------------------------:|:----------------------------------:|
+| ^$^==^$^   | equality                       | ^$^3 == 3^$^                        | ^$^3 == 2^$^                       |
+| ^$^\gt^$^  | greater than                   | ^$^4 \gt 2^$^                       | ^$^1 \gt 2^$^                      |
+| ^$^\lt^$^  | less  than                     | ^$^1 \lt 2^$^                       | ^$^4 \lt 2^$^                      |
+| ^$^\geq^$^ | greater than or equal to       | ^$^4 \geq 4^$^                      | ^$^1 \geq 2^$^                     |
+| ^$^\leq^$^ | less than or equal to          | ^$^1 \leq 1^$^                      | ^$^4 \leq 2^$^                     |
+| \&         | and (both statements are true) | ^$^(4 \gt 2)^$^ \& ^$^(3 == 3)^$^   | ^$^(4 \gt 2)^$^ \& ^$^(1 \gt 2)^$^ |
+| ^$^\|^$^   | or (either statement is true)  | ^$^(3 == 2) \| (1 \geq 2)^$^        | ^$^(4 \lt 2) \| (1 \gt 2)^$^       |
 
 You can also use paranthese in combination with \& and ^$^\|^$^ to create more logical statements (e.g. TRUE \& (FALSE ^$^\|^$^ TRUE) returns true).
 
