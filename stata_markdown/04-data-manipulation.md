@@ -128,6 +128,8 @@ false. We can assign values of true and false to any such conditional statements
 | \&         | and (both statements are true) | ^$^(4 > 2)^$^ \& ^$^(3 == 3)^$^     | ^$^(4 > 2)^$^ \& ^$^(1 > 2)^$^ |
 | ^$^\|^$^   | or (either statement is true)  | ^$^(3 == 2) \| (1 \geq 2)^$^        | ^$^(4 < 2) \| (1 > 2)^$^       |
 
+You can also use paranthese in combination with \& and ^$^\|^$^ to create more logical statements (e.g. TRUE \& (FALSE ^$^\|^$^ TRUE) returns true).
+
 Now here's the catch: In Stata^[This is true of most statistical software in fact], conditional statements return 1 (True) and 0 (False). So we can
 use them in `gen` statements to create binary variables easily.
 
@@ -141,9 +143,65 @@ list price price_over_40k in 1/5, abbr(100)
 (Note that `list` truncates variable names to 8 characters by default. The `abbr(#)` argument abbreviates to other lengths; setting it to a large
 number removes abbreviating at all.)
 
+Now, `price_over_40k` takes on values 1 and 0 depending on whether the conditional statement was true.
+
+For a slightly more complicated example, lets create a dummy variable representing cheap cars. There are two possible definitions of cheap cars - cars
+which have a low cost, or cars which have low maintenance costs (high mileage and low repairs).
+
+~~~~
+<<dd_do>>
+gen cheap = price < 3500 | (rep78 <= 2 & mpg > 20)
+list make price rep78 mpg if cheap == 1
+<</dd_do>>
+~~~~
+
+The `list` commands conditions on `cheap == 1` because again, the conditional statement will return 1 for true and 0 for false. So we see three cheap
+cars, two with low cost and one with low maintenance.
+
 ^#^^#^^#^ Hidden variables
 
-`_n`, `_N`
+The name "hidden variables" may be slightly more dramatic than need be. In Stata, under the [One Data](basics.html#one-data) principal, any
+information in the data^[We'll see some exceptions to this in the [programming](programming.html) section.] must be in a variable. This includes the
+so called "hidden variables" of `_n` and `_N`. You can imagine that each row of your data has two additional columns of data, one for `_n` and one for `_N`.
+
+`_n` represents the row number currently. Currently, meaning if the data is re-sorted, `_n` can change.
+
+`_N` represents the total number of rows in the data, hence this is the same for every row. Again, if the data changes (e.g. you [drop](#keep-drop)
+some data) then `_N` may be updated.
+
+While you cannot access these hidden variables normally, you can use them in generating variables or conditional statements. For example, we've seen
+that `list` can use `in` to restrict the rows it outputs, and we've seen that it can use `if` to choose conditionally. We can combine these:
+
+~~~~
+<<dd_do>>
+list make in 1/2
+list make if _n <= 2
+<</dd_do>>
+~~~~
+
+A more useful example is to save the initial row numbering in your data. When we discuss [sorting](#sorting) later, it may be useful to be able to
+return to the original ordering. Since `_n` changes when the data is re-sorted, if we save the initial row numbers to a permanent variable, we can
+always re-sort by it later.
+
+~~~~
+<<dd_do>>
+gen row = _n
+<</dd_do>>
+~~~~
+
+`_N` is slightly less useful but operates similarly:
+
+~~~~
+<<dd_do>>
+gen totalobs = _N
+list row totalobs in 1/5
+<</dd_do>>
+~~~~
+
+
+
+
+
 
 
 ^#^^#^ `replace`
