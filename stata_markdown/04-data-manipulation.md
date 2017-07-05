@@ -121,6 +121,7 @@ false. We can assign values of true and false to any such conditional statements
 | Sign       | Definition                     | True example                        | False example                      |
 |:----------:|:-------------------------------|:-----------------------------------:|:----------------------------------:|
 | ^$^==^$^   | equality                       | ^$^3 == 3^$^                        | ^$^3 == 2^$^                       |
+| ^$^!=^$^   | not equal                      | ^$^3 != 4^$^                        | ^$^3 != 3^$^                       |
 | ^$^\gt^$^  | greater than                   | ^$^4 \gt 2^$^                       | ^$^1 \gt 2^$^                      |
 | ^$^\lt^$^  | less  than                     | ^$^1 \lt 2^$^                       | ^$^4 \lt 2^$^                      |
 | ^$^\gt=^$^ | greater than or equal to       | ^$^4 \gt= 4^$^                      | ^$^1 \gt= 2^$^                     |
@@ -185,15 +186,128 @@ always re-sort by it later. `_N` is slightly less useful but can be used similar
 
 ~~~~
 <<dd_do>>
-gen row = _n
-gen totalobs = _N
+generate row = _n
+generate totalobs = _N
 list row totalobs in 1/5
 <</dd_do>>
 ~~~~
 
 ^#^^#^ `replace`
 
-^#^^#^^#^ Conditional generation
+[Earlier](#generate) we created the `weight2` variable which changed the units on weight from pounds to tons. What if, instead of creating a new variable,
+we tried to just change the existing `weight` variable.
+
+~~~~
+<<dd_do>>
+generate weight = weight/2000
+<</dd_do>>
+~~~~
+
+Here Stata refuses to proceed since `weight` is already defined. To overwrite `weight`, we'll instead need to use the `replace` command.
+
+~~~~
+<<dd_do>>
+replace weight = weight/2000
+list weight in 1/5
+<</dd_do>>
+~~~~
+
+`replace` features syntax identical to `generate`.^[`generate` has a few features we don't discuss which `replace` doesn't support. Namely, `generate`
+can set the [type](data-managedment.html#compress) manually (instead of letting Stata choose the best type automatically), and `generate` can place
+the new variable as desired rather than [using `order`](data-management.html#managing-variables). Clearly, neither of these features are needed for
+`replace`.]
+
+^#^^#^^#^ Conditional variable generation
+
+One frequent task is recoding variables. This can be "binning" continuous variables into a few categories, re-ordering an ordinal variables, or
+collapsing categories in an already-categorical variable. There are also mulit-variable versions; e.g. combining multiple variables into one.
+
+The general workflow with these cases will be to optionally use `generate` to create the new variable, then use `replace` to conditional replace the
+original or new variable.
+
+As a first example, let's collapse the `rep78` variable into a low/mid/high cost of maintenance categorical variable (1 repair, 2-3 repairs, 4-5
+repairs). First, we'll generate the new variable.
+
+~~~~
+<<dd_do>>
+generate cost_maint = 1
+tab cost_maint
+<</dd_do>>
+~~~~
+
+Without any variables or conditions, every row is set to 1. We'll let the 1 represent the "low" category, so next we'll replace it with 2 for cars in
+the "mid" category.
+
+~~~~
+<<dd_do>>
+replace cost_maint = 2 if rep78 >= 2 & rep78 <= 3
+tab cost_maint
+<</dd_do>>
+~~~~
+
+Finish with the "high" category.
+
+~~~~
+<<dd_do>>
+replace cost_maint = 3 if rep78 > 3
+tab cost_maint
+<</dd_do>>
+~~~~
+
+There's one additional complication. Stata represents missing values by `.`, and `.` has a value of positive infinity. That means that
+
+^$$^
+  400 \lt .
+^$$^
+
+is true! There is some discussion [on the Stata FAQs](http://www.stata.com/support/faqs/data-management/logical-expressions-and-missing-values/) that
+goes into the rationale behind it, but the short version is that this slightly complicates variable generation but greatly simplifies and
+protects [data management tasks](#keep-drop).
+
+The complication referred to can be seen in row 3 here:
+
+~~~~
+<<dd_do>>
+list make rep78 cost_maint in 1/5, abbr(100)
+<</dd_do>>
+~~~~
+
+The AMC Spirit has a high repair cost even though we do not have its repair record. We can fix this easily.
+
+~~~~
+<<dd_do>>
+replace cost_maint = . if rep78 == .
+tab cost_maint, missing
+<</dd_do>>
+~~~~
+
+The `missing` option to `tab` forces it to show a row for any missing values. Without it, missing rows are suppressed.
+
+To summarize, we used the following commands:
+
+```
+generate cost_maint = 1
+replace cost_maint = 2 if rep78 >= 2 & rep78 <= 3
+replace cost_maint = 3 if rep78 > 3
+replace cost_maint = . if rep78 == .
+```
+
+There are various other ways it could have been done, such as
+
+```
+generate cost_maint = 1 if rep78 == 1
+replace cost_maint = 2 if rep78 >= 2 & rep78 <= 3
+replace cost_maint = 3 if rep78 > 3 & rep78 != .
+```
+
+```
+generate cost_maint = .
+replace cost_maint = 1 if rep78 == 1
+replace cost_maint = 2 if rep78 >= 2 & rep78 <= 3
+replace cost_maint = 3 if rep78 > 3
+```
+
+Of course, we could also generate it in the reverse order (3 to 1).
 
 ^#^^#^ `egen`
 
