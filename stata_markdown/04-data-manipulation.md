@@ -183,7 +183,6 @@ A more useful example is to save the initial row numbering in your data. When we
 return to the original ordering. Since `_n` changes when the data is re-sorted, if we save the initial row numbers to a permanent variable, we can
 always re-sort by it later. `_N` is slightly less useful but can be used similarly.
 
-
 ~~~~
 <<dd_do>>
 gen row = _n
@@ -191,12 +190,6 @@ gen totalobs = _N
 list row totalobs in 1/5
 <</dd_do>>
 ~~~~
-
-
-
-
-
-
 
 ^#^^#^ `replace`
 
