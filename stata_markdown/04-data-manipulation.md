@@ -566,9 +566,90 @@ tab date4, nolab
 This can be extended to allow any sort of ordering desired. For this trivial binary example, it might actually be faster to use `gen` and do it
 manually, but for a variable with a large number of categories, this is much easier.
 
+`decode` works in the reverse, creating a string out of a numeric vector with labels attached to it.
+
+~~~~
+<<dd_do>>
+decode date4, gen(date5)
+desc date5
+tab date5
+<</dd_do>>
+~~~~
+
+`decode` will fail if its target does not have value labels attached.
+
+^#^^#^^#^ String manipulation
+
+If you find yourself in a situation where you simply must manipulate the strings directly, there are a number of string functions. You can see the
+full list in `help string functions`, but below we list a few commonly used ones.
+
+- `char`: Returns the number of characters in the string
+- "`+`": Adding two strings together concatenates them (e.g. "abc" + "def" = "abcdef").
+- `strupper` and `strlower`: Converts to lower/upper case.
+- `strtrim`: Removes white space before and after strings (e.g. `strtrim(" string ") = "string"`). To remove only left (preceeding) or right (following)
+  spaces, use `strltrim` or `strrtrim`.
+- `substr`: Returns the substring starting at an index for a given number of characters (e.g. `substr("abcdefg", 2, 3) = "bcd").
+- `wordcount`: Returns the number of whitespace-separated words.
+
+These are used inside `gen` and `replace`, e.g.
+
+~~~~
+<<dd_do>>
+gen date6 = strupper(date5)
+list date5 date6 in 1/5
+<</dd_do>>
+~~~~
+
 ^#^^#^ sorting
 
+We already saw sorting [in the context of `bysort`](#by-and-bysort). We can also sort as a standalone operation. As before, consider generating
+a [original ordering variable](#hidden-variables) first.
+
+We'll switch back to "auto" first.
+
+~~~~
+<<dd_do>>
+sysuse auto, clear
+gen order = _n
+<</dd_do>>
+~~~~
+
+The `gsort` function takes a list of variables to order by.
+
+~~~~
+<<dd_do>>
+gsort rep78 price
+list rep78 price in 1/5
+<</dd_do>>
+~~~~
+
+Stata first sorts the data by `rep78`, ascending (so the lowest value is in row 1). Then within each set of rows that have a common value of `rep78`,
+it sorts by `price`.
+
+You can append "+" or "-" to each variable to change whether it is ascending or descending. Without a prefix, the variable is sorted ascending.
+
+~~~~
+<<dd_do>>
+gsort +rep78 -price
+list rep78 price in 1/5
+<</dd_do>>
+~~~~
+
+Recall that missing values (`.`) are [larger than any other values](data-manipulation.html#conditional-variable-generation). When sorting with missing
+values, they follow this rule as well. If you want to treat missing values as smaller than all other values, you can pass the `mfirst` option to
+`gsort`. Note this does *not* make missingness "less than" anywhere else, only for the purposes of the current search.
+
+Sorting strings does work and it does it alphabetically. All capital letters are "less than" all lower case letters, and a blank string ("") is the
+"smallest". For example, if you have the strings "DBC", "Daa", "", "EEE", the sorted ascending order would be "", "DBC", "Daa", "EEE". The blank is
+first; the two strings starting with "D" are before the string "EEE", and the upper case "B" preceeds the lower case "a".
+
+As a sidenote, there is an additional command, `sort`, which can perform sorting. It does not allow sorting in descending order, however it does allow
+you to conditionally sort; that is, passing something like `sort <varname> in <condition>` would sort only those rows for which the condition is true,
+the remaining rows remain *in their exact same position*.
+
 ^#^^#^ Merging Files
+
+
 
 ^#^^#^ Reshaping Files
 
