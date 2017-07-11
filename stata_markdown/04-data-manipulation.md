@@ -325,9 +325,246 @@ Of course, we could also generate it in the reverse order (3 to 1).
 
 ^#^^#^ Subsetting
 
+Almost any Stata command which operates on variables can operate on a subset of the data instead of the entire data, using the conditional statements
+we just learned. Specifically, we can append the `if <condition>` to a command, and the command will be executed as if the data for which the
+conditional does not return True does not exist. This is equivalent to throwing away some data and then peforming the command. In general, you should
+avoid discarding data as you never know when you will possible use it. Of course, you could
+use [`preserve` and `restore`](working-with-data-sets.html#preserverestore) to temporarily remove the data, but using the conditional subsetting is
+more straightforward.
+
+~~~~
+<<dd_do>>
+summ price
+<</dd_do>>
+~~~~
+
+This gives us a summary of price across all cars. What if we wanted to look at the summary only for non-foreign cars?
+
+~~~~
+<<dd_do>>
+tab foreign
+summ price if foreign == 0
+<</dd_do>>
+~~~~
+
+First, we check the label to make sure we're looking at the appropriate value of `foreign`. Now, notice that "Obs", the number of rows of the data, is
+only 52 as we expect! If we look also at foreign cars,
+
+~~~~
+<<dd_do>>
+summ price if foreign == 1
+<</dd_do>>
+~~~~
+
+we see that American cars are cheaper on average^[Note that this is not a statistical claim, we would have to do a two-sample t-test to make any
+statistical claim.].
+
+^#^^#^^#^ `by` and `bysort`
+
+To look at the average price for American and foreign cars, we ran two individual commands. If we wanted to look at the summaries by `rep78`, that
+would take 6 commands (values 1 through 5 and `.`)!
+
+Instead, we can use `by` and `bysort` to perform the same operation over each unique value in a variable. For example, we could repeat the above with:
+
+~~~~
+<<dd_do>>
+by foreign: summ price
+<</dd_do>>
+~~~~
+
+There is a strong assumption here that `foreign` is already sorted. If `foreign` were not sorted (or if you simply didn't want to check/assume it was), you could instead use
+
+```
+bysort foreign: summ price
+```
+
+`bysort` is identical to [sorting](#sorting) first and running the `by` statement afterwards. In general, it is recommended to always use `bysort`
+instead of `by`, *unless* you believe the data is already sorted and want an error if that assumption is violated.
+
+Before running these commands, consider generating a [original ordering variable](#hidden-variables) first.
+
+`bysort`'s variables cannot be conditional statements, so if you wanted to for example get summaries by low and high mileage cars, you'd need to
+generate a dummy variable first.
+
+~~~~
+<<dd_do>>
+gen highmileage = mpg > 20
+bysort highmileage: summ price
+<</dd_do>>
+~~~~
+
+`bysort` can take two or more variables, and performs its commands within each unique combination of the variable. For example,
+
+~~~~
+<<dd_do>>
+bysort foreign highmileage: summ price
+<</dd_do>>
+~~~~
+
+When specifying `bysort`, you can optionally specify a variable to sort on but not to group by. For example, let's say your data consisted of doctors
+visits for patients, where patients may have more than one appointment. You want to generate a variable indicating whether a visit is the first by the
+patient. Say `id` stores the patient id, `date` stores the date of the visit.
+
+```
+bysort id (date): gen firstvisit = _n == 1
+```
+
+By placing `date` in parantheses, this ensures that within each `id`, the data is sorted by `date`. Therefore the first row for each patient is their
+first visit, so `_n == 1` evaluates to 1 only in that first row and 0 zero otherwise.
+
 ^#^^#^^#^ `keep`, `drop`
 
-^#^^#^ encode/decode/tostring/destring
+If you do want to discard data, you can use `keep` or `drop` to do so. They each can perform on variables:
+
+```
+keep <var1> <var2> ...
+drop <var1> <var2> ...
+```
+
+or on observations:
+
+```
+keep if <conditional>
+drop if <conditional>
+```
+
+Note that these *cannot* be combined:
+
+~~~~
+<<dd_do>>
+drop turn if mpg > 20
+<</dd_do>>
+~~~~
+
+`keep` removes all variables except the listed variables, or removes any row which the conditional does not return true.
+
+`drop` removes any listed variables, or removes any row which the codnitional returns true.
+
+^#^^#^ Working with strings and categorical variables
+
+String variables are commonly used during data collection but are ultimately not very useful from a statistical point of view. Typically string
+variables should be represented as [categorical variables with value labels](data-management.html#label-values) as we've previously discussed. Here
+are some useful commands for operating on strings and categorical variables.
+
+^#^^#^^#^ `destring` and `tostring`
+
+These two commands convert strings and numerics between each other.
+
+```
+destring <variable>, gen(<newvar>)
+tostring <variable>, replace
+```
+
+Either can take `replace` (to replace the existing variable with the new one) or `gen( )` (to generate a new variable). I would recommend always using
+`gen` to double-check that the conversion worked as expected, then using `drop`, `rename` and `order` to replace the existing variable.
+
+~~~~
+<<dd_do>>
+desc mpg
+tostring mpg, gen(mpg2)
+desc mpg2
+list mpg* in 1/5
+<</dd_do>>
+~~~~
+Now that the new string is correct, we can replace the existing `mpg`.
+~~~~
+<<dd_do>>
+drop mpg
+rename mpg2 mpg
+order mpg, after(price)
+<</dd_do>>
+~~~~
+Let's go the other way around:
+~~~~
+<<dd_do>>
+desc mpg
+destring mpg, gen(mpg2)
+desc mpg2
+list mpg* in 1/5
+drop mpg
+rename mpg2 mpg
+order mpg, after(price)
+<</dd_do>>
+~~~~
+And we're back to the original set-up^[If you are sharp-eyed, you may have noticed that the original `mpg` was an "int" whereas the final one is a "byte". If we had called [`compress`](data-management.html$compress) on the original data, it would have done that type conversion anyways - so we're ok!]
+
+When using `destring` to convert a string variable (that it storing numeric data as strings - "13", "14") to a numeric variable, if there are *any*
+non-numeric entries, `destring` will fail:
+
+~~~~
+<<dd_do>>
+destring make, gen(make2)
+<</dd_do>>
+~~~~
+
+We must pass the `force` option. With this option, any strings which have non-numeric variables will be marked as missing.
+
+~~~~
+<<dd_do>>
+destring make, gen(make2) force
+tab make2, mi
+<</dd_do>>
+~~~~
+
+`tostring` also accepts the `force` option when using `replace`, we recommend instead to **never** use `replace` with `tostring` (you probably
+shouldn't use it with `destring either!).
+
+^#^^#^^#^ `encode` and `decode`
+
+If we have a string variable which has non-numerical values (e.g. `race` with values "white", "black", "hispanic", etc), the ideal way to store it is
+as numerical with [value labels](data-management.html#label-values) attached. While we could do this manually using a combination of `gen` and
+`replace` with some conditionals, a less tedious way to do so is via `encode`.
+
+The "auto" data set does not have a good string variable to demonstrate this on, so we'll switch to the "surface" data set, which contains sea surface
+temperature measurements from a number of locations over two days. (Remember this will erase any existing unsaved changes! You won't need any
+modifications you've made to "auto" going forward, but if you do want to save it, do so first!)
+
+~~~~
+<<dd_do>>
+sysuse surface, clear
+desc date
+tab date
+<</dd_do>>
+~~~~
+
+The `date` variable is a string with two values. First, let's create a numeric with value labels version manually.
+
+~~~~
+<<dd_do>>
+gen date2 = date == "01mar2011"
+label define date 0 "01mar2011" 1 "11mar2011"
+label values date2 date
+desc date2
+tab date2
+<</dd_do>>
+~~~~
+
+Instead, we can easily use `encode`:
+
+~~~~
+<<dd_do>>
+encode date, gen(date3)
+desc date3
+tab date3
+<</dd_do>>
+~~~~
+
+However, `encode` starts numbering at 1 instead of 0, which is not ideal for dummy variables. To get around this, we can create our value label
+manually first, then pass it as an argument to `encode`.
+
+~~~~
+<<dd_do>>
+label define manualdate 0 "01mar2011" 1 "11mar2011"
+encode date, gen(date4) label(manualdate)
+tab date3
+tab date3, nolab
+tab date4
+tab date4, nolab
+<</dd_do>>
+~~~~
+
+This can be extended to allow any sort of ordering desired. For this trivial binary example, it might actually be faster to use `gen` and do it
+manually, but for a variable with a large number of categories, this is much easier.
 
 ^#^^#^ sorting
 
