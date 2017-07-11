@@ -649,7 +649,92 @@ the remaining rows remain *in their exact same position*.
 
 ^#^^#^ Merging Files
 
+When managing data sets, the need often arises to merge two data sets together, either by matching two files together according to values on certain
+variables, or by adding cases to an existing data set. We’ll start with the simpler case of adding cases to an existing data set.
 
+^#^^#^^#^ Appending Files
+
+Appending is straightforward. Observations in a new data set are appended to the current data set, matching variable names. If a variable in the new
+data set exists already in the open data set, its values are entered there. If a variable in the new data set does not exist in the original, the new
+variable is added to the appended data set which is missing for all members of the original data. This is easiest to visualize. There are two data
+sets on [Stata's website](working-with-data-sets.html#stata-website-data) which we can append, "odd" and "even".
+
+~~~~
+<<dd_do>>
+webuse odd, clear
+list
+webuse even
+list
+<</dd_do>>
+~~~~
+
+It does not truely matter which data set is the "original" and which is the "new" one (it will later in [match-merging](#match-merging-data)), it will
+only affect the sorted order (the original data is sorted first).
+
+~~~~
+<<dd_do>>
+webuse eveb
+append using http://www.stata-press.com/data/r15/odd
+list
+<</dd_do>>
+~~~~
+
+Note that the "number" variable, which exists in both data sets, has complete data, while "even" and "odd" both have missing data as expected.
+
+Stata is case sensitive in its variable names, so "varname" and "Varname" are two unique variables. We could always fix this later with something like
+
+```
+replace varname = Varname if varname == .
+```
+
+but it is better to ensure before appending that the shared variables have identical names.
+
+^#^^#^^#^ Match-merging Data
+
+A more common data management necessity is to add variables from another data set to a working data set, match-merging the cases in the data sets by
+values on a single ID variable (or by values on multiple variables). There are two general forms of this match-merging.
+
+The first, one-to-one merging, occurs when in each data, each individual is represented by only one row. For example, one data set containing final
+exam information and one data set containing demographic information. This "1:1" match takes rows which match on some variable(s) and places them
+together.
+
+The second match, many-to-one, occurs when the data are measured on different "levels". For example, consider if we have one data set containing
+household level characteristics and another containing town level characters. Two households from the same town would want the same town level
+data. This is either "1:m" or "m:1" depending on which data is the "original" and which is "new" (e.g. 1:m indicates the household data is original
+and town is new).
+
+(Technically there is also many-to-many matching, "m:m", but it is rarely used in practice.)
+
+Again, we'll use data sets off Stata's website to demonstrate, specifically the "autosize" and "autocost" data which splits the "auto" data into two
+pieces.
+
+~~~~
+<<dd_do>>
+webuse autosize, clear
+list in 1/5
+webuse autocost
+list in 1/5
+<</dd_do>>
+~~~~
+
+
+HERE BELOW UNEDITED:
+
+All that needs to be specified is the variable to match cases by and the name of the data set with variables to be added. The part “1:1” is to merge
+two files that have one-to-one match on the key variable. Take a look at the resulting data set using the data browser, and we see that the cases in
+the two data files have been matched up by ID,and that the new working data file has all variables in it.
+
+A few notes:
+
+- Stata will sort both files by the key variables before merging.
+- You can match on more than one variable. For example, if you had data based upon year and state, you might run merge 1:1 state year using ...
+- Stata adds a merge variable in the new combined data set. This variable indicates the merging status of each case. If a case had information in both
+  files, merge will be equal to 3. If a case only had information intheworkingfile(partA.dta)whenthemergewasperformed, merge will be equal to 1. If a
+  case only had information in the external file on disk (e.g., those only in the partB.dta), merge will be equal to 2. **If you wanted to merge
+  another file in, you’d need to drop the merge variable first.**
+- IMPORTANT NOTE: Make sure that the only variables common to both files when performing a match-merge are the variables that will be used to match
+  cases (like ID)! Stata will by default keep the variable in the working data set (partA.dta in this case) when the merge is performed, if the same
+  variable appears in more than one file and is not defined as a matching variable. This may cause problems when performing merges.
 
 ^#^^#^ Reshaping Files
 
