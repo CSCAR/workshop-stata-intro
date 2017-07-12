@@ -898,23 +898,22 @@ A few notes:
 - If you have wide data and some individuals are missing some repeated measures, when converting to tall, they will still have a row with a blank
   value. You can easily drop it:
 
-```
-reshape long
-drop if <varname> == .
-```
+    ```
+    reshape long
+    drop if <varname> == .
+    ```
 
-Converting back to wide will re-enter those missing values; `reshape` doesn’t care if the long data is "complete".
-
+    Converting back to wide will re-enter those missing values; `reshape` doesn’t care if the long data is "complete".
 
 - More than one stub can be entered if you have more than one repeated measurement. For example, if the variables were {"id", "x1", "x2", "y1", "y2"},
   you could enter
 
-```
-reshape long x y, i(id) j(index)
-```
+    ```
+    reshape long x y, i(id) j(index)
+    ```
 
-Note that they technically don’t have to have the same indices (e.g. you could have {"x1", "x2", "y3", "y4"}) although that would create a weird
-result where each row of index 1 or 2 is missing `y` and each row of index 3 or 4 is missing `x`.
+    Note that they technically don’t have to have the same indices (e.g. you could have "x1", "x2", "y3", "y4") although that would create a weird
+    result where each row of index 1 or 2 is missing `y` and each row of index 3 or 4 is missing `x`.
 
 - If you have wide data and many time-varying variables, there is no shorthand for entering all the stubs. For large data, this is **extremely**
   frustrating. I'd recommend using `describe, simple` to get a list of all variable names, then using find \& replace to remove the indices. If you
