@@ -50,7 +50,7 @@ describe weight*
 <</dd_do>>
 ~~~~
 
-In addition to direct arithmatic equations, we can use a number of functions to perform calculations. For example, a common transformation is to take
+In addition to direct arithmetic equations, we can use a number of functions to perform calculations. For example, a common transformation is to take
 the log of any dollar amount variable, in our case `price`. This is done because typical dollar amount variables, such as price or salary, tend to be
 very right-skewed - most people make $30k-50k, and a few people make 6 or 7 digit incomes.
 
@@ -62,8 +62,8 @@ list *price in 1/5
 <</dd_do>>
 ~~~~
 
-In that command, `log` is the function name, and it is immediately followed by parantheses which enclose the variable to operate on. Read the
-parantheses as "of", so that `log(price)` is read as "log of price".
+In that command, `log` is the function name, and it is immediately followed by parentheses which enclose the variable to operate on. Read the
+parentheses as "of", so that `log(price)` is read as "log of price".
 
 There are a lot of functions that can be used. We list some commonly used mathematical functions below for your convenience:
 
@@ -92,7 +92,7 @@ help functions
 
 ^#^^#^^#^ Creating dummies
 
-Dummy variables (also known as indicator variables or binary variables) are variables which take on two values, 0 and 1^[Technically and mathmetically
+Dummy variables (also known as indicator variables or binary variables) are variables which take on two values, 0 and 1^[Technically and mathematically
 they can take on any two values, but your life will be easier if you stick with the 0/1 convention.]. These are typically used in a setting where the
 0 represents an absence of something (or an answer of "no") and 1 represents the presence (or an answer of "yes"). When naming dummy variables, you
 should keep this in mind to make understanding the variable easier, as well as extracting interpretations regarding the variable in a model.
@@ -129,7 +129,7 @@ false. We can assign values of true and false to any such conditional statements
 | \&         | and (both statements are true) | ^$^(4 \gt 2)^$^ \& ^$^(3 == 3)^$^   | ^$^(4 \gt 2)^$^ \& ^$^(1 \gt 2)^$^ |
 | ^$^\|^$^   | or (either statement is true)  | ^$^(3 == 2) \| (1 \gt= 2)^$^        | ^$^(4 \lt 2) \| (1 \gt 2)^$^       |
 
-You can also use paranthese in combination with \& and ^$^\|^$^ to create more logical statements (e.g. TRUE \& (FALSE ^$^\|^$^ TRUE) returns true).
+You can also use parentheses in combination with \& and ^$^\|^$^ to create more logical statements (e.g. TRUE \& (FALSE ^$^\|^$^ TRUE) returns true).
 
 Now here's the catch: In Stata^[This is true of most statistical software in fact], conditional statements return 1 (True) and 0 (False). So we can
 use them in `generate` statements to create binary variables easily.
@@ -226,15 +226,15 @@ list weight in 1/5
 <</dd_do>>
 ~~~~
 
-`replace` features syntax identical to `generate`.^[`generate` has a few features we don't discuss which `replace` doesn't support. Namely, `generate`
-can set the [type](data-managedment.html#compress) manually (instead of letting Stata choose the best type automatically), and `generate` can place
-the new variable as desired rather than [using `order`](data-management.html#managing-variables). Clearly, neither of these features are needed for
-`replace`.]
+`replace` features syntax identical to `generate`.^[`generate` has a few features we do not discuss which `replace` does not support. Namely,
+`generate` can set the [type](data-management.html#compress) manually (instead of letting Stata choose the best type automatically), and `generate`
+can place the new variable as desired rather than [using `order`](data-management.html#managing-variables). Clearly, neither of these features are
+needed for `replace`.]
 
 ^#^^#^^#^ Conditional variable generation
 
 One frequent task is recoding variables. This can be "binning" continuous variables into a few categories, re-ordering an ordinal variables, or
-collapsing categories in an already-categorical variable. There are also mulit-variable versions; e.g. combining multiple variables into one.
+collapsing categories in an already-categorical variable. There are also multi-variable versions; e.g. combining multiple variables into one.
 
 The general workflow with these cases will be to optionally use `generate` to create the new variable, then use `replace` to conditional replace the
 original or new variable.
@@ -327,7 +327,7 @@ Of course, we could also generate it in the reverse order (3 to 1).
 
 Almost any Stata command which operates on variables can operate on a subset of the data instead of the entire data, using the conditional statements
 we just learned. Specifically, we can append the `if <condition>` to a command, and the command will be executed as if the data for which the
-conditional does not return True does not exist. This is equivalent to throwing away some data and then peforming the command. In general, you should
+conditional does not return True does not exist. This is equivalent to throwing away some data and then performing the command. In general, you should
 avoid discarding data as you never know when you will possible use it. Of course, you could
 use [`preserve` and `restore`](working-with-data-sets.html#preserverestore) to temporarily remove the data, but using the conditional subsetting is
 more straightforward.
@@ -372,7 +372,8 @@ by foreign: summ price
 <</dd_do>>
 ~~~~
 
-There is a strong assumption here that `foreign` is already sorted. If `foreign` were not sorted (or if you simply didn't want to check/assume it was), you could instead use
+There is a strong assumption here that `foreign` is already sorted. If `foreign` were not sorted (or if you simply did not want to check/assume it
+was), you could instead use
 
 ```
 bysort foreign: summ price
@@ -409,7 +410,7 @@ patient. Say `id` stores the patient id, `date` stores the date of the visit.
 bysort id (date): gen firstvisit = _n == 1
 ```
 
-By placing `date` in parantheses, this ensures that within each `id`, the data is sorted by `date`. Therefore the first row for each patient is their
+By placing `date` in parentheses, this ensures that within each `id`, the data is sorted by `date`. Therefore the first row for each patient is their
 first visit, so `_n == 1` evaluates to 1 only in that first row and 0 zero otherwise.
 
 ^#^^#^^#^ `keep`, `drop`
@@ -438,7 +439,7 @@ drop turn if mpg > 20
 
 `keep` removes all variables except the listed variables, or removes any row which the conditional does not return true.
 
-`drop` removes any listed variables, or removes any row which the codnitional returns true.
+`drop` removes any listed variables, or removes any row which the conditional returns true.
 
 ^#^^#^ Working with strings and categorical variables
 
@@ -506,17 +507,17 @@ tab make2, mi
 <</dd_do>>
 ~~~~
 
-`tostring` also accepts the `force` option when using `replace`, we recommend instead to **never** use `replace` with `tostring` (you probably
-shouldn't use it with `destring either!).
+`tostring` also accepts the `force` option when using `replace`, we recommend instead to **never** use `replace` with `tostring` (you probably should
+not use it with `destring either!).
 
 ^#^^#^^#^ `encode` and `decode`
 
-If we have a string variable which has non-numerical values (e.g. `race` with values "white", "black", "hispanic", etc), the ideal way to store it is
+If we have a string variable which has non-numerical values (e.g. `race` with values "white", "black", "Hispanic", etc), the ideal way to store it is
 as numerical with [value labels](data-management.html#label-values) attached. While we could do this manually using a combination of `gen` and
 `replace` with some conditionals, a less tedious way to do so is via `encode`.
 
 The "auto" data set does not have a good string variable to demonstrate this on, so we'll switch to the "surface" data set, which contains sea surface
-temperature measurements from a number of locations over two days. (Remember this will erase any existing unsaved changes! You won't need any
+temperature measurements from a number of locations over two days. (Remember this will erase any existing unsaved changes! You will not need any
 modifications you've made to "auto" going forward, but if you do want to save it, do so first!)
 
 ~~~~
@@ -586,7 +587,7 @@ full list in `help string functions`, but below we list a few commonly used ones
 - `char`: Returns the number of characters in the string
 - "`+`": Adding two strings together concatenates them (e.g. "abc" + "def" = "abcdef").
 - `strupper` and `strlower`: Converts to lower/upper case.
-- `strtrim`: Removes white space before and after strings (e.g. `strtrim(" string ") = "string"`). To remove only left (preceeding) or right (following)
+- `strtrim`: Removes white space before and after strings (e.g. `strtrim(" string ") = "string"`). To remove only left (preceding) or right (following)
   spaces, use `strltrim` or `strrtrim`.
 - `substr`: Returns the substring starting at an index for a given number of characters (e.g. `substr("abcdefg", 2, 3) = "bcd").
 - `wordcount`: Returns the number of whitespace-separated words.
@@ -641,9 +642,9 @@ values, they follow this rule as well. If you want to treat missing values as sm
 
 Sorting strings does work and it does it alphabetically. All capital letters are "less than" all lower case letters, and a blank string ("") is the
 "smallest". For example, if you have the strings "DBC", "Daa", "", "EEE", the sorted ascending order would be "", "DBC", "Daa", "EEE". The blank is
-first; the two strings starting with "D" are before the string "EEE", and the upper case "B" preceeds the lower case "a".
+first; the two strings starting with "D" are before the string "EEE", and the upper case "B" precedes the lower case "a".
 
-As a sidenote, there is an additional command, `sort`, which can perform sorting. It does not allow sorting in descending order, however it does allow
+As a side note, there is an additional command, `sort`, which can perform sorting. It does not allow sorting in descending order, however it does allow
 you to conditionally sort; that is, passing something like `sort <varname> in <condition>` would sort only those rows for which the condition is true,
 the remaining rows remain *in their exact same position*.
 
@@ -669,7 +670,7 @@ list
 <</dd_do>>
 ~~~~
 
-It does not truely matter which data set is the master data and which is the using data (it will later in [match-merging](#match-merging-data)), it
+It does not truly matter which data set is the master data and which is the using data (it will later in [match-merging](#match-merging-data)), it
 will only affect the sorted order (the data in master is sorted first). The syntax is simply
 
 ```
@@ -757,7 +758,7 @@ A few notes:
 
 - Stata will sort both files by the key variables before and after merging.
 - You can match on more than one variable. For example, if you had data based upon year and state, you might run `merge 1:1 state year using ...`
-- If you wanted to merge another file after the intial merge, you’ll need to drop the `_merge` variable first.
+- If you wanted to merge another file after the initial merge, you’ll need to drop the `_merge` variable first.
 - IMPORTANT NOTE: Make sure that the only variables common to both files when performing a match-merge are the variables that will be used to match
   cases (like ID)! Stata will by default keep the variable in the master data when the merge is performed if the same variable appears in more than
   one file and is not defined as a matching variable. This may cause problems when performing merges. (You can overwrite this behavior with the
@@ -840,7 +841,7 @@ Let's generate the command to convert back to long.
 
 - "stub": "bp" is the stub of `bp1` and `bp2`.
 - "ivar": `patient` identifies individuals.
-- "jvar": Since the data is currently wide, there is no existing jvar and we can call it whatever we like. For consistentcy, we'll call it "when" again.
+- "jvar": Since the data is currently wide, there is no existing jvar and we can call it whatever we like. For consistency, we'll call it "when" again.
 
 The command is identical! Just swap `wide` for `long`.
 
@@ -853,8 +854,8 @@ list in 1/5
 
 The variables are slightly out of order, but we've completely recovered the original data.
 
-After you've run a single `reshape` command, and assuming nothing has changed (you don't want to change "stub", "ivar" or "jvar", and the variables in
-the data are the same), you can convert between wide and long without specifying anything. Try it:
+After you've run a single `reshape` command, and assuming nothing has changed (you do not want to change "stub", "ivar" or "jvar", and the variables
+in the data are the same), you can convert between wide and long without specifying anything. Try it:
 
 ```
 reshape wide
@@ -903,7 +904,7 @@ A few notes:
     drop if <varname> == .
     ```
 
-    Converting back to wide will re-enter those missing values; `reshape` doesn’t care if the long data is "complete".
+    Converting back to wide will re-enter those missing values; `reshape` does not care if the long data is "complete".
 
 - More than one stub can be entered if you have more than one repeated measurement. For example, if the variables were {"id", "x1", "x2", "y1", "y2"},
   you could enter
@@ -933,7 +934,7 @@ duplicates report
 ~~~~
 
 This report is not very interesting; it reports that there are 240 observations which have 1 copy (e.g. are unique), and hence no surplus. Given that
-each row should be unique (just in patient ID and before/after alone), this isn't surprising. Let's instead look at the duplicates just for `bp` and
+each row should be unique (just in patient ID and before/after alone), this is not surprising. Let's instead look at the duplicates just for `bp` and
 `when`:
 
 ~~~~
@@ -950,7 +951,7 @@ as 4 observations with 2 copies.
 
 The number of surplus is the number of non-unique rows in that category. We could compute it ourselves - we know that there are 42 rows with 2 copies,
 so that means that half of the rows are "unique" and the other half are "duplicates" (which is unique and which is duplicate is not clear). So 42/2 =
-21, and we have 21 surprlus.
+21, and we have 21 surplus.
 
 Consider the row for 4 copies. There are 48 rows, each of which belongs to a set of four duplicates. For example, 1, 1, 1, 1, 2, 2, 2, 2, has
 observations 8 and copies 2. In this row, 48/4 = 12, so there are 12 unique values, meaning 36 surplus.
