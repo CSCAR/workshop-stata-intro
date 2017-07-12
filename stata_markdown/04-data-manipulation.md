@@ -654,10 +654,11 @@ variables, or by adding cases to an existing data set. We’ll start with the si
 
 ^#^^#^^#^ Appending Files
 
-Appending is straightforward. Observations in a new data set are appended to the current data set, matching variable names. If a variable in the new
-data set exists already in the open data set, its values are entered there. If a variable in the new data set does not exist in the original, the new
-variable is added to the appended data set which is missing for all members of the original data. This is easiest to visualize. There are two data
-sets on [Stata's website](working-with-data-sets.html#stata-website-data) which we can append, "odd" and "even".
+Appending is straightforward. Observations in a new data set (called the "using" data) are appended to the current data set (called the "master"
+data), matching variable names. If a variable in the using data exists already in the master data, its values are entered there. If a variable in the
+using data does not exist in the master, the new variable is added to the appended data set which is missing for all members of the master data. This
+is easiest to visualize. There are two data sets on [Stata's website](working-with-data-sets.html#stata-website-data) which we can append, "odd" and
+"even".
 
 ~~~~
 <<dd_do>>
@@ -668,8 +669,12 @@ list
 <</dd_do>>
 ~~~~
 
-It does not truely matter which data set is the "original" and which is the "new" one (it will later in [match-merging](#match-merging-data)), it will
-only affect the sorted order (the original data is sorted first).
+It does not truely matter which data set is the master data and which is the using data (it will later in [match-merging](#match-merging-data)), it
+will only affect the sorted order (the data in master is sorted first). The syntax is simply
+
+```
+append using <using data>
+```
 
 ~~~~
 <<dd_do>>
@@ -679,7 +684,12 @@ list
 <</dd_do>>
 ~~~~
 
-Note that the "number" variable, which exists in both data sets, has complete data, while "even" and "odd" both have missing data as expected.
+(We must specify the complete path to the data instead of the `webuse` shorthand of just the data name. Of course, with real data that you locally
+have on your computer, you follow the [working directory](basics.html#working-directory) rules; if the file exists in your working directory you just
+give the name, otherwise give the complete path.)
+
+Note that the "number" variable, which exists in both data sets, has complete data, while "even" and "odd" both have missing data as expected. The
+`using` part of the command is where the term the "using data" comes from.
 
 Stata is case sensitive in its variable names, so "varname" and "Varname" are two unique variables. We could always fix this later with something like
 
@@ -691,7 +701,7 @@ but it is better to ensure before appending that the shared variables have ident
 
 ^#^^#^^#^ Match-merging Data
 
-A more common data management necessity is to add variables from another data set to a working data set, match-merging the cases in the data sets by
+A more common data management necessity is to add variables from another data set to a master data set, match-merging the cases in the data sets by
 values on a single ID variable (or by values on multiple variables). There are two general forms of this match-merging.
 
 The first, one-to-one merging, occurs when in each data, each individual is represented by only one row. For example, one data set containing final
@@ -700,12 +710,12 @@ together.
 
 The second match, many-to-one, occurs when the data are measured on different "levels". For example, consider if we have one data set containing
 household level characteristics and another containing town level characters. Two households from the same town would want the same town level
-data. This is either "1:m" or "m:1" depending on which data is the "original" and which is "new" (e.g. 1:m indicates the household data is original
-and town is new).
+data. This is either "1:m" or "m:1" depending on which data is the master data and which is the using data (e.g. 1:m indicates the household data is
+the master data and town is the using data).
 
 (Technically there is also many-to-many matching, "m:m", but it is rarely used in practice.)
 
-Again, we'll use data sets off Stata's website to demonstrate, specifically the "autosize" and "autocost" data which splits the "auto" data into two
+We'll use data sets off Stata's website again to demonstrate, specifically the "autosize" and "autocost" data which splits the "auto" data into two
 pieces.
 
 ~~~~
@@ -717,25 +727,198 @@ list in 1/5
 <</dd_do>>
 ~~~~
 
+Now we can perform the merge using the syntax.
 
-HERE BELOW UNEDITED:
+```
+merge 1:1 <variables to match on> using <using data set>
+```
 
-All that needs to be specified is the variable to match cases by and the name of the data set with variables to be added. The part “1:1” is to merge
-two files that have one-to-one match on the key variable. Take a look at the resulting data set using the data browser, and we see that the cases in
-the two data files have been matched up by ID,and that the new working data file has all variables in it.
+All that needs to be specified is the variable to match cases by and the name of the data set with variables to be added. We could replace `1:1` with
+`m:1` or `1:m` as desired.
+
+~~~~
+<<dd_do>>
+merge 1:1 make using http://www.stata-press.com/data/r15/autoexpense
+list in 1/7
+<</dd_do>>
+~~~~
+
+(Again, we use the full path but for local files, following [working directory](basics.html#working-directory) rules.)
+
+First, take a look at the output of the merge command. We see that 69 cars were not matched, which means they exist in only one of the two data
+sets. In this case, they all exist in master data, but in general you could see a mix of the two. The remaining 5 observations were appropriately
+matched. This is a terrible merge! Hopefully with your real data, the majority of data is matched and only a few outliers are not matched.
+
+Notice the `(_merge==#)` tags. When you perform a merge, a new variable `_merge` is added which indicates the source for each row: 1 and 2 indicate
+the data was only found in the master data or using data respectively, while 3 indicates a match. There are two other possible values (4 and 5) which
+occur rarely, see the documentation at `help merge` for details.
 
 A few notes:
 
-- Stata will sort both files by the key variables before merging.
-- You can match on more than one variable. For example, if you had data based upon year and state, you might run merge 1:1 state year using ...
-- Stata adds a merge variable in the new combined data set. This variable indicates the merging status of each case. If a case had information in both
-  files, merge will be equal to 3. If a case only had information intheworkingfile(partA.dta)whenthemergewasperformed, merge will be equal to 1. If a
-  case only had information in the external file on disk (e.g., those only in the partB.dta), merge will be equal to 2. **If you wanted to merge
-  another file in, you’d need to drop the merge variable first.**
+- Stata will sort both files by the key variables before and after merging.
+- You can match on more than one variable. For example, if you had data based upon year and state, you might run `merge 1:1 state year using ...`
+- If you wanted to merge another file after the intial merge, you’ll need to drop the `_merge` variable first.
 - IMPORTANT NOTE: Make sure that the only variables common to both files when performing a match-merge are the variables that will be used to match
-  cases (like ID)! Stata will by default keep the variable in the working data set (partA.dta in this case) when the merge is performed, if the same
-  variable appears in more than one file and is not defined as a matching variable. This may cause problems when performing merges.
+  cases (like ID)! Stata will by default keep the variable in the master data when the merge is performed if the same variable appears in more than
+  one file and is not defined as a matching variable. This may cause problems when performing merges. (You can overwrite this behavior with the
+  `update` or `replace` options, see the documentation for details.)
 
 ^#^^#^ Reshaping Files
+
+
+Different data formats are needed for various statistical methods. Stata prefers data in "Long" format, but also makes it easy to convert between Long
+and "Wide". Stata uses the `reshape` command to convert data formats.
+
+[![](../images/wide-vs-long.png)](../images/wide-vs-long.png)
+
+
+In this example, the wide format of the data has each row representing a single observation. The variables "X1", "X2" and "X3" are what make this
+"wide". These are typically variables measured at different time points, but don’t have to be. In the long format, each row represents an observation
+*at a specific index*.
+
+
+A nice feature of Stata's `reshape` command is that the syntax to convert from wide-to-long or from long-to-wide are identical, except for desired
+format (`long` vs `wide`).
+
+Convert to long:
+
+```
+reshape long <stub>, i(<ivar>) j(<jvar>)
+```
+
+Convert to wide:
+
+```
+reshape wide <stub>, i(<ivar>) j(<jvar>)
+```
+
+We need to identify three components, the `stub`, `ivar` and `jvar`.
+
+- "stub": The stub in wide format is the common prefix of the repeated variables names. In the illustration above, "X1", "X2" and "X3" have the common
+  prefix "X". In the long format, the stub is simply the name of the variable which is repeated. In the illustration above, "X" is this
+  variable. Hence the stub is `X` for both.
+- "ivar": The ivar is the id variable. In the long format, this should be constant across individuals. In both formats above, the id is `ID`.
+- "jvar": The jvar in long format is the variable that distinguishes which index each repeated measure is from. In the illustration above, "Index" fills
+  this role. In wide format, this does not exist. So when converting from wide to long, you can use any name for the jvar.
+
+Putting this all together together, the two commands to convert between the illustrations above would be:
+
+```
+reshape long X, i(ID) j(Index)
+reshape wide X, i(ID) j(Index)
+```
+
+As an example, we'll use the built-in data set "bplong"
+
+~~~~
+<<dd_do>>
+sysuse bplong, clear
+list in 1/5
+<</dd_do>>
+~~~~
+
+Each patient has two rows representing their before and after measurements. `when` indicates which time period the measurement occurs in, and `bp` is
+the only time-varying variable (both `sex` and `agegrp` are constant, presumably the "Before" and "After" occur within a short time period such that
+neither of those can change). Let's identify the three components
+
+- "stub": Since we're going from long to wide, the "stub" is any time-varying variables, here only `bp`.
+- "ivar": `patient` identifies individuals.
+- "jvar": `when` identifies time period.
+
+Putting this together,
+
+~~~~
+<<dd_do>>
+reshape wide bp, i(patient) j(when)
+list in 1/5
+<</dd_do>>
+~~~~
+
+Each row represents a single patient, and `bp1` and `bp2` represent the before and after measurements.
+
+Let's generate the command to convert back to long.
+
+- "stub": "bp" is the stub of `bp1` and `bp2`.
+- "ivar": `patient` identifies individuals.
+- "jvar": Since the data is currently wide, there is no existing jvar and we can call it whatever we like. For consistentcy, we'll call it "when" again.
+
+The command is identical! Just swap `wide` for `long`.
+
+~~~~
+<<dd_do>>
+reshape long bp, i(patient) j(when)
+list in 1/5
+<</dd_do>>
+~~~~
+
+The variables are slightly out of order, but we've completely recovered the original data.
+
+After you've run a single `reshape` command, and assuming nothing has changed (you don't want to change "stub", "ivar" or "jvar", and the variables in
+the data are the same), you can convert between wide and long without specifying anything. Try it:
+
+```
+reshape wide
+reshape long
+```
+
+Now, notice that when we reshaped the original long data into wide format, the two "bp" variables where `bp1` and `bp2`, not something like
+`bp_before` and `bp_after`. In most cases this is fine (as the common use case for this is repeated measures over time), but not always - what if we
+wanted to save the "before" and "after" labels? Do note that thankfully Stata saves these labels, so when converting back to long, it restores the
+"Before" and "After" tags.
+
+If you do want to save the text instead of the count, you need to use strings. We'll use [`decode`](#encode-and-decode) to convert to a string, then
+use that as the jvar.
+
+~~~~
+<<dd_do>>
+decode when, gen(when2)
+drop when
+rename when2 when
+reshape wide bp, i(patient) j(when) string
+list in 1/5
+<</dd_do>>
+~~~~
+
+Note the `string` option. When converting back to long, you'll need to `encode` the string to get it back to numeric.
+
+
+~~~~
+<<dd_do>>
+reshape long
+desc when
+encode when, gen(when2)
+drop when
+rename when2 when
+desc when
+<</dd_do>>
+~~~~
+
+A few notes:
+
+- If you have wide data and some individuals are missing some repeated measures, when converting to tall, they will still have a row with a blank
+  value. You can easily drop it:
+
+```
+reshape long
+drop if <varname> == .
+```
+
+Converting back to wide will re-enter those missing values; `reshape` doesn’t care if the long data is "complete".
+
+
+- More than one stub can be entered if you have more than one repeated measurement. For example, if the variables were {"id", "x1", "x2", "y1", "y2"},
+  you could enter
+
+```
+reshape long x y, i(id) j(index)
+```
+
+Note that they technically don’t have to have the same indices (e.g. you could have {"x1", "x2", "y3", "y4"}) although that would create a weird
+result where each row of index 1 or 2 is missing `y` and each row of index 3 or 4 is missing `x`.
+
+- If you have wide data and many time-varying variables, there is no shorthand for entering all the stubs. For large data, this is **extremely**
+  frustrating. I'd recommend using `describe, simple` to get a list of all variable names, then using find \& replace to remove the indices. If you
+  know a better way, [let me know](index.html#contact-information)!
+
 
 ^#^^#^ Dealing with duplicates
