@@ -441,6 +441,99 @@ drop turn if mpg > 20
 
 `drop` removes any listed variables, or removes any row which the conditional returns true.
 
+^#^^#^ Dealing with duplicates
+
+If your data is not expected to have duplicates, either across all variables or within certain variables, the `duplicates` command can make their
+detection and correction easier. The most basic command is `duplicates report`, which simply reports on the status of duplicate rows. Let's reload the
+"bplong" data in case it got changed while we were reshaping.
+
+~~~~
+<<dd_do>>
+sysuse bplong, clear
+duplicates report
+<</dd_do>>
+~~~~
+
+This report is not very interesting; it reports that there are 240 observations which have 1 copy (e.g. are unique), and hence no surplus. Given that
+each row should be unique (just in patient ID and before/after alone), this is not surprising. Let's instead look at the duplicates just for `bp` and
+`when`:
+
+~~~~
+<<dd_do>>
+duplicates report bp when
+<</dd_do>>
+~~~~
+
+Here we have some duplicates. First, there are 23 observations which are fully unique. All other observations have repeats to some extent.
+
+The second row of the output tells of us that there are 42 observations which have 2 copies. The language here can be a bit confusing; all it is
+saying is that there are 42 rows, each of which has a single duplicate *within that same 42*. So if we have values 1, 1, 2, 2, that would be reported
+as 4 observations with 2 copies.
+
+The number of surplus is the number of non-unique rows in that category. We could compute it ourselves - we know that there are 42 rows with 2 copies,
+so that means that half of the rows are "unique" and the other half are "duplicates" (which is unique and which is duplicate is not clear). So 42/2 =
+21, and we have 21 surplus.
+
+Consider the row for 4 copies. There are 48 rows, each of which belongs to a set of four duplicates. For example, 1, 1, 1, 1, 2, 2, 2, 2, has
+observations 8 and copies 2. In this row, 48/4 = 12, so there are 12 unique values, meaning 36 surplus.
+
+Other useful commands include
+
+- `duplicates list`: Shows every set of duplicates, including its row number and value. Obviously for something like this the output would be massive
+    as of the 240 total rows, only 23 are not duplicated to some degree!
+- `duplicates tag <vars>, gen(<newvar>)`: Adds a new variable which represents the number of other copies for each row. For unique rows, this will
+  be 0. For any duplicated rows, it will essentially be "copies" from `duplicates report` minus 1. This can be useful for examining duplicates or
+  dropping them.
+- `duplicates drop`: Be cautious with this, as it drops any row which is a duplicate of a previous row (in other words keeps the first entry of every
+  set of duplicates).
+
+^#^^#^ sorting
+
+We already saw sorting [in the context of `bysort`](#by-and-bysort). We can also sort as a standalone operation. As before, consider generating
+a [original ordering variable](#hidden-variables) first.
+
+We'll switch back to "auto" first.
+
+~~~~
+<<dd_do>>
+sysuse auto, clear
+gen order = _n
+<</dd_do>>
+~~~~
+
+The `gsort` function takes a list of variables to order by.
+
+~~~~
+<<dd_do>>
+gsort rep78 price
+list rep78 price in 1/5
+<</dd_do>>
+~~~~
+
+Stata first sorts the data by `rep78`, ascending (so the lowest value is in row 1). Then within each set of rows that have a common value of `rep78`,
+it sorts by `price`.
+
+You can append "+" or "-" to each variable to change whether it is ascending or descending. Without a prefix, the variable is sorted ascending.
+
+~~~~
+<<dd_do>>
+gsort +rep78 -price
+list rep78 price in 1/5
+<</dd_do>>
+~~~~
+
+Recall that missing values (`.`) are [larger than any other values](data-manipulation.html#conditional-variable-generation). When sorting with missing
+values, they follow this rule as well. If you want to treat missing values as smaller than all other values, you can pass the `mfirst` option to
+`gsort`. Note this does *not* make missingness "less than" anywhere else, only for the purposes of the current search.
+
+Sorting strings does work and it does it alphabetically. All capital letters are "less than" all lower case letters, and a blank string ("") is the
+"smallest". For example, if you have the strings "DBC", "Daa", "", "EEE", the sorted ascending order would be "", "DBC", "Daa", "EEE". The blank is
+first; the two strings starting with "D" are before the string "EEE", and the upper case "B" precedes the lower case "a".
+
+As a side note, there is an additional command, `sort`, which can perform sorting. It does not allow sorting in descending order, however it does allow
+you to conditionally sort; that is, passing something like `sort <varname> in <condition>` would sort only those rows for which the condition is true,
+the remaining rows remain *in their exact same position*.
+
 ^#^^#^ Working with strings and categorical variables
 
 String variables are commonly used during data collection but are ultimately not very useful from a statistical point of view. Typically string
@@ -600,53 +693,6 @@ gen date6 = strupper(date5)
 list date5 date6 in 1/5
 <</dd_do>>
 ~~~~
-
-^#^^#^ sorting
-
-We already saw sorting [in the context of `bysort`](#by-and-bysort). We can also sort as a standalone operation. As before, consider generating
-a [original ordering variable](#hidden-variables) first.
-
-We'll switch back to "auto" first.
-
-~~~~
-<<dd_do>>
-sysuse auto, clear
-gen order = _n
-<</dd_do>>
-~~~~
-
-The `gsort` function takes a list of variables to order by.
-
-~~~~
-<<dd_do>>
-gsort rep78 price
-list rep78 price in 1/5
-<</dd_do>>
-~~~~
-
-Stata first sorts the data by `rep78`, ascending (so the lowest value is in row 1). Then within each set of rows that have a common value of `rep78`,
-it sorts by `price`.
-
-You can append "+" or "-" to each variable to change whether it is ascending or descending. Without a prefix, the variable is sorted ascending.
-
-~~~~
-<<dd_do>>
-gsort +rep78 -price
-list rep78 price in 1/5
-<</dd_do>>
-~~~~
-
-Recall that missing values (`.`) are [larger than any other values](data-manipulation.html#conditional-variable-generation). When sorting with missing
-values, they follow this rule as well. If you want to treat missing values as smaller than all other values, you can pass the `mfirst` option to
-`gsort`. Note this does *not* make missingness "less than" anywhere else, only for the purposes of the current search.
-
-Sorting strings does work and it does it alphabetically. All capital letters are "less than" all lower case letters, and a blank string ("") is the
-"smallest". For example, if you have the strings "DBC", "Daa", "", "EEE", the sorted ascending order would be "", "DBC", "Daa", "EEE". The blank is
-first; the two strings starting with "D" are before the string "EEE", and the upper case "B" precedes the lower case "a".
-
-As a side note, there is an additional command, `sort`, which can perform sorting. It does not allow sorting in descending order, however it does allow
-you to conditionally sort; that is, passing something like `sort <varname> in <condition>` would sort only those rows for which the condition is true,
-the remaining rows remain *in their exact same position*.
 
 ^#^^#^ Merging Files
 
@@ -919,49 +965,3 @@ A few notes:
 - If you have wide data and many time-varying variables, there is no shorthand for entering all the stubs. For large data, this is **extremely**
   frustrating. I'd recommend using `describe, simple` to get a list of all variable names, then using find \& replace to remove the indices. If you
   know a better way, [let me know](index.html#contact-information)!
-
-^#^^#^ Dealing with duplicates
-
-If your data is not expected to have duplicates, either across all variables or within certain variables, the `duplicates` command can make their
-detection and correction easier. The most basic command is `duplicates report`, which simply reports on the status of duplicate rows. Let's reload the
-"bplong" data in case it got changed while we were reshaping.
-
-~~~~
-<<dd_do>>
-sysuse bplong, clear
-duplicates report
-<</dd_do>>
-~~~~
-
-This report is not very interesting; it reports that there are 240 observations which have 1 copy (e.g. are unique), and hence no surplus. Given that
-each row should be unique (just in patient ID and before/after alone), this is not surprising. Let's instead look at the duplicates just for `bp` and
-`when`:
-
-~~~~
-<<dd_do>>
-duplicates report bp when
-<</dd_do>>
-~~~~
-
-Here we have some duplicates. First, there are 23 observations which are fully unique. All other observations have repeats to some extent.
-
-The second row of the output tells of us that there are 42 observations which have 2 copies. The language here can be a bit confusing; all it is
-saying is that there are 42 rows, each of which has a single duplicate *within that same 42*. So if we have values 1, 1, 2, 2, that would be reported
-as 4 observations with 2 copies.
-
-The number of surplus is the number of non-unique rows in that category. We could compute it ourselves - we know that there are 42 rows with 2 copies,
-so that means that half of the rows are "unique" and the other half are "duplicates" (which is unique and which is duplicate is not clear). So 42/2 =
-21, and we have 21 surplus.
-
-Consider the row for 4 copies. There are 48 rows, each of which belongs to a set of four duplicates. For example, 1, 1, 1, 1, 2, 2, 2, 2, has
-observations 8 and copies 2. In this row, 48/4 = 12, so there are 12 unique values, meaning 36 surplus.
-
-Other useful commands include
-
-- `duplicates list`: Shows every set of duplicates, including its row number and value. Obviously for something like this the output would be massive
-    as of the 240 total rows, only 23 are not duplicated to some degree!
-- `duplicates tag <vars>, gen(<newvar>)`: Adds a new variable which represents the number of other copies for each row. For unique rows, this will
-  be 0. For any duplicated rows, it will essentially be "copies" from `duplicates report` minus 1. This can be useful for examining duplicates or
-  dropping them.
-- `duplicates drop`: Be cautious with this, as it drops any row which is a duplicate of a previous row (in other words keeps the first entry of every
-  set of duplicates).
