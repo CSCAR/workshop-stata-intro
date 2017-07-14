@@ -43,7 +43,7 @@ duplicates list `vars'
 
 The first command, `local`, defines what is known as a "local macro"^["Local" as opposed to "global", a distinction which is not important until you
 get deep into programming. For now, `local` is the safer option.]. Whenever it is referred to, wrapped in a backtick (to the left of the 1 key at the
-topleft of the keyboard) and a single quote, Stata replaces it with the original text. So when you enter
+top-left of the keyboard) and a single quote, Stata replaces it with the original text. So when you enter
 
 ```
 list `vars' in 1/5
@@ -92,7 +92,7 @@ r-class. The distinction between the two is inconsequential, besides that they s
 
 Here, `summarize` is a r-class command, so it stores its returns in "return". We can see them all by `return list`. On the other hand, `mean` (which
 we haven't discussed, but basically displays summary statistics similar to `summarize` but provides some additional functionality) is an e-class
-command, storing its results in `ereturn
+command, storing its results in `ereturn`:
 
 ~~~~
 <<dd_do>>
@@ -109,7 +109,7 @@ stores the following in `r()`:" or "`mean` stores the following in `e()`:", corr
 Along with the [One Data](basics.html#one-data) principal, Stata also follows the One _-class principal - meaning you can only view the `return` or
 `ereturn` for the most recent command of that class. So if you run a `summarize` command, then do a bunch of n-class calls (`gsort` for example), the
 `return list` call will still give you the returns for that first `summarize`. However, as soon as you run another command, you lose it. You can save
-any piece of it using a macro. For example, to calculate the average difference in price between foriegn and domestic cars^[There are obviously other
+any piece of it using a macro. For example, to calculate the average difference in price between foreign and domestic cars^[There are obviously other
 ways to compute this, but this gives a flavor of the use.]:
 
 ~~~~
@@ -134,7 +134,7 @@ sysuse pop2000, clear
 ~~~~
 
 The "pop2000" data contains data from the 2000 census, broken down by age and gender. The values are in total counts, lets say instead we want
-percentages by gender. For example, what percentage of asians in age 25-29 are male? We could generate this manually.
+percentages by gender. For example, what percentage of Asians in age 25-29 are male? We could generate this manually.
 
 ~~~~
 <<dd_do>>

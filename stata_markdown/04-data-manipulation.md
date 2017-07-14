@@ -580,7 +580,9 @@ rename mpg2 mpg
 order mpg, after(price)
 <</dd_do>>
 ~~~~
-And we're back to the original set-up^[If you are sharp-eyed, you may have noticed that the original `mpg` was an "int" whereas the final one is a "byte". If we had called [`compress`](data-management.html$compress) on the original data, it would have done that type conversion anyways - so we're ok!]
+And we're back to the original set-up^[If you are sharp-eyed, you may have noticed that the original `mpg` was an "int" whereas the final one is a
+"byte". If we had called [`compress`](data-management.html$compress) on the original data, it would have done that type conversion anyways - so we're
+ok!]
 
 When using `destring` to convert a string variable (that it storing numeric data as strings - "13", "14") to a numeric variable, if there are *any*
 non-numeric entries, `destring` will fail:

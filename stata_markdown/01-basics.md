@@ -217,7 +217,7 @@ summarize /* comment in the middle of a command! */ price
 <</dd_do>>
 ~~~~
 
-Note that when a command wraps to more than one line in the Results window (either due to a manual line break like this or a command thats too wide
+Note that when a command wraps to more than one line in the Results window (either due to a manual line break like this or a command that's too wide
 for the Results window), the prefix changes from `.` to `>` to indicate that its all one command.
 
 Finally, there's the special comment, `///`. Stata commands must be on a single line. However, complicated commands may get very long, such that its
