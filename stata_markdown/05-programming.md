@@ -124,13 +124,196 @@ display `dprice' - `fprice'
 
 ^#^^#^ loops
 
-Say you need to repeat the same code for many variables. Rather than writing the same line repeatedly, you could create a loop using `foreach`
-instead.
+Using macros can simplify code if you have to use the same string repeatedly, but what if you want to perform the same command repeatedly with
+different variables? Here we can use a `foreach` loop. This is easiest to see with examples.
+
+~~~~
+<<dd_do>>
+sysuse pop2000, clear
+<</dd_do>>
+~~~~
+
+The "pop2000" data contains data from the 2000 census, broken down by age and gender. The values are in total counts, lets say instead we want
+percentages by gender. For example, what percentage of asians in age 25-29 are male? We could generate this manually.
+
+~~~~
+<<dd_do>>
+gen maletotalperc = maletotal/total
+gen femtotalperc = femtotal/total
+gen malewhiteperc = malewhite/white
+<</dd_do>>
+~~~~
+
+This gets tedious fast as we need a total of 12 lines! Notice, however, that each line has a predictable pattern:
+
+```
+gen <gender><race>perc = <gender><race>/<race>
+```
+
+We can exploit this by creating a `foreach` loop over the racial categories and only needing a single command.
+
+~~~~
+<<dd_do>>
+drop *perc
+foreach race of varlist total-island {
+  gen male`race'perc = male`race'/`race'
+  gen fem`race'perc = fem`race'/`race'
+}
+list *perc in 1, ab(100)
+<</dd_do>>
+~~~~
+
+Let's breakdown each piece of the command. The command syntax for `foreach` is
+
+```
+foreach <new macroname> of varlist <list of variables>
+```
+
+The loop will create a macro that you name (in the example above, it was named "race"), and repeatedly set it to each subsequent entry in the list of
+variables. So in the code above, first "race" is set to "total", then the two `gen` commands are run. Next, "race" is set to "white", then the two
+commands are run. Etc.
+
+Within each of the `gen` commands, we use the backtick-quote notation just like with [macros](#macros).
+
+Finally, we end the `foreach` line with an open curly brace, `{`, and the line after the last command within the loop has the matching close curly
+brace, `}`.
+
+We can also nest these loops. Notice that both `gen` statements above are identical except for "male" vs "fem". Let's put an internal loop:
+
+~~~~
+<<dd_do>>
+drop *perc
+foreach race of varlist total-island {
+  foreach gender in male fem {
+    gen `gender'`race'perc = `gender'`race'/`race'
+  }
+}
+list *perc in 1, ab(100)
+<</dd_do>>
+~~~~
+
+Each time "race" gets set to a new variable, we enter another loop where "gender" gets set first to "male" then to "fem". To help visualize it, here
+is what "race" and "gender" are set to each time the `gen` command is run:
+
+| `gen` command | "race"     | "gender"   |
+|:-------------:|:----------:|:----------:|
+| 1             | total      | male       |
+| 2             | total      | fem        |
+| 3             | white      | male       |
+| 4             | white      | fem        |
+| 5             | black      | male       |
+| 6             | black      | fem        |
+| 7             | indian     | male       |
+| 8             | indian     | fem        |
+| 9             | asian      | male       |
+| 10            | asian      | fem        |
+| 11            | island     | male       |
+| 12            | island     | fem        |
+
+Notice the syntax of the above two `foreach` differs slightly:
+
+```
+foreach <macro name> of varlist <variables>
+foreach <macro name> in <list of strings>
+```
+
+It's a bit annoying, but Stata handles the "of" and "in" slight differently. The "in" treats any strings on the right as strict. Meaning if the above
+loop were
+
+```
+foreach race in total-island
+```
+
+then Stata would set "race" to "total-island" and the `gen` command would run once! By using "of varlist", you are telling Stata that before it sets
+"race" to anything, expand the varlist using the [rules such as `*` and `-`](basics.html#referring-to-variables).
+
+There is also
+
+```
+foreach <macro name> of numlist <list of numbers>
+```
+
+The benefit of "of numlist" is that numlists support things like 1-4 representing 1, 2, 3, 4. So
+
+```
+foreach num of numlist 1 3-5
+```
+
+Loops over 1, 3, 4, 5, whereas
+
+```
+foreach num in 1 3-5
+```
+
+loops over just "1" and "3-5".
+
+The use of "in" is for when you need to loop over strings that are neither numbers nor variables (such as "male" and "fem" from above).
+
+^#^^#^ Suppressing output and errors
+
+There are two useful command prefixes that can be handy while writing more elaborate Do-files.
+
+^#^^#^^#^ `capture`
+
+Imagine the following scenario. You want to write a Do-file that generates a new variable. However, you may need to re-run chunks of the Do-file
+repeatedly, so that the `gen` statement is hit repeatedly. After the first `gen`, we can't call it again
+and [need to use `replace` instead](data-manipulation.html#replace). However, if we used `replace`, it wouldn't work the first time! One solution is
+to `drop` the variable before we gen it:
 
 
+~~~~
+<<dd_do>>
+sysuse auto, clear
+drop newvar
+gen newvar = 1
+<</dd_do>>
+~~~~
 
-^#^^#^ useful commands
+That error, while not breaking the code, is awfully annoying! However, if we prefix it by `capture`, the error (and *all output from the command*) are
+"captured" and hidden.
 
-^#^^#^^#^ capture
+~~~~
+<<dd_do>>
+list price in 1/5
+capture list price in 1/5
+list abcd
+capture list abcd
+<</dd_do>>
+~~~~
 
-^#^^#^^#^  quietly
+Therefore, the best way to generate our new variable is
+
+~~~~
+<<dd_do>>
+capture drop newvar
+gen newvar = 1
+<</dd_do>>
+~~~~
+
+^#^^#^^#^ `quietly`
+
+`quietly` does the same basic thing as `capture`, except it does not hide errors. It can be useful combined
+with [the returns](programming.html#class-and-return):
+
+~~~~
+<<dd_do>>
+quietly summ price
+display r(mean)
+<</dd_do>>
+~~~~
+
+This will come in very handy when you start running statistical models, where the output can be over a single screen, whereas you only want a small
+piece of it.
+
+Just to make the difference between `capture` and `quietly` clear:
+
+~~~~
+<<dd_do>>
+list price in 1/5
+quietly list price in 1/5
+capture list price in 1/5
+list abcd in 1/5
+quietly list abcd in 1/5
+capture list abcd in 1/5
+<</dd_do>>
+~~~~
