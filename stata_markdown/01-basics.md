@@ -70,6 +70,24 @@ In this document, if you see a single command without a period, it indicates som
 first line is the command prefaced by the `.`, that was run in Stata and only the Results are included since they include the command. The command can
 still be run, *but should be run without the `.`*.
 
+^#^^#^^#^ Saving Results
+
+Any output that appears in the Results window (including the echoed commands and any errors) can by copied to be pasted into another location, such as
+Word. In addition, if you highlight text and right-click, you also have the options:
+
+- "Copy table": Useful for exporting to Excel. This can be tempermental; if the selected table is less "regular", this may not produce the best
+  results. It is most useful for text which comes naturally as a table rather than results which are forced into a table for display purposes.
+- "Copy table as HTML": You can paste this into a plaintext editor (Notepad.exe or TextEdit, *not* Word) and save it as a *.html to produce a
+  webpage. If you paste this into Excel you get a slightly different table than the layout for "Copy table" which may be more useful.
+- "Copy as picture": Does exactly what it says - equivalent to taking a screenshot. Very handy!
+
+There are a few commands that can be useful for saving results which we will not cover in this workshop, if you are interested, you can look
+into [the help](#stata-help) for them.
+
+- `log`: Saves everything that goes into Results into a file.
+- `putexcel`: Adds to a spreadsheet specific strings or output.
+- `outreg2`: A [user-written](#installing-user-written-commands) command to output the results of a model (e.g. regression).
+
 ^#^^#^ Updating
 
 If you have administrative access on your computer (e.g. if it is your personal machine, or your IT department has given you the ability), you can
