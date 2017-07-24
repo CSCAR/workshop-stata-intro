@@ -23,7 +23,8 @@ which enables easy creation of longform documents (using a mixture of
 [Stata](http://www.stata.com/)'s
 [dyndoc](http://www.stata.com/manuals/pdyndoc.pdf)).
 
-The table of contents is found on the left hand side, with subsections expanding below the current section. At the top of the page are three icons, from left to right they 1) Hide/show the table of contents, 2) Search this document, and 3) Change the font the book is displayed in.
+The table of contents is found on the left hand side, with subsections expanding below the current section. At the top of the page are three icons,
+from left to right they 1) Hide/show the table of contents, 2) Search this document, and 3) Change the font the book is displayed in.
 
 All images should link to full-size versions to see detail if needed.
 
