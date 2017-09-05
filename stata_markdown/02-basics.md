@@ -432,15 +432,15 @@ use C:\Documents\Stata\Project\mydata.dta
 
 Similarly, when saving files, the working directory is the default choice.
 
-The working directory can be viewed with the `cd` command
+The working directory can be viewed with the `pwd` command (Print Working Directory)
 
 ~~~~
 <<dd_do>>
-cd
+pwd
 <</dd_do>>
 ~~~~
 
-You can change the working directory by passing a path to `cd`:
+You can change the working directory by passing a path to `cd` (Change Directory):
 
 ```
 cd C:\Documents\Stata\Project
