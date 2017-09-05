@@ -82,5 +82,5 @@ You can access the file you'll be working with in this class here: [RDSL.subset.
 
 1. Download the data and move it into your M drive.
 2. Open the data with Stata (either double click on the file, or use File -> Open, or use `use`).
-3. Use `cd` to ensure that directory containing the data file is the working directory. If not, use `cd` again or File -> Change Working Directory to
-fix it.
+3. Use `pwd` to ensure that directory containing the data file is the working directory. If not, use File -> Change Working Directory or `cd` to fix
+it.
