@@ -86,67 +86,7 @@ into [the help](#stata-help) for them.
 
 - `log`: Saves everything that goes into Results into a file.
 - `putexcel`: Adds to a spreadsheet specific strings or output.
-- `outreg2`: A [user-written](#installing-user-written-commands) command to output the results of a model (e.g. regression).
 
-^#^^#^ Updating
-
-If you have administrative access on your computer (e.g. if it is your personal machine, or your IT department has given you the ability), you can
-update Stata freely. Major point upgrades such as the newly released 15.0 require re-installation, but minor upgrades (such as the 14.1 and 14.2
-updates) as well as minor internal updates are free.
-
-To check for updates, you can run
-
-```
-update query
-```
-
-If any updates are available (regardless of whether you ran a query first), you can obtain all updates with
-
-```
-update all
-```
-
-If you do not have administrative access on your computer, you'll need to reach out to your IT administrators to update.
-
-^#^^#^ Installing user-written commands
-
-In addition to built in commands, Stata supports user-written programs, know as "ado-files"^[As we'll see in [a bit](#do-files), you can save Stata
-commands in a "do-file". While I've never seen an official definition, I tend to think of "ado" as "automatic do".]. Once installed, these
-user-written programs operate identically to any built-in command, with the caveat that they may not be quite as polished or complete since they're
-volunteer written.
-
-We won't be covering any ado-files in these notes, but if you wanted to install a program named `newcommand`:
-
-```
-ssc install newcommand
-```
-
-You can remove a program with
-
-```
-ssc uninstall newcommand
-```
-
-Finally, to see a list of all user-written programs you have installed, used
-
-```
-ado
-```
-
-[Updating Stata](#updating) will not update any ado-files, instead you can run
-
-
-```
-adoupdate
-```
-
-to list all available updates and
-
-```
-adoupdate, update
-```
-
-to perform all updates.
 
 ^#^^#^ Do-files
 
@@ -175,7 +115,6 @@ Let's manually add some commands to a Do-file to see how to execute the commands
 ```
 sysuse auto
 summarize price
-compress
 ```
 
 Once the lines are in the editor, highlight the commands (you do not need to highlight the entire line, you merely need to ensure your selection
@@ -186,12 +125,11 @@ Results window.
 <<dd_do>>
 sysuse auto
 summarize price
-compress
 <</dd_do>>
 ~~~~
 
-We will cover in later sections what each of these commands does
-([`sysuse`](working-with-data-sets.html#sysuse), [`summarize`](#summarize), [`compress`](#compress)).
+We will cover in later sections what these commands do
+([`sysuse`](working-with-data-sets.html#sysuse) and [`summarize`](#summarize)).
 
 ^#^^#^^#^ Comments
 

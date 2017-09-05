@@ -90,73 +90,6 @@ describe, simple
 <</dd_do>>
 ~~~~
 
-^#^^#^ Data Notes
-
-You can attach notes to a data set, which will be saved along with the data and reloaded when you open it again. This can be handy to use in place of
-a separate data dictionary (along with [`labels`](#labels)).
-
-~~~~
-<<dd_do>>
-notes
-<</dd_do>>
-~~~~
-
-We see that there is a single note attached to the auto data. New notes can be easily added either to the whole data set or to a specific variable
-
-~~~~
-<<dd_do>>
-notes: Data is built-in from Stata.
-notes displacement: This variable comes from survey XXX.
-notes
-<</dd_do>>
-~~~~
-
-There are two notes attached to the overall data (listed under `_dta`) and a single note attached to the `displacement` variable. You can list these
-separately if desired.
-
-~~~~
-<<dd_do>>
-notes list _dta
-notes list displacement
-notes list turn
-<</dd_do>>
-~~~~
-
-Dropping notes can be accomplished as well. The numbering of notes is within each location (e.g. here the data (`_dta`) has notes 1 and 2, whereas
-`displacement` has note 1).
-
-~~~~
-<<dd_do>>
-notes drop _dta in 2
-notes
-notes drop displacement in 1
-notes
-<</dd_do>>
-~~~~
-
-^#^^#^ `compress`
-
-As mentioned [above](#describe), there are various ways to store a number variable, such as `byte` and `long`. The various options take more space to
-save - types which take less space can store only smaller numbers whereas types that take more space can store larger numbers. For example, a number
-stored as a byte can only take on values between -127 and 100 and only integers (e.g. not 2.5) whereas a number stored as float can store numbers up
-to \(1.7x10^38\) with up to 38 decimal places. Strings operate similarly; a string variable with 20 characters would store "abc" as 17 blank
-characters followed by the "abc".
-
-Understanding the above is not that important these days as computer power and storage has increased to the point where the majority of us will be
-reaching its limits. However, Stata does offer the `compress` command which attempts to store variables in the smallest possible type. For example, if
-a variable is a float takes on only values 1 through 10, it is replaced by a byte (and similarly, strings are as long as the longest value).
-
-~~~~
-<<dd_do>>
-compress
-describe, short
-<</dd_do>>
-~~~~
-
-We see here a very modest saving (370 bytes, about 12%), but sometimes you can see much more significant gains.
-
-Don't be afraid of artificially restricting yourself going forward; if one of your values exceeds the limitations its type supports, Stata will
-automatically change types. So don't hesitate to run `compress` occasionally!
 
 ^#^^#^ Labels
 
@@ -168,8 +101,6 @@ In an Excel file, to get around this, you might add additional content to the sh
 etc. However, Stata does not allow such arbitrary storage. In contrast, Stata allows you to directly **label** parts of the data with context
 information which will be displayed in the appropriate Results, to make Stata output much easier to read as well as removing the need for an external
 data dictionary. All three different versions use the `label` command.
-
-^#^^#^^#^ `label data`
 
 ^#^^#^^#^ `label variable`
 
