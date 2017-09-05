@@ -75,3 +75,12 @@ As with `sysuse`, the `clear` option discards the existing data regardless of un
 
 There are some distinctions between Windows and Mac in regards to file paths, the most blatant that Windows uses forward slash (`\\`) whereas Mac uses
 back slashes (`\/`). You can see full details of this by running `help filename`.
+
+^#^^#^ Exercise 1
+
+You can access the file you'll be working with in this class here: [RDSL.subset.dta](RDSL.subset.dta).
+
+1. Download the data and move it into your M drive.
+2. Open the data with Stata (either double click on the file, or use File -> Open, or use `use`).
+3. Use `cd` to ensure that directory containing the data file is the working directory. If not, use `cd` again or File -> Change Working Directory to
+fix it.
