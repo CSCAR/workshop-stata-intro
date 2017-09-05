@@ -86,11 +86,6 @@ Do-file.
 
 As with `sysuse` and `webuse`, the `clear` option discards the existing data regardless of unsaved changes.
 
-^#^^#^^#^ File paths
-
-There are some distinctions between Windows and Mac in regards to file paths, the most blatant that Windows uses forward slash (`\\`) whereas Mac uses
-back slashes (`\/`). You can see full details of this by running `help filename`.
-
 ^#^^#^^#^ Loading subsets of the data
 
 Though I would rarely recommend its use, you can load only a subset of the data into the program at a time. Generally I would recommend loading the

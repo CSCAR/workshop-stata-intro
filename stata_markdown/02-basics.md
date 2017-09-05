@@ -432,7 +432,15 @@ use C:\Documents\Stata\Project\mydata.dta
 
 Similarly, when saving files, the working directory is the default choice.
 
-The working directory can be changed with the `cd` command
+The working directory can be viewed with the `cd` command
+
+~~~~
+<<dd_do>>
+cd
+<</dd_do>>
+~~~~
+
+You can change the working directory by passing a path to `cd`:
 
 ```
 cd C:\Documents\Stata\Project
@@ -440,3 +448,8 @@ cd C:\Documents\Stata\Project
 
 Alternatively and perhaps more easily, you can change the working directory by the menus, choosing "Files -> Change working directory". After
 selecting the appropriate directory, the full `cd` command will be printed in the Results, so you can save it in a Do-file for later use.
+
+^#^^#^^#^ File paths
+
+There are some distinctions between Windows and Mac in regards to file paths, the most blatant that Windows uses forward slash (`\\`) whereas Mac uses
+back slashes (`\/`). You can see full details of this by running `help filename`.
