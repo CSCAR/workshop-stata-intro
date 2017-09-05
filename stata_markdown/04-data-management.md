@@ -8,9 +8,7 @@ sysuse auto
 <</dd_do>>
 ~~~~
 
-You can reload it as necessary (if you modify it and want the original) by re-running this with the `clear` option. Feel free to make frequent use
-of [`preserve` and `restore`](working-with-data-sets.html#preserverestore).
-
+You can reload it as necessary (if you modify it and want the original) by re-running this with the `clear` option.
 
 Whenever you first begin working with a data set, you'll want to spend some time getting familiar with it. You should be able to answer the following
 questions (even if some of them are approximations):
