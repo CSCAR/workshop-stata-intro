@@ -434,3 +434,13 @@ This reports potential issues Stata has discovered in the data. In this data, ne
 - Issues with value labels (if you've attached a value label to a variable and subsequently deleted the value label without detaching it; or if your
   variable takes on values unaccounted for in the value label).
 - Issues with date variables.
+
+^#^^#^ Exercise 2
+
+Begin by exploring the data generally with `describe`, `summarize` and `codebook`. After you've explored a bit, look into answering the following
+questions:
+
+1. What variables are continuous? Binary? Categorical?
+2. Most of the gpa data (`hsgpa`) are values like 2.9 or 3.8. There are several rows with the values 2.5364995. Does anything in the data tell you
+   why?
+3. Run `label list FCPREVPG` to look at the labels being applied to `bcprevpg`. There is only one label! Why might that be?
