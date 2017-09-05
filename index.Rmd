@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Stata"
+title: "Introduction to Stata (SOC 510)"
 author: "Josh Errickson"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
