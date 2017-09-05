@@ -220,6 +220,8 @@ replace cost_maint = 3 if rep78 > 3
 
 Of course, we could also generate it in the reverse order (3 to 1).
 
+^#^^#^ Missing values
+
 ^#^^#^ Subsetting
 
 Almost any Stata command which operates on variables can operate on a subset of the data instead of the entire data, using the conditional statements
@@ -384,3 +386,16 @@ first; the two strings starting with "D" are before the string "EEE", and the up
 As a side note, there is an additional command, `sort`, which can perform sorting. It does not allow sorting in descending order, however it does allow
 you to conditionally sort; that is, passing something like `sort <varname> in <condition>` would sort only those rows for which the condition is true,
 the remaining rows remain *in their exact same position*.
+
+^#^^#^ Exercise 3
+
+If you haven't already, open the "RDSL.subset" data.
+
+(Note: Any "interpretation" or "explanation" in this exercise is for illustrative purposes only as I have no idea what the details of this data are!)
+
+1. Create a new variable, `school_primary_focus`, which attempts to represent whether someone's primary focus is their schooling. This variable should
+   be a binary variable with a value of 1 if the student has a GPA greater than 2.8 and is enrolled full time.
+2. The variable `bage1stsex`, representing age at 1st sex, has some very low values - some that are errors (e.g. 0 or 1) and some that are hopefully
+   errors (below 7). Replace values of 0 or 1 with a missing ".", and replace values between 2-7 with missing ".a".
+3. Look at a table (`tab`) of public assistance. Compare it with the table of public assistant amongst blacks and non-blacks. Notice any
+   relationships?

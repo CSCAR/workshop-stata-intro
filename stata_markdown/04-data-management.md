@@ -437,6 +437,8 @@ This reports potential issues Stata has discovered in the data. In this data, ne
 
 ^#^^#^ Exercise 2
 
+If you haven't already, open the "RDSL.subset" data.
+
 Begin by exploring the data generally with `describe`, `summarize` and `codebook`. After you've explored a bit, look into answering the following
 questions:
 
