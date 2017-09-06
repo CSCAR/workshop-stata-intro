@@ -76,6 +76,47 @@ As with `sysuse`, the `clear` option discards the existing data regardless of un
 There are some distinctions between Windows and Mac in regards to file paths, the most blatant that Windows uses forward slash (`\\`) whereas Mac uses
 back slashes (`\/`). You can see full details of this by running `help filename`.
 
+
+^#^^#^ `preserve`/`restore`
+
+Along with the [One Data](basics.html#one-data) principal, if you wished to modify a data set temporarily, say to remove some subset of your
+observations, it must be done destructively. One workflow to use would be:
+
+```
+sysuse auto
+<modify data set as desired>
+save tmp
+<subset data>
+<obtain results>
+use tmp, clear
+<delete the tmp file manually>
+```
+
+Alternatively, the `preserve` and `restore` commands perform the same set of operations in a more automated fashion:
+
+```
+sysuse auto
+<modify data set as desired>
+preserve
+<subset data>
+<obtain results>
+restore
+```
+
+The `preserve` command saves an image of the data as they are now, and the `restore` command reloads the image of the data, discarding any interim
+changes. There can only be a single image of the data preserved at a time, so if you `preserve`, then make a change and want to `preserve` again
+(without an intervening `restore`), you can pass the option `not` to `restore` to discard the preserved image of the data.
+
+```
+restore, not
+```
+
+Finally, to restore the image of the data but not discard the preserved image, pass the `preserve` option
+
+```
+restore, preserve
+```
+
 ^#^^#^ Exercise 1
 
 You can access the file you'll be working with in this class here: [RDSL.subset.dta](RDSL.subset.dta).
