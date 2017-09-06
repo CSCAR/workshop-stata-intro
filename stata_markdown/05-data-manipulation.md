@@ -187,12 +187,21 @@ The AMC Spirit has a high repair cost even though we do not have its repair reco
 
 ~~~~
 <<dd_do>>
-replace cost_maint = . if rep78 == .
+replace cost_maint = rep78 if rep78 >= .
 tab cost_maint, missing
 <</dd_do>>
 ~~~~
 
 The `missing` option to `tab` forces it to show a row for any missing values. Without it, missing rows are suppressed.
+
+Perhaps a more natural way to do the above replacement would be
+
+```
+replace cost_maint = . if rep78 == .
+```
+
+In other words, if `rep78` is missing, make `cost_maint` missing. Instead, the version run above says, if `rep78` is missing or larger, replace
+`cost_maint` with `rep78`. See [below](#missing-values) for further explanation of this.
 
 To summarize, we used the following commands:
 
@@ -200,27 +209,63 @@ To summarize, we used the following commands:
 generate cost_maint = 1
 replace cost_maint = 2 if rep78 >= 2 & rep78 <= 3
 replace cost_maint = 3 if rep78 > 3
-replace cost_maint = . if rep78 == .
+replace cost_maint = rep78 if rep78 >= .
 ```
 
-There are various other ways it could have been done, such as
-
+There are various other ways it could have been done, such as:
 ```
 generate cost_maint = 1 if rep78 == 1
 replace cost_maint = 2 if rep78 >= 2 & rep78 <= 3
-replace cost_maint = 3 if rep78 > 3 & rep78 != .
+replace cost_maint = 3 if rep78 > 3 & rep78 < .
+replace cost_maint = rep78 if rep78 >= .
 ```
 
 ```
-generate cost_maint = .
+generate cost_maint = rep78
 replace cost_maint = 1 if rep78 == 1
 replace cost_maint = 2 if rep78 >= 2 & rep78 <= 3
-replace cost_maint = 3 if rep78 > 3
+replace cost_maint = 3 if rep78 > 3 & rep78 < .
 ```
 
 Of course, we could also generate it in the reverse order (3 to 1).
 
 ^#^^#^ Missing values
+
+As we mentioned briefly earlier, Stata treats missing values as large positive numbers. In fact, Stata actually supports 27 different missing values,
+`.`, `.a`, `.b`, ..., `.z`. This is to allow granularity in the reason for missingness; for example, perhaps you can code that `.` is random
+missingness (e.g. coffee spilled on a paper survey and blotted out an answer), while `.r` is for missingness due to refusal to answer and `.n` is for
+nonresponse.
+
+These missing values are ordered as expected, such that:
+
+```
+. < .a < .b < ... < .z
+```
+
+That means that a logical statement such as `variable < .f` will return true if `variable` is `.` or `.c`, but false if `variable` is `.k` and `.v`
+(and of course for all other `._`'s as appropriate). This is why, [above](#replace), we used
+
+```
+replace cost_maint = rep78 if rep78 >= .
+```
+
+The conditional, `rep78 >= .`, catches both `.` and all `.a`, `.b`, etc, because all are greater than `.`. Once we've identified which rows contain
+`rep78` with some missing flag, we replace `cost_maint` with `rep78` to maintain the proper distinction between types of missingness; if we didn't
+care about those in `cost_maint`, we could have used `replace cost_maint = .` instead.
+
+Stata has a shortcut to testing missingness that avoids worrying about the order, using the `missing` or `mi` function. We could have written:
+
+```
+replace cost_maint = rep78 if missing(rep78)
+replace cost_maint = rep78 if mi(rep78)
+```
+
+To check for non-missing values, use `!mi(rep78)` (the `!` is a negation; whatever the expression to the right of it returns (true or false), it
+switches to the opposte).
+
+Note that when running (most) statistical analyses, Stata will ignore the differentiation between types of missingness and instead use casewise (drop
+any row containing any missingness in variables involved in the analysis) or pairwise (consider each pair of variables; drop a row's pair if either is
+missing).
 
 ^#^^#^ Subsetting
 
