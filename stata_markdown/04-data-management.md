@@ -4,11 +4,11 @@ Throughout this chapter, we'll be using the "auto" data set which is distributed
 
 ~~~~
 <<dd_do>>
-sysuse auto
+sysuse auto, clear
 <</dd_do>>
 ~~~~
 
-You can reload it as necessary (if you modify it and want the original) by re-running this with the `clear` option.
+You can reload it as necessary (if you modify it and want the original) by re-running this whenever you want.
 
 Whenever you first begin working with a data set, you'll want to spend some time getting familiar with it. You should be able to answer the following
 questions (even if some of them are approximations):
@@ -42,12 +42,13 @@ This displays a large amount of information, so let's break in down.
 
 First, the header displays general data set information - the number of observations (`obs`, the number of rows) and variables (`vars`), as well as
 the file size^[Reported in bytes. Roughly 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, 1000 megabytes = 1 gigabyte.] It also gives a short
-label of the data (we discussing adding this [later](#label-data)), the date of last modification and whether there are any [notes](#data-notes).
+label of the data, the date of last modification and whether there are any notes.
 
 Next, there is a table listing each variable in the data and some information about them. The "storage type" can be one of `byte`, `int`, `long`,
-`float`, `double`; all of which are simply numbers. We'll touch on the differences between these when we discuss [`compress`](#compress), but for now
-they all represent numeric variables. String variables are represented as `str##` where the `##` represent the number of characters that the string
-can be, e.g. `str18` shows that `make` has a maximum of 18 letters. (This limit is irrelevant, again, see [`compress`](#compress) for details.)
+`float`, `double`; all of which are simply numbers. There are some distinctions between them, but for our purposes they are irrelevant^[They are
+irrelevant mostly because Stata will adjust them according to our need; so we don't concern ourselves with it]. String variables are represented as
+`str##` where the `##` represent the number of characters that the string can be, e.g. `str18` shows that `make` has a maximum of 18 letters. This
+limit is actually irrelevant; if you add a new string that is longer (or modify an existing one), Stata will simply increase `str##` as needed.
 
 The "display format" column contains format information about each variable which only control how the variables are displayed in data view. For the
 most part you can ignore these and leave them at the default, though you may need to work with this if you have date or time information. For further
@@ -226,14 +227,6 @@ describe foreign
 <</dd_do>>
 ~~~~
 
-You can view all value labels in the data set:
-
-~~~~
-<<dd_do>>
-label list
-<</dd_do>>
-~~~~
-
 Note that value labels exist within a data set regardless of whether they are attached to a variable. If there is a label value that you no longer
 want to keep in the data-set, you can drop it:
 
@@ -273,7 +266,7 @@ describe, simple
 <</dd_do>>
 ~~~~
 
-The output truncated the name because it was so long.
+The output truncated the name because it was so long, but the full name exists in the data.
 
 To rename multiple variables, you can run multiple `rename` commands, or else you can give multiple old and new names:
 
@@ -337,7 +330,7 @@ to identify problematic variables. Among other things, we can try and detect
 There are numerous ways to look at summary statistics, from obtaining one-number summaries to visualizations, but we will focus on two Stata commands,
 `summarize` and `codebook`.
 
-`summarize` produces basic summary statistics *for numeric variables
+`summarize` produces basic summary statistics *for numeric variables*.
 
 ~~~~
 <<dd_do>>
@@ -347,7 +340,7 @@ summarize
 
 The table reports the total number of non-missing values (`make` appears to be entirely missing because it is non-numeric), the mean (the average
 value), the standard deviation (a measure of how spread out the data is) and the minimum and maximum non-missing^[As we
-discuss [later](data-manipulation.html#conditional-variable-generation), in Stata, missing values (represented by `.` in the data) are considered to
+discuss [later](data-manipulation.html#missing-values), in Stata, missing values (represented by `.` in the data) are considered to
 be higher than any other number (so 99999 < .).] values observed.
 
 Here's some suggestions of how to look at these values.
@@ -409,7 +402,8 @@ codebook make
 
 We get less information here, but still useful to check that the data is as expected. There are no empty strings nor any repeated strings. The warning
 about "embedded blanks" is spaces; it's telling us that there are spaces in some of the cars (e.g. "Dodge Magnum"). The reason it is a warning is that
-"Dodge_Magnum" and "Dodge__Magnum" read the same to us, but that extra space means Stata recognizes these as two different variables.
+"Dodge Magnum" and "Dodge&nbsp;&nbsp;Magnum" looks the same to us, but Stata notices that the second actually has two spaces, so considers these
+completely unique strings.
 
 Two options for `codebook` which come in handy:
 

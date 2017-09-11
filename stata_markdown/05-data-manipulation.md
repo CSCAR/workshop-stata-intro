@@ -156,6 +156,10 @@ tab cost_maint
 <</dd_do>>
 ~~~~
 
+The `&` is an "and"; the statement `if rep78 >= 2 & rep78 <= 3` returns either true or false; true only if both `rep78 >= 2` and `rep78 <= 3` are
+true. Alternatively, we could have used `if rep78 == 2 | rep78 == 3`, where `|` means "or" and the double equals is testing equality; the statement
+returns true if `rep78` is identically equal to 2 *or* 3.
+
 Finish with the "high" category.
 
 ~~~~
@@ -182,6 +186,7 @@ The complication referred to can be seen in row 3 here:
 list make rep78 cost_maint in 1/5, abbr(100)
 <</dd_do>>
 ~~~~
+(The `abbr` option changes the number of displayed characters for string variables, I set it to a large value here so the whole make can be seen.)
 
 The AMC Spirit has a high repair cost even though we do not have its repair record. We can fix this easily.
 
@@ -326,7 +331,8 @@ bysort foreign: summ price
 `bysort` is identical to [sorting](#sorting) first and running the `by` statement afterwards. In general, it is recommended to always use `bysort`
 instead of `by`, *unless* you believe the data is already sorted and want an error if that assumption is violated.
 
-Before running these commands, consider generating a [original ordering variable](#hidden-variables) first.
+Note that sorting does change the order of the variables, you may want to save or preserve the data beforehand so you can return to the original
+sorting easily.
 
 `bysort`'s variables cannot be conditional statements, so if you wanted to for example get summaries by low and high mileage cars, you'd need to
 generate a dummy variable first.
@@ -345,17 +351,6 @@ bysort highmileage: summ price
 bysort foreign highmileage: summ price
 <</dd_do>>
 ~~~~
-
-When specifying `bysort`, you can optionally specify a variable to sort on but not to group by. For example, let's say your data consisted of doctors
-visits for patients, where patients may have more than one appointment. You want to generate a variable indicating whether a visit is the first by the
-patient. Say `id` stores the patient id, `date` stores the date of the visit.
-
-```
-bysort id (date): gen firstvisit = _n == 1
-```
-
-By placing `date` in parentheses, this ensures that within each `id`, the data is sorted by `date`. Therefore the first row for each patient is their
-first visit, so `_n == 1` evaluates to 1 only in that first row and 0 zero otherwise.
 
 ^#^^#^^#^ `keep`, `drop`
 
@@ -385,17 +380,16 @@ drop turn if mpg > 20
 
 `drop` removes any listed variables, or removes any row which the conditional returns true.
 
-^#^^#^ sorting
+^#^^#^ Sorting
 
-We already saw sorting [in the context of `bysort`](#by-and-bysort). We can also sort as a standalone operation. As before, consider generating
-a [original ordering variable](#hidden-variables) first.
+We already saw sorting [in the context of `bysort`](#by-and-bysort). We can also sort as a standalone operation. As before, consider saving or
+preserving first.
 
-We'll switch back to "auto" first.
+We'll open a clean version of "auto" first:
 
 ~~~~
 <<dd_do>>
 sysuse auto, clear
-gen order = _n
 <</dd_do>>
 ~~~~
 
@@ -420,7 +414,7 @@ list rep78 price in 1/5
 <</dd_do>>
 ~~~~
 
-Recall that missing values (`.`) are [larger than any other values](data-manipulation.html#conditional-variable-generation). When sorting with missing
+Recall that missing values (`.`) are [larger than any other values](data-manipulation.html#missing-values). When sorting with missing
 values, they follow this rule as well. If you want to treat missing values as smaller than all other values, you can pass the `mfirst` option to
 `gsort`. Note this does *not* make missingness "less than" anywhere else, only for the purposes of the current search.
 

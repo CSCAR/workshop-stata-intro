@@ -39,7 +39,7 @@ sysuse auto, clear
 
 ^#^^#^ Opening data
 
-As you may have deduced from the `sysuse` command above, the command to load local data is `use`:
+As you may have guessed from the `sysuse` command above, the command to load local data is `use`:
 
 ```
 use <filename>
@@ -47,14 +47,14 @@ use <filename>
 
 As discussed in the [working directory](basics.html#working-directory) section, Stata can see only files in its working directory, so only the name of
 the file needs to be passed. If the file exists in a different directory, you will need to give the full (or relative path). For example, if your
-working directory is "C:\Documents\Stata" and the file you are looking for, "mydata", is in the "Project" subfolder, you could open it with any of the
-following:
+working directory is "C:\Documents\Stata" and the file you are looking for, "mydata.dta", is in the "Project" subfolder, you could open it with any of
+the following:
 
 ```
-use C:\Documents\Stata\Project\mydata
-use Project\mydata
-cd Project
-use mydata
+use C:\Documents\Stata\Project\mydata.dta
+use Project\mydata.dta
+cd Documents\Stata\Project
+use mydata.dta
 ```
 
 Note that if the path (or file name) contains any spaces, you need to wrap the entire thing in quotes:
@@ -71,11 +71,35 @@ Do-file.
 
 As with `sysuse`, the `clear` option discards the existing data regardless of unsaved changes.
 
-^#^^#^^#^ File paths
+^#^^#^ Saving data
 
-There are some distinctions between Windows and Mac in regards to file paths, the most blatant that Windows uses forward slash (`\\`) whereas Mac uses
-back slashes (`\/`). You can see full details of this by running `help filename`.
+The `save` command can be used to save a data set. Without any further arguments, it saves the existing file with the same name.
 
+```
+save
+```
+
+However, Stata again tries to save you from yourself and does not allow you to overwrite an existing file, so you'll basically never run `save` by
+itself. Instead, passing the `replace` option allows you to overwrite existing files:
+
+```
+save, replace
+```
+
+Finally, we can pass a name to the command to save a file with a different name:
+
+```
+save mynewdata.dta
+```
+
+This can also take a `replace` option.
+
+`save` follows the same logic as `use` with regards to the working directory; it saves in the working directory unless you pass a path. Additionally,
+a file name with spaces needs to be wrapped in quotes.
+
+The File -> Save (and Save As) menu options can be used instead.
+
+System data (loaded with [`sysuse`](#built-in-data)) can only be saved as a new file; you cannot (easily) modify the built-in data.q
 
 ^#^^#^ `preserve`/`restore`
 
@@ -105,16 +129,10 @@ restore
 
 The `preserve` command saves an image of the data as they are now, and the `restore` command reloads the image of the data, discarding any interim
 changes. There can only be a single image of the data preserved at a time, so if you `preserve`, then make a change and want to `preserve` again
-(without an intervening `restore`), you can pass the option `not` to `restore` to discard the preserved image of the data.
+(without an intervening `restore`), you'll need to desroy the existing preserved state by passing the option `not` to `restore`.
 
 ```
 restore, not
-```
-
-Finally, to restore the image of the data but not discard the preserved image, pass the `preserve` option
-
-```
-restore, preserve
 ```
 
 ^#^^#^ Exercise 1

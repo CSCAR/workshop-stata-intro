@@ -55,8 +55,8 @@ Stata immediately replaces \\`vars' with var1 var2 var3 var4 var5, then executes
 list var1 var2 var3 var4 var5 in 1/5
 ```
 
-**Important**: Local macros are deleted as soon as code finishes executing! That means that you must use them in a do-file, and **you must run all
-lines which create and access the macro at the same time**, by highlighting them all.
+**Important**: Local macros which are created in Do-files are deleted as soon as code finishes executing! That means that you must use them in a
+do-file, and **you must run all lines which create and access the macro at the same time**, by highlighting them all.
 
 Some other notes:
 

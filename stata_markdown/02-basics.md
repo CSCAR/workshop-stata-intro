@@ -43,9 +43,11 @@ about variables. The command is simply `summarize`, there is no need to direct i
 
 If you have multiple data sets you need to work with, you can either
 
-1. Switch between the two data sets as needed. This can be burdensome, though tools such as [`preserve`](#preserve) help greatly.
+1. Switch between the two data sets as needed. This can be burdensome, though tools such as [`preserve`](working-with-data-sets.html#preserve) help
+   greatly.
 
-2. Merge the data sets, the better option. We'll discuss [merging](#merge) later.
+2. Merge the data sets, the better option. We won't be covering this in this workshop, but the command to look into the [help](#stata-help) for is
+   `merge`.
 
 ^#^^#^ Give Stata a command
 
@@ -68,7 +70,7 @@ The first line proceeded by the `.` indicates the command that was written, `ver
 
 In this document, if you see a single command without a period, it indicates something that can be run. If you instead see a Results output where the
 first line is the command prefaced by the `.`, that was run in Stata and only the Results are included since they include the command. The command can
-still be run, *but should be run without the `.`*.
+still be run, *but should be run without the `.`*.^[Technically Stata can run commands prefaced by `.`, but it's considered inappropriate.]
 
 ^#^^#^^#^ Saving Results
 
@@ -129,7 +131,7 @@ summarize price
 ~~~~
 
 We will cover in later sections what these commands do
-([`sysuse`](working-with-data-sets.html#sysuse) and [`summarize`](#summarize)).
+([`sysuse`](working-with-data-sets.html#sysuse) and [`summarize`](data-management.html#summarizing-the-data)).
 
 ^#^^#^^#^ Comments
 
@@ -235,8 +237,7 @@ command <variable(s)> if <condition>, <options>
 
 We will cover this [in more detail](data-manipulation.html#subsetting) later, including how to specify the condition.
 
-As an example, if we were to fit a linear regression model^[This course does not cover fitting statistical models, see the follow-up course for
-further detail], the command might be
+As an example, if we were to fit a linear regression model^[This course does not cover fitting statistical models], the command might be
 
 ```
 regress y x1 x2 x3 x4 if z > 5, vce(robust) beta
@@ -245,9 +246,9 @@ regress y x1 x2 x3 x4 if z > 5, vce(robust) beta
 Without getting too into the details of how the command works, we can see examine the command.
 
 - The command is `regress`.
-- In the list of variables, the first position (the `y`) in a privileged position as the dependent variable, and all remaining variables are
-  independent. (In other words, the variable is of one type, the remainder (in any order) are another type.)
-- We are fitting the model on on the subset where `z > 5`.
+- In the list of variables, the first position (the `y`) is in a privileged position as the dependent variable, and all remaining variables are
+  independent. (In other words, the `y` variable is of one type, the remainder (in any order) are another type.)
+- We are fitting the model on the subset where `z > 5`.
 - There are two options, `vce(robust)` which changes how the model is estimated and `beta` which changes how the output is displayed.
 
 ^#^^#^^#^ Referring to variables
@@ -257,15 +258,14 @@ each in (or double-clicking on their entry in the Variables window) is sufficien
 tedious. Thankfully there are two alternatives.
 
 First, we can use the wild card `\*`^[This is the reason why `*` as a comment does not work in the middle of a line (and we use `//` instead).] For
-example, we could refer to those four `x#` variables as `x*`. However, be careful, as this would also match `x5`, `x6`, `xage`, `xcats`, etc. It can also
-be used in the middle or beginning, e.g.:
+example, we could refer to those four "x" variables as `x*`. However, be careful, as this would also match `x5`, `x6`, `xage`, `xcats`, etc. It can
+also be used in the middle or beginning, e.g.:
 
 - `c*t` would match `cat`, `caught` and `ct`
 - `*2` would match `age2`, `gender2` and `salary2012`.
 
 Alternatively, if the variables we want to include are next to each other in the data (e.g. in the Variables window), we can refer to a list of
-them. If the variables in the window are `a` through `z`, alphabetically, then `b-e` would include `b`, `c`, `d`, and `e`. We will discuss the
-`[order](#order)` command later to re-order variables.
+them. If the variables in the window are `a` through `z`, alphabetically, then `b-e` would include `b`, `c`, `d`, and `e`.
 
 ^#^^#^ Stata Help
 
@@ -291,7 +291,7 @@ Each help page has numerous features, I will merely point out a few here.
 3. The examples in the help are great but basic; the PDF help (see #1) usually has more detailed examples.
 4. We will discuss the "Stored results" in the [Programming](programming.html) section.
 
-`help` can also be used to search for the appropriate command. For example, if you wanted help merging some data together (which we will cover [later](#merging)), you might try running
+`help` can also be used to search for the appropriate command. For example, if you wanted help merging some data together, you might try running
 
 ```
 help merging
