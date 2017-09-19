@@ -263,4 +263,5 @@ restore, preserve
 4. [Save a copy](#saving-data) of this data to your computer.
     1. Check your [working directory](basics.html#working-directory). Make sure it is set somewhere convenient.
     2. Use `save`. Make sure to give it a name!
-5. If you haven't already, play with [`preserve` and `restore`](#preserverestore).
+5. If you haven't already, play with [`preserve` and `restore`](#preserverestore). Preserve the data, modify some values, then observe what happens
+   when you restore.
