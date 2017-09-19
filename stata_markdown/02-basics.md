@@ -270,6 +270,22 @@ fashion only when included at the top of a Do-file.
 Best practices is to always include a `version ##.#` line at the top of each Do-file, but if its code that will continue to see use, you should test
 it with the newer releases and update the code as necessary!
 
+^#^^#^ Exercise 0
+
+Get familiar with the Stata interface. If you've been following along, you may have already done all these!
+
+1. If you haven't already, open Stata. (You should be able to do this by clicking on the "Start" menu in the bottom left of the screen, then typing
+   "Stata".)
+2. The use of each pane will become much clearer when we start opening data in the [next section](working-with-data-sets.html), but take a look at
+   each.
+3. Give Stata a command: `update query`. This will list whether Stata can be updated. (Note that because we don't have administrator privileges on
+   these computers, we can't actual do the updates. If you're working on a computer where you can, you can run `update all` to perform any updates.)
+4. Open a Do file. Enter a [`version` command](#version-control) corresponding to the version on your computer. Place the `update query` command from
+   the last step in the Do file.
+5. Be sure you know how to run these commands from the Do file.
+6. Comment out the `update query` command; we won't need it anymore.
+
+
 ^#^^#^ Basic command syntax
 
 Most commands which operate on variables (as opposed to system commands such as `version` that we've been discussing) follow the same general
