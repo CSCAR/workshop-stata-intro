@@ -407,6 +407,22 @@ describe, simple
 <</dd_do>>
 ~~~~
 
+^#^^#^ Exercise 3
+
+If you've changed to a different data set, load "census9" back up with `webuse`.
+
+1. Going forward, we'll be using a version of "census9" with changes we're making. [Save](working-with-data-sets.html#saving-data) a copy of the data
+   to somewhere convenient (such as your Desktop).
+2. The `drate` variable is a bit vague - the name of the variable provides no clue that "d" = "death", and the values (e.g. 75) are ambiguous.
+    1. [Rename](#managing-variables) `drate` to `deathrate`.
+    2. The rate is actually per 10,000 individuals. [Label](#label-variable) `drate` to include this information.
+3. The variable `region` has a value label associated with it ("cenreg"). It has some odd choices, namely "NE" and "N Cntrl". Fix this.
+    1. [Create a new value label](#label-values) which replaces "NE" and "N Cntrl" with "Northeast" and "North Central" respectively.
+    2. Attach this new value label to `region`.
+    3. Remove the existing value label "cenreg".
+    4. Use `label list` and `tab` to confirm it worked.
+4. Save the data, replacing the version you created in step 1.
+
 ^#^^#^ Summarizing the data
 
 While these notes will not cover anything statistical, it can be handy from a data management perspective to look at some summary statistics, mostly
