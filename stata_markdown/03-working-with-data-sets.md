@@ -101,6 +101,15 @@ use bp heartrate date if gender == "male" using patientdata
 Here, `using` and `if` are subcommands, which we will see used more as the day goes on. For further details, see `help use`, specifically the manual
 which has the full documentation.
 
+^#^^#^ Editing data manually
+
+We will discuss in [Data Manipulation](data-manipulation.html) how to edit your data on a larger scale and in an automated fashion, but Stata does
+support modifying a spreadsheet of your data similar to Excel. At the top of the main window, you'll see two buttons, "Data Editor" and "Data
+Browser". These open the same new Data window, the only difference is that Stata is protecting you from yourself and if you open the "Data Browser"
+(or switch to it in the Data window), you cannot modify the data.
+
+Once in the Data window, you can select cells and edit them as desired.
+
 ^#^^#^ Saving data
 
 Saving data is straightforward using the `save` command. If you do not pass a filename to `save`, it will save with the same name as the existing
@@ -245,3 +254,13 @@ Finally, to restore the image of the data but not discard the preserved image, p
 ```
 restore, preserve
 ```
+
+^#^^#^ Exercise 1
+
+1. Load the [built-in](#built-in-data) data set "lifexp".
+2. Open the Data Editor window. [Modify](#editing-data-manually) at least one of the cells.
+3. Close the Data window. Load the built-in data set "sandstone". Don't forget to `clear` or pass the `clear` option.
+4. [Save a copy](#saving-data) of this data to your computer.
+    1. Check your [working directory](basics.html#working-directory). Make sure it is set somewhere convenient.
+    2. Use `save`. Make sure to give it a name!
+5. If you haven't already, play with [`preserve` and `restore`](#preserverestore).
