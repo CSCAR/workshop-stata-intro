@@ -158,6 +158,18 @@ We see here a very modest saving (370 bytes, about 12%), but sometimes you can s
 Don't be afraid of artificially restricting yourself going forward; if one of your values exceeds the limitations its type supports, Stata will
 automatically change types. So don't hesitate to run `compress` occasionally!
 
+^#^^#^ Exercise 2
+
+For exercises moving forward, we'll use the "census9" data set.
+
+1. "census9" is accesible via `webuse`. Load it.
+2. Spend a minute looking at the data. What does this data seem to represent? What variables do we have? What year is the data collected from?
+   (`describe` will come in handy here!)
+3. Are there any missing states?
+4. What variables (if any) are numeric and what variables (if any) are strings?
+5. Compress the data. How much space is saved? Why do you think this is?
+
+
 ^#^^#^ Labels
 
 A raw data set is very sparse on context. In addition to the data itself, it will have at most a variable name, which in Stata cannot include spaces
