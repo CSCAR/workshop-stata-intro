@@ -4,34 +4,34 @@
 
 [![](../images/stata_main_screen.png)](../images/stata_main_screen.png)
 
-When a user first opens Stata, there are five main windows that will appear:
+When a user first opens Stata, there are five panes that will appear in the main window:
 
-- The Results Window
-    - All commands which are run are echoed out here, as well as any output they produce. Not all commands produce output though most do (e.g. obtaining
-      summaries of the data or running a statistical procedure). Items that appear in the results window in <span style="color:blue">blue</span> are
-      clickable.
-- The Command Window
-    - This window is where users can interactively type Stata commands and submit them to Stata for processing.  Everything that one can do in Stata
-      is based on a set of Stata commands. Stata commands are case sensitive. All Stata commands and options are in lower case. When variables are
-      used in any command, the variable names are also case sensitive.
-- The Variables Window
-    - This window displays all of the variables in the data set that is currently open in Stata, and users can click on variable names in this window
-      to carry the variables over into Stata commands in the Command window. Note that Stata allows only one data-set to be open in a session.
-- The Review Window
-    - Stata will keep a running record of all Stata commands that have been submitted in the current session in this window. Users can simply click on
-      previous commands in this window to recall them in the Command window.
-- The Properties Window
-    - This window allows variable properties and data-set properties to be managed. Variable names, labels, value labels, notes, display formats, and
+- The Results Pane
+    - All commands which are run are echoed out here, as well as any output they produce. Not all commands produce output though most do
+      (e.g. obtaining summaries of the data or running a statistical procedure). Items that appear in the results pane in <span
+      style="color:blue">blue</span> are clickable.
+- The Command Pane
+    - This pane is where users can interactively type Stata commands and submit them to Stata for processing.  Everything that one can do in Stata is
+      based on a set of Stata commands. Stata commands are case sensitive. All Stata commands and options are in lower case. When variables are used
+      in any command, the variable names are also case sensitive.
+- The Variables Pane
+    - This pane displays all of the variables in the data set that is currently open in Stata, and users can click on variable names in this pane to
+      carry the variables over into Stata commands in the Command pane. Note that Stata allows only one data-set to be open in a session.
+- The Review Pane
+    - Stata will keep a running record of all Stata commands that have been submitted in the current session in this pane. Users can simply click on
+      previous commands in this pane to recall them in the Command pane.
+- The Properties Pane
+    - This pane allows variable properties and data-set properties to be managed. Variable names, labels, value labels, notes, display formats, and
       storage types can be viewed and modified here.
 
-Each of these five windows will be nested within a larger overall window for the Stata session, which contains menus and tool bars available for
+Each of these five panes will be nested within a larger overall window for the Stata session, which contains menus and tool bars available for
 users. There are additional windows that users can access from the Window menu, which include the Graph window (which will open when graphs have been
 created), the Viewer window (which is primarily used for help features and Stata news), the Data Editor window (for use when viewing data sets), and
 the Do-file Editor window (for use when writing .do files).
 
-In the lower left-hand corner of the main Stata window, there will be a directory displayed. This is known as the working directory, and is where
-Stata will look to find data files and other associated Stata files unless the user specifies another directory. We will cover examples of changing
-the working directory.
+In the lower left-hand corner of the main Stata window (below the panes), there will be a directory displayed. This is known as the working directory,
+and is where Stata will look to find data files and other associated Stata files unless the user specifies another directory. We will cover examples
+of changing the working directory.
 
 ^#^^#^ One Data
 
@@ -49,13 +49,13 @@ If you have multiple data sets you need to work with, you can either
 
 ^#^^#^ Give Stata a command
 
-Let's try running a Stata command. In the command window, type (or copy) the following:
+Let's try running a Stata command. In the command pane, type (or copy) the following:
 
 ```
 version
 ```
 
-The following should appear in the Results window:
+The following should appear in the Results pane:
 
 ~~~~
 <<dd_do>>
@@ -72,7 +72,7 @@ still be run, *but should be run without the `.`*.
 
 ^#^^#^^#^ Saving Results
 
-Any output that appears in the Results window (including the echoed commands and any errors) can by copied to be pasted into another location, such as
+Any output that appears in the Results pane (including the echoed commands and any errors) can by copied to be pasted into another location, such as
 Word. In addition, if you highlight text and right-click, you also have the options:
 
 - "Copy table": Useful for exporting to Excel. This can be tempermental; if the selected table is less "regular", this may not produce the best
@@ -165,10 +165,10 @@ There are several ways to start a new Do-file.
 ```
 doedit
 ```
-- If you select some commands in the Review window, you can right click and choose "Send select to Do-file Editor".
+- If you select some commands in the Review pane, you can right click and choose "Send select to Do-file Editor".
 
 For the last option there, note that performing that twice will create two separate Do-files instead of appending the commands. Instead, you can copy
-and paste from the Review window to add to an existing Do-file.
+and paste from the Review pane to add to an existing Do-file.
 
 Let's manually add some commands to a Do-file to see how to execute the commands. In a Do-file editor, enter the following
 
@@ -180,7 +180,7 @@ compress
 
 Once the lines are in the editor, highlight the commands (you do not need to highlight the entire line, you merely need to ensure your selection
 includes part of every line you want run) and press the "Execute/Do" (on Windows) or "Do" (on Mac) button. You should see the following appear in your
-Results window.
+Results pane.
 
 ~~~~
 <<dd_do>>
@@ -235,8 +235,8 @@ summarize /* comment in the middle of a command! */ price
 <</dd_do>>
 ~~~~
 
-Note that when a command wraps to more than one line in the Results window (either due to a manual line break like this or a command that's too wide
-for the Results window), the prefix changes from `.` to `>` to indicate that its all one command.
+Note that when a command wraps to more than one line in the Results pane (either due to a manual line break like this or a command that's too wide for
+the Results pane), the prefix changes from `.` to `>` to indicate that its all one command.
 
 Finally, there's the special comment, `///`. Stata commands must be on a single line. However, complicated commands may get very long, such that its
 hard to read them on a single line. Using `///` instead of `//` allows wrapping onto the next line.
@@ -250,7 +250,7 @@ price
 
 As with `//`, there needs to be a space before the `///`.
 
-Note, only the `*` works on interactive commands entered in the Command window. All four versions work in Do-files.
+Note, only the `*` works on interactive commands entered in the Command pane. All four versions work in Do-files.
 
 ^#^^#^^#^ Version control
 
@@ -315,7 +315,7 @@ Without getting too into the details of how the command works, we can see examin
 ^#^^#^^#^ Referring to variables
 
 In the example of the `regress` command above, 4 variables we referred to were `x1` through `x4`. If you have only a few variables to refer to, typing
-each in (or double-clicking on their entry in the Variables window) is sufficient. However, if the number of variables grows, this becomes
+each in (or double-clicking on their entry in the Variables pane) is sufficient. However, if the number of variables grows, this becomes
 tedious. Thankfully there are two alternatives.
 
 First, we can use the wild card `\*`^[This is the reason why `*` as a comment does not work in the middle of a line (and we use `//` instead).] For
@@ -325,9 +325,9 @@ be used in the middle or beginning, e.g.:
 - `c*t` would match `cat`, `caught` and `ct`
 - `*2` would match `age2`, `gender2` and `salary2012`.
 
-Alternatively, if the variables we want to include are next to each other in the data (e.g. in the Variables window), we can refer to a list of
-them. If the variables in the window are `a` through `z`, alphabetically, then `b-e` would include `b`, `c`, `d`, and `e`. We will discuss the
-`[order](#order)` command later to re-order variables.
+Alternatively, if the variables we want to include are next to each other in the data (e.g. in the Variables pane), we can refer to a list of them. If
+the variables in the data are `a` through `z` (ordered alphabetically), alphabetically, then `b-e` would include `b`, `c`, `d`, and `e`. We will
+discuss the `[order](#order)` command later to re-order variables.
 
 ^#^^#^ Stata Help
 
