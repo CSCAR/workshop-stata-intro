@@ -1,6 +1,7 @@
 default: stata fixRmd book
 
 stata:
+	@rm mycensus9.dta
 	/Applications/Stata/StataSE.app/Contents/MacOS/stata-se -b do build-stata.do
 
 fixRmd:

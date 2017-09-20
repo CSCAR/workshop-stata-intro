@@ -707,8 +707,9 @@ Open the *saved* version of "census9" with `use`, not the original version with 
     - "Below national average": `medage` greater than 26.20 and less than or equal to 30.10.
     - "Above national average": `medage` greater than 30.10 and less than or equal to 32.80.
     - "Significantly above national average": `medage` greater than 32.80.
-3. What is the death rate in [each of those four categories](#by-and-bysort)? Does there appear to be any pattern?
-4. What state has the [highest](#sorting) death rate? The lowest? The highest average age? The lowest?
+3. What is the death rate in [each of those four categories](#by-and-bysort)? (You can use `summarize` to obtain the means.) Does there appear to be
+   any pattern?
+4. What state has the [lowest](#sorting) death rate? The highest? The lowest average age? The highest?
 5. Each state has a single observation here, but if we had multiple years of data, then we could have ["long data"](#reshaping-files) with multiple
    rows per state. To prepare for this sort of data, [encode](#encode-and-decode) the two-letter state abbreviation into a numeric value with value
    labels.
