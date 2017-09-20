@@ -696,6 +696,23 @@ list date5 date6 in 1/5
 <</dd_do>>
 ~~~~
 
+^#^^#^ Exercise 5
+
+Open the *saved* version of "census9" with `use`, not the original version with `webuse`.
+
+1. Generate a new variable, `deathperc`, which is the percentage of deaths in each state. (Remember that `deathrate` is deaths per 10,000.)
+2. The average age of all Americans in 1980 is roughly 30.11 years of age. [Generate a categorical](#conditional-variable-generation) with four values
+   as described before, with appropriate [value labels](#data-management.html#label-values).
+    - "Significantly below national average": `medage` equal to 26.20 or less
+    - "Below national average": `medage` greater than 26.20 and less than or equal to 30.10.
+    - "Above national average": `medage` greater than 30.10 and less than or equal to 32.80.
+    - "Significantly above national average": `medage` greater than 32.80.
+3. What is the death rate in [each of those four categories](#by-and-bysort)? Does there appear to be any pattern?
+4. What state has the [highest](#sorting) death rate? The lowest? The highest average age? The lowest?
+5. Each state has a single observation here, but if we had multiple years of data, then we could have ["long data"](#reshaping-files) with multiple
+   rows per state. To prepare for this sort of data, [encode](#encode-and-decode) the two-letter state abbreviation into a numeric value with value
+   labels.
+
 ^#^^#^ Merging Files
 
 When managing data sets, the need often arises to merge two data sets together, either by matching two files together according to values on certain
