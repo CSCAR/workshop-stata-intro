@@ -415,7 +415,7 @@ If you've changed to a different data set, load "census9" back up with `webuse`.
    to somewhere convenient (such as your Desktop).
 2. The `drate` variable is a bit vague - the name of the variable provides no clue that "d" = "death", and the values (e.g. 75) are ambiguous.
     1. [Rename](#managing-variables) `drate` to `deathrate`.
-    2. The rate is actually per 10,000 individuals. [Label](#label-variable) `drate` to include this information.
+    2. The rate is actually per 10,000 individuals. [Label](#label-variable) `dearthrate` to include this information.
 3. The variable `region` has a value label associated with it ("cenreg"). It has some odd choices, namely "NE" and "N Cntrl". Fix this.
     1. [Create a new value label](#label-values) which replaces "NE" and "N Cntrl" with "Northeast" and "North Central" respectively.
     2. Attach this new value label to `region`.
@@ -533,3 +533,11 @@ This reports potential issues Stata has discovered in the data. In this data, ne
 - Issues with value labels (if you've attached a value label to a variable and subsequently deleted the value label without detaching it; or if your
   variable takes on values unaccounted for in the value label).
 - Issues with date variables.
+
+^#^^#^ Exercise 4
+
+Using `summarize` and `codebook` to explore the "census9" data and answer the following questions:
+
+1. Are there any values which seem to be errors?
+2. I'd expect each state to have their own unique value of death rate, population and median age. Is this true? If not, why?
+2. Are there any problems with the data?
