@@ -580,7 +580,7 @@ rename mpg2 mpg
 order mpg, after(price)
 <</dd_do>>
 ~~~~
-And we're back to the original set-up^[If you are sharp-eyed, you may have noticed that the original `mpg` was an "int" whereas the final one is a
+And we're back to the original set-up.^[If you are sharp-eyed, you may have noticed that the original `mpg` was an "int" whereas the final one is a
 "byte". If we had called [`compress`](data-management.html#compress) on the original data, it would have done that type conversion anyways - so we're
 ok!]
 
@@ -603,7 +603,7 @@ tab make2, mi
 ~~~~
 
 `tostring` also accepts the `force` option when using `replace`, we recommend instead to **never** use `replace` with `tostring` (you probably should
-not use it with `destring either!).
+not use it with `destring` either!).
 
 ^#^^#^^#^ `encode` and `decode`
 

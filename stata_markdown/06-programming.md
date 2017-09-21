@@ -108,9 +108,9 @@ stores the following in `r()`:" or "`mean` stores the following in `e()`:", corr
 
 Along with the [One Data](basics.html#one-data) principal, Stata also follows the One _-class principal - meaning you can only view the `return` or
 `ereturn` for the most recent command of that class. So if you run a `summarize` command, then do a bunch of n-class calls (`gsort` for example), the
-`return list` call will still give you the returns for that first `summarize`. However, as soon as you run another command, you lose it. You can save
-any piece of it using a macro. For example, to calculate the average difference in price between foreign and domestic cars^[There are obviously other
-ways to compute this, but this gives a flavor of the use.]:
+`return list` call will still give you the returns for that first `summarize`. However, as soon as you run another r-class command, you lose access to
+the first one. You can save any piece of it using a [macro](#macros). For example, to calculate the average difference in price between foreign and domestic
+cars^[There are obviously other ways to compute this, but this gives a flavor of the use.]:
 
 ~~~~
 <<dd_do>>
@@ -169,9 +169,9 @@ Let's breakdown each piece of the command. The command syntax for `foreach` is
 foreach <new macroname> of varlist <list of variables>
 ```
 
-The loop will create a macro that you name (in the example above, it was named "race"), and repeatedly set it to each subsequent entry in the list of
-variables. So in the code above, first "race" is set to "total", then the two `gen` commands are run. Next, "race" is set to "white", then the two
-commands are run. Etc.
+The loop will create a [macro](#macros) that you name (in the example above, it was named "race"), and repeatedly set it to each subsequent entry in
+the list of variables. So in the code above, first "race" is set to "total", then the two `gen` commands are run. Next, "race" is set to "white", then
+the two commands are run. Etc.
 
 Within each of the `gen` commands, we use the backtick-quote notation just like with [macros](#macros).
 
@@ -218,7 +218,7 @@ foreach <macro name> in <list of strings>
 ```
 
 It's a bit annoying, but Stata handles the "of" and "in" slight differently. The "in" treats any strings on the right as strict. Meaning if the above
-loop were
+loop over race were
 
 ```
 foreach race in total-island
