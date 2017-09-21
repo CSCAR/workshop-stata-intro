@@ -43,9 +43,10 @@ about variables. The command is simply `summarize`, there is no need to direct i
 
 If you have multiple data sets you need to work with, you can either
 
-1. Switch between the two data sets as needed. This can be burdensome, though tools such as [`preserve`](#preserve) help greatly.
+1. Switch between the two data sets as needed. This can be burdensome, though tools such as [`preserve`](working-with-data-sets.html#preserverestore)
+   help greatly.
 
-2. Merge the data sets, the better option. We'll discuss [merging](#merge) later.
+2. Merge the data sets, the better option. We'll discuss [merging](data-manipulation.html#merging-files) towards the end of the course.
 
 ^#^^#^ Give Stata a command
 
@@ -66,7 +67,8 @@ version
 The first line proceeded by the `.` indicates the command that was written, `version`, and the rest is the output. Here, I am running Stata version
 15.0 (your version may vary).
 
-In this document, if you see a single command without a period, it indicates something that can be run. If you instead see a Results output where the
+In this document, if you see a single command without a period, it indicates something that was not run - either it's not designed to be run (it's
+fake code designed to illustrate a point), or more likely, the output is not interesting or unnecessary. If you instead see a Results output where the
 first line is the command prefaced by the `.`, that was run in Stata and only the Results are included since they include the command. The command can
 still be run, *but should be run without the `.`*.
 
@@ -84,15 +86,15 @@ Word. In addition, if you highlight text and right-click, you also have the opti
 There are a few commands that can be useful for saving results which we will not cover in this workshop, if you are interested, you can look
 into [the help](#stata-help) for them.
 
-- `log`: Saves everything that goes into Results into a file.
+- `log`: Saves a file consisting of everything printed to the Results pane.
 - `putexcel`: Adds to a spreadsheet specific strings or output.
-- `outreg2`: A [user-written](#installing-user-written-commands) command to output the results of a model (e.g. regression).
+- `outreg2`: A [user-written](#installing-user-written-commands) command to output the results of a model (e.g. regression) in a clean format.
 
 ^#^^#^ Updating
 
 If you have administrative access on your computer (e.g. if it is your personal machine, or your IT department has given you the ability), you can
-update Stata freely. Major point upgrades such as the newly released 15.0 require re-installation, but minor upgrades (such as the 14.1 and 14.2
-updates) as well as minor internal updates are free.
+update Stata freely. Major point upgrades such as the newly released 15.0 require purchase and re-installation, but minor upgrades (such as the 14.1
+and 14.2 updates) as well as minor internal updates are free.
 
 To check for updates, you can run
 
@@ -150,7 +152,7 @@ to perform all updates.
 
 ^#^^#^ Do-files
 
-We [saw](#the-stata-environment) that commands can be typed interactively, one command at a time, and the results immediately observed. From this, the
+We [saw](#give-stata-a-command) that commands can be typed interactively, one command at a time, and the results immediately observed. From this, the
 output can be copied/exported/printed, or the results can be saved. However, a better paradigm would save all the commands run separately so that the
 analysis is [reproducible](https://en.wikipedia.org/wiki/Reproducibility).
 
@@ -161,7 +163,7 @@ analysis. Additionally you can easily save and/or share this command, allowing y
 There are several ways to start a new Do-file.
 
 - File -> New -> Do-file
-- You can enter the command
+- You can enter the command:
 ```
 doedit
 ```
@@ -190,8 +192,8 @@ compress
 <</dd_do>>
 ~~~~
 
-We will cover in later sections what each of these commands does
-([`sysuse`](working-with-data-sets.html#sysuse), [`summarize`](#summarize), [`compress`](#compress)).
+We will cover in later sections what each of these commands does ([`sysuse`](working-with-data-sets.html#sysuse),
+[`summarize`](data-management.html#summarizing-the-data), [`compress`](#compress)).
 
 ^#^^#^^#^ Comments
 
@@ -264,7 +266,7 @@ version 14.2
 to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you've updated to Stata 15. This
 works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 15 when you only have Stata 14 installed.)
 
-Note that this `version` is the same command as the `version` we've been discussing [before](#giving-stata-a-command). It operates in this special
+Note that this `version` is the same command as the `version` we've been discussing [before](#give-stata-a-command). It operates in this special
 fashion only when included at the top of a Do-file.
 
 Best practices is to always include a `version ##.#` line at the top of each Do-file, but if its code that will continue to see use, you should test
@@ -314,7 +316,7 @@ command <variable(s)> if <condition>, <options>
 We will cover this [in more detail](data-manipulation.html#subsetting) later, including how to specify the condition.
 
 As an example, if we were to fit a linear regression model^[This course does not cover fitting statistical models, see the follow-up course for
-further detail], the command might be
+further detail.], the command might be
 
 ```
 regress y x1 x2 x3 x4 if z > 5, vce(robust) beta
@@ -343,7 +345,7 @@ be used in the middle or beginning, e.g.:
 
 Alternatively, if the variables we want to include are next to each other in the data (e.g. in the Variables pane), we can refer to a list of them. If
 the variables in the data are `a` through `z` (ordered alphabetically), alphabetically, then `b-e` would include `b`, `c`, `d`, and `e`. We will
-discuss the `[order](#order)` command later to re-order variables.
+discuss the `[order](data-management.html#managing-variables)` command later to re-order variables.
 
 ^#^^#^ Stata Help
 

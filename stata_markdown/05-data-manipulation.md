@@ -97,9 +97,9 @@ they can take on any two values, but your life will be easier if you stick with 
 0 represents an absence of something (or an answer of "no") and 1 represents the presence (or an answer of "yes"). When naming dummy variables, you
 should keep this in mind to make understanding the variable easier, as well as extracting interpretations regarding the variable in a model.
 
-For example, "gender" is a poor dummy variable - what does 0 gender or 1 gender represent? Obviously we could (and should)
-use [value labels](data-management.html#value-labels) to associate 0 and 1 with particular genders, but it is more straightforward to use "female" as
-the dummy variable - a 0 represents "no" to the question of "Female?", hence male; and a 1 represents a "yes", hence female.
+For example, "gender" is a poor dummy variable - what does 0 gender or 1 gender represent? Obviously we could (and should) use [value
+labels](data-management.html#label-values) to associate 0 and 1 with particular genders, but it is more straightforward to use "female" as the dummy
+variable - a 0 represents "no" to the question of "Female?", hence male; and a 1 represents a "yes", hence female.
 
 If you are collecting data, consider collecting data as dummies where appropriate - if the question has a binary response, encode it as a dummy
 instead of strings. If a question has categorical responses, consider encoding them as a series of dummy variables instead (e.g. "Are you from MI?",
@@ -275,8 +275,8 @@ There's one additional complication. Stata represents missing values by `.`, and
 ^$$^
 
 is true! There is some discussion [on the Stata FAQs](http://www.stata.com/support/faqs/data-management/logical-expressions-and-missing-values/) that
-goes into the rationale behind it, but the short version is that this slightly complicates variable generation but greatly simplifies and
-protects [data management tasks](#keep-drop).
+goes into the rationale behind it, but the short version is that this slightly complicates variable generation but greatly simplifies and protects
+some data management tasks.
 
 The complication referred to can be seen in row 3 here:
 
@@ -581,7 +581,7 @@ order mpg, after(price)
 <</dd_do>>
 ~~~~
 And we're back to the original set-up^[If you are sharp-eyed, you may have noticed that the original `mpg` was an "int" whereas the final one is a
-"byte". If we had called [`compress`](data-management.html$compress) on the original data, it would have done that type conversion anyways - so we're
+"byte". If we had called [`compress`](data-management.html#compress) on the original data, it would have done that type conversion anyways - so we're
 ok!]
 
 When using `destring` to convert a string variable (that it storing numeric data as strings - "13", "14") to a numeric variable, if there are *any*
@@ -702,7 +702,7 @@ Open the *saved* version of "census9" with `use`, not the original version with 
 
 1. Generate a new variable, `deathperc`, which is the percentage of deaths in each state. (Remember that `deathrate` is deaths per 10,000.)
 2. The average age of all Americans in 1980 is roughly 30.11 years of age. [Generate a categorical](#conditional-variable-generation) with four values
-   as described before, with appropriate [value labels](#data-management.html#label-values).
+   as described before, with appropriate [value labels](data-management.html#label-values).
     - "Significantly below national average": `medage` equal to 26.20 or less
     - "Below national average": `medage` greater than 26.20 and less than or equal to 30.10.
     - "Above national average": `medage` greater than 30.10 and less than or equal to 32.80.

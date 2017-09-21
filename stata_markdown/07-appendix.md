@@ -106,7 +106,7 @@ This just flags spaces (" ") in the data. Not a real problem!
 
 ^#^^#^^#^ Exercise 5
 
-[Exercise 5](data-management.html#exercise-5)
+[Exercise 5](data-manipulation.html#exercise-5)
 
 1:
 ~~~~
