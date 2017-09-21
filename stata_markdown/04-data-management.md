@@ -183,6 +183,38 @@ data dictionary. All three different versions use the `label` command.
 
 ^#^^#^^#^ `label data`
 
+While [`notes`](#data-notes) provide very similar functionality, a label can be attached to the data. These are shorter than notes, and there can be
+only a single label. However, these appear when running `describe`, and so can be useful for quick identification. If you want to put more detail, add
+notes.
+
+We saw an existing data label on the "auto" data set when running `describe`:
+
+~~~~
+<<dd_do>>
+describe, short
+<</dd_do>>
+~~~~
+
+The label appears on the right, "1978 Automobile Data".
+
+We can replace it with `label data "<new label here>"`, for example:
+
+~~~~
+<<dd_do>>
+label data "Cars from 1978"
+describe, short
+<</dd_do>>
+~~~~
+
+You can remove it by not passing a new label:
+
+~~~~
+<<dd_do>>
+label data
+describe, short
+<</dd_do>>
+~~~~
+
 ^#^^#^^#^ `label variable`
 
 Variables names, as mentioned, are limited to 32 characters and do not allow spaces (or several other special characters). This is to encourage you to
