@@ -209,7 +209,7 @@ First, to comment out an entire line, precede it by `*`:
 <</dd_do>>
 ~~~~
 
-Second, you can add a comment to the end of a line with `//``
+Second, you can add a comment to the end of a line with `//`
 
 ~~~~
 <<dd_do>>
