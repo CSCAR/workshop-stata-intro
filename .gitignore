@@ -8,3 +8,4 @@ rsconnect
 0*.Rmd
 *.log
 .DS_Store
+mycensus9.dta
