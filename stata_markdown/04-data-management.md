@@ -116,9 +116,10 @@ separately if desired.
 
 ~~~~
 <<dd_do>>
-notes list _dta
-notes list displacement
-notes list turn
+notes
+notes _dta
+notes displacement
+notes turn
 <</dd_do>>
 ~~~~
 
@@ -136,15 +137,15 @@ notes
 
 ^#^^#^ `compress`
 
-As mentioned [above](#describe), there are various ways to store a number variable, such as `byte` and `long`. The various options take more space to
-save - types which take less space can store only smaller numbers whereas types that take more space can store larger numbers. For example, a number
-stored as a byte can only take on values between -127 and 100 and only integers (e.g. not 2.5) whereas a number stored as float can store numbers up
-to \(1.7x10^38\) with up to 38 decimal places. Strings operate similarly; a string variable with 20 characters would store "abc" as 17 blank
-characters followed by the "abc".
+As mentioned [above](#describe), there are different ways to store a number variable, such as `byte` and `long`. The various options take more space
+to save - types which take less space can store only smaller numbers whereas types that take more space can store larger numbers. For example, a
+number stored as a byte can only take on values between -127 and 100 and only integers (e.g. not 2.5) whereas a number stored as float can store
+numbers up to \(1.7x10^38\) with up to 38 decimal places. Strings operate similarly; a string variable with 20 characters would store "abc" as 17
+blank characters followed by the "abc".
 
-Understanding the above is not that important these days as computer power and storage has increased to the point where the majority of us will be
+Understanding the above is not that important these days as computer power and storage has increased to the point where the majority of us will not be
 reaching its limits. However, Stata does offer the `compress` command which attempts to store variables in the smallest possible type. For example, if
-a variable is a float takes on only values 1 through 10, it is replaced by a byte (and similarly, strings are as long as the longest value).
+a variable which is a float takes on only values 1 through 10, it is replaced by a byte (and similarly, strings are as long as the longest value).
 
 ~~~~
 <<dd_do>>
@@ -245,6 +246,8 @@ describe turn
 <</dd_do>>
 ~~~~
 
+As with [labelling the data](#label-data), call `label variable <varname>` without a new label to remove the existing one.
+
 ^#^^#^^#^ `label values`
 
 It is tempting to store categorical variables as strings. If you ask, for example, for someone's state of residence, you might store the answers as
@@ -288,7 +291,7 @@ describe foreign
 <</dd_do>>
 ~~~~
 
-You'll notice that in the "value label" column has `origin` attached to `foreign`. In Stata, the value labels information are *stored separately* from
+You'll notice that the "value label" column has `origin` attached to `foreign`. In Stata, the value labels information are *stored separately* from
 the variables. They are two separate components - there is a variable and there is a value label. You connect the value label to a variable to use it.
 
 The benefit of this separated structure is that if you have several variables which have the same coding scheme (e.g. a series of Likert scale
@@ -332,7 +335,7 @@ label values <var1> <var2> <var3> <label>
 ```
 
 
-To remove the value labels from a variable, use the `label values` command with no label name following the variable name:
+To remove the value labels from a variable, use the `label values <variable>` command with no label name following the variable name:
 
 ~~~~
 <<dd_do>>
@@ -468,7 +471,7 @@ to identify problematic variables. Among other things, we can try and detect
 There are numerous ways to look at summary statistics, from obtaining one-number summaries to visualizations, but we will focus on two Stata commands,
 `summarize` and `codebook`.
 
-`summarize` produces basic summary statistics *for numeric variables
+`summarize` produces basic summary statistics *for numeric variables*.
 
 ~~~~
 <<dd_do>>
