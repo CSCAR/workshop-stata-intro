@@ -16,24 +16,14 @@ github-repo: rstudio/bookdown-demo
 
 ## How to use this document
 
-These notes are published in [bookdown](https://bookdown.org/) format
-which enables easy creation of longform documents (using a mixture of
-[markdown](https://daringfireball.net/projects/markdown/),
-[R](https://www.r-project.org/), and for these notes specifically,
-[Stata](http://www.stata.com/)'s
-[dyndoc](http://www.stata.com/manuals/pdyndoc.pdf)).
+These notes are published in [bookdown](https://bookdown.org/) format which enables easy creation of longform documents (using a mixture of
+[markdown](https://daringfireball.net/projects/markdown/), [R](https://www.r-project.org/), and for these notes specifically,
+[Stata](http://www.stata.com/)'s [dyndoc](http://www.stata.com/manuals/pdyndoc.pdf), which was added in [Stata 15](#stata-14-vs-stata-15))0.
 
 The table of contents is found on the left hand side, with subsections expanding below the current section. At the top of the page are three icons,
 from left to right they 1) Hide/show the table of contents, 2) Search this document, and 3) Change the font the book is displayed in.
 
 All images should link to full-size versions to see detail if needed.
-
-### Stata 14 vs Stata 15
-
-Given that Stata 15 has been released relatively recently to this workshop (July 2017), while the workshop is designed with and taught towards Stata
-15, we will flag areas where Stata 14 performs differently. Look for the following image to designate such areas:
-
-![](../images/s14v15.png)
 
 ## Contact information
 

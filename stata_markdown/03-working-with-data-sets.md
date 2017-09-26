@@ -62,8 +62,8 @@ use <filename>
 
 As discussed in the [working directory](basics.html#working-directory) section, Stata can see only files in its working directory, so only the name of
 the file needs to be passed. If the file exists in a different directory, you will need to give the full (or relative path). For example, if your
-working directory is "C:\Documents\Stata" and the file you are looking for, "mydata", is in the "Project" subfolder, you could open it with any of the
-following:
+working directory is "C\:\\\Documents\\\Stata" and the file you are looking for, "mydata", is in the "Project" subfolder, you could open it with any
+of the following:
 
 ```
 use C:\Documents\Stata\Project\mydata
@@ -119,11 +119,10 @@ to a location outside of the working directory.
 By default, `save` will not overwrite existing files. To do so, use the `replace` option.
 
 ```
-save
-save newfile
-save C:\tmp
-save, replace
-save newfile, replace
+save * Saves a new copy with the same name.
+save, replace * Replaces the existing copy with the same name
+save newfile * Saves a new copy with a new name (if the new name file doesn't exist)
+save newfile, replace * Replaces the copy with the new name
 ```
 
 As before, wrap the file name in quotes if it (or the path) includes any spaces.
@@ -170,7 +169,8 @@ If Stata makes mistakes here (usually because the data is formatted oddly), thin
 used to force Stata to treat everything as a string so that it reads in the data *exactly* as stored in the Excel sheet so that you can clean it up
 later. Note that cleaning this up is usually more complicated then just fixing the Excel sheet first! (Note also that for larger data, this scan can be slow!)
 
-Once the preview looks accurate, go ahead and import. As usual, this will create an `import excel` command in the Results that you can save for the future in a Do-file, but using `save` to create a Stata data set is probably a better option.
+Once the preview looks accurate, go ahead and import. As usual, this will create an `import excel` command in the Results that you can save for the
+future in a Do-file, but using `save` to create a Stata data set to load in later is probably a better option.
 
 ^#^^#^^#^ Importing a CSV File
 
@@ -217,8 +217,8 @@ not free. Your department or organization may offer access to it.
 
 ^#^^#^ `preserve`/`restore`
 
-Along with the [One Data](basics.html#one-data) principal, if you wished to modify a data set temporarily, say to remove some subset of your
-observations, it must be done destructively. One workflow to use would be:
+Along with the [One Data](basics.html#one-data) principal, if you wished to modify a data set temporarily, say to
+[remove](data-manipulation.html#keep-drop) some subset of your observations, it must be done destructively. One workflow to use would be:
 
 ```
 sysuse auto
@@ -249,15 +249,9 @@ changes. There can only be a single image of the data preserved at a time, so if
 restore, not
 ```
 
-Finally, to restore the image of the data but not discard the preserved image, pass the `preserve` option
-
-```
-restore, preserve
-```
-
 ^#^^#^ Exercise 1
 
-1. Load the [built-in](#built-in-data) data set "lifexp".
+1. Load the [built-in](#built-in-data) data set "lifeexp".
 2. Open the Data Editor window. [Modify](#editing-data-manually) at least one of the cells.
 3. Close the Data window. Load the built-in data set "sandstone". Don't forget to `clear` or pass the `clear` option.
 4. [Save a copy](#saving-data) of this data to your computer.

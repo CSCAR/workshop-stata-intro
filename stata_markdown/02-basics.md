@@ -16,30 +16,32 @@ When a user first opens Stata, there are five panes that will appear in the main
       in any command, the variable names are also case sensitive.
 - The Variables Pane
     - This pane displays all of the variables in the data set that is currently open in Stata, and users can click on variable names in this pane to
-      carry the variables over into Stata commands in the Command pane. Note that Stata allows only one data-set to be open in a session.
+      carry the variables over into Stata commands in the Command pane. Note that Stata allows only [one data-set](#one-data) to be open in a session.
 - The Review Pane
     - Stata will keep a running record of all Stata commands that have been submitted in the current session in this pane. Users can simply click on
       previous commands in this pane to recall them in the Command pane.
 - The Properties Pane
-    - This pane allows variable properties and data-set properties to be managed. Variable names, labels, value labels, notes, display formats, and
-      storage types can be viewed and modified here.
+    - This pane allows variable properties and data-set properties to be managed. [Variable names](data-management.html#managing-variables),
+      [labels](data-management.html#label-variable), [value labels](data-management.html#label-values), [notes](data-management.html#data-notes),
+      [display formats](data-management.html#describe), and [storage types](data-management.html#describe) can be viewed and modified here.
 
 Each of these five panes will be nested within a larger overall window for the Stata session, which contains menus and tool bars available for
 users. There are additional windows that users can access from the Window menu, which include the Graph window (which will open when graphs have been
-created), the Viewer window (which is primarily used for help features and Stata news), the Data Editor window (for use when viewing data sets), and
-the Do-file Editor window (for use when writing .do files).
+created), the Viewer window (which is primarily used for [help](#help) features and Stata news), the Data Editor window (for use when [viewing data
+sets](working-with-data-sets.html#editing-data-manually)), and the Do-file Editor window (for use when writing [.do files](#do-files)).
 
-In the lower left-hand corner of the main Stata window (below the panes), there will be a directory displayed. This is known as the working directory,
-and is where Stata will look to find data files and other associated Stata files unless the user specifies another directory. We will cover examples
-of changing the working directory.
+In the lower left-hand corner of the main Stata window (below the panes), there will be a directory displayed. This is known as the [working
+directory](#working-directory), and is where Stata will look to find data files and other associated Stata files unless the user specifies another
+directory. We will cover examples of changing the working directory.
 
 ^#^^#^ One Data
 
 One functionality where Stata differs than most other statistical or data analysis software is that Stata can only have a single data set open at a
 time. (You can open a second instance of Stata to open a second data set, but the two instances cannot communicate.)
 
-Any command you run knows to operate on the data set you have open. For example, there is a command `summarize` which provides summary information
-about variables. The command is simply `summarize`, there is no need to direct it towards a specific data set.
+Any command you run knows to operate on the data set you have open. For example, there is a command
+[`summarize`](#data-management.html#summarizing-the-data) which provides summary information about variables. The command is simply `summarize`, there
+is no need to direct it towards a specific data set.
 
 If you have multiple data sets you need to work with, you can either
 
@@ -50,7 +52,7 @@ If you have multiple data sets you need to work with, you can either
 
 ^#^^#^ Give Stata a command
 
-Let's try running a Stata command. In the command pane, type (or copy) the following:
+Let's try running a Stata command. In the command pane, type (or copy and paste) the following:
 
 ```
 version
@@ -74,7 +76,7 @@ still be run, *but should be run without the `.`*.
 
 ^#^^#^^#^ Saving Results
 
-Any output that appears in the Results pane (including the echoed commands and any errors) can by copied to be pasted into another location, such as
+Any output that appears in the Results pane (including the echoed commands and any errors) can bea copied to be pasted into another location, such as
 Word. In addition, if you highlight text and right-click, you also have the options:
 
 - "Copy table": Useful for exporting to Excel. This can be tempermental; if the selected table is less "regular", this may not produce the best
@@ -278,14 +280,14 @@ Get familiar with the Stata interface. If you've been following along, you may h
 
 1. If you haven't already, open Stata. (You should be able to do this by clicking on the "Start" menu in the bottom left of the screen, then typing
    "Stata".)
-2. The use of each pane will become much clearer when we start opening data in the [next section](working-with-data-sets.html), but take a look at
-   each.
-3. Give Stata a command: `update query`. This will list whether Stata can be updated. (Note that because we don't have administrator privileges on
-   these computers, we can't actual do the updates. If you're working on a computer where you can, you can run `update all` to perform any updates.)
-4. Open a Do file. Enter a [`version` command](#version-control) corresponding to the version on your computer. Place the `update query` command from
-   the last step in the Do file.
+2. The [use of each pane](#the-stata-environment) will become much clearer when we start opening data in the [next
+   section](working-with-data-sets.html), but take a look at each.
+3. Give Stata a command: `query memory`. This lists some settings related to memory usage in Stata, for example, `maxvar` is the maximum number of
+   variables in a model; `matsize` is the largest number of predictors allowed in a model.
+4. Open a [Do file](#do-files). Place a [`version` command](#version-control) at the top of the file corresponding to the version on your
+   computer. Place the `query memory` command from the last step in the Do file.
 5. Be sure you know how to run these commands from the Do file.
-6. Comment out the `update query` command; we won't need it anymore.
+6. [Comment](#comments) out the `query memory` command; we won't need it anymore.
 
 
 ^#^^#^ Basic command syntax
@@ -410,11 +412,7 @@ saw `su, d`, you might have trouble figuring that out unless you already knew th
 ^#^^#^ `set more off`
 
 Stata has an option, `more`, which, if a command were to produce voluminous output, breaks the output into "pages" so that you can see it
-page-by-page.
-
-![](../images/s14v15.png)
-
-Through Stata 14, the default was that this was on. Starting with Stata 15, the default is off. You can turn this on or off,
+page-by-page. Through Stata 14, the default was that this was on. Starting with Stata 15, the default is off. You can turn this on or off,
 
 ```
 set more on
