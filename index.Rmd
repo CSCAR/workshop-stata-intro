@@ -18,7 +18,7 @@ github-repo: rstudio/bookdown-demo
 
 These notes are published in [bookdown](https://bookdown.org/) format which enables easy creation of longform documents (using a mixture of
 [markdown](https://daringfireball.net/projects/markdown/), [R](https://www.r-project.org/), and for these notes specifically,
-[Stata](http://www.stata.com/)'s [dyndoc](http://www.stata.com/manuals/pdyndoc.pdf), which was added in [Stata 15](#stata-14-vs-stata-15))0.
+[Stata](http://www.stata.com/)'s [dyndoc](http://www.stata.com/manuals/pdyndoc.pdf), which was added in [Stata 15](#stata-14-vs-stata-15)).
 
 The table of contents is found on the left hand side, with subsections expanding below the current section. At the top of the page are three icons,
 from left to right they 1) Hide/show the table of contents, 2) Search this document, and 3) Change the font the book is displayed in.
