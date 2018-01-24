@@ -21,7 +21,7 @@ When a user first opens Stata, there are five panes that will appear in the main
     - Stata will keep a running record of all Stata commands that have been submitted in the current session in this pane. Users can simply click on
       previous commands in this pane to recall them in the Command pane.
 - The Properties Pane
-    - This pane allows variable properties and data-set properties to be managed. [Variable names](data-management.html#managing-variables),
+    - This pane allows variable properties and data-set properties to be managed. [Variable names](data-management.html#renaming-variables),
       [labels](data-management.html#label-variable), [value labels](data-management.html#label-values), [notes](data-management.html#data-notes),
       [display formats](data-management.html#describe), and [storage types](data-management.html#describe) can be viewed and modified here.
 
@@ -72,11 +72,12 @@ The first line proceeded by the `.` indicates the command that was written, `ver
 In this document, if you see a single command without a period, it indicates something that was not run - either it's not designed to be run (it's
 fake code designed to illustrate a point), or more likely, the output is not interesting or unnecessary. If you instead see a Results output where the
 first line is the command prefaced by the `.`, that was run in Stata and only the Results are included since they include the command. The command can
-still be run, *but should be run without the `.`*.
+still be run, *but should be run without the `.`*^[Stata can handle commands that are prefaced by `.` (with a space between the period and comand) so
+you can copy/paste the `. version` and run it as is. However, don't get used to that habit! The correct command is just `version`.].
 
 ^#^^#^^#^ Saving Results
 
-Any output that appears in the Results pane (including the echoed commands and any errors) can bea copied to be pasted into another location, such as
+Any output that appears in the Results pane (including the echoed commands and any errors) can be copied and pasted into another location, such as
 Word. In addition, if you highlight text and right-click, you also have the options:
 
 - "Copy table": Useful for exporting to Excel. This can be tempermental; if the selected table is less "regular", this may not produce the best
@@ -91,6 +92,12 @@ into [the help](#stata-help) for them.
 - `log`: Saves a file consisting of everything printed to the Results pane.
 - `putexcel`: Adds to a spreadsheet specific strings or output.
 - `outreg2`: A [user-written](#installing-user-written-commands) command to output the results of a model (e.g. regression) in a clean format.
+
+^#^^#^^#^ dyndoc
+
+Version 15 of Stata introduced "dyndoc" which allows you to weave together narrative text and Stata code to produce a high-quality output (html, word
+or pdf). This document is written ([in part](index.html#how-to-use-this-document) in dyndoc. It is extremely powerful but is well outside the mandate
+of this class. If you are interested in this functionality, I'd be happy to help.
 
 ^#^^#^ Updating
 
@@ -117,7 +124,7 @@ If you do not have administrative access on your computer, you'll need to reach 
 In addition to built in commands, Stata supports user-written programs, know as "ado-files"^[As we'll see in [a bit](#do-files), you can save Stata
 commands in a "do-file". While I've never seen an official definition, I tend to think of "ado" as "automatic do".]. Once installed, these
 user-written programs operate identically to any built-in command, with the caveat that they may not be quite as polished or complete since they're
-volunteer written.
+volunteer written. Documentation is rarely up to [Stata standards](#stata-help) and often relegates details to a manuscript.
 
 We won't be covering any ado-files in these notes, but if you wanted to install a program named `newcommand`:
 
@@ -200,8 +207,9 @@ We will cover in later sections what each of these commands does ([`sysuse`](wor
 ^#^^#^^#^ Comments
 
 Comments are information in a Do-file which Stata will ignore. They can be used to stop a command from running without deleting it, or more usefully,
-to add information about the code which may be useful for others (or yourself in the future) to understand how some code works or to justify you made
-choices you did. In general, comments can also help readability. There are three different ways to enter comments (and one additional special way).
+to add information about the code which may be useful for others (or yourself in the future) to understand how some code works or to justify why you
+made certain choices. In general, comments can also help readability. There are three different ways to enter comments (and one additional special
+way).
 
 First, to comment out an entire line, precede it by `*`:
 
@@ -220,7 +228,7 @@ version // Returns the Stata version number
 <</dd_do>>
 ~~~~
 
-Note that there must be a space before the `//` if it comes after a command:
+There must be a space before the `//` if it comes after a command:
 
 ~~~~
 <<dd_do>>
@@ -254,7 +262,7 @@ price
 
 As with `//`, there needs to be a space before the `///`.
 
-Note, only the `*` works on interactive commands entered in the Command pane. All four versions work in Do-files.
+Only the `*` works on interactive commands entered in the Command pane. All four versions work in Do-files.
 
 ^#^^#^^#^ Version control
 
@@ -292,8 +300,8 @@ Get familiar with the Stata interface. If you've been following along, you may h
 
 ^#^^#^ Basic command syntax
 
-Most commands which operate on variables (as opposed to system commands such as `version` that we've been discussing) follow the same general
-format. Recognizing this format will make it easier to understand new commands that you are introduced.
+Most commands which operate on variables (as opposed to system commands such as `version`, `update`, `query`, etc.  that we've been discussing) follow
+the same general format. Recognizing this format will make it easier to understand new commands that you are introduced.
 
 The basic syntax is
 
@@ -327,16 +335,15 @@ regress y x1 x2 x3 x4 if z > 5, vce(robust) beta
 Without getting too into the details of how the command works, we can see examine the command.
 
 - The command is `regress`.
-- In the list of variables, the first position (the `y`) in a privileged position as the dependent variable, and all remaining variables are
-  independent. (In other words, the variable is of one type, the remainder (in any order) are another type.)
+- In the list of variables is `y x1 x2 x3 x4`. In the `regress` command, the choice of the first listed variable matters.
 - We are fitting the model on on the subset where `z > 5`.
-- There are two options, `vce(robust)` which changes how the model is estimated and `beta` which changes how the output is displayed.
+- There are two options, `vce(robust)` which changes how errors in the model are estimated and `beta` which changes how the output is displayed.
 
 ^#^^#^^#^ Referring to variables
 
-In the example of the `regress` command above, 4 variables we referred to were `x1` through `x4`. If you have only a few variables to refer to, typing
-each in (or double-clicking on their entry in the Variables pane) is sufficient. However, if the number of variables grows, this becomes
-tedious. Thankfully there are two alternatives.
+In the example of the `regress` command above, we referred to (in addition to `y`) variables `x1` through `x4`. If you have only a few variables to
+refer to, typing each in (or double-clicking on their entry in the Variables pane) is sufficient. However, if the number of variables grows, this
+becomes tedious. Thankfully there are two alternatives.
 
 First, we can use the wild card `\*`^[This is the reason why `*` as a comment does not work in the middle of a line (and we use `//` instead).] For
 example, we could refer to those four `x#` variables as `x*`. However, be careful, as this would also match `x5`, `x6`, `xage`, `xcats`, etc. It can also
@@ -347,7 +354,7 @@ be used in the middle or beginning, e.g.:
 
 Alternatively, if the variables we want to include are next to each other in the data (e.g. in the Variables pane), we can refer to a list of them. If
 the variables in the data are `a` through `z` (ordered alphabetically), alphabetically, then `b-e` would include `b`, `c`, `d`, and `e`. We will
-discuss the `[order](data-management.html#managing-variables)` command later to re-order variables.
+discuss the `[order](data-management.html#changing-variable-ordering)` command later to re-order variables.
 
 ^#^^#^ Stata Help
 

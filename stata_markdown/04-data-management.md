@@ -43,7 +43,7 @@ describe
 This displays a large amount of information, so let's break in down.
 
 First, the header displays general data set information - the number of observations (`obs`, the number of rows) and variables (`vars`), as well as
-the file size^[Reported in bytes. Roughly 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, 1000 megabytes = 1 gigabyte.] It also gives a short
+the file size^[Reported in bytes. Roughly 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, 1000 megabytes = 1 gigabyte.]. It also gives a short
 label of the data (we discussing adding this [later](#label-data)), the date of last modification and whether there are any [notes](#data-notes).
 
 Next, there is a table listing each variable in the data and some information about them. The "storage type" can be one of `byte`, `int`, `long`,
@@ -157,7 +157,7 @@ describe, short
 We see here a very modest saving (370 bytes, about 12%), but sometimes you can see much more significant gains.
 
 Don't be afraid of artificially restricting yourself going forward; if one of your values exceeds the limitations its type supports, Stata will
-automatically change types. So don't hesitate to run `compress` occasionally!
+automatically change types. So don't hesitate to run `compress` when loading new data or after some manipulations.
 
 ^#^^#^ Exercise 2
 
@@ -273,7 +273,10 @@ describe foreign
 <</dd_do>>
 ~~~~
 
-Instead, let's look at that table ignoring the value labels:
+Additionally, if you look at the data through Data Editor or Data Browser, you see that instead of `foreign` being red (as a string) it is blue, as we
+discussed [earlier](working-with-data-sets.html#colors-as-variable-type).
+
+Let's look at that table ignoring the value labels:
 
 ~~~~
 <<dd_do>>
@@ -376,6 +379,8 @@ the [shortcuts for referring to variables](basics.html#referring-to-variables). 
 include `age`, `address` or `a10`, or using `var1-var10` to include all variables between `var1` and `var10` as they are ordered). Of course, you may
 also want to rename or re-order variables for other reasons such as making the data easier to look at.
 
+^#^^#^^#^ Renaming variables
+
 To rename variables:
 
 ```
@@ -393,22 +398,13 @@ describe, simple
 
 The output truncated the name because it was so long.
 
-To rename multiple variables, you can run multiple `rename` commands, or else you can give multiple old and new names:
-
-~~~~
-<<dd_do>>
-rename (mpg trunk turn) (mpg2 trunk2 turn2)
-describe, simple
-<</dd_do>>
-~~~~
-
-The first old variable is renamed to the first new variable, the second to the second, etc. The parentheses are required.
-
 Variable names are unique; if you wanted to swap to variable names, you'd have to name one to a temporary name, rename the second, then rename the
-first again. Alternately, you can do it simultaneously:
+first again:
 
 ```
-rename (var1 var2) (var2 var1)
+rename a tmp
+rename b a
+rename b tmp
 ```
 
 You can use wildcards in the renaming too. For example, imagine you had a collection of variables from a longitudinal data set, "visit1\_age",
@@ -428,8 +424,20 @@ describe, simple
 <</dd_do>>
 ~~~~
 
-Turning to variable ordering, the `order` command takes a list of variables and moves them to the front/end/before a certain variable/after a certain
-variable. The options `first`, `last`, `before(<variable>)` and `after(<variable>)` control this.
+You can also do this for the whole data set with the special variable list `_all`
+
+~~~~
+<<dd_do>>
+rename _all, upper
+describe, simple
+rename _all, lower
+<</dd_do>>
+~~~~
+
+^#^^#^^#^  Changing variable ordering
+
+The `order` command takes a list of variables and moves them to the front/end/before a certain variable/after a certain variable. The options `first`,
+`last`, `before(<variable>)` and `after(<variable>)` control this.
 
 ~~~~
 <<dd_do>>
@@ -437,7 +445,7 @@ order foreign // The default is `first`
 describe, simple
 order weight, last
 describe, simple
-order mpg2 trunk2, before(displacement)
+order mpg trunk, before(displacement)
 describe, simple
 <</dd_do>>
 ~~~~
@@ -449,9 +457,9 @@ If you've changed to a different data set, load "census9" back up with `webuse`.
 1. Going forward, we'll be using a version of "census9" with changes we're making. [Save](working-with-data-sets.html#saving-data) a copy of the data
    to somewhere convenient (such as your Desktop). *You must name it something besides "census9".*
 2. The `drate` variable is a bit vague - the name of the variable provides no clue that "d" = "death", and the values (e.g. 75) are ambiguous.
-    1. [Rename](#managing-variables) `drate` to `deathrate`.
+    1. [Rename](#renaming-variables) `drate` to `deathrate`.
     2. The rate is actually per 10,000 individuals. [Label](#label-variable) `dearthrate` to include this information.
-3. The variable `region` has a value label associated with it ("cenreg"). It has some odd choices, namely "NE" and "N Cntrl". Fix this.
+3. The variable `region` has a value label associated with it ("cenreg"). It has some inconsistent choices, namely "NE" and "N Cntrl". Fix this.
     1. [Create a new value label](#label-values) which uses "Northeast" and "North Central" instead of "NE" and "N Cntrl".
     2. Attach this new value label to `region`.
     3. Remove the existing value label "cenreg".
@@ -491,9 +499,9 @@ Here's some suggestions of how to look at these values.
 - The mean should be a reasonable number, somewhere in the rough middle of the range of possible values for the variable. If you have age recorded for
   a random selection of adults and the mean age is 18, something has gone wrong. If the mean age is -18, something has gone tragically wrong!
 - The standard deviation is hard to interpret precisely, but in a very rough sense, 2/3rds of the values should lie within 1 standard deviation of the
-  mean. For example, consider `mpg2`. The mean is ~21 and the standard deviation is ~6, so roughly 2/3rds of the cars have `mpg2` between 15
-  and 27. Does this seems reasonable? If the standard deviation is very high compared to the mean (e.g. if `mpg2`'s standard deviation was 50) or
-  close to 0, that could indicate an issue.
+  mean. For example, consider `mpg`. The mean is ~21 and the standard deviation is ~6, so roughly 2/3rds of the cars have `mpg` between 15
+  and 27. Does this seems reasonable? If the standard deviation is very high compared to the mean (e.g. if `mpg`'s standard deviation was 50) or close
+  to 0, that could indicate an issue.
 - Are the max and min reasonable? If the minimum `LENGTH` was -9, that's problematic. Maybe -9 is the code for missing values? If the range of
   `LENGTH` is 14 to 2500, maybe the units differ? They measured in feet for some cars and inches for others?
 

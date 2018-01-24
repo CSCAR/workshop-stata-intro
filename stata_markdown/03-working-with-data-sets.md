@@ -88,18 +88,26 @@ As with `sysuse` and `webuse`, the `clear` option discards the existing data reg
 
 ^#^^#^^#^ Loading subsets of the data
 
-Though I would rarely recommend its use, you can load only a subset of the data into the program at a time. Generally I would recommend loading the
-full data and then [discarding](data-manipulation.html#keep-drop) the extraneous information. However, if your data is very large, it might be handy
-to only load in some of it rather than the entire thing. As this is a lesser-used option we won't go into too much detail, but as an example, if I
-wanted to load only the variables named "bp", "heartrate" and "date" from the data set "patientdata", restricted to male patients, I might use
-something like
+You can load only a subset of the data into the program at a time. Generally I would recommend loading the full data and then
+[discarding](data-manipulation.html#keep-drop) the extraneous information. However, if your data is very large, it might be handy to only load in some
+of it rather than the entire thing. As this is a lesser-used option we won't go into too much detail, but as an example, if I wanted to load only the
+variables named "bp", "heartrate" and "date" from the data set "patientdata", restricted to male patients, I might use something like
 
 ```
 use bp heartrate date if gender == "male" using patientdata
 ```
 
-Here, `using` and `if` are subcommands, which we will see used more as the day goes on. For further details, see `help use`, specifically the manual
-which has the full documentation.
+Here, `using` and `if` are subcommands, which we will see used more as the day goes on.
+
+Alternatively, if you have a very large data set, you can load in a small chunk of it.
+
+```
+use patientdata in 1/100
+```
+
+This loads just the first 100 rows (`a/b` is a "numlist" counting from "a" to "b" by integers).
+
+For further details, see `help use`, specifically the manual which has the full documentation.
 
 ^#^^#^ Editing data manually
 
@@ -110,6 +118,16 @@ Browser". These open the same new Data window, the only difference is that Stata
 
 Once in the Data window, you can select cells and edit them as desired.
 
+^#^^#^^#^ Colors as variable type
+
+When viewing the data, the color of each column's text provides information about the type of variable. We'll go into more details
+[later](data-management.html#describe) what these types mean. Below, for the `auto` data, you can see the `make` variable is red, indicating a string,
+the `foreign` variable is blue indicating a variable with an attached [value label](data-management.html#label-values) and the remainder of the
+variables are black for numeric.
+
+[![](../images/datacolors.png)](../images/datacolors.png)
+
+
 ^#^^#^ Saving data
 
 Saving data is straightforward using the `save` command. If you do not pass a filename to `save`, it will save with the same name as the existing
@@ -119,10 +137,10 @@ to a location outside of the working directory.
 By default, `save` will not overwrite existing files. To do so, use the `replace` option.
 
 ```
-save * Saves a new copy with the same name.
+save * Saves a new copy with the same name, failing it it already exists.
 save, replace * Replaces the existing copy with the same name
-save newfile * Saves a new copy with a new name (if the new name file doesn't exist)
-save newfile, replace * Replaces the copy with the new name
+save newfile * Saves a new copy with a new name, failing it "newfile" already exists.
+save newfile, replace * Replaces the new name copy.
 ```
 
 As before, wrap the file name in quotes if it (or the path) includes any spaces.
@@ -167,7 +185,8 @@ Stata reads all the data and tries to predict whether each column represents a n
 
 If Stata makes mistakes here (usually because the data is formatted oddly), things can go wrong. The last option, "Import all data as strings" can be
 used to force Stata to treat everything as a string so that it reads in the data *exactly* as stored in the Excel sheet so that you can clean it up
-later. Note that cleaning this up is usually more complicated then just fixing the Excel sheet first! (Note also that for larger data, this scan can be slow!)
+later. Note that cleaning this up is usually more complicated then just fixing the Excel sheet first! (Note also that for larger data, this scan can
+be slow!)
 
 Once the preview looks accurate, go ahead and import. As usual, this will create an `import excel` command in the Results that you can save for the
 future in a Do-file, but using `save` to create a Stata data set to load in later is probably a better option.
@@ -176,16 +195,20 @@ future in a Do-file, but using `save` to create a Stata data set to load in late
 
 CSV files (comma separated values) are a very useful format for passing data between software. Files specific for software (e.g. .dta for Stata, .xlsx
 for Excel, .sav for SPSS) carry a lot of overhead information - very useful when working exclusively within that software, but confusing for other
-software. The import menu in Stata (and other software) can often address this, but a CSV file bypasses this. The faculty data in CSV format would
-look like
+software. The import menu in Stata (and other software) can often address this, but a CSV file bypasses this. Data in CSV format might look like
 
 ```
 id,salary,exprior,market,admin,yearsdg,rank,male
 1,38361.75,0,.72,0,14,2,0
-2,68906,2,1,0,31,3,1
+2,68906,2,1,,31,3,1
 ```
 
-The downside of CSV files is we lose any auxiliary information, such as descriptive titles, labels etc. Still, they can be very useful.
+The first row is the variable names, all separated by commas. The 2nd row starts the data, where each variable is again separated by commas. Multiple
+commas in a row indicate a missing value.
+
+The downside of CSV files is we lose any auxiliary information, such as descriptive titles, labels etc. Often, if you are obtaining CSV files from an
+online resource, they will provide a Do-file alongside the data that reads in the CSV file and applies labels, titles, etc. If not you'll have to do
+this yourself!
 
 A CSV files can be imported using "File -> Import -> Text Data (delimited, *.csv, ...)"
 

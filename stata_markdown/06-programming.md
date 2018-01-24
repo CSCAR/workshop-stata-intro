@@ -81,8 +81,8 @@ local test = "abc"
 display "`test'"
 <</dd_do>>
 ~~~~
-- You may occasionally see code that excludes the `=` in macros. The differences between including and excluding the `=` are mostly unimportant, so I
-  recommend sticking with the `=` unless you specifically need the other version.
+- You may occasionally see code that excludes the `=` in defining a macro (e.g. `local vars "var1 var2"`). The differences between including and
+  excluding the `=` are mostly unimportant, so I recommend sticking with the `=` unless you specifically need the other version.
 
 ^#^^#^^#^ Class and Return
 
@@ -233,19 +233,19 @@ There is also
 foreach <macro name> of numlist <list of numbers>
 ```
 
-The benefit of "of numlist" is that numlists support things like 1-4 representing 1, 2, 3, 4. So
+The benefit of "of numlist" is that numlists support things like 1/4 representing 1, 2, 3, 4. So
 
 ```
-foreach num of numlist 1 3-5
+foreach num of numlist 1 3/5
 ```
 
 Loops over 1, 3, 4, 5, whereas
 
 ```
-foreach num in 1 3-5
+foreach num in 1 3/5
 ```
 
-loops over just "1" and "3-5".
+loops over just "1" and "3/5".
 
 The use of "in" is for when you need to loop over strings that are neither numbers nor variables (such as "male" and "fem" from above).
 

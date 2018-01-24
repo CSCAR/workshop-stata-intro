@@ -70,18 +70,18 @@ There are a lot of functions that can be used. We list some commonly used mathem
 - `+`, `-`, `*`, `/`: Standard arithmetic
 - `abs( )`: returns the absolute value
 - `exp( )`: returns the exponential function of \(e^x\)
-- `log( )` or `ln( )`: returns the natural logarithm of the argument
-- `round( )`: returns the rounded value
+- `log( )` or `ln( )`: returns the natural logarithm of the argument^[If you want log with a different base, you can use the transformation that
+  dividing by `log(b)` is equivalent to using `b` as a base. In other words, if you need log base 10, use `gen newvar = log(oldvar)/log(10)`.]
+- `round( )`, `ceil( )`, `floor( )`: returns the rounded value (rounded to nearest integer, rounded up, and rounded down)
 - `sqrt( )`: returns the square root
 
 Stata also offers functions for string variables, such as:
 
 - `length( )`: returns the length of the string
-- `lower( )`: returns the string in lower-case letters
+- `lower( )` and `upper( )`: returns the string in lower or upper case letters
 - `ltrim( )`: returns the string with any leading spaces stripped
 - `rtrim( )`: returns the string with any trailing spaces stripped
 - `string( )`: converts a numeric value to a string value
-- `upper( )`: returns the string in upper-case letters
 
 You can see a full accounting of all functions you can use in this setting in
 
@@ -129,9 +129,9 @@ false. We can assign values of true and false to any such conditional statements
 | \&         | and (both statements are true) | ^$^(4 \gt 2)^$^ \& ^$^(3 == 3)^$^   | ^$^(4 \gt 2)^$^ \& ^$^(1 \gt 2)^$^ |
 | ^$^\|^$^   | or (either statement is true)  | ^$^(3 == 2) \| (1 \gt= 2)^$^        | ^$^(4 \lt 2) \| (1 \gt 2)^$^       |
 
-You can also use parentheses in combination with \& and ^$^\|^$^ to create more logical statements (e.g. TRUE \& (FALSE ^$^\|^$^ TRUE) returns true).
+You can also use parentheses in combination with \& and ^$^\|^$^ to create more logical statements (e.g. `True & (False | True)` returns true).
 
-Now here's the catch: In Stata^[This is true of most statistical software in fact], conditional statements return 1 (True) and 0 (False). So we can
+Now here's the catch: In Stata^[This is true of most statistical software in fact.], conditional statements return 1 (True) and 0 (False). So we can
 use them in `generate` statements to create binary variables easily.
 
 ~~~~
@@ -228,8 +228,8 @@ list weight in 1/5
 
 `replace` features syntax identical to `generate`.^[`generate` has a few features we do not discuss which `replace` does not support. Namely,
 `generate` can set the [type](data-management.html#compress) manually (instead of letting Stata choose the best type automatically), and `generate`
-can place the new variable as desired rather than [using `order`](data-management.html#managing-variables). Clearly, neither of these features are
-needed for `replace`.]
+can place the new variable as desired rather than [using `order`](data-management.html#changing-variable-ordering). Clearly, neither of these features
+are needed for `replace`.]
 
 ^#^^#^^#^ Conditional variable generation
 
@@ -444,8 +444,9 @@ drop turn if mpg > 20
 ^#^^#^ Dealing with duplicates
 
 If your data is not expected to have duplicates, either across all variables or within certain variables, the `duplicates` command can make their
-detection and correction easier. The most basic command is `duplicates report`, which simply reports on the status of duplicate rows. Let's reload the
-"bplong" data in case it got changed while we were reshaping.
+detection and correction easier. The most basic command is `duplicates report`, which simply reports on the status of duplicate rows. Let's use the
+built-in "bplong" data. This data contains 120 patients (`patient`) with measures of blood pressure (`bp`) at two different time points (`when`, a
+Before and After), and some descriptive variables (`sex` and `agegrp`).
 
 ~~~~
 <<dd_do>>
@@ -468,7 +469,7 @@ Here we have some duplicates. First, there are 23 observations which are fully u
 
 The second row of the output tells of us that there are 42 observations which have 2 copies. The language here can be a bit confusing; all it is
 saying is that there are 42 rows, each of which has a single duplicate *within that same 42*. So if we have values 1, 1, 2, 2, that would be reported
-as 4 observations with 2 copies.
+as 4 observations with 2 surplus.
 
 The number of surplus is the number of non-unique rows in that category. We could compute it ourselves - we know that there are 42 rows with 2 copies,
 so that means that half of the rows are "unique" and the other half are "duplicates" (which is unique and which is duplicate is not clear). So 42/2 =
@@ -524,9 +525,9 @@ list rep78 price in 1/5
 
 Recall that missing values (`.`) are [larger than any other values](data-manipulation.html#conditional-variable-generation). When sorting with missing
 values, they follow this rule as well. If you want to treat missing values as smaller than all other values, you can pass the `mfirst` option to
-`gsort`. Note this does *not* make missingness "less than" anywhere else, only for the purposes of the current search.
+`gsort`. Note this does *not* make missingness "less than" anywhere else, only for the purposes of the current sort.
 
-Sorting strings does work and it does it alphabetically. All capital letters are "less than" all lower case letters, and a blank string ("") is the
+Sorting strings does work and is done alphabetically. All capital letters are "less than" all lower case letters, and a blank string ("") is the
 "smallest". For example, if you have the strings "DBC", "Daa", "", "EEE", the sorted ascending order would be "", "DBC", "Daa", "EEE". The blank is
 first; the two strings starting with "D" are before the string "EEE", and the upper case "B" precedes the lower case "a".
 
@@ -611,9 +612,9 @@ If we have a string variable which has non-numerical values (e.g. `race` with va
 as numerical with [value labels](data-management.html#label-values) attached. While we could do this manually using a combination of `gen` and
 `replace` with some conditionals, a less tedious way to do so is via `encode`.
 
-The "auto" data set does not have a good string variable to demonstrate this on, so we'll switch to the "surface" data set, which contains sea surface
-temperature measurements from a number of locations over two days. (Remember this will erase any existing unsaved changes! You will not need any
-modifications you've made to "auto" going forward, but if you do want to save it, do so first!)
+We'll switch to the "surface" data set, which contains sea surface temperature measurements from a number of locations over two days. (Remember this
+will erase any existing unsaved changes! You will not need any modifications you've made to other built-in datasets going forward [except `census9`
+from [exercise 3](data-management.html#execise-3), but if you do want to save it, do so first!)
 
 ~~~~
 <<dd_do>>
@@ -692,7 +693,8 @@ These are used inside `gen` and `replace`, e.g.
 ~~~~
 <<dd_do>>
 gen date6 = strupper(date5)
-list date5 date6 in 1/5
+gen month = substr(date5, 3, 3)
+list date5 date6 month in 1/5
 <</dd_do>>
 ~~~~
 
@@ -745,7 +747,7 @@ append using <using data>
 
 ~~~~
 <<dd_do>>
-webuse eveb
+webuse even
 append using http://www.stata-press.com/data/r15/odd
 list
 <</dd_do>>
@@ -753,7 +755,7 @@ list
 
 (We must specify the complete path to the data instead of the `webuse` shorthand of just the data name. Of course, with real data that you locally
 have on your computer, you follow the [working directory](basics.html#working-directory) rules; if the file exists in your working directory you just
-give the name, otherwise give the complete path.)
+give the name, otherwise give the complete path. I obtained that path by visiting the Stata data website and finding the link to "odd".)
 
 Note that the "number" variable, which exists in both data sets, has complete data, while "even" and "odd" both have missing data as expected. The
 `using` part of the command is where the term the "using data" comes from.
