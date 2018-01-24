@@ -6,6 +6,7 @@ stata:
 
 fixRmd:
 	R -q -f fixRmd.R
+	find . -type f -name '0*.Rmd' | xargs sed -i '' 's|href="|target="_blank" href="|g'
 
 book:
 	Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
