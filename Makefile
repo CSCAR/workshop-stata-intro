@@ -18,3 +18,7 @@ fresh: clean default
 
 open:
 	@open _book/index.html
+
+publish:
+	@cp -r _book/* ~/repositories/josherrickson.github.io/stata1/.
+	@cp images/* ~/repositories/josherrickson.github.io/images/.
