@@ -136,15 +136,15 @@ use them in `generate` statements to create binary variables easily.
 
 ~~~~
 <<dd_do>>
-generate price_over_40k = price > 4000
-list price price_over_40k in 1/5, abbr(100)
+generate price_over_4k = price > 4000
+list price price_over_4k in 1/5, abbr(100)
 <</dd_do>>
 ~~~~
 
 (Note that `list` truncates variable names to 8 characters by default. The `abbr(#)` argument abbreviates to other lengths; setting it to a large
 number removes abbreviating at all.)
 
-Now, `price_over_40k` takes on values 1 and 0 depending on whether the conditional statement was true.
+Now, `price_over_4k` takes on values 1 and 0 depending on whether the conditional statement was true.
 
 For a slightly more complicated example, lets create a dummy variable representing cheap cars. There are two possible definitions of cheap cars - cars
 which have a low cost, or cars which have low maintenance costs (high mileage and low repairs).
@@ -318,7 +318,7 @@ replace cost_maint = 3 if rep78 > 3 & rep78 != .
 generate cost_maint = .
 replace cost_maint = 1 if rep78 == 1
 replace cost_maint = 2 if rep78 >= 2 & rep78 <= 3
-replace cost_maint = 3 if rep78 > 3
+replace cost_maint = 3 if rep78 > 3 & rep78 != .
 ```
 
 Of course, we could also generate it in the reverse order (3 to 1).
