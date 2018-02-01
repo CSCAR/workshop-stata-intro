@@ -127,7 +127,7 @@ false. We can assign values of true and false to any such conditional statements
 | ^$^\gt=^$^ | greater than or equal to       | ^$^4 \gt= 4^$^                      | ^$^1 \gt= 2^$^                     |
 | ^$^\lt=^$^ | less than or equal to          | ^$^1 \lt= 1^$^                      | ^$^4 \lt= 2^$^                     |
 | \&         | and (both statements are true) | ^$^(4 \gt 2)^$^ \& ^$^(3 == 3)^$^   | ^$^(4 \gt 2)^$^ \& ^$^(1 \gt 2)^$^ |
-| ^$^\|^$^   | or (either statement is true)  | ^$^(3 == 2) \| (1 \gt= 2)^$^        | ^$^(4 \lt 2) \| (1 \gt 2)^$^       |
+| ^$^\|^$^   | or (either statement is true)  | ^$^(3 == 2) \| (1 \lt= 2)^$^        | ^$^(4 \lt 2) \| (1 \gt 2)^$^       |
 
 You can also use parentheses in combination with \& and ^$^\|^$^ to create more logical statements (e.g. `True & (False | True)` returns true).
 
@@ -136,15 +136,15 @@ use them in `generate` statements to create binary variables easily.
 
 ~~~~
 <<dd_do>>
-generate price_over_40k = price > 4000
-list price price_over_40k in 1/5, abbr(100)
+generate price_over_4k = price > 4000
+list price price_over_4k in 1/5, abbr(100)
 <</dd_do>>
 ~~~~
 
 (Note that `list` truncates variable names to 8 characters by default. The `abbr(#)` argument abbreviates to other lengths; setting it to a large
 number removes abbreviating at all.)
 
-Now, `price_over_40k` takes on values 1 and 0 depending on whether the conditional statement was true.
+Now, `price_over_4k` takes on values 1 and 0 depending on whether the conditional statement was true.
 
 For a slightly more complicated example, lets create a dummy variable representing cheap cars. There are two possible definitions of cheap cars - cars
 which have a low cost, or cars which have low maintenance costs (high mileage and low repairs).
@@ -318,7 +318,7 @@ replace cost_maint = 3 if rep78 > 3 & rep78 != .
 generate cost_maint = .
 replace cost_maint = 1 if rep78 == 1
 replace cost_maint = 2 if rep78 >= 2 & rep78 <= 3
-replace cost_maint = 3 if rep78 > 3
+replace cost_maint = 3 if rep78 > 3 & rep78 != .
 ```
 
 Of course, we could also generate it in the reverse order (3 to 1).
