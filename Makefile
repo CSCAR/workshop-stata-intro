@@ -7,13 +7,13 @@ stata_markdown/%.Rmd: stata_markdown/%.md
 	@rm -f mycensus9.dta
 	@echo "$< -> $@"
 	@/Applications/Stata/StataSE.app/Contents/MacOS/stata-se -b 'dyndoc "$<", saving("$@") replace nostop'
+# Remove <p> at the front of sections
+	@sed -E -i '' '/^\<p\>\^#/s/\<\/?p\>//g' $@
 # Convert ^#^ to #
 	@sed -i '' 's.\^#\^.#.g' $@
 # Convert ^$^ to $ and ^$$^ to $$
 	@sed -i '' 's.\^$$^.$$.g' $@
 	@sed -i '' 's.\^$$$$\^.$$$$.g' $@
-# Remove <p>
-	@sed -E -i '' 's.\<\/?p\>..g' $@
 # This line makes all links open in new windows.
 	@sed -i '' 's|href="|target="_blank" href="|g' $@
 
@@ -37,3 +37,7 @@ clean:
 
 open:
 	@open _book/index.html
+
+publish:
+	@cp -r _book/* ~/repositories/josherrickson.github.io/stata1/.
+	@cp images/* ~/repositories/josherrickson.github.io/images/.
