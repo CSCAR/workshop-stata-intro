@@ -24,7 +24,7 @@ _book/index.html: index.Rmd $(Stata_Rmd)
 	@$(eval TMP := $(shell find stata_markdown -name "*.Rmd" | sed 's.stata_markdown/..'))
 	@cp $(TMPPATH) .
 # All images get copied too
-	if [ $(shell find stata_markdown -name "*.svg" | wc -l) -gt 0 ]; then cp stata_markdown/*.svg .; fi
+	@if [ $(shell find stata_markdown -name "*.svg" | wc -l) -gt 0 ]; then cp stata_markdown/*.svg .; fi
 	@Rscript -e "bookdown::render_book('$<', 'bookdown::gitbook')"
 #	Remove any files copies up
 	@rm -rf $(TMP)
