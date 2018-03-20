@@ -339,22 +339,7 @@ Without getting too into the details of how the command works, we can see examin
 - We are fitting the model on on the subset where `z > 5`.
 - There are two options, `vce(robust)` which changes how errors in the model are estimated and `beta` which changes how the output is displayed.
 
-^#^^#^^#^ Referring to variables
-
-In the example of the `regress` command above, we referred to (in addition to `y`) variables `x1` through `x4`. If you have only a few variables to
-refer to, typing each in (or double-clicking on their entry in the Variables pane) is sufficient. However, if the number of variables grows, this
-becomes tedious. Thankfully there are two alternatives.
-
-First, we can use the wild card `\*`^[This is the reason why `*` as a comment does not work in the middle of a line (and we use `//` instead).] For
-example, we could refer to those four `x#` variables as `x*`. However, be careful, as this would also match `x5`, `x6`, `xage`, `xcats`, etc. It can also
-be used in the middle or beginning, e.g.:
-
-- `c*t` would match `cat`, `caught` and `ct`
-- `*2` would match `age2`, `gender2` and `salary2012`.
-
-Alternatively, if the variables we want to include are next to each other in the data (e.g. in the Variables pane), we can refer to a list of them. If
-the variables in the data are `a` through `z` (ordered alphabetically), alphabetically, then `b-e` would include `b`, `c`, `d`, and `e`. We will
-discuss the `[order](data-management.html#changing-variable-ordering)` command later to re-order variables.
+We will see later how to [make referring to variables easier](data-management.html#referring-to-variables).
 
 ^#^^#^ Stata Help
 

@@ -69,7 +69,7 @@ Finally, if the data is sorted, `describe` will provide information about the so
 ~~~~
 <<dd_do>>
 describe mpg
-describe rep78-turn
+describe trunk displacement
 <</dd_do>>
 ~~~~
 
@@ -89,6 +89,48 @@ rows).
 describe, simple
 <</dd_do>>
 ~~~~
+
+^#^^#^^#^ Referring to variables
+
+If we wanted to run `describe` on several variables, we could type them all out as we did above:
+
+```
+describe trunk weight length turn displacement
+```
+
+This can get very tedious as the number of variables increases. Thankfully there are two alternatives.
+
+First, we can use the wild card `\*`^[This is the reason why `*` as a comment does not work in the middle of a line (and we use `//` instead).] For
+example, we could refer to the variables "turn" and "trunk" as `t*`, as both variables start with "t" and are followed by anything. However, be
+careful, as this would also match variables such as `turnips`, `tprice`, `t`, etc, if any such variables existed. It can also be used in the middle or
+beginning, e.g.:
+
+- `c*t` would match `cat`, `caught` and `ct`
+- `*2` would match `age2`, `gender2` and `salary2012`.
+
+Alternatively, if the variables we want to include are next to each other in the data (e.g. in the Variables pane), we can refer to a list of
+them. Since the variables we requested above, `trunk`, `weight`, `length`, `turn` and `displacement`, are all next to each other, we can instead write
+`trunk-turn`. We will discuss the `[order](data-management.html#changing-variable-ordering)` command later to re-order variables.
+
+Finally, you often don't need to give the entire name of the variable, just enough characters for Stata to be able to uniquely identify it (similar to
+[short names](basics.html#short-commands)). For example,
+
+~~~~
+<<dd_do>>
+describe headr
+<</dd_do>>
+~~~~
+
+Stata will error if you don't use enough characters:
+
+~~~~
+<<dd_do>>
+describe t
+<</dd_do>>
+~~~~
+
+Be very careful with this approach. I only recommend it's use when exploring the data using the Command window; when writing a Do-file, use the full
+variable name to prevent errors!
 
 ^#^^#^ Data Notes
 
