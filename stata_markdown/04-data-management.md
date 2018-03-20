@@ -455,7 +455,7 @@ describe, simple
 If you've changed to a different data set, load "census9" back up with `webuse`.
 
 1. Going forward, we'll be using a version of "census9" with changes we're making. [Save](working-with-data-sets.html#saving-data) a copy of the data
-   to somewhere convenient (such as your Desktop). *You must name it something besides "census9".*
+   to somewhere convenient (such as your Desktop). Don't forget to give it a name!
 2. The `drate` variable is a bit vague - the name of the variable provides no clue that "d" = "death", and the values (e.g. 75) are ambiguous.
     1. [Rename](#renaming-variables) `drate` to `deathrate`.
     2. The rate is actually per 10,000 individuals. [Label](#label-variable) `dearthrate` to include this information.

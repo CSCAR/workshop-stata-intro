@@ -75,13 +75,6 @@ There are a lot of functions that can be used. We list some commonly used mathem
 - `round( )`, `ceil( )`, `floor( )`: returns the rounded value (rounded to nearest integer, rounded up, and rounded down)
 - `sqrt( )`: returns the square root
 
-Stata also offers functions for string variables, such as:
-
-- `length( )`: returns the length of the string
-- `lower( )` and `upper( )`: returns the string in lower or upper case letters
-- `ltrim( )`: returns the string with any leading spaces stripped
-- `rtrim( )`: returns the string with any trailing spaces stripped
-- `string( )`: converts a numeric value to a string value
 
 You can see a full accounting of all functions you can use in this setting in
 
@@ -488,7 +481,7 @@ Other useful commands include
 - `duplicates drop`: Be cautious with this, as it drops any row which is a duplicate of a previous row (in other words keeps the first entry of every
   set of duplicates).
 
-^#^^#^ sorting
+^#^^#^ Sorting
 
 We already saw sorting [in the context of `bysort`](#by-and-bysort). We can also sort as a standalone operation. As before, consider generating
 a [original ordering variable](#hidden-variables) first.
@@ -680,13 +673,13 @@ tab date5
 If you find yourself in a situation where you simply must manipulate the strings directly, there are a number of string functions. You can see the
 full list in `help string functions`, but below we list a few commonly used ones.
 
-- `char`: Returns the number of characters in the string
+- `strlen`: Returns the number of characters in the string
+- `wordcount`: Returns the number of whitespace-separated words.
 - "`+`": Adding two strings together concatenates them (e.g. "abc" + "def" = "abcdef").
 - `strupper` and `strlower`: Converts to lower/upper case.
 - `strtrim`: Removes white space before and after strings (e.g. `strtrim(" string ") = "string"`). To remove only left (preceding) or right (following)
   spaces, use `strltrim` or `strrtrim`.
 - `substr`: Returns the substring starting at an index for a given number of characters (e.g. `substr("abcdefg", 2, 3) = "bcd").
-- `wordcount`: Returns the number of whitespace-separated words.
 
 These are used inside `gen` and `replace`, e.g.
 
@@ -705,10 +698,10 @@ Open the *saved* version of "census9" with `use`, not the original version with 
 1. Generate a new variable, `deathperc`, which is the percentage of deaths in each state. (Remember that `deathrate` is deaths per 10,000.)
 2. The average age of all Americans in 1980 is roughly 30.11 years of age. [Generate a categorical](#conditional-variable-generation) with four values
    as described before, with appropriate [value labels](data-management.html#label-values).
-    - "Significantly below national average": `medage` equal to 26.20 or less
-    - "Below national average": `medage` greater than 26.20 and less than or equal to 30.10.
-    - "Above national average": `medage` greater than 30.10 and less than or equal to 32.80.
-    - "Significantly above national average": `medage` greater than 32.80.
+    - Significantly below national average: `medage` equal to 26.20 or less
+    - Below national average: `medage` greater than 26.20 and less than or equal to 30.10.
+    - Above national average: `medage` greater than 30.10 and less than or equal to 32.80.
+    - Significantly above national average: `medage` greater than 32.80.
 3. What is the death rate in [each of those four categories](#by-and-bysort)? (You can use `summarize` to obtain the means.) Does there appear to be
    any pattern?
 4. What state has the [lowest](#sorting) death rate? The highest? The lowest average age? The highest?

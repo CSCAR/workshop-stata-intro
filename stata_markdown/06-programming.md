@@ -122,7 +122,7 @@ display `dprice' - `fprice'
 <</dd_do>>
 ~~~~
 
-^#^^#^ loops
+^#^^#^ Loops
 
 Using macros can simplify code if you have to use the same string repeatedly, but what if you want to perform the same command repeatedly with
 different variables? Here we can use a `foreach` loop. This is easiest to see with examples.
