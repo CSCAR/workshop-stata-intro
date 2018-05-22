@@ -124,20 +124,18 @@ false. We can assign values of true and false to any such conditional statements
 
 You can also use parentheses in combination with \& and ^$^\|^$^ to create more logical statements (e.g. `True & (False | True)` returns true).
 
-Now here's the catch: In Stata^[This is true of most statistical software in fact.], conditional statements return 1 (True) and 0 (False). So we can
+Now here's the trick: In Stata^[This is true of most statistical software in fact.], conditional statements return 1 (True) and 0 (False). So we can
 use them in `generate` statements to create binary variables easily.
 
 ~~~~
 <<dd_do>>
-generate price_over_4k = price > 4000
-list price price_over_4k in 1/5, abbr(100)
+generate price4k = price > 4000
+list price* in 1/5
 <</dd_do>>
 ~~~~
 
-(Note that `list` truncates variable names to 8 characters by default. The `abbr(#)` argument abbreviates to other lengths; setting it to a large
-number removes abbreviating at all.)
 
-Now, `price_over_4k` takes on values 1 and 0 depending on whether the conditional statement was true.
+Now, `price4k` takes on values 1 and 0 depending on whether the conditional statement was true.
 
 For a slightly more complicated example, lets create a dummy variable representing cheap cars. There are two possible definitions of cheap cars - cars
 which have a low cost, or cars which have low maintenance costs (high mileage and low repairs).
@@ -237,8 +235,8 @@ repairs). First, we'll generate the new variable.
 
 ~~~~
 <<dd_do>>
-generate cost_maint = 1
-tab cost_maint
+generate maintcost = 1
+tab maintcost
 <</dd_do>>
 ~~~~
 
@@ -247,8 +245,8 @@ the "mid" category.
 
 ~~~~
 <<dd_do>>
-replace cost_maint = 2 if rep78 >= 2 & rep78 <= 3
-tab cost_maint
+replace maintcost = 2 if rep78 >= 2 & rep78 <= 3
+tab maintcost
 <</dd_do>>
 ~~~~
 
@@ -256,8 +254,8 @@ Finish with the "high" category.
 
 ~~~~
 <<dd_do>>
-replace cost_maint = 3 if rep78 > 3
-tab cost_maint
+replace maintcost = 3 if rep78 > 3
+tab maintcost
 <</dd_do>>
 ~~~~
 
@@ -275,7 +273,7 @@ The complication referred to can be seen in row 3 here:
 
 ~~~~
 <<dd_do>>
-list make rep78 cost_maint in 1/5, abbr(100)
+list make rep78 maintcost in 1/5
 <</dd_do>>
 ~~~~
 
@@ -283,38 +281,45 @@ The AMC Spirit has a high repair cost even though we do not have its repair reco
 
 ~~~~
 <<dd_do>>
-replace cost_maint = . if rep78 == .
-tab cost_maint, missing
+replace maintcost = . if rep78 >= .
+tab maintcost, missing
 <</dd_do>>
 ~~~~
+
+Note that in the `if` condition, we use `>=` instead of `==`. This is because Stata allows you to define "reasons" for missing, specifically `.a`,
+`.b`, all the way through `.z`. These are sorted such that `.` < `.a` < `.b` < ... < `.z`. A lot of data do not differentiate, but for safety, using
+`>= .` will catch both cases where these extended missing are used and when they aren't.
+
 
 The `missing` option to `tab` forces it to show a row for any missing values. Without it, missing rows are suppressed.
 
 To summarize, we used the following commands:
 
 ```
-generate cost_maint = 1
-replace cost_maint = 2 if rep78 >= 2 & rep78 <= 3
-replace cost_maint = 3 if rep78 > 3
-replace cost_maint = . if rep78 == .
+generate maintcost = 1
+replace maintcost = 2 if rep78 >= 2 & rep78 <= 3
+replace maintcost = 3 if rep78 > 3
+replace maintcost = . if rep78 == .
 ```
 
 There are various other ways it could have been done, such as
 
 ```
-generate cost_maint = 1 if rep78 == 1
-replace cost_maint = 2 if rep78 >= 2 & rep78 <= 3
-replace cost_maint = 3 if rep78 > 3 & rep78 != .
+generate maintcost = 1 if rep78 == 1
+replace maintcost = 2 if rep78 >= 2 & rep78 <= 3
+replace maintcost = 3 if rep78 > 3 & rep78 != .
 ```
 
 ```
-generate cost_maint = .
-replace cost_maint = 1 if rep78 == 1
-replace cost_maint = 2 if rep78 >= 2 & rep78 <= 3
-replace cost_maint = 3 if rep78 > 3 & rep78 != .
+generate maintcost = .
+replace maintcost = 1 if rep78 == 1
+replace maintcost = 2 if rep78 >= 2 & rep78 <= 3
+replace maintcost = 3 if rep78 > 3 & rep78 != .
 ```
 
-Of course, we could also generate it in the reverse order (3 to 1).
+Of course, we could also generate it in the reverse order (3 to 1). There are also alternate ways to write the various conditionals, such as replacing
+`rep78 > 3` with `rep78 >=4` or even `rep78 == 4 | rep78 == 5` (though the last is a bit wordy). There are usually multiple correct ways to specify
+any conditional.
 
 ^#^^#^ Subsetting
 
@@ -335,7 +340,7 @@ This gives us a summary of price across all cars. What if we wanted to look at t
 
 ~~~~
 <<dd_do>>
-tab foreign
+codebook foreign
 summ price if foreign == 0
 <</dd_do>>
 ~~~~
@@ -365,8 +370,8 @@ by foreign: summ price
 <</dd_do>>
 ~~~~
 
-There is a strong assumption here that `foreign` is already sorted. If `foreign` were not sorted (or if you simply did not want to check/assume it
-was), you could instead use
+There is a strong assumption here that the data is already sorted by the variables we are splitting `by` on (e.g. `foreign`). If `foreign` were not
+sorted (or if you simply did not want to check/assume it was), you could instead use
 
 ```
 bysort foreign: summ price
@@ -543,8 +548,9 @@ destring <variable>, gen(<newvar>)
 tostring <variable>, replace
 ```
 
-Either can take `replace` (to replace the existing variable with the new one) or `gen( )` (to generate a new variable). I would recommend always using
-`gen` to double-check that the conversion worked as expected, then using `drop`, `rename` and `order` to replace the existing variable.
+Both commands can take the options `replace` (to replace the existing variable with the new one) or `gen( )` (to generate a new variable). I would
+recommend always using `gen` to double-check that the conversion worked as expected, then using `drop`, `rename` and `order` to replace the existing
+variable.
 
 ~~~~
 <<dd_do>>

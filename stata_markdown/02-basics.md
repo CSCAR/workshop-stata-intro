@@ -96,7 +96,7 @@ into [the help](#stata-help) for them.
 ^#^^#^^#^ dyndoc
 
 Version 15 of Stata introduced "dyndoc" which allows you to weave together narrative text and Stata code to produce a high-quality output (html, word
-or pdf). This document is written ([in part](index.html#how-to-use-this-document) in dyndoc. It is extremely powerful but is well outside the mandate
+or pdf). This document is written ([in part](index.html#how-to-use-this-document)) in dyndoc. It is extremely powerful but is well outside the mandate
 of this class. If you are interested in this functionality, I'd be happy to help.
 
 ^#^^#^ Updating

@@ -611,7 +611,7 @@ codebook, problems
 <</dd_do>>
 ~~~~
 
-This reports potential issues Stata has discovered in the data. In this data, neither are really concerns (We can run `compress`, but this isn't a
+This reports potential issues Stata has discovered in the data. In this data, neither are really concerns. (We can run `compress`, but this isn't a
 "problem" so much as a suggestion. We already saw above the concern about "embedded blanks.") More serious problems that it can detect include:
 
 - Constant columns (all entries being the same value, including all missing).
