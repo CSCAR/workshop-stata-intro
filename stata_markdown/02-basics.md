@@ -297,50 +297,6 @@ Get familiar with the Stata interface. If you've been following along, you may h
 5. Be sure you know how to run these commands from the Do file.
 6. [Comment](#comments) out the `query memory` command; we won't need it anymore.
 
-
-^#^^#^ Basic command syntax
-
-Most commands which operate on variables (as opposed to system commands such as `version`, `update`, `query`, etc.  that we've been discussing) follow
-the same general format. Recognizing this format will make it easier to understand new commands that you are introduced.
-
-The basic syntax is
-
-```
-command <variable(s)>, <options>
-```
-
-The command can take on more than one word; e.g. to create a scatter plot, the command is `graph twoway scatter`.
-
-Depending on the command, the list of variables can contain 0 variables, 1 variable, or many variables separated by spaces. Whether the order of
-variables matters depends on the specific command.
-
-The options are not required, but if they are given, they too are separated by spaces. There are some options that are consistent across a number of
-commands, and some options are specific to commands.
-
-There's an additional piece; if you want to run a command on a subset of the data, we add to the syntax:
-
-```
-command <variable(s)> if <condition>, <options>
-```
-
-We will cover this [in more detail](data-manipulation.html#subsetting) later, including how to specify the condition.
-
-As an example, if we were to fit a linear regression model^[This course does not cover fitting statistical models, see the follow-up course for
-further detail.], the command might be
-
-```
-regress y x1 x2 x3 x4 if z > 5, vce(robust) beta
-```
-
-Without getting too into the details of how the command works, we can see examine the command.
-
-- The command is `regress`.
-- In the list of variables is `y x1 x2 x3 x4`. In the `regress` command, the choice of the first listed variable matters.
-- We are fitting the model on on the subset where `z > 5`.
-- There are two options, `vce(robust)` which changes how errors in the model are estimated and `beta` which changes how the output is displayed.
-
-We will see later how to [make referring to variables easier](data-management.html#referring-to-variables).
-
 ^#^^#^ Stata Help
 
 Stata has, hands down, the best built-in help files of any of the "Big 4" statistical software.^[I consider the "Big 4" as Stata, SAS, SPSS, and

@@ -30,6 +30,87 @@ You'll notice that there are no statistical questions here - we're not even worr
 In this chapter we'll go over various tools and commands you can use to answer these questions (and more) and overall to gain a familiarity with the
 logistics of your data.
 
+^#^^#^ Basic command syntax
+
+Most commands which operate on variables (as opposed to system commands such as `version`, `update`, `query`, etc.) follow
+the same general format. Recognizing this format will make it easier to understand new commands that you are introduced.
+
+The basic syntax is
+
+```
+command <variable(s)>, <options>
+```
+
+The command can take on more than one word; e.g. to create a scatter plot, the command is `graph twoway scatter`.
+
+Depending on the command, the list of variables can contain 0 variables, 1 variable, or many variables separated by spaces. Whether the order of
+variables matters depends on the specific command.
+
+The options are not required, but if they are given, they too are separated by spaces. There are some options that are consistent across a number of
+commands, and some options are specific to commands.
+
+There's an additional piece; if you want to run a command on a subset of the data, we add to the syntax:
+
+```
+command <variable(s)> if <condition>, <options>
+```
+
+We will cover this [in more detail](data-manipulation.html#subsetting) later, including how to specify the condition.
+
+As an example, if we were to fit a linear regression model^[This course does not cover fitting statistical models, see the follow-up course for
+further detail.], the command might be
+
+```
+regress y x1 x2 x3 x4 if z > 5, vce(robust) beta
+```
+
+Without getting too into the details of how the command works, we can see examine the command.
+
+- The command is `regress`.
+- In the list of variables is `y x1 x2 x3 x4`. In the `regress` command, the choice of the first listed variable matters.
+- We are fitting the model on on the subset where `z > 5`.
+- There are two options, `vce(robust)` which changes how errors in the model are estimated and `beta` which changes how the output is displayed.
+
+We will see later how to [make referring to variables easier](data-management.html#referring-to-variables).
+
+^#^^#^^#^ Referring to variables
+
+The `regress` example above referred to 5 variables, which we wrote out manually.  This can get very tedious as the number of variables
+increases. Thankfully there are two alternatives.
+
+First, we can use the wild card `\*`^[This is the reason why `*` as a comment does not work in the middle of a line (and we use `//` instead).] For
+example, we could refer to the variables "turn" and "trunk" as `t*`, as both variables start with "t" and are followed by anything. However, be
+careful, as this would also match variables such as `turnips`, `tprice`, `t`, etc, if any such variables existed. It can also be used in the middle or
+beginning, e.g.:
+
+- `c*t` would match `cat`, `caught` and `ct`
+- `*2` would match `age2`, `gender2` and `salary2012`.
+
+Alternatively, if the variables we want to include are next to each other in the data (e.g. in the Variables pane), we can refer to a list of
+them. Say the variables `x1` through `x25` are in ordered in the logical fashion. We could refer to the whole list of them as `x1-x25`. This includes
+both `x1` and `x25`, as well as any variable in between them. We will discuss the `[order](data-management.html#changing-variable-ordering)` command
+later to re-order variables.
+
+Finally, you often don't need to give the entire name of the variable, just enough characters for Stata to be able to uniquely identify it (similar to
+[short names](basics.html#short-commands)). We'll see in a minute more about the `describe` command, but for example,
+
+~~~~
+<<dd_do>>
+describe headr
+<</dd_do>>
+~~~~
+
+Stata will error if you don't use enough characters:
+
+~~~~
+<<dd_do>>
+describe t
+<</dd_do>>
+~~~~
+
+Be very careful with this approach. I only recommend it's use when exploring the data using the Command window; when writing a Do-file, use the full
+variable name to prevent errors!
+
 ^#^^#^ `describe`
 
 The first command you should run is `describe`.
@@ -90,47 +171,6 @@ describe, simple
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^ Referring to variables
-
-If we wanted to run `describe` on several variables, we could type them all out as we did above:
-
-```
-describe trunk weight length turn displacement
-```
-
-This can get very tedious as the number of variables increases. Thankfully there are two alternatives.
-
-First, we can use the wild card `\*`^[This is the reason why `*` as a comment does not work in the middle of a line (and we use `//` instead).] For
-example, we could refer to the variables "turn" and "trunk" as `t*`, as both variables start with "t" and are followed by anything. However, be
-careful, as this would also match variables such as `turnips`, `tprice`, `t`, etc, if any such variables existed. It can also be used in the middle or
-beginning, e.g.:
-
-- `c*t` would match `cat`, `caught` and `ct`
-- `*2` would match `age2`, `gender2` and `salary2012`.
-
-Alternatively, if the variables we want to include are next to each other in the data (e.g. in the Variables pane), we can refer to a list of
-them. Since the variables we requested above, `trunk`, `weight`, `length`, `turn` and `displacement`, are all next to each other, we can instead write
-`trunk-turn`. We will discuss the `[order](data-management.html#changing-variable-ordering)` command later to re-order variables.
-
-Finally, you often don't need to give the entire name of the variable, just enough characters for Stata to be able to uniquely identify it (similar to
-[short names](basics.html#short-commands)). For example,
-
-~~~~
-<<dd_do>>
-describe headr
-<</dd_do>>
-~~~~
-
-Stata will error if you don't use enough characters:
-
-~~~~
-<<dd_do>>
-describe t
-<</dd_do>>
-~~~~
-
-Be very careful with this approach. I only recommend it's use when exploring the data using the Command window; when writing a Do-file, use the full
-variable name to prevent errors!
 
 ^#^^#^ `compress`
 
