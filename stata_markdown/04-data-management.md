@@ -446,7 +446,7 @@ first again:
 ```
 rename a tmp
 rename b a
-rename b tmp
+rename tmp b
 ```
 
 You can use wildcards in the renaming too. For example, imagine you had a collection of variables from a longitudinal data set, "visit1\_age",
