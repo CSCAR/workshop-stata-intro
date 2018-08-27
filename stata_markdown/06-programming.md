@@ -290,6 +290,49 @@ gen newvar = 1
 <</dd_do>>
 ~~~~
 
+^#^^#^^#^^#^ `capture` Return Code
+
+When you `capture` a command that errors, Stata saves the error code in the `_rc` macro.
+
+~~~~
+<<dd_do>>
+list abc
+capture list abc
+display _rc
+<</dd_do>>
+~~~~
+
+If the command does not error, `_rc` contains 0.
+
+~~~~
+<<dd_do>>
+capture list price
+display _rc
+<</dd_do>>
+~~~~
+
+This can be used to offer additional code if an error occurs
+
+```
+capture <code that runs without error if something is true, but errors otherwise>
+if _rc > 0 {
+  ...
+}
+```
+
+If the code inside the `capture` runs without error, the `if` block will run. If the code inside the `capture` errors, the `else` block will run.
+
+Say you wanted to rename a variable if it exists, and if doesn't exist, create it. (For example, you have to process a large number of files, and in
+some files, this variable may be missing for all rows and thus not reported.) You could run the following:
+
+```
+capture rename oldvar newvar
+if _rc > 0 {
+  gen newvar = .
+}
+```
+
+
 ^#^^#^^#^ `quietly`
 
 `quietly` does the same basic thing as `capture`, except it does not hide errors. It can be useful combined
