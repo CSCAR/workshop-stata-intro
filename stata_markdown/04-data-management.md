@@ -44,7 +44,7 @@ This displays a large amount of information, so let's break in down.
 
 First, the header displays general data set information - the number of observations (`obs`, the number of rows) and variables (`vars`), as well as
 the file size^[Reported in bytes. Roughly 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, 1000 megabytes = 1 gigabyte.]. It also gives a short
-label of the data (we discussing adding this [later](#label-data)), the date of last modification and whether there are any [notes](#data-notes).
+label of the data (we discussing adding this [later](#label-data)) and the date of last modification.
 
 Next, there is a table listing each variable in the data and some information about them. The "storage type" can be one of `byte`, `int`, `long`,
 `float`, `double`; all of which are simply numbers. We'll touch on the differences between these when we discuss [`compress`](#compress), but for now
@@ -132,51 +132,6 @@ describe t
 Be very careful with this approach. I only recommend it's use when exploring the data using the Command window; when writing a Do-file, use the full
 variable name to prevent errors!
 
-^#^^#^ Data Notes
-
-You can attach notes to a data set, which will be saved along with the data and reloaded when you open it again. This can be handy to use in place of
-a separate data dictionary (along with [`labels`](#labels)).
-
-~~~~
-<<dd_do>>
-notes
-<</dd_do>>
-~~~~
-
-We see that there is a single note attached to the auto data. New notes can be easily added either to the whole data set or to a specific variable
-
-~~~~
-<<dd_do>>
-notes: Data is built-in from Stata.
-notes displacement: This variable comes from survey XXX.
-notes
-<</dd_do>>
-~~~~
-
-There are two notes attached to the overall data (listed under `_dta`) and a single note attached to the `displacement` variable. You can list these
-separately if desired.
-
-~~~~
-<<dd_do>>
-notes
-notes _dta
-notes displacement
-notes turn
-<</dd_do>>
-~~~~
-
-Dropping notes can be accomplished as well. The numbering of notes is within each location (e.g. here the data (`_dta`) has notes 1 and 2, whereas
-`displacement` has note 1).
-
-~~~~
-<<dd_do>>
-notes drop _dta in 2
-notes
-notes drop displacement in 1
-notes
-<</dd_do>>
-~~~~
-
 ^#^^#^ `compress`
 
 As mentioned [above](#describe), there are different ways to store a number variable, such as `byte` and `long`. The various options take more space
@@ -226,9 +181,9 @@ data dictionary. All three different versions use the `label` command.
 
 ^#^^#^^#^ `label data`
 
-While [`notes`](#data-notes) provide very similar functionality, a label can be attached to the data. These are shorter than notes, and there can be
-only a single label. However, these appear when running `describe`, and so can be useful for quick identification. If you want to put more detail, add
-notes.
+A label can be attached to the data to provide more information than the variable name allows. Labels do not have the same restrictions that variable
+names have, namely they can be any length, include spaces and punctuation, and start with a number. Additionally, these appear when running
+`describe`, and so can be useful for quick identification.
 
 We saw an existing data label on the "auto" data set when running `describe`:
 

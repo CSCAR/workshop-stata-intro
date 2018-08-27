@@ -22,8 +22,8 @@ When a user first opens Stata, there are five panes that will appear in the main
       previous commands in this pane to recall them in the Command pane.
 - The Properties Pane
     - This pane allows variable properties and data-set properties to be managed. [Variable names](data-management.html#renaming-variables),
-      [labels](data-management.html#label-variable), [value labels](data-management.html#label-values), [notes](data-management.html#data-notes),
-      [display formats](data-management.html#describe), and [storage types](data-management.html#describe) can be viewed and modified here.
+      [labels](data-management.html#label-variable), [value labels](data-management.html#label-values), [display
+      formats](data-management.html#describe), and [storage types](data-management.html#describe) can be viewed and modified here.
 
 Each of these five panes will be nested within a larger overall window for the Stata session, which contains menus and tool bars available for
 users. There are additional windows that users can access from the Window menu, which include the Graph window (which will open when graphs have been
