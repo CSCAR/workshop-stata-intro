@@ -330,6 +330,45 @@ Of course, we could also generate it in the reverse order (3 to 1). There are al
 `rep78 > 3` with `rep78 >=4` or even `rep78 == 4 | rep78 == 5` (though the last is a bit wordy). There are usually multiple correct ways to specify
 any conditional.
 
+^#^^#^ `recode`
+
+The above example for `replace` was fairly simplistic, but you can imagine the need for a much more complicated replacing structure (perhaps based on
+the value of multiple variables). If, however, you do have something this simple, the `recode` command could be used instead.
+
+The `recode` command syntax is fairly simple,
+
+```
+recode <oldvar> (<rule 1>) (<rule 2>) ...., generate(<newvar>)
+```
+
+The different rules define the recoding to take place. For example, the above creation of `maintcost` can be written as
+
+```
+recode rep78 (1 = 1) (2 3 = 2) (4 5 = 3) (missing = .), generate(maintcost)
+```
+
+Each rule has the form of `old value(s) = new value`, where the old values can be either a single number, several numbers (either listed as above, `1
+5 10`, or a [numlist](working-with-data-sets.html#loading-subsets-of-the-data) like `7/12` to include all values between 7 and 12), the phrases
+"missing", "nonmissing" or "else" to capture anything not elsewhere defined. The new value must be a single number or a missing value (`.` or `.a`,
+etc). "else" cannot be used if "missing" or "nonmissing" is defined (and vice-versa), and all of those must be the last rules defined. E.g.,
+
+```
+recode x (missing = 5) (2 = 4) (else = 3) (1 = 2), generate(y)
+```
+
+will not run because "missing" and "else" are both simultaneously defined, and the `1 = 2` rule is last instead of "else" or "missing".
+
+Note that if you see older code you may see either the parantheses or the `generate` option excluded. You should include both of these.
+
+Finally, the rules are executed left-to-right. So if you have two rules referring to the same values, the first one is used, and the second is
+not. For example,
+
+```
+recode x (1/5 = 7) (2 = 4), generate(y)
+```
+
+The `2 = 4` rule will never take place because 2 is already recoded to 7 in the `1/5 = 7` rule.
+
 ^#^^#^ Subsetting
 
 Almost any Stata command which operates on variables can operate on a subset of the data instead of the entire data, using the conditional statements
