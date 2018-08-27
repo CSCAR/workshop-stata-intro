@@ -143,6 +143,8 @@ save newfile // Saves a new copy with a new name, failing it "newfile" already e
 save newfile, replace // Replaces the new name copy.
 ```
 
+I recommened **never** using the first two options (without the file name) to avoid accidents.
+
 As before, wrap the file name in quotes if it (or the path) includes any spaces.
 
 Prior to Stata 14, the save format was different. If you need to save a data set in the older format (perhaps to pass to a collaborator who is
