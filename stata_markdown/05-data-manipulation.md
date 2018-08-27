@@ -281,15 +281,24 @@ The AMC Spirit has a high repair cost even though we do not have its repair reco
 
 ~~~~
 <<dd_do>>
-replace maintcost = . if rep78 >= .
+replace maintcost = . if missing(rep78)
 tab maintcost, missing
 <</dd_do>>
 ~~~~
 
-Note that in the `if` condition, we use `>=` instead of `==`. This is because Stata allows you to define "reasons" for missing, specifically `.a`,
-`.b`, all the way through `.z`. These are sorted such that `.` < `.a` < `.b` < ... < `.z`. A lot of data do not differentiate, but for safety, using
-`>= .` will catch both cases where these extended missing are used and when they aren't.
+The `missing()` function returns true for each row with a missing value, and false for each row with an observed value, for the variable inside the
+parantheses (in this case, `rep78`).
 
+You may occasionally see `if rep78 != .` or `if rep78 <= .` instead of the `missing()` function. Recall that missing values are sorted to be larger
+than the largest observed value, so this works just as well as `missing()`. However, Stata allows you to define "reasons" for missing, specifically
+`.a`, `.b`, all the way through `.z`. These are sorted such that `.` < `.a` < `.b` < ... < `.z`. For this reason, `!= .` is not suggested, as while
+`.` will be captured as missing, `.a`, etc will not be. Using `missing()` removes the temptation to write `!=` instead of `<=`.
+
+The `missing()` function can be proceeded with an exclamation point to indicate not missing. For example
+
+```
+replace maintcost = 2 if !missing(rep78)
+```
 
 The `missing` option to `tab` forces it to show a row for any missing values. Without it, missing rows are suppressed.
 
@@ -299,7 +308,7 @@ To summarize, we used the following commands:
 generate maintcost = 1
 replace maintcost = 2 if rep78 >= 2 & rep78 <= 3
 replace maintcost = 3 if rep78 > 3
-replace maintcost = . if rep78 == .
+replace maintcost = . if missing(rep78)
 ```
 
 There are various other ways it could have been done, such as
@@ -307,14 +316,14 @@ There are various other ways it could have been done, such as
 ```
 generate maintcost = 1 if rep78 == 1
 replace maintcost = 2 if rep78 >= 2 & rep78 <= 3
-replace maintcost = 3 if rep78 > 3 & rep78 != .
+replace maintcost = 3 if rep78 > 3 & !missing(rep78)
 ```
 
 ```
 generate maintcost = .
 replace maintcost = 1 if rep78 == 1
 replace maintcost = 2 if rep78 >= 2 & rep78 <= 3
-replace maintcost = 3 if rep78 > 3 & rep78 != .
+replace maintcost = 3 if rep78 > 3 & !missing(rep78)
 ```
 
 Of course, we could also generate it in the reverse order (3 to 1). There are also alternate ways to write the various conditionals, such as replacing
