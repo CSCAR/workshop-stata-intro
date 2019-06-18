@@ -577,9 +577,9 @@ Sorting strings does work and is done alphabetically. All capital letters are "l
 "smallest". For example, if you have the strings "DBC", "Daa", "", "EEE", the sorted ascending order would be "", "DBC", "Daa", "EEE". The blank is
 first; the two strings starting with "D" are before the string "EEE", and the upper case "B" precedes the lower case "a".
 
-As a side note, there is an additional command, `sort`, which can perform sorting. It does not allow sorting in descending order, however it does allow
-you to conditionally sort; that is, passing something like `sort <varname> in <condition>` would sort only those rows for which the condition is true,
-the remaining rows remain *in their exact same position*.
+As a side note, there is an additional command, `sort`, which can perform sorting. It does not allow sorting in descending order, however it does
+allow you to sort only a certain number of rows; that is, passing something like `sort <varname> in 100/200` would sort only rows 100 through 200,
+leaving the remaining rows remain *in their exact same position*.
 
 ^#^^#^ Working with strings and categorical variables
 

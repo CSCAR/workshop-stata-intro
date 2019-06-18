@@ -137,9 +137,8 @@ to a location outside of the working directory.
 By default, `save` will not overwrite existing files. To do so, use the `replace` option.
 
 ```
-save // Saves a new copy with the same name, failing it it already exists.
-save, replace // Replaces the existing copy with the same name
 save newfile // Saves a new copy with a new name, failing it "newfile" already exists.
+save, replace // Replaces the existing copy with the same name
 save newfile, replace // Replaces the new name copy.
 ```
 
