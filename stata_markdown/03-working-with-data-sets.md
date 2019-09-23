@@ -239,7 +239,7 @@ Finally, see if you can open the data in the other software and export it into C
 If all else fails, there is software Stat Transfer, https://www.stattransfer.com, which can transfer between all sorts of formats with a click, but is
 not free. Your department or organization may offer access to it.
 
-^#^^#^ `preserve`/`restore`
+^#^^#^ Temporarily preserving and restoring data
 
 Along with the [One Data](basics.html#one-data) principal, if you wished to modify a data set temporarily, say to
 [remove](data-manipulation.html#keep-drop) some subset of your observations, it must be done destructively. One workflow to use would be:

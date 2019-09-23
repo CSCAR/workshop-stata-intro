@@ -16,22 +16,21 @@ When a user first opens Stata, there are five panes that will appear in the main
       in any command, the variable names are also case sensitive.
 - The Variables Pane
     - This pane displays all of the variables in the data set that is currently open in Stata, and users can click on variable names in this pane to
-      carry the variables over into Stata commands in the Command pane. Note that Stata allows only [one data-set](#one-data) to be open in a session.
+      carry the variables over into Stata commands in the Command pane. Note that Stata allows only [one data-set][one data] to be open in a session.
 - The Review Pane
     - Stata will keep a running record of all Stata commands that have been submitted in the current session in this pane. Users can simply click on
       previous commands in this pane to recall them in the Command pane.
 - The Properties Pane
-    - This pane allows variable properties and data-set properties to be managed. [Variable names](data-management.html#renaming-variables),
-      [labels](data-management.html#label-variable), [value labels](data-management.html#label-values), [display
-      formats](data-management.html#describe), and [storage types](data-management.html#describe) can be viewed and modified here.
+    - This pane allows variable properties and data-set properties to be managed. [Variable names][Renaming variables], [labels][labeling variables],
+      [value labels][labeling values], [display formats][describing the data], and [storage types][describing the data] can be viewed and modified here.
 
 Each of these five panes will be nested within a larger overall window for the Stata session, which contains menus and tool bars available for
 users. There are additional windows that users can access from the Window menu, which include the Graph window (which will open when graphs have been
-created), the Viewer window (which is primarily used for [help](#stata-help) features and Stata news), the Data Editor window (for use when [viewing
-data sets](working-with-data-sets.html#editing-data-manually)), and the Do-file Editor window (for use when writing [.do files](#do-files)).
+created), the Viewer window (which is primarily used for [help][stata help] features and Stata news), the Data Editor window (for use when [viewing
+data sets][editing data manually]), and the Do-file Editor window (for use when writing [.do files][do-files]).
 
 In the lower left-hand corner of the main Stata window (below the panes), there will be a directory displayed. This is known as the [working
-directory](#working-directory), and is where Stata will look to find data files and other associated Stata files unless the user specifies another
+directory][working directory], and is where Stata will look to find data files and other associated Stata files unless the user specifies another
 directory. We will cover examples of changing the working directory.
 
 ^#^^#^ One Data
@@ -364,7 +363,7 @@ The short commands are very useful for quickly writing commands, but not so grea
 saw `su, d`, you might have trouble figuring that out unless you already knew that short command. Thankfully, the short commands can be used with
 `help`, so `help su` will bring up the full `summarize` documentation.
 
-^#^^#^ `set more off`
+^#^^#^ The more option
 
 Stata has an option, `more`, which, if a command were to produce voluminous output, breaks the output into "pages" so that you can see it
 page-by-page. Through Stata 14, the default was that this was on. Starting with Stata 15, the default is off. You can turn this on or off,

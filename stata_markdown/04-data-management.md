@@ -109,7 +109,7 @@ describe t
 Be very careful with this approach. I only recommend it's use when exploring the data using the Command window; when writing a Do-file, use the full
 variable name to prevent errors!
 
-^#^^#^ `describe`
+^#^^#^ Describing the data
 
 The first command you should run is `describe`.
 
@@ -170,7 +170,7 @@ describe, simple
 ~~~~
 
 
-^#^^#^ `compress`
+^#^^#^ Compressing data
 
 As mentioned [above](#describe), there are different ways to store a number variable, such as `byte` and `long`. The various options take more space
 to save - types which take less space can store only smaller numbers whereas types that take more space can store larger numbers. For example, a
@@ -215,7 +215,7 @@ etc. However, Stata does not allow such arbitrary storage. In contrast, Stata al
 information which will be displayed in the appropriate Results, to make Stata output much easier to read as well as removing the need for an external
 data dictionary. All three different versions use the `label` command.
 
-^#^^#^^#^ `label data`
+^#^^#^^#^ Labeling data
 
 A label can be attached to the data to provide more information than the variable name allows. Labels do not have the same restrictions that variable
 names have, namely they can be any length, include spaces and punctuation, and start with a number. Additionally, these appear when running
@@ -249,7 +249,7 @@ describe, short
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^ `label variable`
+^#^^#^^#^ Labeling variables
 
 Variables names, as mentioned, are limited to 32 characters and do not allow spaces (or several other special characters). This is to encourage you to
 choose short, simple, and memorable variable names, since you'll likely be typing them a lot!
@@ -281,7 +281,7 @@ describe turn
 
 As with [labelling the data](#label-data), call `label variable <varname>` without a new label to remove the existing one.
 
-^#^^#^^#^ `label values`
+^#^^#^^#^ Labeling values
 
 It is tempting to store categorical variables as strings. If you ask, for example, for someone's state of residence, you might store the answers as
 "MI", "OH", "FL", etc. However, Stata (like most statistical software) cannot handle string variables.^[In the few situations where it can, it doesn't

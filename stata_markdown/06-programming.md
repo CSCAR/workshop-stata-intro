@@ -253,7 +253,7 @@ The use of "in" is for when you need to loop over strings that are neither numbe
 
 There are two useful command prefixes that can be handy while writing more elaborate Do-files.
 
-^#^^#^^#^ `capture`
+^#^^#^^#^ Capturing an error
 
 Imagine the following scenario. You want to write a Do-file that generates a new variable. However, you may need to re-run chunks of the Do-file
 repeatedly, so that the `gen` statement is hit repeatedly. After the first `gen`, we can't call it again
@@ -290,7 +290,7 @@ gen newvar = 1
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^^#^ `capture` Return Code
+^#^^#^^#^^#^ Return Code
 
 When you `capture` a command that errors, Stata saves the error code in the `_rc` macro.
 
@@ -333,7 +333,7 @@ if _rc > 0 {
 ```
 
 
-^#^^#^^#^ `quietly`
+^#^^#^^#^ Quieting the output
 
 `quietly` does the same basic thing as `capture`, except it does not hide errors. It can be useful combined
 with [the returns](programming.html#class-and-return):

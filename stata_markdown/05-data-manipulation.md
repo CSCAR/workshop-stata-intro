@@ -9,7 +9,7 @@ sysuse auto, clear
 ~~~~
 
 
-^#^^#^ `generate`
+^#^^#^ Generating new variables
 
 The `generate` command can be used to create new variables which are functions of existing variables. For example, if we look at the variable label
 for `weight`, we see that it is measured in pounds.
@@ -183,7 +183,7 @@ list row totalobs in 1/5
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^ Extension to `generate`
+^#^^#^^#^ Extensions to generate
 
 The command `egen` offers some functionality that `generate` lacks, for example creating the mean of several variables
 
@@ -197,7 +197,7 @@ The functions which `egen` support are fairly esoteric; you can see the full lis
 help egen
 ```
 
-^#^^#^ `replace`
+^#^^#^ Replacing existing variables
 
 [Earlier](#generate) we created the `weight2` variable which changed the units on weight from pounds to tons. What if, instead of creating a new variable,
 we tried to just change the existing `weight` variable.
@@ -330,7 +330,7 @@ Of course, we could also generate it in the reverse order (3 to 1). There are al
 `rep78 > 3` with `rep78 >=4` or even `rep78 == 4 | rep78 == 5` (though the last is a bit wordy). There are usually multiple correct ways to specify
 any conditional.
 
-^#^^#^ `recode`
+^#^^#^ More complicated replaces
 
 The above example for `replace` was fairly simplistic, but you can imagine the need for a much more complicated replacing structure (perhaps based on
 the value of multiple variables). If, however, you do have something this simple, the `recode` command could be used instead.
@@ -405,7 +405,7 @@ summ price if foreign == 1
 we see that American cars are cheaper on average^[Note that this is not a statistical claim, we would have to do a two-sample t-test to make any
 statistical claim.].
 
-^#^^#^^#^ `by` and `bysort`
+^#^^#^^#^ Automatic subsettings
 
 To look at the average price for American and foreign cars, we ran two individual commands. If we wanted to look at the summaries by `rep78`, that
 would take 6 commands (values 1 through 5 and `.`)!
@@ -459,7 +459,7 @@ bysort id (date): gen firstvisit = _n == 1
 By placing `date` in parentheses, this ensures that within each `id`, the data is sorted by `date`. Therefore the first row for each patient is their
 first visit, so `_n == 1` evaluates to 1 only in that first row and 0 zero otherwise.
 
-^#^^#^^#^ `keep`, `drop`
+^#^^#^^#^ Discarding data
 
 If you do want to discard data, you can use `keep` or `drop` to do so. They each can perform on variables:
 
@@ -587,7 +587,7 @@ String variables are commonly used during data collection but are ultimately not
 variables should be represented as [categorical variables with value labels](data-management.html#label-values) as we've previously discussed. Here
 are some useful commands for operating on strings and categorical variables.
 
-^#^^#^^#^ `destring` and `tostring`
+^#^^#^^#^ Converting between string and numeric
 
 These two commands convert strings and numerics between each other.
 
@@ -653,7 +653,7 @@ tab make2, mi
 `tostring` also accepts the `force` option when using `replace`, we recommend instead to **never** use `replace` with `tostring` (you probably should
 not use it with `destring` either!).
 
-^#^^#^^#^ `encode` and `decode`
+^#^^#^^#^ Converting strings into labeled numbers
 
 If we have a string variable which has non-numerical values (e.g. `race` with values "white", "black", "Hispanic", etc), the ideal way to store it is
 as numerical with [value labels](data-management.html#label-values) attached. While we could do this manually using a combination of `gen` and
