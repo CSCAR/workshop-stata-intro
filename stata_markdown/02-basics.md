@@ -38,16 +38,15 @@ directory. We will cover examples of changing the working directory.
 One functionality where Stata differs than most other statistical or data analysis software is that Stata can only have a single data set open at a
 time. (You can open a second instance of Stata to open a second data set, but the two instances cannot communicate.)
 
-Any command you run knows to operate on the data set you have open. For example, there is a command
-[`summarize`](data-management.html#summarizing-the-data) which provides summary information about variables. The command is simply `summarize`, there
-is no need to direct it towards a specific data set.
+Any command you run knows to operate on the data set you have open. For example, there is a command [`summarize`][summarizing the data] which provides
+summary information about variables. The command is simply `summarize`, there is no need to direct it towards a specific data set.
 
 If you have multiple data sets you need to work with, you can either
 
-1. Switch between the two data sets as needed. This can be burdensome, though tools such as [`preserve`](working-with-data-sets.html#preserverestore)
+1. Switch between the two data sets as needed. This can be burdensome, though tools such as [`preserve`][Temporarily preserving and restoring data]
    help greatly.
 
-2. Merge the data sets, the better option. We'll discuss [merging](data-manipulation.html#merging-files) towards the end of the course.
+2. Merge the data sets, the better option. We'll discuss [merging][merging files] towards the end of the course.
 
 ^#^^#^^#^ Frames
 
@@ -92,16 +91,16 @@ Word. In addition, if you highlight text and right-click, you also have the opti
 - "Copy as picture": Does exactly what it says - equivalent to taking a screenshot. Very handy!
 
 There are a few commands that can be useful for saving results which we will not cover in this workshop, if you are interested, you can look
-into [the help](#stata-help) for them.
+into [the help][stata help] for them.
 
 - `log`: Saves a file consisting of everything printed to the Results pane.
 - `putexcel`: Adds to a spreadsheet specific strings or output.
-- `outreg2`: A [user-written](#installing-user-written-commands) command to output the results of a model (e.g. regression) in a clean format.
+- `outreg2`: A [user-written][installing user-written commands] command to output the results of a model (e.g. regression) in a clean format.
 
 ^#^^#^^#^ dyndoc
 
 Version 15 of Stata introduced "dyndoc" which allows you to weave together narrative text and Stata code to produce a high-quality output (html, word
-or pdf). This document is written ([in part](index.html#how-to-use-this-document)) in dyndoc. It is extremely powerful but is well outside the mandate
+or pdf). This document is written ([in part][how to use this document]) in dyndoc. It is extremely powerful but is well outside the mandate
 of this class. If you are interested in this functionality, I'd be happy to help.
 
 ^#^^#^ Updating
@@ -126,10 +125,10 @@ If you do not have administrative access on your computer, you'll need to reach 
 
 ^#^^#^ Installing user-written commands
 
-In addition to built in commands, Stata supports user-written programs, know as "ado-files"^[As we'll see in [a bit](#do-files), you can save Stata
+In addition to built in commands, Stata supports user-written programs, know as "ado-files"^[As we'll see in [a bit][do-files], you can save Stata
 commands in a "do-file". While I've never seen an official definition, I tend to think of "ado" as "automatic do".]. Once installed, these
 user-written programs operate identically to any built-in command, with the caveat that they may not be quite as polished or complete since they're
-volunteer written. Documentation is rarely up to [Stata standards](#stata-help) and often relegates details to a manuscript.
+volunteer written. Documentation is rarely up to [Stata standards][stata help] and often relegates details to a manuscript.
 
 We won't be covering any ado-files in these notes, but if you wanted to install a program named `newcommand`:
 
@@ -149,7 +148,7 @@ Finally, to see a list of all user-written programs you have installed, used
 ado
 ```
 
-[Updating Stata](#updating) will not update any ado-files, instead you can run
+[Updating Stata][updating] will not update any ado-files, instead you can run
 
 
 ```
@@ -166,12 +165,12 @@ to perform all updates.
 
 ^#^^#^ Do-files
 
-We [saw](#give-stata-a-command) that commands can be typed interactively, one command at a time, and the results immediately observed. From this, the
+We [saw][give stata a command] that commands can be typed interactively, one command at a time, and the results immediately observed. From this, the
 output can be copied/exported/printed, or the results can be saved. However, a better paradigm would save all the commands run separately so that the
 analysis is [reproducible](https://ropensci.github.io/reproducibility-guide/sections/introduction/).
 
 For this purpose, Stata has Do-files (named because they are saved with the .do extension, such as `analysis.do`) which are scripts containing only
-commands and [comments](#comments). We can then run any subset of the commands (including the entire file), re-running parts or all of the
+commands and [comments][comments]. We can then run any subset of the commands (including the entire file), re-running parts or all of the
 analysis. Additionally you can easily save and/or share this command, allowing yourself or a colleague to re-run the analysis.
 
 There are several ways to start a new Do-file.
@@ -206,8 +205,8 @@ compress
 <</dd_do>>
 ~~~~
 
-We will cover in later sections what each of these commands does ([`sysuse`](working-with-data-sets.html#sysuse),
-[`summarize`](data-management.html#summarizing-the-data), [`compress`](data-management.html#compress)).
+We will cover in later sections what each of these commands does ([`sysuse`][built-in data], [`summarize`][summarizing the data],
+[`compress`][compressing data]).
 
 ^#^^#^^#^ Comments
 
@@ -281,7 +280,7 @@ version 14.2
 to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you've updated to Stata 16. This
 works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 16 when you only have Stata 14 installed.)
 
-Note that this `version` is the same command as the `version` we've been discussing [before](#give-stata-a-command). It operates in this special
+Note that this `version` is the same command as the `version` we've been discussing [before][give stata a command]. It operates in this special
 fashion only when included at the top of a Do-file.
 
 Best practices is to always include a `version ##.#` line at the top of each Do-file, but if its code that will continue to see use, you should test
@@ -293,14 +292,14 @@ Get familiar with the Stata interface. If you've been following along, you may h
 
 1. If you haven't already, open Stata. (You should be able to do this by clicking on the "Start" menu in the bottom left of the screen, then typing
    "Stata".)
-2. The [use of each pane](#the-stata-environment) will become much clearer when we start opening data in the [next
-   section](working-with-data-sets.html), but take a look at each.
+2. The [use of each pane][the stata environment] will become much clearer when we start opening data in the [next
+   section][working with data sets], but take a look at each.
 3. Give Stata a command: `query memory`. This lists some settings related to memory usage in Stata, for example, `maxvar` is the maximum number of
    variables in a model; `matsize` is the largest number of predictors allowed in a model.
-4. Open a [Do file](#do-files). Place a [`version` command](#version-control) at the top of the file corresponding to the version on your
+4. Open a [Do file][do-files]. Place a [`version` command][version control] at the top of the file corresponding to the version on your
    computer. Place the `query memory` command from the last step in the Do file.
 5. Be sure you know how to run these commands from the Do file.
-6. [Comment](#comments) out the `query memory` command; we won't need it anymore.
+6. [Comment][comments] out the `query memory` command; we won't need it anymore.
 
 ^#^^#^ Stata Help
 
@@ -324,10 +323,10 @@ Each help page has numerous features, I will merely point out a few here.
    examples than the help file alone.
 2. The syntax section shows the basic syntax. Any part written in square brackets (`[...]`) are optional.
 3. The examples in the help are great but basic; the PDF help (see #1) usually has more detailed examples.
-4. We will discuss the "Stored results" in the [Programming](programming.html) section.
+4. We will discuss the "Stored results" in the [Programming][programming] section.
 
 `help` can also be used to search for the appropriate command. For example, if you wanted help merging some data together (which we will cover
-[later](data-manipulation.html#merging-files)), you might try running
+[later][merging files]), you might try running
 
 ```
 help merging
@@ -382,13 +381,12 @@ set more off, permanently
 
 ^#^^#^ Working directory
 
-We mentioned [earlier](#the-stata-environment) the notion of a "working directory", the current one you can see in the bottom left of the Stata
+We mentioned [earlier][the stata environment] the notion of a "working directory", the current one you can see in the bottom left of the Stata
 window. You can think of a working directory as an open folder inside Windows Explorer (or Finder if you're on a Mac). You can easily access any file
 within that folder without any additional trouble. You can access files in other folders (directories), but it requires moving to that folder.
 
 In the same sense, when referring to files, any file in the working directory can be referred to buy its name. For example, to open a file (we'll go
-into detail about doing this [later](working-with-data-sets.html#opening-data)) named "mydata.dta" which is in your current working directory, you
-need only enter
+into detail about doing this [later][opening data]) named "mydata.dta" which is in your current working directory, you need only enter
 
 ```
 use mydata.dta

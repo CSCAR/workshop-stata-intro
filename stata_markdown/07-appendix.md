@@ -2,9 +2,9 @@
 
 ^#^^#^ Solutions
 
-^#^^#^^#^ Exercise 1
+^#^^#^^#^ Exercise 1 Solution
 
-[Exercise 1](working-with-data-sets.html#exercise-1)
+[Exercise 1][Exercise 1]
 
 1:
 ```
@@ -24,9 +24,9 @@ sysuse sandstone
 4:
 If the working directory isn't convenient, change it using the dialogue box. Then, `save sandstone`.
 
-^#^^#^^#^ Exercise 2
+^#^^#^^#^ Exercise 2 Solution
 
-[Exercise 2](data-management.html#exercise-2)
+[Exercise 2][Exercise 2]
 
 1:
 ```
@@ -42,9 +42,9 @@ webuse census9, clear
 
 5: `compress`. Nothing saved! Because Stata already did it before posting it!
 
-^#^^#^^#^ Exercise 3
+^#^^#^^#^ Exercise 3 Solution
 
-[Exercise 3](data-management.html#exercise-3)
+[Exercise 3][Exercise 3]
 
 1:
 ~~~~
@@ -82,9 +82,9 @@ save, replace
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^ Exercise 4
+^#^^#^^#^ Exercise 4 Solution
 
-[Exercise 4](data-management.html#exercise-4)
+[Exercise 4][Exercise 4]
 
 1: Use `summarize` and `codebook` to take a look at the mean/max/min. No errors detected/
 
@@ -104,9 +104,9 @@ codebook, problems
 ~~~~
 This just flags spaces (" ") in the data. Not a real problem!
 
-^#^^#^^#^ Exercise 5
+^#^^#^^#^ Exercise 5 Solution
 
-[Exercise 5](data-manipulation.html#exercise-5)
+[Exercise 5][Exercise 5]
 
 1:
 ~~~~

@@ -3,7 +3,7 @@
 ^#^^#^ Built-in data
 
 Before we turn to using your own data, it is useful to know that Stata comes with a collection of sample data sets which you can use to try the Stata
-commands. Additionally, most (if not all) of the examples in [Stata help](basics.html#stata-help) will use these data sets.
+commands. Additionally, most (if not all) of the examples in [Stata help][stata help] will use these data sets.
 
 To see a list of the built-in data sets, use
 
@@ -60,10 +60,10 @@ As you may have deduced from the `sysuse` and `webuse` commands above, the comma
 use <filename>
 ```
 
-As discussed in the [working directory](basics.html#working-directory) section, Stata can see only files in its working directory, so only the name of
-the file needs to be passed. If the file exists in a different directory, you will need to give the full (or relative path). For example, if your
-working directory is "C\:\\\Documents\\\Stata" and the file you are looking for, "mydata", is in the "Project" subfolder, you could open it with any
-of the following:
+As discussed in the [working directory][working directory] section, Stata can see only files in its working directory, so only the name of the file
+needs to be passed. If the file exists in a different directory, you will need to give the full (or relative path). For example, if your working
+directory is "C\:\\\Documents\\\Stata" and the file you are looking for, "mydata", is in the "Project" subfolder, you could open it with any of the
+following:
 
 ```
 use C:\Documents\Stata\Project\mydata
@@ -88,10 +88,10 @@ As with `sysuse` and `webuse`, the `clear` option discards the existing data reg
 
 ^#^^#^^#^ Loading subsets of the data
 
-You can load only a subset of the data into the program at a time. Generally I would recommend loading the full data and then
-[discarding](data-manipulation.html#keep-drop) the extraneous information. However, if your data is very large, it might be handy to only load in some
-of it rather than the entire thing. As this is a lesser-used option we won't go into too much detail, but as an example, if I wanted to load only the
-variables named "bp", "heartrate" and "date" from the data set "patientdata", restricted to male patients, I might use something like
+You can load only a subset of the data into the program at a time. Generally I would recommend loading the full data and then [discarding][discarding
+data] the extraneous information. However, if your data is very large, it might be handy to only load in some of it rather than the entire thing. As
+this is a lesser-used option we won't go into too much detail, but as an example, if I wanted to load only the variables named "bp", "heartrate" and
+"date" from the data set "patientdata", restricted to male patients, I might use something like
 
 ```
 use bp heartrate date if gender == "male" using patientdata
@@ -111,7 +111,7 @@ For further details, see `help use`, specifically the manual which has the full 
 
 ^#^^#^ Editing data manually
 
-We will discuss in [Data Manipulation](data-manipulation.html) how to edit your data on a larger scale and in an automated fashion, but Stata does
+We will discuss in [Data Manipulation][data manipulation] how to edit your data on a larger scale and in an automated fashion, but Stata does
 support modifying a spreadsheet of your data similar to Excel. At the top of the main window, you'll see two buttons, "Data Editor" and "Data
 Browser". These open the same new Data window, the only difference is that Stata is protecting you from yourself and if you open the "Data Browser"
 (or switch to it in the Data window), you cannot modify the data.
@@ -120,10 +120,9 @@ Once in the Data window, you can select cells and edit them as desired.
 
 ^#^^#^^#^ Colors as variable type
 
-When viewing the data, the color of each column's text provides information about the type of variable. We'll go into more details
-[later](data-management.html#describe) what these types mean. Below, for the `auto` data, you can see the `make` variable is red, indicating a string,
-the `foreign` variable is blue indicating a variable with an attached [value label](data-management.html#label-values) and the remainder of the
-variables are black for numeric.
+When viewing the data, the color of each column's text provides information about the type of variable. We'll go into more details [later][describing
+the data] what these types mean. Below, for the `auto` data, you can see the `make` variable is red, indicating a string, the `foreign` variable is
+blue indicating a variable with an attached [value label][labeling values] and the remainder of the variables are black for numeric.
 
 [![](../images/datacolors.png)](../images/datacolors.png)
 
@@ -241,8 +240,8 @@ not free. Your department or organization may offer access to it.
 
 ^#^^#^ Temporarily preserving and restoring data
 
-Along with the [One Data](basics.html#one-data) principal, if you wished to modify a data set temporarily, say to
-[remove](data-manipulation.html#keep-drop) some subset of your observations, it must be done destructively. One workflow to use would be:
+Along with the [one data][one data] principal, if you wished to modify a data set temporarily, say to [remove][discarding data] some subset of your
+observations, it must be done destructively. One workflow to use would be:
 
 ```
 sysuse auto
@@ -275,11 +274,11 @@ restore, not
 
 ^#^^#^ Exercise 1
 
-1. Load the [built-in](#built-in-data) data set "lifeexp".
-2. Open the Data Editor window. [Modify](#editing-data-manually) at least one of the cells.
+1. Load the [built-in][built-in data] data set "lifeexp".
+2. Open the Data Editor window. [Modify][editing data manually] at least one of the cells.
 3. Close the Data window. Load the built-in data set "sandstone". Don't forget to `clear` or pass the `clear` option.
-4. [Save a copy](#saving-data) of this data to your computer.
-    1. Check your [working directory](basics.html#working-directory). Make sure it is set somewhere convenient.
+4. [Save a copy][saving data] of this data to your computer.
+    1. Check your [working directory][working directory]. Make sure it is set somewhere convenient.
     2. Use `save`. Make sure to give it a name!
-5. If you haven't already, play with [`preserve` and `restore`](#preserverestore). Preserve the data, modify some values, then observe what happens
-   when you restore.
+5. If you haven't already, play with [`preserve` and `restore`][Temporarily preserving and restoring data]. Preserve the data, modify some values,
+   then observe what happens when you restore.

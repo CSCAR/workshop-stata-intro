@@ -8,8 +8,8 @@ sysuse auto
 <</dd_do>>
 ~~~~
 
-You can reload it as necessary (if you modify it and want the original) by re-running this with the `clear` option. Feel free to make frequent use
-of [`preserve` and `restore`](working-with-data-sets.html#preserverestore).
+You can reload it as necessary (if you modify it and want the original) by re-running this with the `clear` option. Feel free to make frequent use of
+[`preserve` and `restore`][Temporarily preserving and restoring data].
 
 
 Whenever you first begin working with a data set, you'll want to spend some time getting familiar with it. You should be able to answer the following
@@ -55,7 +55,7 @@ There's an additional piece; if you want to run a command on a subset of the dat
 command <variable(s)> if <condition>, <options>
 ```
 
-We will cover this [in more detail](data-manipulation.html#subsetting) later, including how to specify the condition.
+We will cover this [in more detail][subsetting] later, including how to specify the condition.
 
 As an example, if we were to fit a linear regression model^[This course does not cover fitting statistical models, see the follow-up course for
 further detail.], the command might be
@@ -90,7 +90,7 @@ both `x1` and `x25`, as well as any variable in between them. We will discuss th
 later to re-order variables.
 
 Finally, you often don't need to give the entire name of the variable, just enough characters for Stata to be able to uniquely identify it (similar to
-[short names](basics.html#short-commands)). We'll see in a minute more about the `describe` command, but for example,
+[short names][short commands]). We'll see in a minute more about the `describe` command, but for example,
 
 ~~~~
 <<dd_do>>
@@ -123,12 +123,13 @@ This displays a large amount of information, so let's break in down.
 
 First, the header displays general data set information - the number of observations (`obs`, the number of rows) and variables (`vars`), as well as
 the file size^[Reported in bytes. Roughly 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, 1000 megabytes = 1 gigabyte.]. It also gives a short
-label of the data (we discussing adding this [later](#label-data)) and the date of last modification.
+label of the data (we discussing adding this [later][labeling data]) and the date of last modification.
 
 Next, there is a table listing each variable in the data and some information about them. The "storage type" can be one of `byte`, `int`, `long`,
-`float`, `double`; all of which are simply numbers. We'll touch on the differences between these when we discuss [`compress`](#compress), but for now
-they all represent numeric variables. String variables are represented as `str##` where the `##` represent the number of characters that the string
-can be, e.g. `str18` shows that `make` has a maximum of 18 letters. (This limit is irrelevant, again, see [`compress`](#compress) for details.)
+`float`, `double`; all of which are simply numbers. We'll touch on the differences between these when we discuss [`compress`][compressing data], but
+for now they all represent numeric variables. String variables are represented as `str##` where the `##` represent the number of characters that the
+string can be, e.g. `str18` shows that `make` has a maximum of 18 letters. (This limit is irrelevant, again, see [`compress`][compressing data] for
+details.)
 
 The "display format" column contains format information about each variable which only control how the variables are displayed in data view. For the
 most part you can ignore these and leave them at the default, though you may need to work with this if you have date or time information. For further
@@ -172,11 +173,11 @@ describe, simple
 
 ^#^^#^ Compressing data
 
-As mentioned [above](#describe), there are different ways to store a number variable, such as `byte` and `long`. The various options take more space
-to save - types which take less space can store only smaller numbers whereas types that take more space can store larger numbers. For example, a
-number stored as a byte can only take on values between -127 and 100 and only integers (e.g. not 2.5) whereas a number stored as float can store
-numbers up to \(1.7x10^38\) with up to 38 decimal places. Strings operate similarly; a string variable with 20 characters would store "abc" as 17
-blank characters followed by the "abc".
+As mentioned [above][describing the data], there are different ways to store a number variable, such as `byte` and `long`. The various options take
+more space to save - types which take less space can store only smaller numbers whereas types that take more space can store larger numbers. For
+example, a number stored as a byte can only take on values between -127 and 100 and only integers (e.g. not 2.5) whereas a number stored as float can
+store numbers up to \(1.7x10^38\) with up to 38 decimal places. Strings operate similarly; a string variable with 20 characters would store "abc" as
+17 blank characters followed by the "abc".
 
 Understanding the above is not that important these days as computer power and storage has increased to the point where the majority of us will not be
 reaching its limits. However, Stata does offer the `compress` command which attempts to store variables in the smallest possible type. For example, if
@@ -196,12 +197,12 @@ automatically change types. So don't hesitate to run `compress` when loading new
 
 ^#^^#^ Exercise 2
 
-1. "census9" is accesible via [`webuse`](working-with-data-sets.html#stata-website-data). Load it.
+1. "census9" is accesible via [`webuse`][stata website data]. Load it.
 2. Spend a minute looking at the data. What does this data seem to represent? What variables do we have? What year is the data collected from?
    (`describe` will come in handy here!)
 3. Are there any missing states?
 4. What variables (if any) are numeric and what variables (if any) are strings?
-5. [Compress](#compress) the data. How much space is saved? Why do you think this is?
+5. [Compress][compressing data] the data. How much space is saved? Why do you think this is?
 
 
 ^#^^#^ Labels
@@ -279,7 +280,7 @@ describe turn
 <</dd_do>>
 ~~~~
 
-As with [labelling the data](#label-data), call `label variable <varname>` without a new label to remove the existing one.
+As with [labeling the data][labeling data], call `label variable <varname>` without a new label to remove the existing one.
 
 ^#^^#^^#^ Labeling values
 
@@ -307,7 +308,7 @@ describe foreign
 ~~~~
 
 Additionally, if you look at the data through Data Editor or Data Browser, you see that instead of `foreign` being red (as a string) it is blue, as we
-discussed [earlier](working-with-data-sets.html#colors-as-variable-type).
+discussed [earlier][colors as variable type].
 
 Let's look at that table ignoring the value labels:
 
@@ -407,10 +408,10 @@ want to keep them) or they'll be lost!
 
 ^#^^#^ Managing variables
 
-In Stata, managing the names and order of variables is important to make entering commands easier due to
-the [shortcuts for referring to variables](#referring-to-variables). Recall that variables can be referred to using wildcards (e.g. `a*` to
-include `age`, `address` or `a10`, or using `var1-var10` to include all variables between `var1` and `var10` as they are ordered). Of course, you may
-also want to rename or re-order variables for other reasons such as making the data easier to look at.
+In Stata, managing the names and order of variables is important to make entering commands easier due to the [shortcuts for referring to
+variables][referring to variables]. Recall that variables can be referred to using wildcards (e.g. `a*` to include `age`, `address` or `a10`, or using
+`var1-var10` to include all variables between `var1` and `var10` as they are ordered). Of course, you may also want to rename or re-order variables
+for other reasons such as making the data easier to look at.
 
 ^#^^#^^#^ Renaming variables
 
@@ -487,13 +488,13 @@ describe, simple
 
 If you've changed to a different data set, load "census9" back up with `webuse`.
 
-1. Going forward, we'll be using a version of "census9" with changes we're making. [Save](working-with-data-sets.html#saving-data) a copy of the data
-   to somewhere convenient (such as your Desktop). Don't forget to give it a name!
+1. Going forward, we'll be using a version of "census9" with changes we're making. [Save][saving data] a copy of the data to somewhere convenient
+   (such as your Desktop). Don't forget to give it a name!
 2. The `drate` variable is a bit vague - the name of the variable provides no clue that "d" = "death", and the values (e.g. 75) are ambiguous.
-    1. [Rename](#renaming-variables) `drate` to `deathrate`.
-    2. The rate is actually per 10,000 individuals. [Label](#label-variable) `dearthrate` to include this information.
+    1. [Rename][renaming variables] `drate` to `deathrate`.
+    2. The rate is actually per 10,000 individuals. [Label][labeling variables] `dearthrate` to include this information.
 3. The variable `region` has a value label associated with it ("cenreg"). It has some inconsistent choices, namely "NE" and "N Cntrl". Fix this.
-    1. [Create a new value label](#label-values) which uses "Northeast" and "North Central" instead of "NE" and "N Cntrl".
+    1. [Create a new value label][labeling values] which uses "Northeast" and "North Central" instead of "NE" and "N Cntrl".
     2. Attach this new value label to `region`.
     3. Remove the existing value label "cenreg".
     4. Use `label list` and `tab` to confirm it worked.
@@ -521,9 +522,9 @@ summarize
 ~~~~
 
 The table reports the total number of non-missing values (`make` appears to be entirely missing because it is non-numeric), the mean (the average
-value), the standard deviation (a measure of how spread out the data is) and the minimum and maximum non-missing^[As we
-discuss [later](data-manipulation.html#conditional-variable-generation), in Stata, missing values (represented by `.` in the data) are considered to
-be higher than any other number (so 99999 < .).] values observed.
+value), the standard deviation (a measure of how spread out the data is) and the minimum and maximum non-missing^[As we discuss [later][conditional
+variable generation], in Stata, missing values (represented by `.` in the data) are considered to be higher than any other number (so 99999 < .).]
+values observed.
 
 Here's some suggestions of how to look at these values.
 
@@ -612,7 +613,7 @@ This reports potential issues Stata has discovered in the data. In this data, ne
 
 ^#^^#^ Exercise 4
 
-Using [`summarize` and `codebook`](#summarizing-the-data) to explore the "census9" data and answer the following questions:
+Using [`summarize` and `codebook`][summarizing the data] to explore the "census9" data and answer the following questions:
 
 1. Are there any values which seem to be errors?
 2. I'd expect each state to have their own unique value of death rate, population and median age. Is this true? If not, why?

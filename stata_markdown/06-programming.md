@@ -6,7 +6,7 @@ models. This is an advanced feature that not many users will need.
 However, there are several components of the programming capabilities which are very useful even without writing your own commands. Here we'll discuss
 several.
 
-Let's open a fresh version of "auto"
+Let's open a fresh version of "auto":
 
 ~~~~
 <<dd_do>>
@@ -106,10 +106,10 @@ ereturn list
 Rather than try and keep track of what gets stored where, if you look at the very bottom of any help file, it will say something like "`summarize`
 stores the following in `r()`:" or "`mean` stores the following in `e()`:", corresponding to `return` and `ereturn` respectively.
 
-Along with the [One Data](basics.html#one-data) principal, Stata also follows the One _-class principal - meaning you can only view the `return` or
-`ereturn` for the most recent command of that class. So if you run a `summarize` command, then do a bunch of n-class calls (`gsort` for example), the
-`return list` call will still give you the returns for that first `summarize`. However, as soon as you run another r-class command, you lose access to
-the first one. You can save any piece of it using a [macro](#macros). For example, to calculate the average difference in price between foreign and domestic
+Along with the [One Data][one data] principal, Stata also follows the One _-class principal - meaning you can only view the `return` or `ereturn` for
+the most recent command of that class. So if you run a `summarize` command, then do a bunch of n-class calls (`gsort` for example), the `return list`
+call will still give you the returns for that first `summarize`. However, as soon as you run another r-class command, you lose access to the first
+one. You can save any piece of it using a [macro][macros]. For example, to calculate the average difference in price between foreign and domestic
 cars^[There are obviously other ways to compute this, but this gives a flavor of the use.]:
 
 ~~~~
@@ -169,11 +169,11 @@ Let's breakdown each piece of the command. The command syntax for `foreach` is
 foreach <new macroname> of varlist <list of variables>
 ```
 
-The loop will create a [macro](#macros) that you name (in the example above, it was named "race"), and repeatedly set it to each subsequent entry in
+The loop will create a [macro][macros] that you name (in the example above, it was named "race"), and repeatedly set it to each subsequent entry in
 the list of variables. So in the code above, first "race" is set to "total", then the two `gen` commands are run. Next, "race" is set to "white", then
 the two commands are run. Etc.
 
-Within each of the `gen` commands, we use the backtick-quote notation just like with [macros](#macros).
+Within each of the `gen` commands, we use the backtick-quote notation just like with [macros][macros].
 
 Finally, we end the `foreach` line with an open curly brace, `{`, and the line after the last command within the loop has the matching close curly
 brace, `}`.
@@ -225,7 +225,7 @@ foreach race in total-island
 ```
 
 then Stata would set "race" to "total-island" and the `gen` command would run once! By using "of varlist", you are telling Stata that before it sets
-"race" to anything, expand the varlist using the [rules such as `*` and `-`](data-management.html#referring-to-variables).
+"race" to anything, expand the varlist using the [rules such as `*` and `-`][referring to variables].
 
 There is also
 
@@ -256,9 +256,8 @@ There are two useful command prefixes that can be handy while writing more elabo
 ^#^^#^^#^ Capturing an error
 
 Imagine the following scenario. You want to write a Do-file that generates a new variable. However, you may need to re-run chunks of the Do-file
-repeatedly, so that the `gen` statement is hit repeatedly. After the first `gen`, we can't call it again
-and [need to use `replace` instead](data-manipulation.html#replace). However, if we used `replace`, it wouldn't work the first time! One solution is
-to `drop` the variable before we gen it:
+repeatedly, so that the `gen` statement is hit repeatedly. After the first `gen`, we can't call it again and [need to use `replace` instead][replacing
+existing variables]. However, if we used `replace`, it wouldn't work the first time! One solution is to `drop` the variable before we gen it:
 
 
 ~~~~
@@ -336,7 +335,7 @@ if _rc > 0 {
 ^#^^#^^#^ Quieting the output
 
 `quietly` does the same basic thing as `capture`, except it does not hide errors. It can be useful combined
-with [the returns](programming.html#class-and-return):
+with [the returns][class and return]:
 
 ~~~~
 <<dd_do>>
@@ -360,3 +359,6 @@ quietly list abcd in 1/5
 capture list abcd in 1/5
 <</dd_do>>
 ~~~~
+
+With a command that doesn't error (listing `price`), both `quietly` and `capture` perform the same. However, with a command that does error, `quietly`
+still errors, whereas `capture` just ignores it!

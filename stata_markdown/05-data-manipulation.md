@@ -90,9 +90,9 @@ they can take on any two values, but your life will be easier if you stick with 
 0 represents an absence of something (or an answer of "no") and 1 represents the presence (or an answer of "yes"). When naming dummy variables, you
 should keep this in mind to make understanding the variable easier, as well as extracting interpretations regarding the variable in a model.
 
-For example, "gender" is a poor dummy variable - what does 0 gender or 1 gender represent? Obviously we could (and should) use [value
-labels](data-management.html#label-values) to associate 0 and 1 with particular genders, but it is more straightforward to use "female" as the dummy
-variable - a 0 represents "no" to the question of "Female?", hence male; and a 1 represents a "yes", hence female.
+For example, "gender" is a poor dummy variable - what does 0 gender or 1 gender represent? Obviously we could (and should) use [value labels][labeling
+values] to associate 0 and 1 with particular genders, but it is more straightforward to use "female" as the dummy variable - a 0 represents "no" to
+the question of "Female?", hence male; and a 1 represents a "yes", hence female.
 
 If you are collecting data, consider collecting data as dummies where appropriate - if the question has a binary response, encode it as a dummy
 instead of strings. If a question has categorical responses, consider encoding them as a series of dummy variables instead (e.g. "Are you from MI?",
@@ -152,14 +152,14 @@ cars, two with low cost and one with low maintenance.
 
 ^#^^#^^#^ Hidden variables
 
-The name "hidden variables" may be slightly more dramatic than need be. In Stata, under the [One Data](basics.html#one-data) principal, any
-information in the data^[We'll see some exceptions to this in the [programming](programming.html) section.] must be in a variable. This includes the
-so called "hidden variables" of `_n` and `_N`. You can imagine that each row of your data has two additional columns of data, one for `_n` and one for `_N`.
+The name "hidden variables" may be slightly more dramatic than need be. In Stata, under the [One Data][one data] principal, any information in the
+data^[We'll see some exceptions to this in the [programming](programming.html) section.] must be in a variable. This includes the so called "hidden
+variables" of `_n` and `_N`. You can imagine that each row of your data has two additional columns of data, one for `_n` and one for `_N`.
 
 `_n` represents the row number currently. Currently, meaning if the data is re-sorted, `_n` can change.
 
-`_N` represents the total number of rows in the data, hence this is the same for every row. Again, if the data changes (e.g. you [drop](#keep-drop)
-some data) then `_N` may be updated.
+`_N` represents the total number of rows in the data, hence this is the same for every row. Again, if the data changes (e.g. you [drop][discarding
+data] some data) then `_N` may be updated.
 
 While you cannot access these hidden variables normally, you can use them in generating variables or conditional statements. For example, we've seen
 that `list` can use `in` to restrict the rows it outputs, and we've seen that it can use `if` to choose conditionally. We can combine these:
@@ -171,7 +171,7 @@ list make if _n <= 2
 <</dd_do>>
 ~~~~
 
-A more useful example is to save the initial row numbering in your data. When we discuss [sorting](#sorting) later, it may be useful to be able to
+A more useful example is to save the initial row numbering in your data. When we discuss [sorting][sorting] later, it may be useful to be able to
 return to the original ordering. Since `_n` changes when the data is re-sorted, if we save the initial row numbers to a permanent variable, we can
 always re-sort by it later. `_N` is slightly less useful but can be used similarly.
 
@@ -199,8 +199,8 @@ help egen
 
 ^#^^#^ Replacing existing variables
 
-[Earlier](#generate) we created the `weight2` variable which changed the units on weight from pounds to tons. What if, instead of creating a new variable,
-we tried to just change the existing `weight` variable.
+[Earlier][generating new variables] we created the `weight2` variable which changed the units on weight from pounds to tons. What if, instead of
+creating a new variable, we tried to just change the existing `weight` variable.
 
 ~~~~
 <<dd_do>>
@@ -218,9 +218,8 @@ list weight in 1/5
 ~~~~
 
 `replace` features syntax identical to `generate`.^[`generate` has a few features we do not discuss which `replace` does not support. Namely,
-`generate` can set the [type](data-management.html#compress) manually (instead of letting Stata choose the best type automatically), and `generate`
-can place the new variable as desired rather than [using `order`](data-management.html#changing-variable-ordering). Clearly, neither of these features
-are needed for `replace`.]
+`generate` can set the [type][compressing data] manually (instead of letting Stata choose the best type automatically), and `generate` can place the
+new variable as desired rather than [using `order`][changing variable ordering]. Clearly, neither of these features are needed for `replace`.]
 
 ^#^^#^^#^ Conditional variable generation
 
@@ -348,9 +347,9 @@ recode rep78 (1 = 1) (2 3 = 2) (4 5 = 3) (missing = .), generate(maintcost)
 ```
 
 Each rule has the form of `old value(s) = new value`, where the old values can be either a single number, several numbers (either listed as above, `1
-5 10`, or a [numlist](working-with-data-sets.html#loading-subsets-of-the-data) like `7/12` to include all values between 7 and 12), the phrases
-"missing", "nonmissing" or "else" to capture anything not elsewhere defined. The new value must be a single number or a missing value (`.` or `.a`,
-etc). "else" cannot be used if "missing" or "nonmissing" is defined (and vice-versa), and all of those must be the last rules defined. E.g.,
+5 10`, or a [numlist][loading subsets of the data] like `7/12` to include all values between 7 and 12), the phrases "missing", "nonmissing" or "else"
+to capture anything not elsewhere defined. The new value must be a single number or a missing value (`.` or `.a`, etc). "else" cannot be used if
+"missing" or "nonmissing" is defined (and vice-versa), and all of those must be the last rules defined. E.g.,
 
 ```
 recode x (missing = 5) (2 = 4) (else = 3) (1 = 2), generate(y)
@@ -374,9 +373,8 @@ The `2 = 4` rule will never take place because 2 is already recoded to 7 in the 
 Almost any Stata command which operates on variables can operate on a subset of the data instead of the entire data, using the conditional statements
 we just learned. Specifically, we can append the `if <condition>` to a command, and the command will be executed as if the data for which the
 conditional does not return True does not exist. This is equivalent to throwing away some data and then performing the command. In general, you should
-avoid discarding data as you never know when you will possible use it. Of course, you could
-use [`preserve` and `restore`](working-with-data-sets.html#preserverestore) to temporarily remove the data, but using the conditional subsetting is
-more straightforward.
+avoid discarding data as you never know when you will possible use it. Of course, you could use [`preserve` and `restore`][Temporarily preserving and
+restoring data] to temporarily remove the data, but using the conditional subsetting is more straightforward.
 
 ~~~~
 <<dd_do>>
@@ -405,7 +403,7 @@ summ price if foreign == 1
 we see that American cars are cheaper on average^[Note that this is not a statistical claim, we would have to do a two-sample t-test to make any
 statistical claim.].
 
-^#^^#^^#^ Automatic subsettings
+^#^^#^^#^ Repeat commands on subsets
 
 To look at the average price for American and foreign cars, we ran two individual commands. If we wanted to look at the summaries by `rep78`, that
 would take 6 commands (values 1 through 5 and `.`)!
@@ -425,10 +423,10 @@ sorted (or if you simply did not want to check/assume it was), you could instead
 bysort foreign: summ price
 ```
 
-`bysort` is identical to sorting (which we'll discuss [later](#sorting)) first and running the `by` statement afterwards. In general, it is
-recommended to always use `bysort` instead of `by`, *unless* you believe the data is already sorted and want an error if that assumption is violated.
+`bysort` is identical to sorting (which we'll discuss [later][sorting]) first and running the `by` statement afterwards. In general, it is recommended
+to always use `bysort` instead of `by`, *unless* you believe the data is already sorted and want an error if that assumption is violated.
 
-Before running these commands, consider generating a [original ordering variable](#hidden-variables) first.
+Before running these commands, consider generating a [original ordering variable][hidden variables] first.
 
 `bysort`'s variables cannot be conditional statements, so if you wanted to for example get summaries by low and high mileage cars, you'd need to
 generate a dummy variable first.
@@ -536,8 +534,8 @@ Other useful commands include
 
 ^#^^#^ Sorting
 
-We already saw sorting [in the context of `bysort`](#by-and-bysort). We can also sort as a standalone operation. As before, consider generating
-a [original ordering variable](#hidden-variables) first.
+We already saw sorting [in the context of `bysort`][repeat commands on subsets]. We can also sort as a standalone operation. As before, consider
+generating a [original ordering variable][hidden variables] first.
 
 We'll switch back to "auto" first.
 
@@ -569,9 +567,9 @@ list rep78 price in 1/5
 <</dd_do>>
 ~~~~
 
-Recall that missing values (`.`) are [larger than any other values](data-manipulation.html#conditional-variable-generation). When sorting with missing
-values, they follow this rule as well. If you want to treat missing values as smaller than all other values, you can pass the `mfirst` option to
-`gsort`. Note this does *not* make missingness "less than" anywhere else, only for the purposes of the current sort.
+Recall that missing values (`.`) are [larger than any other values][conditional variable generation]. When sorting with missing values, they follow
+this rule as well. If you want to treat missing values as smaller than all other values, you can pass the `mfirst` option to `gsort`. Note this does
+*not* make missingness "less than" anywhere else, only for the purposes of the current sort.
 
 Sorting strings does work and is done alphabetically. All capital letters are "less than" all lower case letters, and a blank string ("") is the
 "smallest". For example, if you have the strings "DBC", "Daa", "", "EEE", the sorted ascending order would be "", "DBC", "Daa", "EEE". The blank is
@@ -584,8 +582,8 @@ leaving the remaining rows remain *in their exact same position*.
 ^#^^#^ Working with strings and categorical variables
 
 String variables are commonly used during data collection but are ultimately not very useful from a statistical point of view. Typically string
-variables should be represented as [categorical variables with value labels](data-management.html#label-values) as we've previously discussed. Here
-are some useful commands for operating on strings and categorical variables.
+variables should be represented as [categorical variables with value labels][labeling values] as we've previously discussed. Here are some useful
+commands for operating on strings and categorical variables.
 
 ^#^^#^^#^ Converting between string and numeric
 
@@ -629,7 +627,7 @@ order mpg, after(price)
 <</dd_do>>
 ~~~~
 And we're back to the original set-up.^[If you are sharp-eyed, you may have noticed that the original `mpg` was an "int" whereas the final one is a
-"byte". If we had called [`compress`](data-management.html#compress) on the original data, it would have done that type conversion anyways - so we're
+"byte". If we had called [`compress`][compressing data] on the original data, it would have done that type conversion anyways - so we're
 ok!]
 
 When using `destring` to convert a string variable (that it storing numeric data as strings - "13", "14") to a numeric variable, if there are *any*
@@ -656,12 +654,12 @@ not use it with `destring` either!).
 ^#^^#^^#^ Converting strings into labeled numbers
 
 If we have a string variable which has non-numerical values (e.g. `race` with values "white", "black", "Hispanic", etc), the ideal way to store it is
-as numerical with [value labels](data-management.html#label-values) attached. While we could do this manually using a combination of `gen` and
+as numerical with [value labels][labeling values] attached. While we could do this manually using a combination of `gen` and
 `replace` with some conditionals, a less tedious way to do so is via `encode`.
 
 We'll switch to the "surface" data set, which contains sea surface temperature measurements from a number of locations over two days. (Remember this
 will erase any existing unsaved changes! You will not need any modifications you've made to other built-in datasets going forward [except `census9`
-from [exercise 3](data-management.html#execise-3), but if you do want to save it, do so first!)
+from [Exercise 3][exercise 3]], but if you do want to save it, do so first!)
 
 ~~~~
 <<dd_do>>
@@ -750,18 +748,18 @@ list date5 date6 month in 1/5
 Open the *saved* version of "census9" with `use`, not the original version with `webuse`.
 
 1. Generate a new variable, `deathperc`, which is the percentage of deaths in each state. (Remember that `deathrate` is deaths per 10,000.)
-2. The average age of all Americans in 1980 is roughly 30.11 years of age. [Generate a categorical](#conditional-variable-generation) with four values
-   as described before, with appropriate [value labels](data-management.html#label-values).
+2. The average age of all Americans in 1980 is roughly 30.11 years of age. [Generate a categorical][conditional variable generation] with four values
+   as described before, with appropriate [value labels][labeling values].
     - Significantly below national average: `medage` equal to 26.20 or less
     - Below national average: `medage` greater than 26.20 and less than or equal to 30.10.
     - Above national average: `medage` greater than 30.10 and less than or equal to 32.80.
     - Significantly above national average: `medage` greater than 32.80.
-3. What is the death rate in [each of those four categories](#by-and-bysort)? (You can use `summarize` to obtain the means.) Does there appear to be
+3. What is the death rate in [each of those four categories][repeat commands on subsets]? (You can use `summarize` to obtain the means.) Does there appear to be
    any pattern?
-4. What state has the [lowest](#sorting) death rate? The highest? The lowest average age? The highest?
-5. Each state has a single observation here, but if we had multiple years of data, then we could have ["long data"](#reshaping-files) with multiple
-   rows per state. To prepare for this sort of data, [encode](#encode-and-decode) the two-letter state abbreviation into a numeric value with value
-   labels.
+4. What state has the [lowest][sorting] death rate? The highest? The lowest average age? The highest?
+5. Each state has a single observation here, but if we had multiple years of data, then we could have ["long data"][reshaping files] with multiple
+   rows per state. To prepare for this sort of data, [encode][Converting strings into labeled numbers] the two-letter state abbreviation into a
+   numeric value with value labels.
 
 ^#^^#^ Merging Files
 
@@ -773,7 +771,7 @@ variables, or by adding cases to an existing data set. We’ll start with the si
 Appending is straightforward. Observations in a new data set (called the "using" data) are appended to the current data set (called the "master"
 data), matching variable names. If a variable in the using data exists already in the master data, its values are entered there. If a variable in the
 using data does not exist in the master, the new variable is added to the appended data set which is missing for all members of the master data. This
-is easiest to visualize. There are two data sets on [Stata's website](working-with-data-sets.html#stata-website-data) which we can append, "odd" and
+is easiest to visualize. There are two data sets on [Stata's website][stata website data] which we can append, "odd" and
 "even".
 
 ~~~~
@@ -785,8 +783,8 @@ list
 <</dd_do>>
 ~~~~
 
-It does not truly matter which data set is the master data and which is the using data (it will later in [match-merging](#match-merging-data)), it
-will only affect the sorted order (the data in master is sorted first). The syntax is simply
+It does not truly matter which data set is the master data and which is the using data (it will later in [match-merging][match-merging data]), it will
+only affect the sorted order (the data in master is sorted first). The syntax is simply
 
 ```
 append using <using data>
@@ -801,8 +799,8 @@ list
 ~~~~
 
 (We must specify the complete path to the data instead of the `webuse` shorthand of just the data name. Of course, with real data that you locally
-have on your computer, you follow the [working directory](basics.html#working-directory) rules; if the file exists in your working directory you just
-give the name, otherwise give the complete path. I obtained that path by visiting the Stata data website and finding the link to "odd".)
+have on your computer, you follow the [working directory][working directory] rules; if the file exists in your working directory you just give the
+name, otherwise give the complete path. I obtained that path by visiting the Stata data website and finding the link to "odd".)
 
 Note that the "number" variable, which exists in both data sets, has complete data, while "even" and "odd" both have missing data as expected. The
 `using` part of the command is where the term the "using data" comes from.
@@ -859,7 +857,7 @@ list in 1/7
 <</dd_do>>
 ~~~~
 
-(Again, we use the full path but for local files, following [working directory](basics.html#working-directory) rules.)
+(Again, we use the full path but for local files, following [working directory][working directory] rules.)
 
 First, take a look at the output of the merge command. We see that 69 cars were not matched, which means they exist in only one of the two data
 sets. In this case, they all exist in master data, but in general you could see a mix of the two. The remaining 5 observations were appropriately
@@ -982,8 +980,8 @@ Now, notice that when we reshaped the original long data into wide format, the t
 wanted to save the "before" and "after" labels? Do note that thankfully Stata saves these labels, so when converting back to long, it restores the
 "Before" and "After" tags.
 
-If you do want to save the text instead of the count, you need to use strings. We'll use [`decode`](#encode-and-decode) to convert to a string, then
-use that as the jvar.
+If you do want to save the text instead of the count, you need to use strings. We'll use [`decode`][Converting strings into labeled numbers] to
+convert to a string, then use that as the jvar.
 
 ~~~~
 <<dd_do>>
@@ -1033,4 +1031,4 @@ A few notes:
 
 - If you have wide data and many time-varying variables, there is no shorthand for entering all the stubs. For large data, this is **extremely**
   frustrating. I'd recommend using `describe, simple` to get a list of all variable names, then using find \& replace to remove the indices. If you
-  know a better way, [let me know](index.html#contact-information)!
+  know a better way, [let me know][contact information]!
