@@ -218,8 +218,9 @@ list weight in 1/5
 ~~~~
 
 `replace` features syntax identical to `generate`.^[`generate` has a few features we do not discuss which `replace` does not support. Namely,
-`generate` can set the [type][compressing data] manually (instead of letting Stata choose the best type automatically), and `generate` can place the
-new variable as desired rather than [using `order`][changing variable ordering]. Clearly, neither of these features are needed for `replace`.]
+`generate` can set the [type][describing the data] manually (instead of letting Stata choose the best type [automatically][compressing data]), and
+`generate` can place the new variable as desired rather than [using `order`][changing variable ordering]. Clearly, neither of these features are
+needed for `replace`.]
 
 ^#^^#^^#^ Conditional variable generation
 
