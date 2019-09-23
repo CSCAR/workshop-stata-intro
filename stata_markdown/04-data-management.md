@@ -71,8 +71,6 @@ Without getting too into the details of how the command works, we can see examin
 - We are fitting the model on on the subset where `z > 5`.
 - There are two options, `vce(robust)` which changes how errors in the model are estimated and `beta` which changes how the output is displayed.
 
-We will see later how to [make referring to variables easier](data-management.html#referring-to-variables).
-
 ^#^^#^^#^ Referring to variables
 
 The `regress` example above referred to 5 variables, which we wrote out manually.  This can get very tedious as the number of variables
@@ -198,12 +196,12 @@ automatically change types. So don't hesitate to run `compress` when loading new
 
 ^#^^#^ Exercise 2
 
-1. "census9" is accesible via `webuse`. Load it.
+1. "census9" is accesible via [`webuse`](working-with-data-sets.html#stata-website-data). Load it.
 2. Spend a minute looking at the data. What does this data seem to represent? What variables do we have? What year is the data collected from?
    (`describe` will come in handy here!)
 3. Are there any missing states?
 4. What variables (if any) are numeric and what variables (if any) are strings?
-5. Compress the data. How much space is saved? Why do you think this is?
+5. [Compress](#compress) the data. How much space is saved? Why do you think this is?
 
 
 ^#^^#^ Labels
@@ -410,7 +408,7 @@ want to keep them) or they'll be lost!
 ^#^^#^ Managing variables
 
 In Stata, managing the names and order of variables is important to make entering commands easier due to
-the [shortcuts for referring to variables](basics.html#referring-to-variables). Recall that variables can be referred to using wildcards (e.g. `a*` to
+the [shortcuts for referring to variables](#referring-to-variables). Recall that variables can be referred to using wildcards (e.g. `a*` to
 include `age`, `address` or `a10`, or using `var1-var10` to include all variables between `var1` and `var10` as they are ordered). Of course, you may
 also want to rename or re-order variables for other reasons such as making the data easier to look at.
 
@@ -614,7 +612,7 @@ This reports potential issues Stata has discovered in the data. In this data, ne
 
 ^#^^#^ Exercise 4
 
-Using `summarize` and `codebook` to explore the "census9" data and answer the following questions:
+Using [`summarize` and `codebook`](#summarizing-the-data) to explore the "census9" data and answer the following questions:
 
 1. Are there any values which seem to be errors?
 2. I'd expect each state to have their own unique value of death rate, population and median age. Is this true? If not, why?

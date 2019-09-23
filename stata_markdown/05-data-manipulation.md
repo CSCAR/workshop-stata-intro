@@ -425,8 +425,8 @@ sorted (or if you simply did not want to check/assume it was), you could instead
 bysort foreign: summ price
 ```
 
-`bysort` is identical to [sorting](#sorting) first and running the `by` statement afterwards. In general, it is recommended to always use `bysort`
-instead of `by`, *unless* you believe the data is already sorted and want an error if that assumption is violated.
+`bysort` is identical to sorting (which we'll discuss [later](#sorting)) first and running the `by` statement afterwards. In general, it is
+recommended to always use `bysort` instead of `by`, *unless* you believe the data is already sorted and want an error if that assumption is violated.
 
 Before running these commands, consider generating a [original ordering variable](#hidden-variables) first.
 
@@ -795,7 +795,7 @@ append using <using data>
 ~~~~
 <<dd_do>>
 webuse even
-append using http://www.stata-press.com/data/r15/odd
+append using http://www.stata-press.com/data/r16/odd
 list
 <</dd_do>>
 ~~~~
@@ -854,7 +854,7 @@ All that needs to be specified is the variable to match cases by and the name of
 
 ~~~~
 <<dd_do>>
-merge 1:1 make using http://www.stata-press.com/data/r15/autoexpense
+merge 1:1 make using http://www.stata-press.com/data/r16/autoexpense
 list in 1/7
 <</dd_do>>
 ~~~~

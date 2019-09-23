@@ -27,8 +27,8 @@ When a user first opens Stata, there are five panes that will appear in the main
 
 Each of these five panes will be nested within a larger overall window for the Stata session, which contains menus and tool bars available for
 users. There are additional windows that users can access from the Window menu, which include the Graph window (which will open when graphs have been
-created), the Viewer window (which is primarily used for [help](#help) features and Stata news), the Data Editor window (for use when [viewing data
-sets](working-with-data-sets.html#editing-data-manually)), and the Do-file Editor window (for use when writing [.do files](#do-files)).
+created), the Viewer window (which is primarily used for [help](#stata-help) features and Stata news), the Data Editor window (for use when [viewing
+data sets](working-with-data-sets.html#editing-data-manually)), and the Do-file Editor window (for use when writing [.do files](#do-files)).
 
 In the lower left-hand corner of the main Stata window (below the panes), there will be a directory displayed. This is known as the [working
 directory](#working-directory), and is where Stata will look to find data files and other associated Stata files unless the user specifies another
@@ -40,7 +40,7 @@ One functionality where Stata differs than most other statistical or data analys
 time. (You can open a second instance of Stata to open a second data set, but the two instances cannot communicate.)
 
 Any command you run knows to operate on the data set you have open. For example, there is a command
-[`summarize`](#data-management.html#summarizing-the-data) which provides summary information about variables. The command is simply `summarize`, there
+[`summarize`](data-management.html#summarizing-the-data) which provides summary information about variables. The command is simply `summarize`, there
 is no need to direct it towards a specific data set.
 
 If you have multiple data sets you need to work with, you can either
@@ -49,6 +49,12 @@ If you have multiple data sets you need to work with, you can either
    help greatly.
 
 2. Merge the data sets, the better option. We'll discuss [merging](data-manipulation.html#merging-files) towards the end of the course.
+
+^#^^#^^#^ Frames
+
+Stata 16 has introduced the concept of ["frames"](https://www.stata.com/new-in-stata/multiple-datasets-in-memory/) which allows you to work with more
+than one data set at a time in a limited capacity. We will not be covering this functionality in these notes at this time; but see an upcoming set of
+notes on Stata 16's new features.
 
 ^#^^#^ Give Stata a command
 
@@ -67,7 +73,7 @@ version
 ~~~~
 
 The first line proceeded by the `.` indicates the command that was written, `version`, and the rest is the output. Here, I am running Stata version
-15.0 (your version may vary).
+16.0 (your version may vary).
 
 In this document, if you see a single command without a period, it indicates something that was not run - either it's not designed to be run (it's
 fake code designed to illustrate a point), or more likely, the output is not interesting or unnecessary. If you instead see a Results output where the
@@ -102,7 +108,7 @@ of this class. If you are interested in this functionality, I'd be happy to help
 ^#^^#^ Updating
 
 If you have administrative access on your computer (e.g. if it is your personal machine, or your IT department has given you the ability), you can
-update Stata freely. Major point upgrades such as the newly released 15.0 require purchase and re-installation, but minor upgrades (such as the 14.1
+update Stata freely. Major point upgrades such as the newly released 16.0 require purchase and re-installation, but minor upgrades (such as the 14.1
 and 14.2 updates) as well as minor internal updates are free.
 
 To check for updates, you can run
@@ -163,7 +169,7 @@ to perform all updates.
 
 We [saw](#give-stata-a-command) that commands can be typed interactively, one command at a time, and the results immediately observed. From this, the
 output can be copied/exported/printed, or the results can be saved. However, a better paradigm would save all the commands run separately so that the
-analysis is [reproducible](https://en.wikipedia.org/wiki/Reproducibility).
+analysis is [reproducible](https://ropensci.github.io/reproducibility-guide/sections/introduction/).
 
 For this purpose, Stata has Do-files (named because they are saved with the .do extension, such as `analysis.do`) which are scripts containing only
 commands and [comments](#comments). We can then run any subset of the commands (including the entire file), re-running parts or all of the
@@ -202,7 +208,7 @@ compress
 ~~~~
 
 We will cover in later sections what each of these commands does ([`sysuse`](working-with-data-sets.html#sysuse),
-[`summarize`](data-management.html#summarizing-the-data), [`compress`](#compress)).
+[`summarize`](data-management.html#summarizing-the-data), [`compress`](data-management.html#compress)).
 
 ^#^^#^^#^ Comments
 
@@ -273,8 +279,8 @@ that your code may operate differently with the new version. If you add
 version 14.2
 ```
 
-to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you've updated to Stata 15. This
-works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 15 when you only have Stata 14 installed.)
+to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you've updated to Stata 16. This
+works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 16 when you only have Stata 14 installed.)
 
 Note that this `version` is the same command as the `version` we've been discussing [before](#give-stata-a-command). It operates in this special
 fashion only when included at the top of a Do-file.
@@ -321,7 +327,8 @@ Each help page has numerous features, I will merely point out a few here.
 3. The examples in the help are great but basic; the PDF help (see #1) usually has more detailed examples.
 4. We will discuss the "Stored results" in the [Programming](programming.html) section.
 
-`help` can also be used to search for the appropriate command. For example, if you wanted help merging some data together (which we will cover [later](#merging)), you might try running
+`help` can also be used to search for the appropriate command. For example, if you wanted help merging some data together (which we will cover
+[later](data-manipulation.html#merging-files)), you might try running
 
 ```
 help merging

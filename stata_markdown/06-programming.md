@@ -225,7 +225,7 @@ foreach race in total-island
 ```
 
 then Stata would set "race" to "total-island" and the `gen` command would run once! By using "of varlist", you are telling Stata that before it sets
-"race" to anything, expand the varlist using the [rules such as `*` and `-`](basics.html#referring-to-variables).
+"race" to anything, expand the varlist using the [rules such as `*` and `-`](data-management.html#referring-to-variables).
 
 There is also
 
