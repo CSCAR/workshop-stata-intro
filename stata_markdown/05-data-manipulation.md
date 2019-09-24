@@ -680,10 +680,11 @@ And we're back to the original set-up.^[If you are sharp-eyed, you may have noti
 ok!]
 
 When using `destring` to convert a string variable (that it storing numeric data as strings - "13", "14") to a numeric variable, if there are *any*
-non-numeric entries, `destring` will fail:
+non-numeric entries, `destring` will fail. For example, lets replace one the car "make" with a numeric.
 
 ~~~~
 <<dd_do>>
+replace make = "1" in 1
 destring make, gen(make2)
 <</dd_do>>
 ~~~~
@@ -706,27 +707,29 @@ If we have a string variable which has non-numerical values (e.g. `race` with va
 as numerical with [value labels][labeling values] attached. While we could do this manually using a combination of `gen` and
 `replace` with some conditionals, a less tedious way to do so is via `encode`.
 
-We'll switch to the "surface" data set, which contains sea surface temperature measurements from a number of locations over two days. (Remember this
-will erase any existing unsaved changes! You will not need any modifications you've made to other built-in datasets going forward [except `census9`
-from [Exercise 3][exercise 3]], but if you do want to save it, do so first!)
+We'll switch to the "hbp2" data set from the Stata website, records some blood pressure measurements. (Remember this will erase any existing unsaved
+changes! You will not need any modifications you've made to other built-in datasets going forward [except `census9` from [Exercise 3][exercise 3]],
+but if you do want to save it, do so first!)
 
 ~~~~
 <<dd_do>>
-sysuse surface, clear
-desc date
-tab date
+webuse hbp2, clear
+tab sex, missing
+desc sex
 <</dd_do>>
 ~~~~
 
-The `date` variable is a string with two values. First, let's create a numeric with value labels version manually.
+The `sex` variable is a string with two values. First, let's create a numeric with value labels version manually.
 
 ~~~~
 <<dd_do>>
-gen date2 = date == "01mar2011"
-label define date 0 "01mar2011" 1 "11mar2011"
-label values date2 date
-desc date2
-tab date2
+gen male = sex == "male"
+label define male 0 "female" 1 "male"
+label values male male
+tab male, missing
+replace male = . if sex == ""
+tab male, missing
+tab male, missing nolabel
 <</dd_do>>
 ~~~~
 
@@ -734,23 +737,21 @@ Instead, we can easily use `encode`:
 
 ~~~~
 <<dd_do>>
-encode date, gen(date3)
-desc date3
-tab date3
+encode sex, gen(sex2)
+tab sex2, missing
+tab sex2, missing nolabel
 <</dd_do>>
 ~~~~
 
-However, `encode` starts numbering at 1 instead of 0, which is not ideal for dummy variables. To get around this, we can create our value label
-manually first, then pass it as an argument to `encode`.
+However, we see that `encode` starts numbering at 1 instead of 0, which is not ideal for dummy variables. To get around this, we can create our value
+label manually first, then pass it as an argument to `encode`.
 
 ~~~~
 <<dd_do>>
-label define manualdate 0 "01mar2011" 1 "11mar2011"
-encode date, gen(date4) label(manualdate)
-tab date3
-tab date3, nolab
-tab date4
-tab date4, nolab
+label define manualsex 0 "female" 1 "male"
+encode sex, gen(sex3) label(manualsex)
+tab sex3, missing
+tab sex3, missing nolabel
 <</dd_do>>
 ~~~~
 
@@ -761,9 +762,9 @@ manually, but for a variable with a large number of categories, this is much eas
 
 ~~~~
 <<dd_do>>
-decode date4, gen(date5)
-desc date5
-tab date5
+decode sex3, gen(sex4)
+desc sex4
+tab sex4, missing
 <</dd_do>>
 ~~~~
 
