@@ -8,6 +8,73 @@ sysuse auto, clear
 <</dd_do>>
 ~~~~
 
+^#^^#^ Restricting commands to subsets
+
+We'll discuss operating on subsets of the data in far more detail a bit [later][subsetting], but first we'll discuss how to modify the [basic command
+syntax][basic command syntax] to run a command only on some rows of data.
+
+Recall the basic command syntax,
+
+```
+command <variable(s)>, <options>
+```
+
+By default, this will use all rows of the data it can. However, we can restrict this.
+
+```
+command <variable(s)> in <number list>, <options>
+command <variable(s)> if <condition>, <options>
+```
+
+Both are optional (obviously), but you can include them if desired.
+
+Using `in`, we pass a number list which consists of a lower bound, a `/`, and an upper bound. For example, if we wanted to summarize the first 10 rows
+for a variable, we could run:
+
+~~~~
+<<dd_do>>
+summarize weight
+summarize weight in 1/10
+<</dd_do>>
+~~~~
+
+As you can see, the second call to `summarize` thinks there are only 10 rows of data.
+
+The `if` requires defining a conditional statement. Consider the following statements
+
+^$$^
+  4 \gt 2
+^$$^
+^$$^
+  1 \gt 2
+^$$^
+
+Remembering back to middle school math classes that ^$^\gt^$^ means "greater than", clearly the first statement is true and the second statement is
+false. We can assign values of true and false to any such conditional statements, which use the following set of conditional operators:
+
+| Sign       | Definition                     | True example                        | False example                      |
+|:----------:|:-------------------------------|:-----------------------------------:|:----------------------------------:|
+| ^$^==^$^   | equality                       | ^$^3 == 3^$^                        | ^$^3 == 2^$^                       |
+| ^$^!=^$^   | not equal                      | ^$^3 != 4^$^                        | ^$^3 != 3^$^                       |
+| ^$^\gt^$^  | greater than                   | ^$^4 \gt 2^$^                       | ^$^1 \gt 2^$^                      |
+| ^$^\lt^$^  | less  than                     | ^$^1 \lt 2^$^                       | ^$^4 \lt 2^$^                      |
+| ^$^\gt=^$^ | greater than or equal to       | ^$^4 \gt= 4^$^                      | ^$^1 \gt= 2^$^                     |
+| ^$^\lt=^$^ | less than or equal to          | ^$^1 \lt= 1^$^                      | ^$^4 \lt= 2^$^                     |
+| \&         | and (both statements are true) | ^$^(4 \gt 2)^$^ \& ^$^(3 == 3)^$^   | ^$^(4 \gt 2)^$^ \& ^$^(1 \gt 2)^$^ |
+| ^$^\|^$^   | or (either statement is true)  | ^$^(3 == 2) \| (1 \lt= 2)^$^        | ^$^(4 \lt 2) \| (1 \gt 2)^$^       |
+
+You can also use parentheses in combination with \& and ^$^\|^$^ to create more logical statements (e.g. `True & (False | True)` returns true).
+
+
+So we could summarize a variable only when some other variables have some values.
+
+~~~~
+<<dd_do>>
+summarize weight if foreign == 1
+summ weight if foreign == 1 | (mpg > 20 & headroom < 10)
+<</dd_do>>
+~~~~
+
 
 ^#^^#^ Generating new variables
 
@@ -98,34 +165,8 @@ If you are collecting data, consider collecting data as dummies where appropriat
 instead of strings. If a question has categorical responses, consider encoding them as a series of dummy variables instead (e.g. "Are you from MI?",
 "Are you from OH?" etc). These changes will (usually) need to be made later anyways.
 
-Before we discuss creating dummy variables, we need to understand logical operators. Consider the following statements
-
-^$$^
-  4 \gt 2
-^$$^
-^$$^
-  1 \gt 2
-^$$^
-
-
-Remembering back to middle school math classes that ^$^\gt^$^ means "greater than", clearly the first statement is true and the second statement is
-false. We can assign values of true and false to any such conditional statements, which use the following set of conditional operators:
-
-| Sign       | Definition                     | True example                        | False example                      |
-|:----------:|:-------------------------------|:-----------------------------------:|:----------------------------------:|
-| ^$^==^$^   | equality                       | ^$^3 == 3^$^                        | ^$^3 == 2^$^                       |
-| ^$^!=^$^   | not equal                      | ^$^3 != 4^$^                        | ^$^3 != 3^$^                       |
-| ^$^\gt^$^  | greater than                   | ^$^4 \gt 2^$^                       | ^$^1 \gt 2^$^                      |
-| ^$^\lt^$^  | less  than                     | ^$^1 \lt 2^$^                       | ^$^4 \lt 2^$^                      |
-| ^$^\gt=^$^ | greater than or equal to       | ^$^4 \gt= 4^$^                      | ^$^1 \gt= 2^$^                     |
-| ^$^\lt=^$^ | less than or equal to          | ^$^1 \lt= 1^$^                      | ^$^4 \lt= 2^$^                     |
-| \&         | and (both statements are true) | ^$^(4 \gt 2)^$^ \& ^$^(3 == 3)^$^   | ^$^(4 \gt 2)^$^ \& ^$^(1 \gt 2)^$^ |
-| ^$^\|^$^   | or (either statement is true)  | ^$^(3 == 2) \| (1 \lt= 2)^$^        | ^$^(4 \lt 2) \| (1 \gt 2)^$^       |
-
-You can also use parentheses in combination with \& and ^$^\|^$^ to create more logical statements (e.g. `True & (False | True)` returns true).
-
-Now here's the trick: In Stata^[This is true of most statistical software in fact.], conditional statements return 1 (True) and 0 (False). So we can
-use them in `generate` statements to create binary variables easily.
+Now here's the trick: In Stata^[This is true of most statistical software in fact.], [conditional statements][Restricting commands to subsets] return
+1 (True) and 0 (False). So we can use them in `generate` statements to create binary variables easily.
 
 ~~~~
 <<dd_do>>
@@ -134,6 +175,13 @@ list price* in 1/5
 <</dd_do>>
 ~~~~
 
+Note that this is NOT the same thing as using [`if`][Restricting commands to subsets]. E.g., we see the following error:
+
+~~~~
+<<dd_do>>
+generate price4k2 = if price > 4000
+<</dd_do>>
+~~~~
 
 Now, `price4k` takes on values 1 and 0 depending on whether the conditional statement was true.
 

@@ -11,7 +11,6 @@ sysuse auto
 You can reload it as necessary (if you modify it and want the original) by re-running this with the `clear` option. Feel free to make frequent use of
 [`preserve` and `restore`][Temporarily preserving and restoring data].
 
-
 Whenever you first begin working with a data set, you'll want to spend some time getting familiar with it. You should be able to answer the following
 questions (even if some of them are approximations):
 
@@ -30,53 +29,12 @@ You'll notice that there are no statistical questions here - we're not even worr
 In this chapter we'll go over various tools and commands you can use to answer these questions (and more) and overall to gain a familiarity with the
 logistics of your data.
 
-^#^^#^ Basic command syntax
+^#^^#^ Referring to variables
 
-Most commands which operate on variables (as opposed to system commands such as `version`, `update`, `query`, etc.) follow
-the same general format. Recognizing this format will make it easier to understand new commands that you are introduced.
+When we discussed [basic command syntax][basic command syntax], we said that the optional list of variables can include any number of variables (for
+some commands). Writing out all the variables can get very tedious as the number of variables increases. Thankfully there are two alternatives.
 
-The basic syntax is
-
-```
-command <variable(s)>, <options>
-```
-
-The command can take on more than one word; e.g. to create a scatter plot, the command is `graph twoway scatter`.
-
-Depending on the command, the list of variables can contain 0 variables, 1 variable, or many variables separated by spaces. Whether the order of
-variables matters depends on the specific command.
-
-The options are not required, but if they are given, they too are separated by spaces. There are some options that are consistent across a number of
-commands, and some options are specific to commands.
-
-There's an additional piece; if you want to run a command on a subset of the data, we add to the syntax:
-
-```
-command <variable(s)> if <condition>, <options>
-```
-
-We will cover this [in more detail][subsetting] later, including how to specify the condition.
-
-As an example, if we were to fit a linear regression model^[This course does not cover fitting statistical models, see the follow-up course for
-further detail.], the command might be
-
-```
-regress y x1 x2 x3 x4 if z > 5, vce(robust) beta
-```
-
-Without getting too into the details of how the command works, we can see examine the command.
-
-- The command is `regress`.
-- In the list of variables is `y x1 x2 x3 x4`. In the `regress` command, the choice of the first listed variable matters.
-- We are fitting the model on on the subset where `z > 5`.
-- There are two options, `vce(robust)` which changes how errors in the model are estimated and `beta` which changes how the output is displayed.
-
-^#^^#^^#^ Referring to variables
-
-The `regress` example above referred to 5 variables, which we wrote out manually.  This can get very tedious as the number of variables
-increases. Thankfully there are two alternatives.
-
-First, we can use the wild card `\*`^[This is the reason why `*` as a comment does not work in the middle of a line (and we use `//` instead).] For
+First, we can use the wild card `\*`^[This is the reason why `*` as a comment does not work in the middle of a line (and we use `//` instead).]. For
 example, we could refer to the variables "turn" and "trunk" as `t*`, as both variables start with "t" and are followed by anything. However, be
 careful, as this would also match variables such as `turnips`, `tprice`, `t`, etc, if any such variables existed. It can also be used in the middle or
 beginning, e.g.:
@@ -122,8 +80,7 @@ describe
 This displays a large amount of information, so let's break in down.
 
 First, the header displays general data set information - the number of observations (`obs`, the number of rows) and variables (`vars`), as well as
-the file size^[Reported in bytes. Roughly 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, 1000 megabytes = 1 gigabyte.]. It also gives a short
-label of the data (we discussing adding this [later][labeling data]) and the date of last modification.
+the file size^[Reported in bytes. Roughly 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, 1000 megabytes = 1 gigabyte.].
 
 Next, there is a table listing each variable in the data and some information about them. The "storage type" can be one of `byte`, `int`, `long`,
 `float`, `double`; all of which are simply numbers. We'll touch on the differences between these when we discuss [`compress`][compressing data], but
@@ -198,8 +155,7 @@ automatically change types. So don't hesitate to run `compress` when loading new
 ^#^^#^ Exercise 2
 
 1. "census9" is accesible via [`webuse`][stata website data]. Load it.
-2. Spend a minute looking at the data. What does this data seem to represent? What variables do we have? What year is the data collected from?
-   (`describe` will come in handy here!)
+2. Spend a minute looking at the data. What does this data seem to represent? What variables do we have? (`describe` will come in handy here!)
 3. Are there any missing states?
 4. What variables (if any) are numeric and what variables (if any) are strings?
 5. [Compress][compressing data] the data. How much space is saved? Why do you think this is?
@@ -214,41 +170,7 @@ recollection of the analyst.
 In an Excel file, to get around this, you might add additional content to the sheet outside of the raw data - a note here, a subtitle there,
 etc. However, Stata does not allow such arbitrary storage. In contrast, Stata allows you to directly **label** parts of the data with context
 information which will be displayed in the appropriate Results, to make Stata output much easier to read as well as removing the need for an external
-data dictionary. All three different versions use the `label` command.
-
-^#^^#^^#^ Labeling data
-
-A label can be attached to the data to provide more information than the variable name allows. Labels do not have the same restrictions that variable
-names have, namely they can be any length, include spaces and punctuation, and start with a number. Additionally, these appear when running
-`describe`, and so can be useful for quick identification.
-
-We saw an existing data label on the "auto" data set when running `describe`:
-
-~~~~
-<<dd_do>>
-describe, short
-<</dd_do>>
-~~~~
-
-The label appears on the right, "1978 Automobile Data".
-
-We can replace it with `label data "<new label here>"`, for example:
-
-~~~~
-<<dd_do>>
-label data "Cars from 1978"
-describe, short
-<</dd_do>>
-~~~~
-
-You can remove it by not passing a new label:
-
-~~~~
-<<dd_do>>
-label data
-describe, short
-<</dd_do>>
-~~~~
+data dictionary. Both versions use the `label` command.
 
 ^#^^#^^#^ Labeling variables
 
@@ -280,7 +202,8 @@ describe turn
 <</dd_do>>
 ~~~~
 
-As with [labeling the data][labeling data], call `label variable <varname>` without a new label to remove the existing one.
+To remove a vairable label, you can call `label variable <varname>` without a new label to remove the existing one. (Equivalent to `label variabel
+<varname> ""`, so passing an empty variable label.)
 
 ^#^^#^^#^ Labeling values
 

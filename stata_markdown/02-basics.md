@@ -301,6 +301,31 @@ Get familiar with the Stata interface. If you've been following along, you may h
 5. Be sure you know how to run these commands from the Do file.
 6. [Comment][comments] out the `query memory` command; we won't need it anymore.
 
+^#^^#^ Basic command syntax
+
+Most Stata commands which operate on variables (as opposed to system commands such as `version`, `update`, `query`, etc.) follow the same general
+format. Recognizing this format will make it easier to understand new commands that you are introduced.
+
+The basic syntax is
+
+```
+command <variable(s)>, <options>
+```
+
+The command can take on more than one word; e.g. to create a scatter plot, the command is `graph twoway scatter`.
+
+Depending on the command, the list of variables can contain 0 variables, 1 variable, or many variables separated by spaces. Whether the order of
+variables matters depends on the specific command.
+
+Above, in the do-file, we ran three lines of code. The first, `sysuse auto`, is a system command that we'll discuss later.
+
+The second, `summarize price`, follows the basic syntax - "summarize" is the command, and "price" is a single variable it operates on.
+
+The last line, `compress`, has "compress" as the command and has no additional variables.
+
+The options are not required (none of the above commands have options), but if they are given, they too are separated by spaces. There are some
+options that are consistent across a number of commands, and some options are specific to commands.
+
 ^#^^#^ Stata Help
 
 Stata has, hands down, the best built-in help files of any of the "Big 4" statistical software.^[I consider the "Big 4" as Stata, SAS, SPSS, and
