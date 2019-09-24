@@ -170,7 +170,7 @@ recollection of the analyst.
 In an Excel file, to get around this, you might add additional content to the sheet outside of the raw data - a note here, a subtitle there,
 etc. However, Stata does not allow such arbitrary storage. In contrast, Stata allows you to directly **label** parts of the data with context
 information which will be displayed in the appropriate Results, to make Stata output much easier to read as well as removing the need for an external
-data dictionary. Both versions use the `label` command.
+data dictionary.
 
 ^#^^#^^#^ Labeling variables
 
@@ -202,8 +202,15 @@ describe turn
 <</dd_do>>
 ~~~~
 
-To remove a vairable label, you can call `label variable <varname>` without a new label to remove the existing one. (Equivalent to `label variabel
+To remove a variable label, you can call `label variable <varname>` without a new label to remove the existing one. (Equivalent to `label variabel
 <varname> ""`, so passing an empty variable label.)
+
+~~~~
+<<dd_do>>
+label variable turn
+describe turn
+<</dd_do>>
+~~~~
 
 ^#^^#^^#^ Labeling values
 

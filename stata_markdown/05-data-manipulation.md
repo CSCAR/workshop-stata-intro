@@ -75,6 +75,7 @@ summ weight if foreign == 1 | (mpg > 20 & headroom < 10)
 <</dd_do>>
 ~~~~
 
+We saw the usage of this earlier when discussing [loading subsets of the data][loading subsets of the data].
 
 ^#^^#^ Generating new variables
 

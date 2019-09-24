@@ -99,6 +99,9 @@ use bp heartrate date if gender == "male" using patientdata
 
 Here, `using` and `if` are subcommands, which we will see used more as the day goes on.
 
+The statement `gender == "male"` is a conditional statement which only loads male patients. We'll discuss later about [conditional
+statements][Restricting commands to subsets].
+
 Alternatively, if you have a very large data set, you can load in a small chunk of it.
 
 ```
@@ -116,7 +119,13 @@ support modifying a spreadsheet of your data similar to Excel. At the top of the
 Browser". These open the same new Data window, the only difference is that Stata is protecting you from yourself and if you open the "Data Browser"
 (or switch to it in the Data window), you cannot modify the data.
 
-Once in the Data window, you can select cells and edit them as desired.
+Once in the Data window, you can select cells and edit them as desired. Note that whenever you make a modification in the Data Editor, there is a
+corresponding command produced which actually performs the modification.
+
+```
+. replace age = 27 in 11
+(1 real change made)
+```
 
 ^#^^#^^#^ Colors as variable type
 
@@ -129,19 +138,24 @@ blue indicating a variable with an attached [value label][labeling values] and t
 
 ^#^^#^ Saving data
 
-Saving data is straightforward using the `save` command. If you do not pass a filename to `save`, it will save with the same name as the existing
-data. If you pass a name, e.g. `save mydata2`, it will save a copy in the working directory. You can pass it a full path just like with `use` to refer
-to a location outside of the working directory.
-
-By default, `save` will not overwrite existing files. To do so, use the `replace` option.
+Saving data is done with the `save` command. There are two variations of running.
 
 ```
-save newfile // Saves a new copy with a new name, failing it "newfile" already exists.
-save, replace // Replaces the existing copy with the same name
-save newfile, replace // Replaces the new name copy.
+save, replace
 ```
 
-I recommened **never** using the first two options (without the file name) to avoid accidents.
+In this first variation, by not giving a file name and passing the `replace` option, Stata will overwrite whichever file you loaded with `use`. (It
+will error if you loaded a file via `sysuse` or `webuse`.)
+
+The second variation takes a file name:
+
+```
+save newfile
+save newfile, replace
+```
+
+Here, `save` will save a copy named "newfile.dta" in the working directory. You can pass it a full path just like with `use` to refer to a location
+outside of the working directory. By default, `save` will not overwrite existing files, but can be overwritten with the `replace` option.
 
 As before, wrap the file name in quotes if it (or the path) includes any spaces.
 
@@ -154,7 +168,8 @@ The need often arises to import data from another format (such as Excel or SPSS)
 having other formats. To see the types of data that Stata can import, select "File -> Import".
 
 While there are commands to do the importing (such as `import excel file.xlsx`), the dialog boxes for importation provide a preview of the imported
-data, making it easier to ensure that the importation will go smoothly.
+data, making it easier to ensure that the importation will go smoothly. Just as with [editing the data][Editing data manually], after performing an
+import with the dialog box, the corresponding command is executed in the results window and can be copied in a Do-file for reproducibility.
 
 ^#^^#^^#^ Importing Excel data
 
@@ -271,6 +286,9 @@ changes. There can only be a single image of the data preserved at a time, so if
 ```
 restore, not
 ```
+
+One thing to note about the use of `preserve` and `restore` in Do-files: If you run a chunk of commands which include a `preserve` statement, after
+the code executes `restore` is automatically run *even if `restore` was not in the set of commands you ran*!
 
 ^#^^#^ Exercise 1
 

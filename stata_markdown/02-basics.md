@@ -304,7 +304,7 @@ Get familiar with the Stata interface. If you've been following along, you may h
 ^#^^#^ Basic command syntax
 
 Most Stata commands which operate on variables (as opposed to system commands such as `version`, `update`, `query`, etc.) follow the same general
-format. Recognizing this format will make it easier to understand new commands that you are introduced.
+format. Recognizing this format will make it easier to understand new commands to which you are introduced.
 
 The basic syntax is
 
@@ -329,7 +329,8 @@ options that are consistent across a number of commands, and some options are sp
 ^#^^#^ Stata Help
 
 Stata has, hands down, the best built-in help files of any of the "Big 4" statistical software.^[I consider the "Big 4" as Stata, SAS, SPSS, and
-R. Both SAS and SPSS have terrible help; R's is very hit-or-miss.] Stata's help should be your first stop for any of the following:
+R. SPSS has terrible help; SAS's is good but dense and difficult to navigate if you don't already know what you're looking for; R's is very
+hit-or-miss depending on who wrote it.] Stata's help should be your first stop for any of the following:
 
 - Understanding the syntax of a command
 - Exploring the options available for a given command
@@ -386,23 +387,6 @@ su, d
 The short commands are very useful for quickly writing commands, but not so great at reading them. If you came across someone else's Stata Do-file and
 saw `su, d`, you might have trouble figuring that out unless you already knew that short command. Thankfully, the short commands can be used with
 `help`, so `help su` will bring up the full `summarize` documentation.
-
-^#^^#^ The more option
-
-Stata has an option, `more`, which, if a command were to produce voluminous output, breaks the output into "pages" so that you can see it
-page-by-page. Through Stata 14, the default was that this was on. Starting with Stata 15, the default is off. You can turn this on or off,
-
-```
-set more on
-set more off
-```
-
-This settings will only last as long as Stata is open. To make the change persist, use the `permanently` options:
-
-```
-set more on, permanently
-set more off, permanently
-```
 
 ^#^^#^ Working directory
 
