@@ -788,9 +788,9 @@ These are used inside `gen` and `replace`, e.g.
 
 ~~~~
 <<dd_do>>
-gen date6 = strupper(date5)
-gen month = substr(date5, 3, 3)
-list date5 date6 month in 1/5
+gen sexupper = strupper(sex)
+gen sexinitial = substr(sexupper, 1, 1)
+list sex sexupper sexinitial in 1/5
 <</dd_do>>
 ~~~~
 
