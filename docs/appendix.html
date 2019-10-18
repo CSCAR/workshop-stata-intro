@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Appendix | Introduction to Stata</title>
+  <meta name="description" content="Chapter 7 Appendix | Introduction to Stata" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Appendix | Introduction to Stata" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Appendix | Introduction to Stata" />
+  
+  
+  
+
+<meta name="author" content="Josh Errickson" />
+
+
+<meta name="date" content="2019-10-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="programming.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="css/standard_html.css" type="text/css" />
+<link rel="stylesheet" href="css/book.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">Introduction to Stata</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#how-to-use-this-document"><i class="fa fa-check"></i><b>1.1</b> How to use this document</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#contact-information"><i class="fa fa-check"></i><b>1.2</b> Contact information</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#cscar"><i class="fa fa-check"></i><b>1.2.1</b> CSCAR</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#author"><i class="fa fa-check"></i><b>1.2.2</b> Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i><b>1.3</b> Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics</a><ul>
+<li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#the-stata-environment"><i class="fa fa-check"></i><b>2.1</b> The Stata Environment</a></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#one-data"><i class="fa fa-check"></i><b>2.2</b> One Data</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="basics.html"><a href="basics.html#frames"><i class="fa fa-check"></i><b>2.2.1</b> Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basics.html"><a href="basics.html#give-stata-a-command"><i class="fa fa-check"></i><b>2.3</b> Give Stata a command</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="basics.html"><a href="basics.html#saving-results"><i class="fa fa-check"></i><b>2.3.1</b> Saving Results</a></li>
+<li class="chapter" data-level="2.3.2" data-path="basics.html"><a href="basics.html#dyndoc"><i class="fa fa-check"></i><b>2.3.2</b> dyndoc</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="basics.html"><a href="basics.html#updating"><i class="fa fa-check"></i><b>2.4</b> Updating</a></li>
+<li class="chapter" data-level="2.5" data-path="basics.html"><a href="basics.html#installing-user-written-commands"><i class="fa fa-check"></i><b>2.5</b> Installing user-written commands</a></li>
+<li class="chapter" data-level="2.6" data-path="basics.html"><a href="basics.html#do-files"><i class="fa fa-check"></i><b>2.6</b> Do-files</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="basics.html"><a href="basics.html#comments"><i class="fa fa-check"></i><b>2.6.1</b> Comments</a></li>
+<li class="chapter" data-level="2.6.2" data-path="basics.html"><a href="basics.html#version-control"><i class="fa fa-check"></i><b>2.6.2</b> Version control</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="basics.html"><a href="basics.html#exercise-0"><i class="fa fa-check"></i><b>2.7</b> Exercise 0</a></li>
+<li class="chapter" data-level="2.8" data-path="basics.html"><a href="basics.html#basic-command-syntax"><i class="fa fa-check"></i><b>2.8</b> Basic command syntax</a></li>
+<li class="chapter" data-level="2.9" data-path="basics.html"><a href="basics.html#stata-help"><i class="fa fa-check"></i><b>2.9</b> Stata Help</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="basics.html"><a href="basics.html#short-commands"><i class="fa fa-check"></i><b>2.9.1</b> Short commands</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="basics.html"><a href="basics.html#working-directory"><i class="fa fa-check"></i><b>2.10</b> Working directory</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="basics.html"><a href="basics.html#file-paths"><i class="fa fa-check"></i><b>2.10.1</b> File paths</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html"><i class="fa fa-check"></i><b>3</b> Working with Data Sets</a><ul>
+<li class="chapter" data-level="3.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#built-in-data"><i class="fa fa-check"></i><b>3.1</b> Built-in data</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#stata-website-data"><i class="fa fa-check"></i><b>3.1.1</b> Stata Website Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#opening-data"><i class="fa fa-check"></i><b>3.2</b> Opening data</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#loading-subsets-of-the-data"><i class="fa fa-check"></i><b>3.2.1</b> Loading subsets of the data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#editing-data-manually"><i class="fa fa-check"></i><b>3.3</b> Editing data manually</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#colors-as-variable-type"><i class="fa fa-check"></i><b>3.3.1</b> Colors as variable type</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#saving-data"><i class="fa fa-check"></i><b>3.4</b> Saving data</a></li>
+<li class="chapter" data-level="3.5" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#importing-data"><i class="fa fa-check"></i><b>3.5</b> Importing data</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#importing-excel-data"><i class="fa fa-check"></i><b>3.5.1</b> Importing Excel data</a></li>
+<li class="chapter" data-level="3.5.2" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#importing-a-csv-file"><i class="fa fa-check"></i><b>3.5.2</b> Importing a CSV File</a></li>
+<li class="chapter" data-level="3.5.3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#importing-from-a-file-not-supported-directly-by-stata"><i class="fa fa-check"></i><b>3.5.3</b> Importing from a file not supported directly by Stata</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#temporarily-preserving-and-restoring-data"><i class="fa fa-check"></i><b>3.6</b> Temporarily preserving and restoring data</a></li>
+<li class="chapter" data-level="3.7" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#exercise-1"><i class="fa fa-check"></i><b>3.7</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-management.html"><a href="data-management.html"><i class="fa fa-check"></i><b>4</b> Data Management</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-management.html"><a href="data-management.html#referring-to-variables"><i class="fa fa-check"></i><b>4.1</b> Referring to variables</a></li>
+<li class="chapter" data-level="4.2" data-path="data-management.html"><a href="data-management.html#describing-the-data"><i class="fa fa-check"></i><b>4.2</b> Describing the data</a></li>
+<li class="chapter" data-level="4.3" data-path="data-management.html"><a href="data-management.html#compressing-data"><i class="fa fa-check"></i><b>4.3</b> Compressing data</a></li>
+<li class="chapter" data-level="4.4" data-path="data-management.html"><a href="data-management.html#exercise-2"><i class="fa fa-check"></i><b>4.4</b> Exercise 2</a></li>
+<li class="chapter" data-level="4.5" data-path="data-management.html"><a href="data-management.html#labels"><i class="fa fa-check"></i><b>4.5</b> Labels</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="data-management.html"><a href="data-management.html#labeling-variables"><i class="fa fa-check"></i><b>4.5.1</b> Labeling variables</a></li>
+<li class="chapter" data-level="4.5.2" data-path="data-management.html"><a href="data-management.html#labeling-values"><i class="fa fa-check"></i><b>4.5.2</b> Labeling values</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="data-management.html"><a href="data-management.html#managing-variables"><i class="fa fa-check"></i><b>4.6</b> Managing variables</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="data-management.html"><a href="data-management.html#renaming-variables"><i class="fa fa-check"></i><b>4.6.1</b> Renaming variables</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-management.html"><a href="data-management.html#changing-variable-ordering"><i class="fa fa-check"></i><b>4.6.2</b> Changing variable ordering</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="data-management.html"><a href="data-management.html#exercise-3"><i class="fa fa-check"></i><b>4.7</b> Exercise 3</a></li>
+<li class="chapter" data-level="4.8" data-path="data-management.html"><a href="data-management.html#summarizing-the-data"><i class="fa fa-check"></i><b>4.8</b> Summarizing the data</a></li>
+<li class="chapter" data-level="4.9" data-path="data-management.html"><a href="data-management.html#exercise-4"><i class="fa fa-check"></i><b>4.9</b> Exercise 4</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>5</b> Data Manipulation</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-manipulation.html"><a href="data-manipulation.html#restricting-commands-to-subsets"><i class="fa fa-check"></i><b>5.1</b> Restricting commands to subsets</a></li>
+<li class="chapter" data-level="5.2" data-path="data-manipulation.html"><a href="data-manipulation.html#generating-new-variables"><i class="fa fa-check"></i><b>5.2</b> Generating new variables</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#creating-dummies"><i class="fa fa-check"></i><b>5.2.1</b> Creating dummies</a></li>
+<li class="chapter" data-level="5.2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#hidden-variables"><i class="fa fa-check"></i><b>5.2.2</b> Hidden variables</a></li>
+<li class="chapter" data-level="5.2.3" data-path="data-manipulation.html"><a href="data-manipulation.html#extensions-to-generate"><i class="fa fa-check"></i><b>5.2.3</b> Extensions to generate</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="data-manipulation.html"><a href="data-manipulation.html#replacing-existing-variables"><i class="fa fa-check"></i><b>5.3</b> Replacing existing variables</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="data-manipulation.html"><a href="data-manipulation.html#conditional-variable-generation"><i class="fa fa-check"></i><b>5.3.1</b> Conditional variable generation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-manipulation.html"><a href="data-manipulation.html#more-complicated-replaces"><i class="fa fa-check"></i><b>5.4</b> More complicated replaces</a></li>
+<li class="chapter" data-level="5.5" data-path="data-manipulation.html"><a href="data-manipulation.html#subsetting"><i class="fa fa-check"></i><b>5.5</b> Subsetting</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="data-manipulation.html"><a href="data-manipulation.html#repeat-commands-on-subsets"><i class="fa fa-check"></i><b>5.5.1</b> Repeat commands on subsets</a></li>
+<li class="chapter" data-level="5.5.2" data-path="data-manipulation.html"><a href="data-manipulation.html#discarding-data"><i class="fa fa-check"></i><b>5.5.2</b> Discarding data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="data-manipulation.html"><a href="data-manipulation.html#dealing-with-duplicates"><i class="fa fa-check"></i><b>5.6</b> Dealing with duplicates</a></li>
+<li class="chapter" data-level="5.7" data-path="data-manipulation.html"><a href="data-manipulation.html#sorting"><i class="fa fa-check"></i><b>5.7</b> Sorting</a></li>
+<li class="chapter" data-level="5.8" data-path="data-manipulation.html"><a href="data-manipulation.html#working-with-strings-and-categorical-variables"><i class="fa fa-check"></i><b>5.8</b> Working with strings and categorical variables</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="data-manipulation.html"><a href="data-manipulation.html#converting-between-string-and-numeric"><i class="fa fa-check"></i><b>5.8.1</b> Converting between string and numeric</a></li>
+<li class="chapter" data-level="5.8.2" data-path="data-manipulation.html"><a href="data-manipulation.html#converting-strings-into-labeled-numbers"><i class="fa fa-check"></i><b>5.8.2</b> Converting strings into labeled numbers</a></li>
+<li class="chapter" data-level="5.8.3" data-path="data-manipulation.html"><a href="data-manipulation.html#string-manipulation"><i class="fa fa-check"></i><b>5.8.3</b> String manipulation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="data-manipulation.html"><a href="data-manipulation.html#exercise-5"><i class="fa fa-check"></i><b>5.9</b> Exercise 5</a></li>
+<li class="chapter" data-level="5.10" data-path="data-manipulation.html"><a href="data-manipulation.html#merging-files"><i class="fa fa-check"></i><b>5.10</b> Merging Files</a><ul>
+<li class="chapter" data-level="5.10.1" data-path="data-manipulation.html"><a href="data-manipulation.html#appending-files"><i class="fa fa-check"></i><b>5.10.1</b> Appending Files</a></li>
+<li class="chapter" data-level="5.10.2" data-path="data-manipulation.html"><a href="data-manipulation.html#match-merging-data"><i class="fa fa-check"></i><b>5.10.2</b> Match-merging Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="data-manipulation.html"><a href="data-manipulation.html#reshaping-files"><i class="fa fa-check"></i><b>5.11</b> Reshaping Files</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="programming.html"><a href="programming.html"><i class="fa fa-check"></i><b>6</b> Programming</a><ul>
+<li class="chapter" data-level="6.1" data-path="programming.html"><a href="programming.html#macros"><i class="fa fa-check"></i><b>6.1</b> Macros</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="programming.html"><a href="programming.html#class-and-return"><i class="fa fa-check"></i><b>6.1.1</b> Class and Return</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="programming.html"><a href="programming.html#loops"><i class="fa fa-check"></i><b>6.2</b> Loops</a></li>
+<li class="chapter" data-level="6.3" data-path="programming.html"><a href="programming.html#suppressing-output-and-errors"><i class="fa fa-check"></i><b>6.3</b> Suppressing output and errors</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="programming.html"><a href="programming.html#capturing-an-error"><i class="fa fa-check"></i><b>6.3.1</b> Capturing an error</a></li>
+<li class="chapter" data-level="6.3.2" data-path="programming.html"><a href="programming.html#quieting-the-output"><i class="fa fa-check"></i><b>6.3.2</b> Quieting the output</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>7</b> Appendix</a><ul>
+<li class="chapter" data-level="7.1" data-path="appendix.html"><a href="appendix.html#solutions"><i class="fa fa-check"></i><b>7.1</b> Solutions</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="appendix.html"><a href="appendix.html#exercise-1-solution"><i class="fa fa-check"></i><b>7.1.1</b> Exercise 1 Solution</a></li>
+<li class="chapter" data-level="7.1.2" data-path="appendix.html"><a href="appendix.html#exercise-2-solution"><i class="fa fa-check"></i><b>7.1.2</b> Exercise 2 Solution</a></li>
+<li class="chapter" data-level="7.1.3" data-path="appendix.html"><a href="appendix.html#exercise-3-solution"><i class="fa fa-check"></i><b>7.1.3</b> Exercise 3 Solution</a></li>
+<li class="chapter" data-level="7.1.4" data-path="appendix.html"><a href="appendix.html#exercise-4-solution"><i class="fa fa-check"></i><b>7.1.4</b> Exercise 4 Solution</a></li>
+<li class="chapter" data-level="7.1.5" data-path="appendix.html"><a href="appendix.html#exercise-5-solution"><i class="fa fa-check"></i><b>7.1.5</b> Exercise 5 Solution</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Stata</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="appendix" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Appendix</h1>
+<div id="solutions" class="section level2">
+<h2><span class="header-section-number">7.1</span> Solutions</h2>
+<div id="exercise-1-solution" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> Exercise 1 Solution</h3>
+<p>
+<a href="working-with-data-sets.html#exercise-1">Exercise 1</a>
+</p>
+<p>
+1:
+</p>
+<pre><code>sysuse lifeexp
+</code></pre>
+<p>
+3:
+</p>
+<pre><code>sysuse sandstone, clear
+</code></pre>
+<p>
+or
+</p>
+<pre><code>clear
+sysuse sandstone
+</code></pre>
+<p>
+4: If the working directory isn’t convenient, change it using the dialogue box. Then, <code>save sandstone</code>.
+</p>
+</div>
+<div id="exercise-2-solution" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> Exercise 2 Solution</h3>
+<p>
+<a href="data-management.html#exercise-2">Exercise 2</a>
+</p>
+<p>
+1:
+</p>
+<pre><code>webuse census9, clear
+</code></pre>
+<p>
+2: Data is from the 1980 census, which we can see by the label (visible in <code>describe, simple</code>). We’ve got two identifiers of state, death rate, population, median age and census region.
+</p>
+<p>
+3: Since there data has 50 rows, it’s a good guess there are no missing sates.
+</p>
+<p>
+4: Looking at <code>describe</code>, we see that the two state identifiers are strings, the rest numeric.
+</p>
+<p>
+5: <code>compress</code>. Nothing saved! Because Stata already did it before posting it!
+</p>
+</div>
+<div id="exercise-3-solution" class="section level3">
+<h3><span class="header-section-number">7.1.3</span> Exercise 3 Solution</h3>
+<p>
+<a href="data-management.html#exercise-3">Exercise 3</a>
+</p>
+<p>
+1:
+</p>
+<pre><code>. webuse census9, clear
+(1980 Census data by state)
+
+. save mycensus9
+file mycensus9.dta saved
+
+</code></pre>
+<p>
+2:
+</p>
+<pre><code>. rename drate deathrate
+
+. label variable deathrate &quot;Death rate per 10,000&quot;
+
+</code></pre>
+<p>
+3:
+</p>
+<pre><code>. tab region
+
+     Census |
+     region |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         NE |          9       18.00       18.00
+    N Cntrl |         12       24.00       42.00
+      South |         16       32.00       74.00
+       West |         13       26.00      100.00
+------------+-----------------------------------
+      Total |         50      100.00
+
+. label list cenreg
+cenreg:
+           1 NE
+           2 N Cntrl
+           3 South
+           4 West
+
+. label define region_label 1 &quot;Northeast&quot; 2 &quot;North Central&quot; 3 &quot;South&quot; 4 &quot;West&quot;
+
+. label values region region_label
+
+. label drop cenreg
+
+. label list
+region_label:
+           1 Northeast
+           2 North Central
+           3 South
+           4 West
+
+. tab region
+
+Census region |      Freq.     Percent        Cum.
+--------------+-----------------------------------
+    Northeast |          9       18.00       18.00
+North Central |         12       24.00       42.00
+        South |         16       32.00       74.00
+         West |         13       26.00      100.00
+--------------+-----------------------------------
+        Total |         50      100.00
+
+</code></pre>
+<p>
+4:
+</p>
+<pre><code>. save, replace
+file mycensus9.dta saved
+
+</code></pre>
+</div>
+<div id="exercise-4-solution" class="section level3">
+<h3><span class="header-section-number">7.1.4</span> Exercise 4 Solution</h3>
+<p>
+<a href="data-management.html#exercise-4">Exercise 4</a>
+</p>
+<p>
+1: Use <code>summarize</code> and <code>codebook</code> to take a look at the mean/max/min. No errors detected/
+</p>
+<p>
+2:
+</p>
+<pre><code>. codebook, compact
+
+Variable   Obs Unique     Mean     Min       Max  Label
+-------------------------------------------------------------------------------
+state       50     50        .       .         .  State
+state2      50     50        .       .         .  Two-letter state abbreviation
+deathrate   50     30     84.3      40       107  Death rate per 10,000
+pop         50     50  4518149  401851  2.37e+07  Population
+medage      50     37    29.54    24.2      34.7  Median age
+region      50      4     2.66       1         4  Census region
+-------------------------------------------------------------------------------
+
+</code></pre>
+<p>
+<code>deathrate</code> and <code>medage</code> both have less than 50 unique values. This is due to both being heavily rounded. If we saw more precision, there would be more unique entires.
+</p>
+<p>
+3:
+</p>
+<pre><code>. codebook, problems
+
+   Potential problems in dataset   mycensus9.dta
+
+               potential problem   variables
+--------------------------------------------------
+  string vars with embedded blanks   state
+--------------------------------------------------
+
+</code></pre>
+<p>
+This just flags spaces (" ") in the data. Not a real problem!
+</p>
+</div>
+<div id="exercise-5-solution" class="section level3">
+<h3><span class="header-section-number">7.1.5</span> Exercise 5 Solution</h3>
+<p>
+<a href="data-manipulation.html#exercise-5">Exercise 5</a>
+</p>
+<p>
+1:
+</p>
+<pre><code>. gen deathperc = deathrate/10000
+
+. label variable deathperc &quot;Percentage of population deceeased in 1980&quot;
+
+. list death* in 1/5
+
+     +---------------------+
+     | deathr~e   deathp~c |
+     |---------------------|
+  1. |       91      .0091 |
+  2. |       40       .004 |
+  3. |       78      .0078 |
+  4. |       99      .0099 |
+  5. |       79      .0079 |
+     +---------------------+
+
+</code></pre>
+<p>
+2:
+</p>
+<pre><code>. gen agecat = 1 if medage &lt; .
+
+. replace agecat = 2 if medage &gt; 26.2 &amp; medage &lt;= 30.1
+(30 real changes made)
+
+. replace agecat = 3 if medage &gt; 30.1 &amp; medage &lt;= 32.8
+(17 real changes made)
+
+. replace agecat = 4 if medage &gt; 32.8
+(1 real change made)
+
+. label define agecat_label 1 &quot;Significantly below national average&quot; ///
+&gt;                           2 &quot;Below national average&quot; ///
+&gt;                           3 &quot;Above national average&quot; ///
+&gt;                           4 &quot;Significantly above national average&quot;
+
+. label values agecat agecat_label
+
+. tab agecat, mi
+
+                              agecat |      Freq.     Percent        Cum.
+-------------------------------------+-----------------------------------
+Significantly below national average |          2        4.00        4.00
+              Below national average |         30       60.00       64.00
+              Above national average |         17       34.00       98.00
+Significantly above national average |          1        2.00      100.00
+-------------------------------------+-----------------------------------
+                               Total |         50      100.00
+
+</code></pre>
+<p>
+We have no missing data (seen with <code>summarize</code> and <code>codebook</code> in the previous exercise) but it’s good practice to check for them anyways.
+</p>
+<p>
+3:
+</p>
+<pre><code>. bysort agecat: summarize deathrate
+
+-------------------------------------------------------------------------------
+-&gt; agecat = Significantly below national average
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+   deathrate |          2        47.5     10.6066         40         55
+
+-------------------------------------------------------------------------------
+-&gt; agecat = Below national average
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+   deathrate |         30    81.76667    9.761583         50         94
+
+-------------------------------------------------------------------------------
+-&gt; agecat = Above national average
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+   deathrate |         17    91.76471    8.422659         73        104
+
+-------------------------------------------------------------------------------
+-&gt; agecat = Significantly above national average
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+   deathrate |          1         107           .        107        107
+
+
+</code></pre>
+<p>
+We see that the groups with the higher median age tend to have higher deathrates.
+</p>
+<p>
+4:
+</p>
+<pre><code>. preserve
+
+. gsort -deathrate
+
+. list state deathrate in 1
+
+     +--------------------+
+     | state     deathr~e |
+     |--------------------|
+  1. | Florida        107 |
+     +--------------------+
+
+. gsort +deathrate
+
+. list state deathrate in 1
+
+     +-------------------+
+     | state    deathr~e |
+     |-------------------|
+  1. | Alaska         40 |
+     +-------------------+
+
+. gsort -medage
+
+. list state medage in 1
+
+     +------------------+
+     | state     medage |
+     |------------------|
+  1. | Florida    34.70 |
+     +------------------+
+
+. gsort +medage
+
+. list state medage in 1
+
+     +----------------+
+     | state   medage |
+     |----------------|
+  1. | Utah     24.20 |
+     +----------------+
+
+. restore
+
+</code></pre>
+<p>
+5:
+</p>
+<pre><code>. encode state2, gen(statecodes)
+
+. codebook statecodes
+
+-------------------------------------------------------------------------------
+statecodes                                        Two-letter state abbreviation
+-------------------------------------------------------------------------------
+
+                  type:  numeric (long)
+                 label:  statecodes
+
+                 range:  [1,50]                       units:  1
+         unique values:  50                       missing .:  0/50
+
+              examples:  10    GA
+                         20    MD
+                         30    NH
+                         40    SC
+
+</code></pre>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Stata can handle commands that are prefaced by <code>.</code> (with a space between the period and comand) so you can copy/paste the <code>. version</code> and run it as is. However, don’t get used to that habit! The correct command is just <code>version</code>.<a href="basics.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>As we’ll see in <a href="basics.html#do-files">a bit</a>, you can save Stata commands in a “do-file”. While I’ve never seen an official definition, I tend to think of “ado” as “automatic do”.<a href="basics.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>I consider the “Big 4” as Stata, SAS, SPSS, and R. SPSS has terrible help; SAS’s is good but dense and difficult to navigate if you don’t already know what you’re looking for; R’s is very hit-or-miss depending on who wrote it.<a href="basics.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>This is the reason why <code>*</code> as a comment does not work in the middle of a line (and we use <code>//</code> instead).<a href="data-management.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>Reported in bytes. Roughly 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, 1000 megabytes = 1 gigabyte.<a href="data-management.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>In the few situations where it can, it doesn’t handle them cleanly.<a href="data-management.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>As we discuss <a href="data-manipulation.html#conditional-variable-generation">later</a>, in Stata, missing values (represented by <code>.</code> in the data) are considered to be higher than any other number (so 99999 &lt; .).<a href="data-management.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>If you want log with a different base, you can use the transformation that dividing by <code>log(b)</code> is equivalent to using <code>b</code> as a base. In other words, if you need log base 10, use <code>gen newvar = log(oldvar)/log(10)</code>.<a href="data-manipulation.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>Technically and mathematically they can take on any two values, but your life will be easier if you stick with the 0/1 convention.<a href="data-manipulation.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>This is true of most statistical software in fact.<a href="data-manipulation.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>We’ll see some exceptions to this in the <a target="_blank" href="programming.html">programming</a> section.<a href="data-manipulation.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p><code>generate</code> has a few features we do not discuss which <code>replace</code> does not support. Namely, <code>generate</code> can set the <a href="data-management.html#describing-the-data">type</a> manually (instead of letting Stata choose the best type <a href="data-management.html#compressing-data">automatically</a>), and <code>generate</code> can place the new variable as desired rather than <a href="data-management.html#changing-variable-ordering">using <code>order</code></a>. Clearly, neither of these features are needed for <code>replace</code>.<a href="data-manipulation.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>Note that this is not a statistical claim, we would have to do a two-sample t-test to make any statistical claim.<a href="data-manipulation.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p>If you are sharp-eyed, you may have noticed that the original <code>mpg</code> was an “int” whereas the final one is a “byte”. If we had called <a href="data-management.html#compressing-data"><code>compress</code></a> on the original data, it would have done that type conversion anyways - so we’re ok!<a href="data-manipulation.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>“Local” as opposed to “global”, a distinction which is not important until you get deep into programming. For now, <code>local</code> is the safer option.<a href="programming.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>There are obviously other ways to compute this, but this gives a flavor of the use.<a href="programming.html#fnref16" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="programming.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
