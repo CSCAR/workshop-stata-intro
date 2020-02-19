@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Data Management | Introduction to Stata</title>
   <meta name="description" content="Chapter 4 Data Management | Introduction to Stata" />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Data Management | Introduction to Stata" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Josh Errickson" />
 
 
-<meta name="date" content="2019-10-18" />
+<meta name="date" content="2020-02-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="working-with-data-sets.html"/>
 <link rel="next" href="data-manipulation.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -70,67 +71,84 @@
 <li><a href="./index.html">Introduction to Stata</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#how-to-use-this-document"><i class="fa fa-check"></i><b>1.1</b> How to use this document</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#contact-information"><i class="fa fa-check"></i><b>1.2</b> Contact information</a><ul>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#contact-information"><i class="fa fa-check"></i><b>1.2</b> Contact information</a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#cscar"><i class="fa fa-check"></i><b>1.2.1</b> CSCAR</a></li>
 <li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#author"><i class="fa fa-check"></i><b>1.2.2</b> Author</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i><b>1.3</b> Acknowledgments</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics</a><ul>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#the-stata-environment"><i class="fa fa-check"></i><b>2.1</b> The Stata Environment</a></li>
-<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#one-data"><i class="fa fa-check"></i><b>2.2</b> One Data</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="basics.html"><a href="basics.html#frames"><i class="fa fa-check"></i><b>2.2.1</b> Frames</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="basics.html"><a href="basics.html#give-stata-a-command"><i class="fa fa-check"></i><b>2.3</b> Give Stata a command</a><ul>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#one-data"><i class="fa fa-check"></i><b>2.2</b> One Data</a></li>
+<li class="chapter" data-level="2.3" data-path="basics.html"><a href="basics.html#give-stata-a-command"><i class="fa fa-check"></i><b>2.3</b> Give Stata a command</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="basics.html"><a href="basics.html#saving-results"><i class="fa fa-check"></i><b>2.3.1</b> Saving Results</a></li>
 <li class="chapter" data-level="2.3.2" data-path="basics.html"><a href="basics.html#dyndoc"><i class="fa fa-check"></i><b>2.3.2</b> dyndoc</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="basics.html"><a href="basics.html#updating"><i class="fa fa-check"></i><b>2.4</b> Updating</a></li>
 <li class="chapter" data-level="2.5" data-path="basics.html"><a href="basics.html#installing-user-written-commands"><i class="fa fa-check"></i><b>2.5</b> Installing user-written commands</a></li>
-<li class="chapter" data-level="2.6" data-path="basics.html"><a href="basics.html#do-files"><i class="fa fa-check"></i><b>2.6</b> Do-files</a><ul>
+<li class="chapter" data-level="2.6" data-path="basics.html"><a href="basics.html#do-files"><i class="fa fa-check"></i><b>2.6</b> Do-files</a>
+<ul>
 <li class="chapter" data-level="2.6.1" data-path="basics.html"><a href="basics.html#comments"><i class="fa fa-check"></i><b>2.6.1</b> Comments</a></li>
 <li class="chapter" data-level="2.6.2" data-path="basics.html"><a href="basics.html#version-control"><i class="fa fa-check"></i><b>2.6.2</b> Version control</a></li>
 </ul></li>
 <li class="chapter" data-level="2.7" data-path="basics.html"><a href="basics.html#exercise-0"><i class="fa fa-check"></i><b>2.7</b> Exercise 0</a></li>
 <li class="chapter" data-level="2.8" data-path="basics.html"><a href="basics.html#basic-command-syntax"><i class="fa fa-check"></i><b>2.8</b> Basic command syntax</a></li>
-<li class="chapter" data-level="2.9" data-path="basics.html"><a href="basics.html#stata-help"><i class="fa fa-check"></i><b>2.9</b> Stata Help</a><ul>
+<li class="chapter" data-level="2.9" data-path="basics.html"><a href="basics.html#stata-help"><i class="fa fa-check"></i><b>2.9</b> Stata Help</a>
+<ul>
 <li class="chapter" data-level="2.9.1" data-path="basics.html"><a href="basics.html#short-commands"><i class="fa fa-check"></i><b>2.9.1</b> Short commands</a></li>
 </ul></li>
-<li class="chapter" data-level="2.10" data-path="basics.html"><a href="basics.html#working-directory"><i class="fa fa-check"></i><b>2.10</b> Working directory</a><ul>
+<li class="chapter" data-level="2.10" data-path="basics.html"><a href="basics.html#working-directory"><i class="fa fa-check"></i><b>2.10</b> Working directory</a>
+<ul>
 <li class="chapter" data-level="2.10.1" data-path="basics.html"><a href="basics.html#file-paths"><i class="fa fa-check"></i><b>2.10.1</b> File paths</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html"><i class="fa fa-check"></i><b>3</b> Working with Data Sets</a><ul>
-<li class="chapter" data-level="3.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#built-in-data"><i class="fa fa-check"></i><b>3.1</b> Built-in data</a><ul>
+<li class="chapter" data-level="3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html"><i class="fa fa-check"></i><b>3</b> Working with Data Sets</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#built-in-data"><i class="fa fa-check"></i><b>3.1</b> Built-in data</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#stata-website-data"><i class="fa fa-check"></i><b>3.1.1</b> Stata Website Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#opening-data"><i class="fa fa-check"></i><b>3.2</b> Opening data</a><ul>
+<li class="chapter" data-level="3.2" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#opening-data"><i class="fa fa-check"></i><b>3.2</b> Opening data</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#loading-subsets-of-the-data"><i class="fa fa-check"></i><b>3.2.1</b> Loading subsets of the data</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#editing-data-manually"><i class="fa fa-check"></i><b>3.3</b> Editing data manually</a><ul>
+<li class="chapter" data-level="3.3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#editing-data-manually"><i class="fa fa-check"></i><b>3.3</b> Editing data manually</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#colors-as-variable-type"><i class="fa fa-check"></i><b>3.3.1</b> Colors as variable type</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#saving-data"><i class="fa fa-check"></i><b>3.4</b> Saving data</a></li>
-<li class="chapter" data-level="3.5" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#importing-data"><i class="fa fa-check"></i><b>3.5</b> Importing data</a><ul>
+<li class="chapter" data-level="3.5" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#importing-data"><i class="fa fa-check"></i><b>3.5</b> Importing data</a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#importing-excel-data"><i class="fa fa-check"></i><b>3.5.1</b> Importing Excel data</a></li>
 <li class="chapter" data-level="3.5.2" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#importing-a-csv-file"><i class="fa fa-check"></i><b>3.5.2</b> Importing a CSV File</a></li>
 <li class="chapter" data-level="3.5.3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#importing-from-a-file-not-supported-directly-by-stata"><i class="fa fa-check"></i><b>3.5.3</b> Importing from a file not supported directly by Stata</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#temporarily-preserving-and-restoring-data"><i class="fa fa-check"></i><b>3.6</b> Temporarily preserving and restoring data</a></li>
+<li class="chapter" data-level="3.6" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#switching-between-data-sets"><i class="fa fa-check"></i><b>3.6</b> Switching between data sets</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#temporarily-preserving-and-restoring-data"><i class="fa fa-check"></i><b>3.6.1</b> Temporarily preserving and restoring data</a></li>
+<li class="chapter" data-level="3.6.2" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#frames"><i class="fa fa-check"></i><b>3.6.2</b> Frames</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#exercise-1"><i class="fa fa-check"></i><b>3.7</b> Exercise 1</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="data-management.html"><a href="data-management.html"><i class="fa fa-check"></i><b>4</b> Data Management</a><ul>
+<li class="chapter" data-level="4" data-path="data-management.html"><a href="data-management.html"><i class="fa fa-check"></i><b>4</b> Data Management</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="data-management.html"><a href="data-management.html#referring-to-variables"><i class="fa fa-check"></i><b>4.1</b> Referring to variables</a></li>
 <li class="chapter" data-level="4.2" data-path="data-management.html"><a href="data-management.html#describing-the-data"><i class="fa fa-check"></i><b>4.2</b> Describing the data</a></li>
 <li class="chapter" data-level="4.3" data-path="data-management.html"><a href="data-management.html#compressing-data"><i class="fa fa-check"></i><b>4.3</b> Compressing data</a></li>
 <li class="chapter" data-level="4.4" data-path="data-management.html"><a href="data-management.html#exercise-2"><i class="fa fa-check"></i><b>4.4</b> Exercise 2</a></li>
-<li class="chapter" data-level="4.5" data-path="data-management.html"><a href="data-management.html#labels"><i class="fa fa-check"></i><b>4.5</b> Labels</a><ul>
+<li class="chapter" data-level="4.5" data-path="data-management.html"><a href="data-management.html#labels"><i class="fa fa-check"></i><b>4.5</b> Labels</a>
+<ul>
 <li class="chapter" data-level="4.5.1" data-path="data-management.html"><a href="data-management.html#labeling-variables"><i class="fa fa-check"></i><b>4.5.1</b> Labeling variables</a></li>
 <li class="chapter" data-level="4.5.2" data-path="data-management.html"><a href="data-management.html#labeling-values"><i class="fa fa-check"></i><b>4.5.2</b> Labeling values</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="data-management.html"><a href="data-management.html#managing-variables"><i class="fa fa-check"></i><b>4.6</b> Managing variables</a><ul>
+<li class="chapter" data-level="4.6" data-path="data-management.html"><a href="data-management.html#managing-variables"><i class="fa fa-check"></i><b>4.6</b> Managing variables</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="data-management.html"><a href="data-management.html#renaming-variables"><i class="fa fa-check"></i><b>4.6.1</b> Renaming variables</a></li>
 <li class="chapter" data-level="4.6.2" data-path="data-management.html"><a href="data-management.html#changing-variable-ordering"><i class="fa fa-check"></i><b>4.6.2</b> Changing variable ordering</a></li>
 </ul></li>
@@ -138,47 +156,71 @@
 <li class="chapter" data-level="4.8" data-path="data-management.html"><a href="data-management.html#summarizing-the-data"><i class="fa fa-check"></i><b>4.8</b> Summarizing the data</a></li>
 <li class="chapter" data-level="4.9" data-path="data-management.html"><a href="data-management.html#exercise-4"><i class="fa fa-check"></i><b>4.9</b> Exercise 4</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>5</b> Data Manipulation</a><ul>
+<li class="chapter" data-level="5" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>5</b> Data Manipulation</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="data-manipulation.html"><a href="data-manipulation.html#restricting-commands-to-subsets"><i class="fa fa-check"></i><b>5.1</b> Restricting commands to subsets</a></li>
-<li class="chapter" data-level="5.2" data-path="data-manipulation.html"><a href="data-manipulation.html#generating-new-variables"><i class="fa fa-check"></i><b>5.2</b> Generating new variables</a><ul>
+<li class="chapter" data-level="5.2" data-path="data-manipulation.html"><a href="data-manipulation.html#generating-new-variables"><i class="fa fa-check"></i><b>5.2</b> Generating new variables</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#creating-dummies"><i class="fa fa-check"></i><b>5.2.1</b> Creating dummies</a></li>
 <li class="chapter" data-level="5.2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#hidden-variables"><i class="fa fa-check"></i><b>5.2.2</b> Hidden variables</a></li>
 <li class="chapter" data-level="5.2.3" data-path="data-manipulation.html"><a href="data-manipulation.html#extensions-to-generate"><i class="fa fa-check"></i><b>5.2.3</b> Extensions to generate</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="data-manipulation.html"><a href="data-manipulation.html#replacing-existing-variables"><i class="fa fa-check"></i><b>5.3</b> Replacing existing variables</a><ul>
+<li class="chapter" data-level="5.3" data-path="data-manipulation.html"><a href="data-manipulation.html#replacing-existing-variables"><i class="fa fa-check"></i><b>5.3</b> Replacing existing variables</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="data-manipulation.html"><a href="data-manipulation.html#conditional-variable-generation"><i class="fa fa-check"></i><b>5.3.1</b> Conditional variable generation</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="data-manipulation.html"><a href="data-manipulation.html#more-complicated-replaces"><i class="fa fa-check"></i><b>5.4</b> More complicated replaces</a></li>
-<li class="chapter" data-level="5.5" data-path="data-manipulation.html"><a href="data-manipulation.html#subsetting"><i class="fa fa-check"></i><b>5.5</b> Subsetting</a><ul>
+<li class="chapter" data-level="5.5" data-path="data-manipulation.html"><a href="data-manipulation.html#subsetting"><i class="fa fa-check"></i><b>5.5</b> Subsetting</a>
+<ul>
 <li class="chapter" data-level="5.5.1" data-path="data-manipulation.html"><a href="data-manipulation.html#repeat-commands-on-subsets"><i class="fa fa-check"></i><b>5.5.1</b> Repeat commands on subsets</a></li>
 <li class="chapter" data-level="5.5.2" data-path="data-manipulation.html"><a href="data-manipulation.html#discarding-data"><i class="fa fa-check"></i><b>5.5.2</b> Discarding data</a></li>
 </ul></li>
 <li class="chapter" data-level="5.6" data-path="data-manipulation.html"><a href="data-manipulation.html#dealing-with-duplicates"><i class="fa fa-check"></i><b>5.6</b> Dealing with duplicates</a></li>
 <li class="chapter" data-level="5.7" data-path="data-manipulation.html"><a href="data-manipulation.html#sorting"><i class="fa fa-check"></i><b>5.7</b> Sorting</a></li>
-<li class="chapter" data-level="5.8" data-path="data-manipulation.html"><a href="data-manipulation.html#working-with-strings-and-categorical-variables"><i class="fa fa-check"></i><b>5.8</b> Working with strings and categorical variables</a><ul>
+<li class="chapter" data-level="5.8" data-path="data-manipulation.html"><a href="data-manipulation.html#working-with-strings-and-categorical-variables"><i class="fa fa-check"></i><b>5.8</b> Working with strings and categorical variables</a>
+<ul>
 <li class="chapter" data-level="5.8.1" data-path="data-manipulation.html"><a href="data-manipulation.html#converting-between-string-and-numeric"><i class="fa fa-check"></i><b>5.8.1</b> Converting between string and numeric</a></li>
 <li class="chapter" data-level="5.8.2" data-path="data-manipulation.html"><a href="data-manipulation.html#converting-strings-into-labeled-numbers"><i class="fa fa-check"></i><b>5.8.2</b> Converting strings into labeled numbers</a></li>
 <li class="chapter" data-level="5.8.3" data-path="data-manipulation.html"><a href="data-manipulation.html#string-manipulation"><i class="fa fa-check"></i><b>5.8.3</b> String manipulation</a></li>
 </ul></li>
 <li class="chapter" data-level="5.9" data-path="data-manipulation.html"><a href="data-manipulation.html#exercise-5"><i class="fa fa-check"></i><b>5.9</b> Exercise 5</a></li>
-<li class="chapter" data-level="5.10" data-path="data-manipulation.html"><a href="data-manipulation.html#merging-files"><i class="fa fa-check"></i><b>5.10</b> Merging Files</a><ul>
+<li class="chapter" data-level="5.10" data-path="data-manipulation.html"><a href="data-manipulation.html#merging-files"><i class="fa fa-check"></i><b>5.10</b> Merging Files</a>
+<ul>
 <li class="chapter" data-level="5.10.1" data-path="data-manipulation.html"><a href="data-manipulation.html#appending-files"><i class="fa fa-check"></i><b>5.10.1</b> Appending Files</a></li>
 <li class="chapter" data-level="5.10.2" data-path="data-manipulation.html"><a href="data-manipulation.html#match-merging-data"><i class="fa fa-check"></i><b>5.10.2</b> Match-merging Data</a></li>
 </ul></li>
 <li class="chapter" data-level="5.11" data-path="data-manipulation.html"><a href="data-manipulation.html#reshaping-files"><i class="fa fa-check"></i><b>5.11</b> Reshaping Files</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="programming.html"><a href="programming.html"><i class="fa fa-check"></i><b>6</b> Programming</a><ul>
-<li class="chapter" data-level="6.1" data-path="programming.html"><a href="programming.html#macros"><i class="fa fa-check"></i><b>6.1</b> Macros</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="programming.html"><a href="programming.html#class-and-return"><i class="fa fa-check"></i><b>6.1.1</b> Class and Return</a></li>
+<li class="chapter" data-level="6" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html"><i class="fa fa-check"></i><b>6</b> Programming &amp; Advanced Features</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#macros"><i class="fa fa-check"></i><b>6.1</b> Macros</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#class-and-return"><i class="fa fa-check"></i><b>6.1.1</b> Class and Return</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="programming.html"><a href="programming.html#loops"><i class="fa fa-check"></i><b>6.2</b> Loops</a></li>
-<li class="chapter" data-level="6.3" data-path="programming.html"><a href="programming.html#suppressing-output-and-errors"><i class="fa fa-check"></i><b>6.3</b> Suppressing output and errors</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="programming.html"><a href="programming.html#capturing-an-error"><i class="fa fa-check"></i><b>6.3.1</b> Capturing an error</a></li>
-<li class="chapter" data-level="6.3.2" data-path="programming.html"><a href="programming.html#quieting-the-output"><i class="fa fa-check"></i><b>6.3.2</b> Quieting the output</a></li>
+<li class="chapter" data-level="6.2" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#variable-lists"><i class="fa fa-check"></i><b>6.2</b> Variable Lists</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#initialization-of-variable-lists"><i class="fa fa-check"></i><b>6.2.1</b> Initialization of Variable Lists</a></li>
+<li class="chapter" data-level="6.2.2" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#viewing-lists"><i class="fa fa-check"></i><b>6.2.2</b> Viewing lists</a></li>
+<li class="chapter" data-level="6.2.3" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#user-variable-lists"><i class="fa fa-check"></i><b>6.2.3</b> User Variable Lists</a></li>
+<li class="chapter" data-level="6.2.4" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#dropping-variable-list"><i class="fa fa-check"></i><b>6.2.4</b> Dropping variable list</a></li>
+<li class="chapter" data-level="6.2.5" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#using-variable-lists"><i class="fa fa-check"></i><b>6.2.5</b> Using Variable Lists</a></li>
+<li class="chapter" data-level="6.2.6" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#stored-statistics"><i class="fa fa-check"></i><b>6.2.6</b> Stored Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#linking-data-sets-1"><i class="fa fa-check"></i><b>6.3</b> Linking data sets</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#working-with-linked-frames"><i class="fa fa-check"></i><b>6.3.1</b> Working with linked frames</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#loops"><i class="fa fa-check"></i><b>6.4</b> Loops</a></li>
+<li class="chapter" data-level="6.5" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#suppressing-output-and-errors"><i class="fa fa-check"></i><b>6.5</b> Suppressing output and errors</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#capturing-an-error"><i class="fa fa-check"></i><b>6.5.1</b> Capturing an error</a></li>
+<li class="chapter" data-level="6.5.2" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#quieting-the-output"><i class="fa fa-check"></i><b>6.5.2</b> Quieting the output</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>7</b> Appendix</a><ul>
-<li class="chapter" data-level="7.1" data-path="appendix.html"><a href="appendix.html#solutions"><i class="fa fa-check"></i><b>7.1</b> Solutions</a><ul>
+<li class="chapter" data-level="7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>7</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="appendix.html"><a href="appendix.html#solutions"><i class="fa fa-check"></i><b>7.1</b> Solutions</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="appendix.html"><a href="appendix.html#exercise-1-solution"><i class="fa fa-check"></i><b>7.1.1</b> Exercise 1 Solution</a></li>
 <li class="chapter" data-level="7.1.2" data-path="appendix.html"><a href="appendix.html#exercise-2-solution"><i class="fa fa-check"></i><b>7.1.2</b> Exercise 2 Solution</a></li>
 <li class="chapter" data-level="7.1.3" data-path="appendix.html"><a href="appendix.html#exercise-3-solution"><i class="fa fa-check"></i><b>7.1.3</b> Exercise 3 Solution</a></li>
@@ -203,7 +245,7 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-management" class="section level1">
+<div id="data-management" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Data Management</h1>
 <p>
 Throughout this chapter, we’ll be using the “auto” data set which is distributed with Stata. It can be loaded via
@@ -249,13 +291,13 @@ You’ll notice that there are no statistical questions here - we’re not even 
 <p>
 In this chapter we’ll go over various tools and commands you can use to answer these questions (and more) and overall to gain a familiarity with the logistics of your data.
 </p>
-<div id="referring-to-variables" class="section level2">
+<div id="referring-to-variables" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Referring to variables</h2>
 <p>
 When we discussed <a href="basics.html#basic-command-syntax">basic command syntax</a>, we said that the optional list of variables can include any number of variables (for some commands). Writing out all the variables can get very tedious as the number of variables increases. Thankfully there are two alternatives.
 </p>
 <p>
-First, we can use the wild card <code>*</code><a href="appendix.html#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. For example, we could refer to the variables “turn” and “trunk” as <code>t*</code>, as both variables start with “t” and are followed by anything. However, be careful, as this would also match variables such as <code>turnips</code>, <code>tprice</code>, <code>t</code>, etc, if any such variables existed. It can also be used in the middle or beginning, e.g.:
+First, we can use the wild card <code>*</code><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. For example, we could refer to the variables “turn” and “trunk” as <code>t*</code>, as both variables start with “t” and are followed by anything. However, be careful, as this would also match variables such as <code>turnips</code>, <code>tprice</code>, <code>t</code>, etc, if any such variables existed. It can also be used in the middle or beginning, e.g.:
 </p>
 <ul>
 <li>
@@ -291,7 +333,7 @@ r(111);
 Be very careful with this approach. I only recommend it’s use when exploring the data using the Command window; when writing a Do-file, use the full variable name to prevent errors!
 </p>
 </div>
-<div id="describing-the-data" class="section level2">
+<div id="describing-the-data" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Describing the data</h2>
 <p>
 The first command you should run is <code>describe</code>.
@@ -326,7 +368,7 @@ Sorted by: foreign
 This displays a large amount of information, so let’s break in down.
 </p>
 <p>
-First, the header displays general data set information - the number of observations (<code>obs</code>, the number of rows) and variables (<code>vars</code>), as well as the file size<a href="appendix.html#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.
+First, the header displays general data set information - the number of observations (<code>obs</code>, the number of rows) and variables (<code>vars</code>), as well as the file size<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.
 </p>
 <p>
 Next, there is a table listing each variable in the data and some information about them. The “storage type” can be one of <code>byte</code>, <code>int</code>, <code>long</code>, <code>float</code>, <code>double</code>; all of which are simply numbers. We’ll touch on the differences between these when we discuss <a href="data-management.html#compressing-data"><code>compress</code></a>, but for now they all represent numeric variables. String variables are represented as <code>str##</code> where the <code>##</code> represent the number of characters that the string can be, e.g. <code>str18</code> shows that <code>make</code> has a maximum of 18 letters. (This limit is irrelevant, again, see <a href="data-management.html#compressing-data"><code>compress</code></a> for details.)
@@ -382,7 +424,7 @@ mpg           trunk         turn          foreign
 
 </code></pre>
 </div>
-<div id="compressing-data" class="section level2">
+<div id="compressing-data" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Compressing data</h2>
 <p>
 As mentioned <a href="data-management.html#describing-the-data">above</a>, there are different ways to store a number variable, such as <code>byte</code> and <code>long</code>. The various options take more space to save - types which take less space can store only smaller numbers whereas types that take more space can store larger numbers. For example, a number stored as a byte can only take on values between -127 and 100 and only integers (e.g. not 2.5) whereas a number stored as float can store numbers up to (1.7x10^38) with up to 38 decimal places. Strings operate similarly; a string variable with 20 characters would store “abc” as 17 blank characters followed by the “abc”.
@@ -414,7 +456,7 @@ We see here a very modest saving (370 bytes, about 12%), but sometimes you can s
 Don’t be afraid of artificially restricting yourself going forward; if one of your values exceeds the limitations its type supports, Stata will automatically change types. So don’t hesitate to run <code>compress</code> when loading new data or after some manipulations.
 </p>
 </div>
-<div id="exercise-2" class="section level2">
+<div id="exercise-2" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Exercise 2</h2>
 <ol>
 <li>
@@ -434,7 +476,7 @@ What variables (if any) are numeric and what variables (if any) are strings?
 </li>
 </ol>
 </div>
-<div id="labels" class="section level2">
+<div id="labels" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Labels</h2>
 <p>
 A raw data set is very sparse on context. In addition to the data itself, it will have at most a variable name, which in Stata cannot include spaces and is limited to 32 characters. All other context associated with the data must either be documented in a data dictionary or exist in the recollection of the analyst.
@@ -442,7 +484,7 @@ A raw data set is very sparse on context. In addition to the data itself, it wil
 <p>
 In an Excel file, to get around this, you might add additional content to the sheet outside of the raw data - a note here, a subtitle there, etc. However, Stata does not allow such arbitrary storage. In contrast, Stata allows you to directly <strong>label</strong> parts of the data with context information which will be displayed in the appropriate Results, to make Stata output much easier to read as well as removing the need for an external data dictionary.
 </p>
-<div id="labeling-variables" class="section level3">
+<div id="labeling-variables" class="section level3" number="4.5.1">
 <h3><span class="header-section-number">4.5.1</span> Labeling variables</h3>
 <p>
 Variables names, as mentioned, are limited to 32 characters and do not allow spaces (or several other special characters). This is to encourage you to choose short, simple, and memorable variable names, since you’ll likely be typing them a lot!
@@ -509,10 +551,10 @@ turn            byte    %8.0g
 
 </code></pre>
 </div>
-<div id="labeling-values" class="section level3">
+<div id="labeling-values" class="section level3" number="4.5.2">
 <h3><span class="header-section-number">4.5.2</span> Labeling values</h3>
 <p>
-It is tempting to store categorical variables as strings. If you ask, for example, for someone’s state of residence, you might store the answers as “MI”, “OH”, “FL”, etc. However, Stata (like most statistical software) cannot handle string variables.<a href="appendix.html#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> A much better way to store this data would be to assign each state a numerical value, say MI = 1, OH = 2, FL = 3, etc, then keep a data dictionary linking the values to the labels they represent.
+It is tempting to store categorical variables as strings. If you ask, for example, for someone’s state of residence, you might store the answers as “MI”, “OH”, “FL”, etc. However, Stata (like most statistical software) cannot handle string variables.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> A much better way to store this data would be to assign each state a numerical value, say MI = 1, OH = 2, FL = 3, etc, then keep a data dictionary linking the values to the labels they represent.
 </p>
 <p>
 Stata allows you to store this value labels information within the data set, such that whenever the values are output, the labels are printed instead. Let’s take a look at the <code>foreign</code> variable. This variable takes on two levels, and we can tabulate it to see how many cars are in each category.
@@ -652,12 +694,12 @@ This will <em>not</em> remove the value labels from any variables, but they will
 </p>
 </div>
 </div>
-<div id="managing-variables" class="section level2">
+<div id="managing-variables" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Managing variables</h2>
 <p>
 In Stata, managing the names and order of variables is important to make entering commands easier due to the <a href="data-management.html#referring-to-variables">shortcuts for referring to variables</a>. Recall that variables can be referred to using wildcards (e.g. <code>a*</code> to include <code>age</code>, <code>address</code> or <code>a10</code>, or using <code>var1-var10</code> to include all variables between <code>var1</code> and <code>var10</code> as they are ordered). Of course, you may also want to rename or re-order variables for other reasons such as making the data easier to look at.
 </p>
-<div id="renaming-variables" class="section level3">
+<div id="renaming-variables" class="section level3" number="4.6.1">
 <h3><span class="header-section-number">4.6.1</span> Renaming variables</h3>
 <p>
 To rename variables:
@@ -715,7 +757,7 @@ MPG           TRUNK         TURN          FOREIGN
 
 </code></pre>
 </div>
-<div id="changing-variable-ordering" class="section level3">
+<div id="changing-variable-ordering" class="section level3" number="4.6.2">
 <h3><span class="header-section-number">4.6.2</span> Changing variable ordering</h3>
 <p>
 The <code>order</code> command takes a list of variables and moves them to the front/end/before a certain variable/after a certain variable. The options <code>first</code>, <code>last</code>, <code>before(&lt;variable&gt;)</code> and <code>after(&lt;variable&gt;)</code> control this.
@@ -744,7 +786,7 @@ price         length        trunk         weight
 </code></pre>
 </div>
 </div>
-<div id="exercise-3" class="section level2">
+<div id="exercise-3" class="section level2" number="4.7">
 <h2><span class="header-section-number">4.7</span> Exercise 3</h2>
 <p>
 If you’ve changed to a different data set, load “census9” back up with <code>webuse</code>.
@@ -786,7 +828,7 @@ Save the data, replacing the version you created in step 1.
 </li>
 </ol>
 </div>
-<div id="summarizing-the-data" class="section level2">
+<div id="summarizing-the-data" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Summarizing the data</h2>
 <p>
 While these notes will not cover anything statistical, it can be handy from a data management perspective to look at some summary statistics, mostly to identify problematic variables. Among other things, we can try and detect
@@ -832,7 +874,7 @@ displacement |         74    197.2973    91.83722         79        425
 
 </code></pre>
 <p>
-The table reports the total number of non-missing values (<code>make</code> appears to be entirely missing because it is non-numeric), the mean (the average value), the standard deviation (a measure of how spread out the data is) and the minimum and maximum non-missing<a href="appendix.html#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> values observed.
+The table reports the total number of non-missing values (<code>make</code> appears to be entirely missing because it is non-numeric), the mean (the average value), the standard deviation (a measure of how spread out the data is) and the minimum and maximum non-missing<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> values observed.
 </p>
 <p>
 Here’s some suggestions of how to look at these values.
@@ -993,7 +1035,7 @@ Issues with date variables.
 </li>
 </ul>
 </div>
-<div id="exercise-4" class="section level2">
+<div id="exercise-4" class="section level2" number="4.9">
 <h2><span class="header-section-number">4.9</span> Exercise 4</h2>
 <p>
 Using <a href="data-management.html#summarizing-the-data"><code>summarize</code> and <code>codebook</code></a> to explore the “census9” data and answer the following questions:
@@ -1011,6 +1053,15 @@ Are there any problems with the data?
 </ol>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>This is the reason why <code>*</code> as a comment does not work in the middle of a line (and we use <code>//</code> instead).<a href="data-management.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>Reported in bytes. Roughly 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, 1000 megabytes = 1 gigabyte.<a href="data-management.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>In the few situations where it can, it doesn’t handle them cleanly.<a href="data-management.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>As we discuss <a href="data-manipulation.html#conditional-variable-generation">later</a>, in Stata, missing values (represented by <code>.</code> in the data) are considered to be higher than any other number (so 99999 &lt; .).<a href="data-management.html#fnref7" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
@@ -1044,6 +1095,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

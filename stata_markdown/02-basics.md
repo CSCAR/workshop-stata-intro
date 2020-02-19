@@ -35,24 +35,19 @@ directory. We will cover examples of changing the working directory.
 
 ^#^^#^ One Data
 
-One functionality where Stata differs than most other statistical or data analysis software is that Stata can only have a single data set open at a
-time. (You can open a second instance of Stata to open a second data set, but the two instances cannot communicate.)
+One functionality where Stata differs than most other statistical or data analysis software is that Stata can only work with a single data set at a
+time.
 
 Any command you run knows to operate on the data set you have open. For example, there is a command [`summarize`][summarizing the data] which provides
 summary information about variables. The command is simply `summarize`, there is no need to direct it towards a specific data set.
 
 If you have multiple data sets you need to work with, you can either
 
-1. Switch between the two data sets as needed. This can be burdensome, though tools such as [`preserve`][Temporarily preserving and restoring data]
-   help greatly.
+1. Switch between the two data sets as needed. This can be burdensome, though tools such as [`preserve`][Temporarily preserving and restoring data] or
+   [`frames`][Frames] help greatly.
 
 2. Merge the data sets, the better option. We'll discuss [merging][merging files] towards the end of the course.
 
-^#^^#^^#^ Frames
-
-Stata 16 has introduced the concept of ["frames"](https://www.stata.com/new-in-stata/multiple-datasets-in-memory/) which allows you to work with more
-than one data set at a time in a limited capacity. We will not be covering this functionality in these notes at this time; but see an upcoming set of
-notes on Stata 16's new features.
 
 ^#^^#^ Give Stata a command
 

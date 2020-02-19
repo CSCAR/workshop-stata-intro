@@ -42,11 +42,9 @@ In addition to the data sets distributed with Stata, Stata also makes available 
 with the `webuse` command. These data sets are used as examples in the Manual and can be seen listed
 as [http://www.stata-press.com/data/r16/](http://www.stata-press.com/data/r16/).
 
-~~~~
-<<dd_do>>
+```
 webuse hiway
-<</dd_do>>
-~~~~
+```
 
 `webuse` supports the `clear` option as well.
 
@@ -59,6 +57,8 @@ As you may have deduced from the `sysuse` and `webuse` commands above, the comma
 ```
 use <filename>
 ```
+
+
 
 As discussed in the [working directory][working directory] section, Stata can see only files in its working directory, so only the name of the file
 needs to be passed. If the file exists in a different directory, you will need to give the full (or relative path). For example, if your working
@@ -253,10 +253,14 @@ Finally, see if you can open the data in the other software and export it into C
 If all else fails, there is software Stat Transfer, https://www.stattransfer.com, which can transfer between all sorts of formats with a click, but is
 not free. Your department or organization may offer access to it.
 
-^#^^#^ Temporarily preserving and restoring data
+^#^^#^ Switching between data sets
 
-Along with the [one data][one data] principal, if you wished to modify a data set temporarily, say to [remove][discarding data] some subset of your
-observations, it must be done destructively. One workflow to use would be:
+Here we'll discuss two ways to switch between data sets. Later we'll discuss the third way to work with multiple data sets, [merging][Merging Files].
+
+^#^^#^^#^ Temporarily preserving and restoring data
+
+Say you want to carry out a destructive operation on your data, temporarily. This could be either to close your data and load another, or to make a
+change to the current data.For example, say you want to [remove][discarding data] some subset of your observations. One workflow to use would be:
 
 ```
 sysuse auto
@@ -289,6 +293,101 @@ restore, not
 
 One thing to note about the use of `preserve` and `restore` in Do-files: If you run a chunk of commands which include a `preserve` statement, after
 the code executes `restore` is automatically run *even if `restore` was not in the set of commands you ran*!
+
+^#^^#^^#^ Frames
+
+Starting in Stata 16, Stata can load multiple data sets into different "frames", though you still work with a single data set at a time. Each frame
+has a name; when you first open Stata the frame you start with is named "`default`".
+
+~~~~
+<<dd_do>>
+frame
+<</dd_do>>
+~~~~
+
+The "`default`" frame is nothing special; it's simply the name when you open a fresh version of Stata. You can create a new frame via `frame create`,
+
+~~~~
+<<dd_do>>
+frame create newframe
+<</dd_do>>
+~~~~
+
+and move between frames via `frame change` or `cwf`.
+
+~~~~
+<<dd_do>>
+cwf newframe
+frame
+cwf default
+<</dd_do>>
+~~~~
+
+If we look at all frames with `frame dir`,
+
+~~~~
+<<dd_do>>
+frame dir
+<</dd_do>>
+~~~~
+
+we can see that the default frame has the most recent data we loaded, the `auto` data. We could switch to the `newframe` and load a separate data set if we wanted.
+
+~~~~
+<<dd_do>>
+cwf newframe
+sysuse bplong
+frame dir
+<</dd_do>>
+~~~~
+
+Note that commands operate on our current frame, so calling `describe` will describe "bplong" since we're still in newframe.
+
+~~~~
+<<dd_do>>
+describe, short
+<</dd_do>>
+~~~~
+
+We can run commands on the other frame either by changing to that frame with `cwf`, or by using the `frame ___:` prefix:
+
+~~~~
+<<dd_do>>
+frame default: describe, short
+<</dd_do>>
+~~~~
+
+^#^^#^^#^^#^ Dropping frames
+
+When you load a data set, it gets loaded into your computer's memory. If you keep creating new frames and loading data, you can very quickly run out of memory!
+
+Use `frame drop` to dispose of old frames.
+
+~~~~
+<<dd_do>>
+frame dir
+frame drop default
+frame dir
+<</dd_do>>
+~~~~
+
+^#^^#^^#^^#^ Copying data into frames
+
+Often you may want to create a `collapse`'d or otherwise modified version of your current data. You can use `frame copy` to create a duplicate which you can then destroy.
+
+~~~~
+<<dd_do>>
+frame copy newframe newframe2
+frame newframe2: collapse (mean) bp, by(patient)
+frame dir
+<</dd_do>>
+~~~~
+
+Note that you cannot copy into an existing frame; you must either delete the old frame or copy into a new name.
+
+^#^^#^^#^^#^ Linking data sets
+
+We're not going to go into it now, but please see the [section][Linking data sets] in the [Programming & Advanced Features] section for details. You can link data sets between frames to either enable moving variables across frames, or if the data are at different units of analysis (e.g. a patient file and a clinic file), to easily merge the files together.
 
 ^#^^#^ Exercise 1
 

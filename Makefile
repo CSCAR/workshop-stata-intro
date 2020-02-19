@@ -17,7 +17,7 @@ stata_markdown/%.Rmd: stata_markdown/%.md
 # This line makes all links open in new windows.
 	@sed -i '' 's|href="|target="_blank" href="|g' $@
 
-_book/index.html: index.Rmd $(Stata_Rmd)
+docs/index.html: index.Rmd $(Stata_Rmd)
 	@echo "$< -> $@"
 #	Get a list of Rmd files; we'll be temporarily copying them to the main directory
 	@$(eval TMPPATH := $(shell find stata_markdown -name "*.Rmd"))
@@ -30,14 +30,10 @@ _book/index.html: index.Rmd $(Stata_Rmd)
 	@rm -rf $(TMP)
 	@rm -rf *.svg
 
-default: $(Stata_Rmd)  _book/index.html
+default: $(Stata_Rmd)  docs/index.html
 
 clean:
 	@git clean -xdf
 
 open:
-	@open _book/index.html
-
-publish:
-	@cp -r _book/* ~/repositories/josherrickson.github.io/stata1/.
-	@cp images/* ~/repositories/josherrickson.github.io/images/.
+	@open docs/index.html
