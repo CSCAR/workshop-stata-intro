@@ -20,8 +20,9 @@ These notes are published in [bookdown](https://bookdown.org/) format which enab
 [markdown](https://daringfireball.net/projects/markdown/), [R](https://www.r-project.org/), and for these notes specifically,
 [Stata](http://www.stata.com/)'s [dyndoc](http://www.stata.com/manuals/pdyndoc.pdf), which was added in Stata 15).
 
-The table of contents is found on the left hand side, with subsections expanding below the current section. At the top of the page are three icons,
-from left to right they 1) Hide/show the table of contents, 2) Search this document, and 3) Change the font the book is displayed in.
+The table of contents is found on the left hand side, with subsections expanding below the current section. At the top of the page are four icons,
+from left to right they 1) Hide/show the table of contents, 2) Search this document, 3) Change the font the book is displayed in, and 4) Display
+keyboard shortcuts.
 
 All images should link to full-size versions to see detail if needed.
 

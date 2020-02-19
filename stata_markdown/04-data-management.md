@@ -155,7 +155,8 @@ automatically change types. So don't hesitate to run `compress` when loading new
 ^#^^#^ Exercise 2
 
 1. "census9" is accesible via [`webuse`][stata website data]. Load it.
-2. Spend a minute looking at the data. What does this data seem to represent? What variables do we have? (`describe` will come in handy here!)
+2. Spend a minute looking at the data. What does this data seem to represent? What variables do we have? ([`describe`][describing the data] will come
+   in handy here!)
 3. Are there any missing states?
 4. What variables (if any) are numeric and what variables (if any) are strings?
 5. [Compress][compressing data] the data. How much space is saved? Why do you think this is?

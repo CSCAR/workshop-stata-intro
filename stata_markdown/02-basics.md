@@ -171,6 +171,7 @@ analysis. Additionally you can easily save and/or share this command, allowing y
 There are several ways to start a new Do-file.
 
 - File -> New -> Do-file
+- Click the "Do-file Editor" button in the main window
 - You can enter the command:
 ```
 doedit
