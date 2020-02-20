@@ -29,6 +29,9 @@ docs/index.html: index.Rmd $(Stata_Rmd)
 #	Remove any files copies up
 	@rm -rf $(TMP)
 	@rm -rf *.svg
+	@mkdir -p docs/images
+	@rm -rf docs/images/*
+	@cp images/* docs/images/
 
 default: $(Stata_Rmd)  docs/index.html
 
