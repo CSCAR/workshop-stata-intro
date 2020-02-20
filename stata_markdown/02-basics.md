@@ -407,11 +407,10 @@ Similarly, when saving files, the working directory is the default choice.
 
 The working directory can be viewed with the `pwd` command (Print Working Directory)
 
-~~~~
-<<dd_do>>
-pwd
-<</dd_do>>
-~~~~
+```
+. pwd
+C:\Documents
+```
 
 You can change the working directory by passing a path to `cd` (Change Directory):
 
