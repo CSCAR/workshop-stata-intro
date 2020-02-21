@@ -24,7 +24,7 @@ When a user first opens Stata, there are five panes that will appear in the main
     - This pane allows variable properties and data-set properties to be managed. [Variable names][Renaming variables], [labels][labeling variables],
       [value labels][labeling values], [display formats][describing the data], and [storage types][describing the data] can be viewed and modified here.
 
-Each of these five panes will be nested within the main Stata session, which contains menus and tool bars available for users. There are additional
+Each of these five panes will be nested within the main Stata session, which contains menus and tool bars. There are additional
 windows that users can access from the Window menu, which include the Graph window (which will open when graphs have been created), the Viewer window
 (which is primarily used for [help][stata help] features and Stata news), the Data Editor window (for use when [viewing data sets][editing data
 manually]), and the Do-file Editor window (for use when writing [.do files][do-files]).
