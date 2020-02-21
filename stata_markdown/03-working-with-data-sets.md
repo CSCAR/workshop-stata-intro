@@ -133,7 +133,7 @@ When viewing the data, the color of each column's text provides information abou
 the data] what these types mean. Below, for the `auto` data, you can see the `make` variable is red, indicating a string, the `foreign` variable is
 blue indicating a variable with an attached [value label][labeling values] and the remainder of the variables are black for numeric.
 
-[![](../images/datacolors.png)](../images/datacolors.png)
+[![](./images/datacolors.png)](./images/datacolors.png)
 
 
 ^#^^#^ Saving data
