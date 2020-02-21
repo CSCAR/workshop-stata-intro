@@ -2,7 +2,7 @@
 
 ^#^^#^ The Stata Environment
 
-[![](./images/stata_main_screen.png)](./images/stata_main_screen.png)
+[![](../images/stata_main_screen.png)](../images/stata_main_screen.png)
 
 When a user first opens Stata, there are five panes that will appear in the main window:
 

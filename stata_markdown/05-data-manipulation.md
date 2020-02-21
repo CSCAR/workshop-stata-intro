@@ -934,7 +934,7 @@ A few notes:
 Different data formats are needed for various statistical methods. Stata prefers data in "Long" format, but also makes it easy to convert between Long
 and "Wide". Stata uses the `reshape` command to convert data formats.
 
-[![](./images/wide-vs-long.png)](./images/wide-vs-long.png)
+[![](../images/wide-vs-long.png)](../images/wide-vs-long.png)
 
 
 In this example, the wide format of the data has each row representing a single observation. The variables "X1", "X2" and "X3" are what make this
