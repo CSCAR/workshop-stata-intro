@@ -4,6 +4,10 @@
 
 [![](../images/stata_main_screen.png)](../images/stata_main_screen.png)
 
+[![](./images/stata_main_screen.png)](./images/stata_main_screen.png)
+
+[![](./stata1/images/stata_main_screen.png)](./stata1/images/stata_main_screen.png)
+
 When a user first opens Stata, there are five panes that will appear in the main window:
 
 - The Results Pane
