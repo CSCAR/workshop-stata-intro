@@ -1,4 +1,4 @@
-^#^ Basics
+^#^ The Basics of Stata
 
 ^#^^#^ The Stata Environment
 
