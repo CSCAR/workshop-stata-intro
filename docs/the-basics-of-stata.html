@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 The Basics of Stata | Introduction to Stata</title>
+  <meta name="description" content="Chapter 2 The Basics of Stata | Introduction to Stata" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 The Basics of Stata | Introduction to Stata" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 The Basics of Stata | Introduction to Stata" />
+  
+  
+  
+
+<meta name="author" content="CSCAR Staff" />
+
+
+<meta name="date" content="2020-09-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="working-with-data-sets.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="css/standard_html.css" type="text/css" />
+<link rel="stylesheet" href="css/book.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">Introduction to Stata</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#how-to-use-this-document"><i class="fa fa-check"></i><b>1.1</b> How to use this document</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#contact-information"><i class="fa fa-check"></i><b>1.2</b> Contact information</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#cscar"><i class="fa fa-check"></i><b>1.2.1</b> CSCAR</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i><b>1.3</b> Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html"><i class="fa fa-check"></i><b>2</b> The Basics of Stata</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#the-stata-environment"><i class="fa fa-check"></i><b>2.1</b> The Stata Environment</a></li>
+<li class="chapter" data-level="2.2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#one-data"><i class="fa fa-check"></i><b>2.2</b> One Data</a></li>
+<li class="chapter" data-level="2.3" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#give-stata-a-command"><i class="fa fa-check"></i><b>2.3</b> Give Stata a command</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#saving-results"><i class="fa fa-check"></i><b>2.3.1</b> Saving Results</a></li>
+<li class="chapter" data-level="2.3.2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#dyndoc"><i class="fa fa-check"></i><b>2.3.2</b> dyndoc</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#updating"><i class="fa fa-check"></i><b>2.4</b> Updating</a></li>
+<li class="chapter" data-level="2.5" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#installing-user-written-commands"><i class="fa fa-check"></i><b>2.5</b> Installing user-written commands</a></li>
+<li class="chapter" data-level="2.6" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#do-files"><i class="fa fa-check"></i><b>2.6</b> Do-files</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#comments"><i class="fa fa-check"></i><b>2.6.1</b> Comments</a></li>
+<li class="chapter" data-level="2.6.2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#version-control"><i class="fa fa-check"></i><b>2.6.2</b> Version control</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#exercise-0"><i class="fa fa-check"></i><b>2.7</b> Exercise 0</a></li>
+<li class="chapter" data-level="2.8" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#basic-command-syntax"><i class="fa fa-check"></i><b>2.8</b> Basic command syntax</a></li>
+<li class="chapter" data-level="2.9" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#stata-help"><i class="fa fa-check"></i><b>2.9</b> Stata Help</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#short-commands"><i class="fa fa-check"></i><b>2.9.1</b> Short commands</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#working-directory"><i class="fa fa-check"></i><b>2.10</b> Working directory</a>
+<ul>
+<li class="chapter" data-level="2.10.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#file-paths"><i class="fa fa-check"></i><b>2.10.1</b> File paths</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html"><i class="fa fa-check"></i><b>3</b> Working with Data Sets</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#built-in-data"><i class="fa fa-check"></i><b>3.1</b> Built-in data</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#stata-website-data"><i class="fa fa-check"></i><b>3.1.1</b> Stata Website Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#opening-data"><i class="fa fa-check"></i><b>3.2</b> Opening data</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#loading-subsets-of-the-data"><i class="fa fa-check"></i><b>3.2.1</b> Loading subsets of the data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#editing-data-manually"><i class="fa fa-check"></i><b>3.3</b> Editing data manually</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#colors-as-variable-type"><i class="fa fa-check"></i><b>3.3.1</b> Colors as variable type</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#saving-data"><i class="fa fa-check"></i><b>3.4</b> Saving data</a></li>
+<li class="chapter" data-level="3.5" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#importing-data"><i class="fa fa-check"></i><b>3.5</b> Importing data</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#importing-excel-data"><i class="fa fa-check"></i><b>3.5.1</b> Importing Excel data</a></li>
+<li class="chapter" data-level="3.5.2" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#importing-a-csv-file"><i class="fa fa-check"></i><b>3.5.2</b> Importing a CSV File</a></li>
+<li class="chapter" data-level="3.5.3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#importing-from-a-file-not-supported-directly-by-stata"><i class="fa fa-check"></i><b>3.5.3</b> Importing from a file not supported directly by Stata</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#switching-between-data-sets"><i class="fa fa-check"></i><b>3.6</b> Switching between data sets</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#temporarily-preserving-and-restoring-data"><i class="fa fa-check"></i><b>3.6.1</b> Temporarily preserving and restoring data</a></li>
+<li class="chapter" data-level="3.6.2" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#frames"><i class="fa fa-check"></i><b>3.6.2</b> Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#exercise-1"><i class="fa fa-check"></i><b>3.7</b> Exercise 1</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-management.html"><a href="data-management.html"><i class="fa fa-check"></i><b>4</b> Data Management</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-management.html"><a href="data-management.html#referring-to-variables"><i class="fa fa-check"></i><b>4.1</b> Referring to variables</a></li>
+<li class="chapter" data-level="4.2" data-path="data-management.html"><a href="data-management.html#describing-the-data"><i class="fa fa-check"></i><b>4.2</b> Describing the data</a></li>
+<li class="chapter" data-level="4.3" data-path="data-management.html"><a href="data-management.html#compressing-data"><i class="fa fa-check"></i><b>4.3</b> Compressing data</a></li>
+<li class="chapter" data-level="4.4" data-path="data-management.html"><a href="data-management.html#exercise-2"><i class="fa fa-check"></i><b>4.4</b> Exercise 2</a></li>
+<li class="chapter" data-level="4.5" data-path="data-management.html"><a href="data-management.html#labels"><i class="fa fa-check"></i><b>4.5</b> Labels</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="data-management.html"><a href="data-management.html#labeling-variables"><i class="fa fa-check"></i><b>4.5.1</b> Labeling variables</a></li>
+<li class="chapter" data-level="4.5.2" data-path="data-management.html"><a href="data-management.html#labeling-values"><i class="fa fa-check"></i><b>4.5.2</b> Labeling values</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="data-management.html"><a href="data-management.html#managing-variables"><i class="fa fa-check"></i><b>4.6</b> Managing variables</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="data-management.html"><a href="data-management.html#renaming-variables"><i class="fa fa-check"></i><b>4.6.1</b> Renaming variables</a></li>
+<li class="chapter" data-level="4.6.2" data-path="data-management.html"><a href="data-management.html#changing-variable-ordering"><i class="fa fa-check"></i><b>4.6.2</b> Changing variable ordering</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="data-management.html"><a href="data-management.html#exercise-3"><i class="fa fa-check"></i><b>4.7</b> Exercise 3</a></li>
+<li class="chapter" data-level="4.8" data-path="data-management.html"><a href="data-management.html#summarizing-the-data"><i class="fa fa-check"></i><b>4.8</b> Summarizing the data</a></li>
+<li class="chapter" data-level="4.9" data-path="data-management.html"><a href="data-management.html#exercise-4"><i class="fa fa-check"></i><b>4.9</b> Exercise 4</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>5</b> Data Manipulation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-manipulation.html"><a href="data-manipulation.html#restricting-commands-to-subsets"><i class="fa fa-check"></i><b>5.1</b> Restricting commands to subsets</a></li>
+<li class="chapter" data-level="5.2" data-path="data-manipulation.html"><a href="data-manipulation.html#generating-new-variables"><i class="fa fa-check"></i><b>5.2</b> Generating new variables</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#creating-dummies"><i class="fa fa-check"></i><b>5.2.1</b> Creating dummies</a></li>
+<li class="chapter" data-level="5.2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#hidden-variables"><i class="fa fa-check"></i><b>5.2.2</b> Hidden variables</a></li>
+<li class="chapter" data-level="5.2.3" data-path="data-manipulation.html"><a href="data-manipulation.html#extensions-to-generate"><i class="fa fa-check"></i><b>5.2.3</b> Extensions to generate</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="data-manipulation.html"><a href="data-manipulation.html#replacing-existing-variables"><i class="fa fa-check"></i><b>5.3</b> Replacing existing variables</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="data-manipulation.html"><a href="data-manipulation.html#conditional-variable-generation"><i class="fa fa-check"></i><b>5.3.1</b> Conditional variable generation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-manipulation.html"><a href="data-manipulation.html#more-complicated-replaces"><i class="fa fa-check"></i><b>5.4</b> More complicated replaces</a></li>
+<li class="chapter" data-level="5.5" data-path="data-manipulation.html"><a href="data-manipulation.html#subsetting"><i class="fa fa-check"></i><b>5.5</b> Subsetting</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="data-manipulation.html"><a href="data-manipulation.html#repeat-commands-on-subsets"><i class="fa fa-check"></i><b>5.5.1</b> Repeat commands on subsets</a></li>
+<li class="chapter" data-level="5.5.2" data-path="data-manipulation.html"><a href="data-manipulation.html#discarding-data"><i class="fa fa-check"></i><b>5.5.2</b> Discarding data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="data-manipulation.html"><a href="data-manipulation.html#dealing-with-duplicates"><i class="fa fa-check"></i><b>5.6</b> Dealing with duplicates</a></li>
+<li class="chapter" data-level="5.7" data-path="data-manipulation.html"><a href="data-manipulation.html#sorting"><i class="fa fa-check"></i><b>5.7</b> Sorting</a></li>
+<li class="chapter" data-level="5.8" data-path="data-manipulation.html"><a href="data-manipulation.html#working-with-strings-and-categorical-variables"><i class="fa fa-check"></i><b>5.8</b> Working with strings and categorical variables</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="data-manipulation.html"><a href="data-manipulation.html#converting-between-string-and-numeric"><i class="fa fa-check"></i><b>5.8.1</b> Converting between string and numeric</a></li>
+<li class="chapter" data-level="5.8.2" data-path="data-manipulation.html"><a href="data-manipulation.html#converting-strings-into-labeled-numbers"><i class="fa fa-check"></i><b>5.8.2</b> Converting strings into labeled numbers</a></li>
+<li class="chapter" data-level="5.8.3" data-path="data-manipulation.html"><a href="data-manipulation.html#string-manipulation"><i class="fa fa-check"></i><b>5.8.3</b> String manipulation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="data-manipulation.html"><a href="data-manipulation.html#exercise-5"><i class="fa fa-check"></i><b>5.9</b> Exercise 5</a></li>
+<li class="chapter" data-level="5.10" data-path="data-manipulation.html"><a href="data-manipulation.html#merging-files"><i class="fa fa-check"></i><b>5.10</b> Merging Files</a>
+<ul>
+<li class="chapter" data-level="5.10.1" data-path="data-manipulation.html"><a href="data-manipulation.html#appending-files"><i class="fa fa-check"></i><b>5.10.1</b> Appending Files</a></li>
+<li class="chapter" data-level="5.10.2" data-path="data-manipulation.html"><a href="data-manipulation.html#match-merging-data"><i class="fa fa-check"></i><b>5.10.2</b> Match-merging Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="data-manipulation.html"><a href="data-manipulation.html#reshaping-files"><i class="fa fa-check"></i><b>5.11</b> Reshaping Files</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html"><i class="fa fa-check"></i><b>6</b> Programming &amp; Advanced Features</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#macros"><i class="fa fa-check"></i><b>6.1</b> Macros</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#class-and-return"><i class="fa fa-check"></i><b>6.1.1</b> Class and Return</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#variable-lists"><i class="fa fa-check"></i><b>6.2</b> Variable Lists</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#initialization-of-variable-lists"><i class="fa fa-check"></i><b>6.2.1</b> Initialization of Variable Lists</a></li>
+<li class="chapter" data-level="6.2.2" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#viewing-lists"><i class="fa fa-check"></i><b>6.2.2</b> Viewing lists</a></li>
+<li class="chapter" data-level="6.2.3" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#user-variable-lists"><i class="fa fa-check"></i><b>6.2.3</b> User Variable Lists</a></li>
+<li class="chapter" data-level="6.2.4" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#dropping-variable-list"><i class="fa fa-check"></i><b>6.2.4</b> Dropping variable list</a></li>
+<li class="chapter" data-level="6.2.5" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#using-variable-lists"><i class="fa fa-check"></i><b>6.2.5</b> Using Variable Lists</a></li>
+<li class="chapter" data-level="6.2.6" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#stored-statistics"><i class="fa fa-check"></i><b>6.2.6</b> Stored Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#linking-data-sets"><i class="fa fa-check"></i><b>6.3</b> Linking data sets</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#working-with-linked-frames"><i class="fa fa-check"></i><b>6.3.1</b> Working with linked frames</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#loops"><i class="fa fa-check"></i><b>6.4</b> Loops</a></li>
+<li class="chapter" data-level="6.5" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#suppressing-output-and-errors"><i class="fa fa-check"></i><b>6.5</b> Suppressing output and errors</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#capturing-an-error"><i class="fa fa-check"></i><b>6.5.1</b> Capturing an error</a></li>
+<li class="chapter" data-level="6.5.2" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#quieting-the-output"><i class="fa fa-check"></i><b>6.5.2</b> Quieting the output</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>7</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="appendix.html"><a href="appendix.html#solutions"><i class="fa fa-check"></i><b>7.1</b> Solutions</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="appendix.html"><a href="appendix.html#exercise-1-solution"><i class="fa fa-check"></i><b>7.1.1</b> Exercise 1 Solution</a></li>
+<li class="chapter" data-level="7.1.2" data-path="appendix.html"><a href="appendix.html#exercise-2-solution"><i class="fa fa-check"></i><b>7.1.2</b> Exercise 2 Solution</a></li>
+<li class="chapter" data-level="7.1.3" data-path="appendix.html"><a href="appendix.html#exercise-3-solution"><i class="fa fa-check"></i><b>7.1.3</b> Exercise 3 Solution</a></li>
+<li class="chapter" data-level="7.1.4" data-path="appendix.html"><a href="appendix.html#exercise-4-solution"><i class="fa fa-check"></i><b>7.1.4</b> Exercise 4 Solution</a></li>
+<li class="chapter" data-level="7.1.5" data-path="appendix.html"><a href="appendix.html#exercise-5-solution"><i class="fa fa-check"></i><b>7.1.5</b> Exercise 5 Solution</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Stata</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="the-basics-of-stata" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> The Basics of Stata</h1>
+<div id="the-stata-environment" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> The Stata Environment</h2>
+<p>
+<a target="_blank" href="./images/stata_main_screen.png"><img src="images/stata_main_screen.png" alt="" /></a>
+</p>
+<p>
+When a user first opens Stata, there are five panes that will appear in the main window:
+</p>
+<ul>
+<li>
+The Results Pane
+<ul>
+<li>
+All commands which are run are echoed out here, as well as any output they produce. Not all commands produce output though most do (e.g. obtaining summaries of the data or running a statistical procedure). Items that appear in the results pane in <span style="color:blue">blue</span> are clickable.
+</li>
+</ul>
+</li>
+<li>
+The Command Pane
+<ul>
+<li>
+This pane is where users can interactively type Stata commands and submit them to Stata for processing. Everything that one can do in Stata is based on a set of Stata commands. Stata commands are case sensitive. All Stata commands and options are in lower case. When variables are used in any command, the variable names are also case sensitive.
+</li>
+</ul>
+</li>
+<li>
+The Variables Pane
+<ul>
+<li>
+This pane displays all of the variables in the data set that is currently open in Stata, and users can click on variable names in this pane to carry the variables over into Stata commands in the Command pane. Note that Stata allows only <a href="the-basics-of-stata.html#one-data">one data-set</a> to be open in a session.
+</li>
+</ul>
+</li>
+<li>
+The Review Pane
+<ul>
+<li>
+Stata will keep a running record of all Stata commands that have been submitted in the current session in this pane. Users can simply click on previous commands in this pane to recall them in the Command pane.
+</li>
+</ul>
+</li>
+<li>
+The Properties Pane
+<ul>
+<li>
+This pane allows variable properties and data-set properties to be managed. [Variable names][Renaming variables], [labels][labeling variables], [value labels][labeling values], [display formats][describing the data], and [storage types][describing the data] can be viewed and modified here.
+</li>
+</ul>
+</li>
+</ul>
+<p>
+Each of these five panes will be nested within the main Stata session, which contains menus and tool bars. There are additional windows that users can access from the Window menu, which include the Graph window (which will open when graphs have been created), the Viewer window (which is primarily used for <a href="the-basics-of-stata.html#stata-help">help</a> features and Stata news), the Data Editor window (for use when [viewing data sets][editing data
+manually]), and the Do-file Editor window (for use when writing <a href="the-basics-of-stata.html#do-files">.do files</a>).
+</p>
+<p>
+In the lower left-hand corner of the main Stata window (below the panes), there will be a directory displayed. This is known as the <a href="the-basics-of-stata.html#working-directory">working directory</a>, and is where Stata will look to find data files and other associated Stata files unless the user specifies another directory. We will cover examples of changing the working directory.
+</p>
+</div>
+<div id="one-data" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> One Data</h2>
+<p>
+One functionality where Stata differs than most other statistical or data analysis software is that Stata can only work with a single data set at a time.
+</p>
+<p>
+Any command you run knows to operate on the data set you have open. For example, there is a command [<code>summarize</code>][summarizing the data] which provides summary information about variables. The command is simply <code>summarize</code>, there is no need to direct it towards a specific data set.
+</p>
+<p>
+If you have multiple data sets you need to work with, you can either
+</p>
+<ol>
+<li>
+<p>
+Switch between the two data sets as needed. This can be burdensome, though tools such as [<code>preserve</code>][Temporarily preserving and restoring data] or [<code>frames</code>][Frames] help greatly.
+</p>
+</li>
+<li>
+<p>
+Merge the data sets, the better option. We’ll discuss [merging][merging files] towards the end of the course.
+</p>
+</li>
+</ol>
+</div>
+<div id="give-stata-a-command" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Give Stata a command</h2>
+<p>
+Let’s try running a Stata command. In the command pane, type (or copy and paste) the following:
+</p>
+<pre><code>version
+</code></pre>
+<p>
+The following should appear in the Results pane:
+</p>
+<pre><code>. version
+version 16.0
+
+</code></pre>
+<p>
+The first line proceeded by the <code>.</code> indicates the command that was written, <code>version</code>, and the rest is the output. Here, I am running Stata version 16.0 (your version may vary).
+</p>
+<p>
+In this document, if you see a single command without a period, it indicates something that was not run - either it’s not designed to be run (it’s fake code designed to illustrate a point), or more likely, the output is not interesting or unnecessary. If you instead see a Results output where the first line is the command prefaced by the <code>.</code>, that was run in Stata and only the Results are included since they include the command. The command can still be run, <em>but should be run without the <code>.</code></em><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.
+</p>
+<div id="saving-results" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Saving Results</h3>
+<p>
+Any output that appears in the Results pane (including the echoed commands and any errors) can be copied and pasted into another location, such as Word. In addition, if you highlight text and right-click, you also have the options:
+</p>
+<ul>
+<li>
+“Copy table”: Useful for exporting to Excel. This can be tempermental; if the selected table is less “regular”, this may not produce the best results. It is most useful for text which comes naturally as a table rather than results which are forced into a table for display purposes.
+</li>
+<li>
+“Copy table as HTML”: You can paste this into a plaintext editor (Notepad.exe or TextEdit, <em>not</em> Word) and save it as a *.html to produce a webpage. If you paste this into Excel you get a slightly different table than the layout for “Copy table” which may be more useful.
+</li>
+<li>
+“Copy as picture”: Does exactly what it says - equivalent to taking a screenshot. Very handy!
+</li>
+</ul>
+<p>
+There are a few commands that can be useful for saving results which we will not cover in this workshop, if you are interested, you can look into <a href="the-basics-of-stata.html#stata-help">the help</a> for them.
+</p>
+<ul>
+<li>
+<code>log</code>: Saves a file consisting of everything printed to the Results pane.
+</li>
+<li>
+<code>putexcel</code>: Adds to a spreadsheet specific strings or output.
+</li>
+<li>
+<code>outreg2</code>: A <a href="the-basics-of-stata.html#installing-user-written-commands">user-written</a> command to output the results of a model (e.g. regression) in a clean format.
+</li>
+</ul>
+</div>
+<div id="dyndoc" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> dyndoc</h3>
+<p>
+Version 15 of Stata introduced “dyndoc” which allows you to weave together narrative text and Stata code to produce a high-quality output (html, word or pdf). This document is written ([in part][how to use this document]) in dyndoc. It is extremely powerful but is well outside the mandate of this class. If you are interested in this functionality, I’d be happy to help.
+</p>
+</div>
+</div>
+<div id="updating" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Updating</h2>
+<p>
+If you have administrative access on your computer (e.g. if it is your personal machine, or your IT department has given you the ability), you can update Stata freely. Major point upgrades such as the newly released 16.0 require purchase and re-installation, but minor upgrades (such as the 14.1 and 14.2 updates) as well as minor internal updates are free.
+</p>
+<p>
+To check for updates, you can run
+</p>
+<pre><code>update query
+</code></pre>
+<p>
+If any updates are available (regardless of whether you ran a query first), you can obtain all updates with
+</p>
+<pre><code>update all
+</code></pre>
+<p>
+If you do not have administrative access on your computer, you’ll need to reach out to your IT administrators to update.
+</p>
+</div>
+<div id="installing-user-written-commands" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Installing user-written commands</h2>
+<p>
+In addition to built in commands, Stata supports user-written programs, know as “ado-files”<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Once installed, these user-written programs operate identically to any built-in command, with the caveat that they may not be quite as polished or complete since they’re volunteer written. Documentation is rarely up to <a href="the-basics-of-stata.html#stata-help">Stata standards</a> and often relegates details to a manuscript.
+</p>
+<p>
+We won’t be covering any ado-files in these notes, but if you wanted to install a program named <code>newcommand</code>:
+</p>
+<pre><code>ssc install newcommand
+</code></pre>
+<p>
+You can remove a program with
+</p>
+<pre><code>ssc uninstall newcommand
+</code></pre>
+<p>
+Finally, to see a list of all user-written programs you have installed, used
+</p>
+<pre><code>ado
+</code></pre>
+<p>
+<a href="the-basics-of-stata.html#updating">Updating Stata</a> will not update any ado-files, instead you can run
+</p>
+<pre><code>adoupdate
+</code></pre>
+<p>
+to list all available updates and
+</p>
+<pre><code>adoupdate, update
+</code></pre>
+<p>
+to perform all updates.
+</p>
+</div>
+<div id="do-files" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> Do-files</h2>
+<p>
+We <a href="the-basics-of-stata.html#give-stata-a-command">saw</a> that commands can be typed interactively, one command at a time, and the results immediately observed. From this, the output can be copied/exported/printed, or the results can be saved. However, a better paradigm would save all the commands run separately so that the analysis is <a target="_blank" href="https://ropensci.github.io/reproducibility-guide/sections/introduction/">reproducible</a>.
+</p>
+<p>
+For this purpose, Stata has Do-files (named because they are saved with the .do extension, such as <code>analysis.do</code>) which are scripts containing only commands and <a href="the-basics-of-stata.html#comments">comments</a>. We can then run any subset of the commands (including the entire file), re-running parts or all of the analysis. Additionally you can easily save and/or share this command, allowing yourself or a colleague to re-run the analysis.
+</p>
+<p>
+There are several ways to start a new Do-file.
+</p>
+<ul>
+<li>
+File -&gt; New -&gt; Do-file
+</li>
+<li>
+Click the “Do-file Editor” button in the main window
+</li>
+<li>
+You can enter the command:
+</li>
+</ul>
+<pre><code>doedit
+</code></pre>
+<ul>
+<li>
+If you select some commands in the Review pane, you can right click and choose “Send select to Do-file Editor”.
+</li>
+</ul>
+<p>
+For the last option there, note that performing that twice will create two separate Do-files instead of appending the commands. Instead, you can copy and paste from the Review pane to add to an existing Do-file.
+</p>
+<p>
+Let’s manually add some commands to a Do-file to see how to execute the commands. In a Do-file editor, enter the following
+</p>
+<pre><code>sysuse auto
+summarize price
+compress
+</code></pre>
+<p>
+Once the lines are in the editor, highlight the commands (you do not need to highlight the entire line, you merely need to ensure your selection includes part of every line you want run) and press the “Execute/Do” (on Windows) or “Do” (on Mac) button. You should see the following appear in your Results pane.
+</p>
+<pre><code>. sysuse auto
+(1978 Automobile Data)
+
+. summarize price
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       price |         74    6165.257    2949.496       3291      15906
+
+. compress
+  variable mpg was int now byte
+  variable rep78 was int now byte
+  variable trunk was int now byte
+  variable turn was int now byte
+  variable make was str18 now str17
+  (370 bytes saved)
+
+</code></pre>
+<p>
+We will cover in later sections what each of these commands does ([<code>sysuse</code>][built-in data], [<code>summarize</code>][summarizing the data], [<code>compress</code>][compressing data]).
+</p>
+<div id="comments" class="section level3" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> Comments</h3>
+<p>
+Comments are information in a Do-file which Stata will ignore. They can be used to stop a command from running without deleting it, or more usefully, to add information about the code which may be useful for others (or yourself in the future) to understand how some code works or to justify why you made certain choices. In general, comments can also help readability. There are three different ways to enter comments (and one additional special way).
+</p>
+<p>
+First, to comment out an entire line, precede it by <code>*</code>:
+</p>
+<pre><code>. * This is a comment
+</code></pre>
+<p>
+Second, you can add a comment to the end of a line with <code>//</code>
+</p>
+<pre><code>. version // Returns the Stata version number
+version 16.0
+
+. // You can also use it to comment out an entire line.
+</code></pre>
+<p>
+There must be a space before the <code>//</code> if it comes after a command:
+</p>
+<pre><code>. version// Returns the Stata version number
+invalid syntax
+r(198);
+
+</code></pre>
+<p>
+Thirdly, you can comment out a section by wrapping it in <code>/*</code> and <code>*/</code>
+</p>
+<pre><code>. /* Here's a several
+&gt; line comment.
+&gt; It just keeps going. */
+. summarize /* comment in the middle of a command! */ price
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       price |         74    6165.257    2949.496       3291      15906
+
+</code></pre>
+<p>
+Note that when a command wraps to more than one line in the Results pane (either due to a manual line break like this or a command that’s too wide for the Results pane), the prefix changes from <code>.</code> to <code>&gt;</code> to indicate that its all one command.
+</p>
+<p>
+Finally, there’s the special comment, <code>///</code>. Stata commands must be on a single line. However, complicated commands may get very long, such that its hard to read them on a single line. Using <code>///</code> instead of <code>//</code> allows wrapping onto the next line.
+</p>
+<pre><code>. summarize ///
+&gt; price
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       price |         74    6165.257    2949.496       3291      15906
+
+</code></pre>
+<p>
+As with <code>//</code>, there needs to be a space before the <code>///</code>.
+</p>
+<p>
+Only the <code>*</code> works on interactive commands entered in the Command pane. All four versions work in Do-files.
+</p>
+</div>
+<div id="version-control" class="section level3" number="2.6.2">
+<h3><span class="header-section-number">2.6.2</span> Version control</h3>
+<p>
+When writing a Do-file, you generally are creating it while using a single version of Stata. If a new version of Stata were released, its possible that your code may operate differently with the new version. If you add
+</p>
+<pre><code>version 14.2
+</code></pre>
+<p>
+to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you’ve updated to Stata 16. This works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 16 when you only have Stata 14 installed.)
+</p>
+<p>
+Note that this <code>version</code> is the same command as the <code>version</code> we’ve been discussing <a href="the-basics-of-stata.html#give-stata-a-command">before</a>. It operates in this special fashion only when included at the top of a Do-file.
+</p>
+<p>
+Best practices is to always include a <code>version ##.#</code> line at the top of each Do-file, but if its code that will continue to see use, you should test it with the newer releases and update the code as necessary!
+</p>
+</div>
+</div>
+<div id="exercise-0" class="section level2" number="2.7">
+<h2><span class="header-section-number">2.7</span> Exercise 0</h2>
+<p>
+Get familiar with the Stata interface. If you’ve been following along, you may have already done all these!
+</p>
+<ol>
+<li>
+If you haven’t already, open Stata. (You should be able to do this by clicking on the “Start” menu in the bottom left of the screen, then typing “Stata”.)
+</li>
+<li>
+The <a href="the-basics-of-stata.html#the-stata-environment">use of each pane</a> will become much clearer when we start opening data in the [next section][working with data sets], but take a look at each.
+</li>
+<li>
+Give Stata a command: <code>query memory</code>. This lists some settings related to memory usage in Stata, for example, <code>maxvar</code> is the maximum number of variables in a model; <code>matsize</code> is the largest number of predictors allowed in a model.
+</li>
+<li>
+Open a <a href="the-basics-of-stata.html#do-files">Do file</a>. Place a <a href="the-basics-of-stata.html#version-control"><code>version</code> command</a> at the top of the file corresponding to the version on your computer. Place the <code>query memory</code> command from the last step in the Do file.
+</li>
+<li>
+Be sure you know how to run these commands from the Do file.
+</li>
+<li>
+<a href="the-basics-of-stata.html#comments">Comment</a> out the <code>query memory</code> command; we won’t need it anymore.
+</li>
+</ol>
+</div>
+<div id="basic-command-syntax" class="section level2" number="2.8">
+<h2><span class="header-section-number">2.8</span> Basic command syntax</h2>
+<p>
+Most Stata commands which operate on variables (as opposed to system commands such as <code>version</code>, <code>update</code>, <code>query</code>, etc.) follow the same general format. Recognizing this format will make it easier to understand new commands to which you are introduced.
+</p>
+<p>
+The basic syntax is
+</p>
+<pre><code>command &lt;variable(s)&gt;, &lt;options&gt;
+</code></pre>
+<p>
+The command can take on more than one word; e.g. to create a scatter plot, the command is <code>graph twoway scatter</code>.
+</p>
+<p>
+Depending on the command, the list of variables can contain 0 variables, 1 variable, or many variables separated by spaces. Whether the order of variables matters depends on the specific command.
+</p>
+<p>
+Above, in the do-file, we ran three lines of code. The first, <code>sysuse auto</code>, is a system command that we’ll discuss later.
+</p>
+<p>
+The second, <code>summarize price</code>, follows the basic syntax - “summarize” is the command, and “price” is a single variable it operates on.
+</p>
+<p>
+The last line, <code>compress</code>, has “compress” as the command and has no additional variables.
+</p>
+<p>
+The options are not required (none of the above commands have options), but if they are given, they too are separated by spaces. There are some options that are consistent across a number of commands, and some options are specific to commands.
+</p>
+</div>
+<div id="stata-help" class="section level2" number="2.9">
+<h2><span class="header-section-number">2.9</span> Stata Help</h2>
+<p>
+Stata has, hands down, the best built-in help files of any of the “Big 4” statistical software.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> Stata’s help should be your first stop for any of the following:
+</p>
+<ul>
+<li>
+Understanding the syntax of a command
+</li>
+<li>
+Exploring the options available for a given command
+</li>
+<li>
+Looking at examples of the command in use
+</li>
+<li>
+Understanding the theoretical statistics behind the command.
+</li>
+</ul>
+<p>
+Help can be accessed by calling <code>help &lt;command&gt;</code>, such as
+</p>
+<pre><code>help summarize
+</code></pre>
+<p>
+Each help page has numerous features, I will merely point out a few here.
+</p>
+<ol>
+<li>
+The “Title” section contains a link (in <span style="color:blue">blue</span>) to a PDF which contains the Manual, which has more detail and examples than the help file alone.
+</li>
+<li>
+The syntax section shows the basic syntax. Any part written in square brackets (<code>[…]</code>) are optional.
+</li>
+<li>
+The examples in the help are great but basic; the PDF help (see #1) usually has more detailed examples.
+</li>
+<li>
+We will discuss the “Stored results” in the [Programming][programming] section.
+</li>
+</ol>
+<p>
+<code>help</code> can also be used to search for the appropriate command. For example, if you wanted help merging some data together (which we will cover [later][merging files]), you might try running
+</p>
+<pre><code>help merging
+</code></pre>
+<p>
+<code>merging</code> is not a valid Stata command, so instead Stata performs a search of the help files. This search is often not great. I would recommend searching online for the appropriate command to use (just search “Stata” and what you are trying to do), then using the built-in help for details on using the command.
+</p>
+<p>
+Finally, <code>help help</code> works and brings up some more information on the <code>help</code> command.
+</p>
+<div id="short-commands" class="section level3" number="2.9.1">
+<h3><span class="header-section-number">2.9.1</span> Short commands</h3>
+<p>
+You’ll frequently see commands with partial underlining; for example <code>summarize</code> has the “su” underlined. Only the underlined part needs to be given for Stata to understand the command; e.g. the following are all equivalent:
+</p>
+<pre><code>summarize
+summ
+su
+</code></pre>
+<p>
+This is often true for options as well; <code>detail</code> (to report far more summary details) has the “d” underlined. So these are equivalent:
+</p>
+<pre><code>summarize, detail
+su, detail
+summarize, d
+su, d
+</code></pre>
+<p>
+The short commands are very useful for quickly writing commands, but not so great at reading them. If you came across someone else’s Stata Do-file and saw <code>su, d</code>, you might have trouble figuring that out unless you already knew that short command. Thankfully, the short commands can be used with <code>help</code>, so <code>help su</code> will bring up the full <code>summarize</code> documentation.
+</p>
+</div>
+</div>
+<div id="working-directory" class="section level2" number="2.10">
+<h2><span class="header-section-number">2.10</span> Working directory</h2>
+<p>
+We mentioned <a href="the-basics-of-stata.html#the-stata-environment">earlier</a> the notion of a “working directory”, the current one you can see in the bottom left of the Stata window. You can think of a working directory as an open folder inside Windows Explorer (or Finder if you’re on a Mac). You can easily access any file within that folder without any additional trouble. You can access files in other folders (directories), but it requires moving to that folder.
+</p>
+<p>
+In the same sense, when referring to files, any file in the working directory can be referred to buy its name. For example, to open a file (we’ll go into detail about doing this [later][opening data]) named “mydata.dta” which is in your current working directory, you need only enter
+</p>
+<pre><code>use mydata.dta
+</code></pre>
+<p>
+If you were in a different working directory, you need to specify the full path to the file:
+</p>
+<pre><code>use C:\Documents\Stata\Project\mydata.dta
+</code></pre>
+<p>
+Similarly, when saving files, the working directory is the default choice.
+</p>
+<p>
+The working directory can be viewed with the <code>pwd</code> command (Print Working Directory)
+</p>
+<pre><code>. pwd
+C:\Documents
+</code></pre>
+<p>
+You can change the working directory by passing a path to <code>cd</code> (Change Directory):
+</p>
+<pre><code>cd C:\Documents\Stata\Project
+</code></pre>
+<p>
+Alternatively and perhaps more easily, you can change the working directory by the menus, choosing “Files -&gt; Change working directory”. After selecting the appropriate directory, the full <code>cd</code> command will be printed in the Results, so you can save it in a Do-file for later use.
+</p>
+<div id="file-paths" class="section level3" number="2.10.1">
+<h3><span class="header-section-number">2.10.1</span> File paths</h3>
+<p>
+There are some distinctions between Windows and Mac in regards to file paths, the most blatant that Windows uses forward slash (<code>\</code>) whereas Mac uses back slashes (<code>/</code>). You can see full details of this by running <code>help filename</code>.
+</p>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Stata can handle commands that are prefaced by <code>.</code> (with a space between the period and comand) so you can copy/paste the <code>. version</code> and run it as is. However, don’t get used to that habit! The correct command is just <code>version</code>.<a href="the-basics-of-stata.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>As we’ll see in <a href="the-basics-of-stata.html#do-files">a bit</a>, you can save Stata commands in a “do-file”. While I’ve never seen an official definition, I tend to think of “ado” as “automatic do”.<a href="the-basics-of-stata.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>I consider the “Big 4” as Stata, SAS, SPSS, and R. SPSS has terrible help; SAS’s is good but dense and difficult to navigate if you don’t already know what you’re looking for; R’s is very hit-or-miss depending on who wrote it.<a href="the-basics-of-stata.html#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="working-with-data-sets.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
