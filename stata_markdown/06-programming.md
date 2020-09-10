@@ -709,8 +709,8 @@ There are two useful command prefixes that can be handy while writing more elabo
 ^#^^#^^#^ Capturing an error
 
 Imagine the following scenario. You want to write a Do-file that generates a new variable. However, you may need to re-run chunks of the Do-file
-repeatedly, so that the `gen` statement is hit repeatedly. After the first `gen`, we can't call it again and [need to use `replace` instead][replacing
-existing variables]. However, if we used `replace`, it wouldn't work the first time! One solution is to `drop` the variable before we gen it:
+repeatedly, so that the `gen` statement is hit repeatedly. After the first `gen`, we can't call it again and [need to use `replace` instead](data-manipulation.html#replacing-existing-variables).
+However, if we used `replace`, it wouldn't work the first time! One solution is to `drop` the variable before we gen it:
 
 
 ~~~~
