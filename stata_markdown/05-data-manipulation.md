@@ -202,8 +202,9 @@ cars, two with low cost and one with low maintenance.
 ^#^^#^^#^ Hidden variables
 
 The name "hidden variables" may be slightly more dramatic than need be. In Stata, under the [One Data][one data] principal, any information in the
-data^[We'll see some exceptions to this in the [programming](programming.html) section.] must be in a variable. This includes the so called "hidden
-variables" of `_n` and `_N`. You can imagine that each row of your data has two additional columns of data, one for `_n` and one for `_N`.
+data^[We'll see some exceptions to this in the [programming](programming-advanced-features.html) section.] must be in a variable. This includes the so
+called "hidden variables" of `_n` and `_N`. You can imagine that each row of your data has two additional columns of data, one for `_n` and one for
+`_N`.
 
 `_n` represents the row number currently. Currently, meaning if the data is re-sorted, `_n` can change.
 
