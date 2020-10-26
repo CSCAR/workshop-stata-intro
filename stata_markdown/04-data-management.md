@@ -203,7 +203,7 @@ describe turn
 <</dd_do>>
 ~~~~
 
-To remove a variable label, you can call `label variable <varname>` without a new label to remove the existing one. (Equivalent to `label variabel
+To remove a variable label, you can call `label variable <varname>` without a new label to remove the existing one. (Equivalent to `label variable
 <varname> ""`, so passing an empty variable label.)
 
 ~~~~
