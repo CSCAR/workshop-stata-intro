@@ -473,14 +473,14 @@ For the last option there, note that performing that twice will create two separ
 <p>
 Let’s manually add some commands to a Do-file to see how to execute the commands. In a Do-file editor, enter the following
 </p>
-<pre><code>sysuse auto
+<pre><code>sysuse auto, clear
 summarize price
 compress
 </code></pre>
 <p>
 Once the lines are in the editor, highlight the commands (you do not need to highlight the entire line, you merely need to ensure your selection includes part of every line you want run) and press the “Execute/Do” (on Windows) or “Do” (on Mac) button. You should see the following appear in your Results pane.
 </p>
-<pre><code>. sysuse auto
+<pre><code>. sysuse auto, clear
 (1978 Automobile Data)
 
 . summarize price

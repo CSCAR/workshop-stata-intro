@@ -183,7 +183,7 @@ and paste from the Review pane to add to an existing Do-file.
 Let's manually add some commands to a Do-file to see how to execute the commands. In a Do-file editor, enter the following
 
 ```
-sysuse auto
+sysuse auto, clear
 summarize price
 compress
 ```
@@ -194,7 +194,7 @@ Results pane.
 
 ~~~~
 <<dd_do>>
-sysuse auto
+sysuse auto, clear
 summarize price
 compress
 <</dd_do>>
