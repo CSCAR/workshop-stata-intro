@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 The Basics of Stata | Introduction to Stata</title>
   <meta name="description" content="Chapter 2 The Basics of Stata | Introduction to Stata" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 The Basics of Stata | Introduction to Stata" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2020-09-10" />
+<meta name="date" content="2020-10-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="working-with-data-sets.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -205,7 +205,7 @@
 <li class="chapter" data-level="6.2.5" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#using-variable-lists"><i class="fa fa-check"></i><b>6.2.5</b> Using Variable Lists</a></li>
 <li class="chapter" data-level="6.2.6" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#stored-statistics"><i class="fa fa-check"></i><b>6.2.6</b> Stored Statistics</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#linking-data-sets"><i class="fa fa-check"></i><b>6.3</b> Linking data sets</a>
+<li class="chapter" data-level="6.3" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#linking-data-sets-1"><i class="fa fa-check"></i><b>6.3</b> Linking data sets</a>
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#working-with-linked-frames"><i class="fa fa-check"></i><b>6.3.1</b> Working with linked frames</a></li>
 </ul></li>
@@ -291,14 +291,13 @@ Stata will keep a running record of all Stata commands that have been submitted 
 The Properties Pane
 <ul>
 <li>
-This pane allows variable properties and data-set properties to be managed. [Variable names][Renaming variables], [labels][labeling variables], [value labels][labeling values], [display formats][describing the data], and [storage types][describing the data] can be viewed and modified here.
+This pane allows variable properties and data-set properties to be managed. <a href="data-management.html#renaming-variables">Variable names</a>, <a href="data-management.html#labeling-variables">labels</a>, <a href="data-management.html#labeling-values">value labels</a>, <a href="data-management.html#describing-the-data">display formats</a>, and <a href="data-management.html#describing-the-data">storage types</a> can be viewed and modified here.
 </li>
 </ul>
 </li>
 </ul>
 <p>
-Each of these five panes will be nested within the main Stata session, which contains menus and tool bars. There are additional windows that users can access from the Window menu, which include the Graph window (which will open when graphs have been created), the Viewer window (which is primarily used for <a href="the-basics-of-stata.html#stata-help">help</a> features and Stata news), the Data Editor window (for use when [viewing data sets][editing data
-manually]), and the Do-file Editor window (for use when writing <a href="the-basics-of-stata.html#do-files">.do files</a>).
+Each of these five panes will be nested within the main Stata session, which contains menus and tool bars. There are additional windows that users can access from the Window menu, which include the Graph window (which will open when graphs have been created), the Viewer window (which is primarily used for <a href="the-basics-of-stata.html#stata-help">help</a> features and Stata news), the Data Editor window (for use when <a href="working-with-data-sets.html#editing-data-manually">viewing data sets</a>), and the Do-file Editor window (for use when writing <a href="the-basics-of-stata.html#do-files">.do files</a>).
 </p>
 <p>
 In the lower left-hand corner of the main Stata window (below the panes), there will be a directory displayed. This is known as the <a href="the-basics-of-stata.html#working-directory">working directory</a>, and is where Stata will look to find data files and other associated Stata files unless the user specifies another directory. We will cover examples of changing the working directory.
@@ -310,7 +309,7 @@ In the lower left-hand corner of the main Stata window (below the panes), there 
 One functionality where Stata differs than most other statistical or data analysis software is that Stata can only work with a single data set at a time.
 </p>
 <p>
-Any command you run knows to operate on the data set you have open. For example, there is a command [<code>summarize</code>][summarizing the data] which provides summary information about variables. The command is simply <code>summarize</code>, there is no need to direct it towards a specific data set.
+Any command you run knows to operate on the data set you have open. For example, there is a command <a href="data-management.html#summarizing-the-data"><code>summarize</code></a> which provides summary information about variables. The command is simply <code>summarize</code>, there is no need to direct it towards a specific data set.
 </p>
 <p>
 If you have multiple data sets you need to work with, you can either
@@ -318,12 +317,12 @@ If you have multiple data sets you need to work with, you can either
 <ol>
 <li>
 <p>
-Switch between the two data sets as needed. This can be burdensome, though tools such as [<code>preserve</code>][Temporarily preserving and restoring data] or [<code>frames</code>][Frames] help greatly.
+Switch between the two data sets as needed. This can be burdensome, though tools such as <a href="working-with-data-sets.html#temporarily-preserving-and-restoring-data"><code>preserve</code></a> or <a href="working-with-data-sets.html#frames"><code>frames</code></a> help greatly.
 </p>
 </li>
 <li>
 <p>
-Merge the data sets, the better option. We’ll discuss [merging][merging files] towards the end of the course.
+Merge the data sets, the better option. We’ll discuss <a href="data-manipulation.html#merging-files">merging</a> towards the end of the course.
 </p>
 </li>
 </ol>
@@ -382,7 +381,7 @@ There are a few commands that can be useful for saving results which we will not
 <div id="dyndoc" class="section level3" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> dyndoc</h3>
 <p>
-Version 15 of Stata introduced “dyndoc” which allows you to weave together narrative text and Stata code to produce a high-quality output (html, word or pdf). This document is written ([in part][how to use this document]) in dyndoc. It is extremely powerful but is well outside the mandate of this class. If you are interested in this functionality, I’d be happy to help.
+Version 15 of Stata introduced “dyndoc” which allows you to weave together narrative text and Stata code to produce a high-quality output (html, word or pdf). This document is written (<a href="index.html#how-to-use-this-document">in part</a>) in dyndoc. It is extremely powerful but is well outside the mandate of this class. If you are interested in this functionality, I’d be happy to help.
 </p>
 </div>
 </div>
@@ -500,7 +499,7 @@ Once the lines are in the editor, highlight the commands (you do not need to hig
 
 </code></pre>
 <p>
-We will cover in later sections what each of these commands does ([<code>sysuse</code>][built-in data], [<code>summarize</code>][summarizing the data], [<code>compress</code>][compressing data]).
+We will cover in later sections what each of these commands does (<a href="working-with-data-sets.html#built-in-data"><code>sysuse</code></a>, <a href="data-management.html#summarizing-the-data"><code>summarize</code></a>, <a href="data-management.html#compressing-data"><code>compress</code></a>).
 </p>
 <div id="comments" class="section level3" number="2.6.1">
 <h3><span class="header-section-number">2.6.1</span> Comments</h3>
@@ -590,7 +589,7 @@ Get familiar with the Stata interface. If you’ve been following along, you may
 If you haven’t already, open Stata. (You should be able to do this by clicking on the “Start” menu in the bottom left of the screen, then typing “Stata”.)
 </li>
 <li>
-The <a href="the-basics-of-stata.html#the-stata-environment">use of each pane</a> will become much clearer when we start opening data in the [next section][working with data sets], but take a look at each.
+The <a href="the-basics-of-stata.html#the-stata-environment">use of each pane</a> will become much clearer when we start opening data in the <a href="working-with-data-sets.html#working-with-data-sets">next section</a>, but take a look at each.
 </li>
 <li>
 Give Stata a command: <code>query memory</code>. This lists some settings related to memory usage in Stata, for example, <code>maxvar</code> is the maximum number of variables in a model; <code>matsize</code> is the largest number of predictors allowed in a model.
@@ -677,7 +676,7 @@ We will discuss the “Stored results” in the [Programming][programming] secti
 </li>
 </ol>
 <p>
-<code>help</code> can also be used to search for the appropriate command. For example, if you wanted help merging some data together (which we will cover [later][merging files]), you might try running
+<code>help</code> can also be used to search for the appropriate command. For example, if you wanted help merging some data together (which we will cover <a href="data-manipulation.html#merging-files">later</a>), you might try running
 </p>
 <pre><code>help merging
 </code></pre>
@@ -715,7 +714,7 @@ The short commands are very useful for quickly writing commands, but not so grea
 We mentioned <a href="the-basics-of-stata.html#the-stata-environment">earlier</a> the notion of a “working directory”, the current one you can see in the bottom left of the Stata window. You can think of a working directory as an open folder inside Windows Explorer (or Finder if you’re on a Mac). You can easily access any file within that folder without any additional trouble. You can access files in other folders (directories), but it requires moving to that folder.
 </p>
 <p>
-In the same sense, when referring to files, any file in the working directory can be referred to buy its name. For example, to open a file (we’ll go into detail about doing this [later][opening data]) named “mydata.dta” which is in your current working directory, you need only enter
+In the same sense, when referring to files, any file in the working directory can be referred to buy its name. For example, to open a file (we’ll go into detail about doing this <a href="working-with-data-sets.html#opening-data">later</a>) named “mydata.dta” which is in your current working directory, you need only enter
 </p>
 <pre><code>use mydata.dta
 </code></pre>

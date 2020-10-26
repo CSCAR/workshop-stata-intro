@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Data Management | Introduction to Stata</title>
   <meta name="description" content="Chapter 4 Data Management | Introduction to Stata" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Data Management | Introduction to Stata" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2020-09-10" />
+<meta name="date" content="2020-10-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="working-with-data-sets.html"/>
 <link rel="next" href="data-manipulation.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -205,7 +205,7 @@
 <li class="chapter" data-level="6.2.5" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#using-variable-lists"><i class="fa fa-check"></i><b>6.2.5</b> Using Variable Lists</a></li>
 <li class="chapter" data-level="6.2.6" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#stored-statistics"><i class="fa fa-check"></i><b>6.2.6</b> Stored Statistics</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#linking-data-sets"><i class="fa fa-check"></i><b>6.3</b> Linking data sets</a>
+<li class="chapter" data-level="6.3" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#linking-data-sets-1"><i class="fa fa-check"></i><b>6.3</b> Linking data sets</a>
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#working-with-linked-frames"><i class="fa fa-check"></i><b>6.3.1</b> Working with linked frames</a></li>
 </ul></li>
@@ -254,7 +254,7 @@ Throughout this chapter, we’ll be using the “auto” data set which is distr
 
 </code></pre>
 <p>
-You can reload it as necessary (if you modify it and want the original) by re-running this with the <code>clear</code> option. Feel free to make frequent use of [<code>preserve</code> and <code>restore</code>][Temporarily preserving and restoring data].
+You can reload it as necessary (if you modify it and want the original) by re-running this with the <code>clear</code> option. Feel free to make frequent use of <a href="working-with-data-sets.html#temporarily-preserving-and-restoring-data"><code>preserve</code> and <code>restore</code></a>.
 </p>
 <p>
 Whenever you first begin working with a data set, you’ll want to spend some time getting familiar with it. You should be able to answer the following questions (even if some of them are approximations):
@@ -293,7 +293,7 @@ In this chapter we’ll go over various tools and commands you can use to answer
 <div id="referring-to-variables" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Referring to variables</h2>
 <p>
-When we discussed [basic command syntax][basic command syntax], we said that the optional list of variables can include any number of variables (for some commands). Writing out all the variables can get very tedious as the number of variables increases. Thankfully there are two alternatives.
+When we discussed <a href="the-basics-of-stata.html#basic-command-syntax">basic command syntax</a>, we said that the optional list of variables can include any number of variables (for some commands). Writing out all the variables can get very tedious as the number of variables increases. Thankfully there are two alternatives.
 </p>
 <p>
 First, we can use the wild card <code>*</code><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. For example, we could refer to the variables “turn” and “trunk” as <code>t*</code>, as both variables start with “t” and are followed by anything. However, be careful, as this would also match variables such as <code>turnips</code>, <code>tprice</code>, <code>t</code>, etc, if any such variables existed. It can also be used in the middle or beginning, e.g.:
@@ -310,7 +310,7 @@ First, we can use the wild card <code>*</code><a href="#fn4" class="footnote-ref
 Alternatively, if the variables we want to include are next to each other in the data (e.g. in the Variables pane), we can refer to a list of them. Say the variables <code>x1</code> through <code>x25</code> are in ordered in the logical fashion. We could refer to the whole list of them as <code>x1-x25</code>. This includes both <code>x1</code> and <code>x25</code>, as well as any variable in between them. We will discuss the <code><a href="data-management.html#changing-variable-ordering">order</a></code> command later to re-order variables.
 </p>
 <p>
-Finally, you often don’t need to give the entire name of the variable, just enough characters for Stata to be able to uniquely identify it (similar to [short names][short commands]). We’ll see in a minute more about the <code>describe</code> command, but for example,
+Finally, you often don’t need to give the entire name of the variable, just enough characters for Stata to be able to uniquely identify it (similar to <a href="the-basics-of-stata.html#short-commands">short names</a>). We’ll see in a minute more about the <code>describe</code> command, but for example,
 </p>
 <pre><code>. describe headr
 
@@ -459,7 +459,7 @@ Don’t be afraid of artificially restricting yourself going forward; if one of 
 <h2><span class="header-section-number">4.4</span> Exercise 2</h2>
 <ol>
 <li>
-“census9” is accesible via [<code>webuse</code>][stata website data]. Load it.
+“census9” is accesible via <a href="working-with-data-sets.html#stata-website-data"><code>webuse</code></a>. Load it.
 </li>
 <li>
 Spend a minute looking at the data. What does this data seem to represent? What variables do we have? (<a href="data-management.html#describing-the-data"><code>describe</code></a> will come in handy here!)
@@ -580,7 +580,7 @@ foreign         byte    %8.0g      origin     Car type
 
 </code></pre>
 <p>
-Additionally, if you look at the data through Data Editor or Data Browser, you see that instead of <code>foreign</code> being red (as a string) it is blue, as we discussed [earlier][colors as variable type].
+Additionally, if you look at the data through Data Editor or Data Browser, you see that instead of <code>foreign</code> being red (as a string) it is blue, as we discussed <a href="working-with-data-sets.html#colors-as-variable-type">earlier</a>.
 </p>
 <p>
 Let’s look at that table ignoring the value labels:
@@ -792,7 +792,7 @@ If you’ve changed to a different data set, load “census9” back up with <co
 </p>
 <ol>
 <li>
-Going forward, we’ll be using a version of “census9” with changes we’re making. [Save][saving data] a copy of the data to somewhere convenient (such as your Desktop). Don’t forget to give it a name!
+Going forward, we’ll be using a version of “census9” with changes we’re making. <a href="working-with-data-sets.html#saving-data">Save</a> a copy of the data to somewhere convenient (such as your Desktop). Don’t forget to give it a name!
 </li>
 <li>
 The <code>drate</code> variable is a bit vague - the name of the variable provides no clue that “d” = “death”, and the values (e.g. 75) are ambiguous.
@@ -1059,8 +1059,7 @@ Are there any problems with the data?
 <li id="fn4"><p>This is the reason why <code>*</code> as a comment does not work in the middle of a line (and we use <code>//</code> instead).<a href="data-management.html#fnref4" class="footnote-back">↩︎</a></p></li>
 <li id="fn5"><p>Reported in bytes. Roughly 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, 1000 megabytes = 1 gigabyte.<a href="data-management.html#fnref5" class="footnote-back">↩︎</a></p></li>
 <li id="fn6"><p>In the few situations where it can, it doesn’t handle them cleanly.<a href="data-management.html#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p>As we discuss [later][conditional
-variable generation], in Stata, missing values (represented by <code>.</code> in the data) are considered to be higher than any other number (so 99999 &lt; .).<a href="data-management.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>As we discuss <a href="data-manipulation.html#conditional-variable-generation">later</a>, in Stata, missing values (represented by <code>.</code> in the data) are considered to be higher than any other number (so 99999 &lt; .).<a href="data-management.html#fnref7" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

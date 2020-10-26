@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Working with Data Sets | Introduction to Stata</title>
   <meta name="description" content="Chapter 3 Working with Data Sets | Introduction to Stata" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Working with Data Sets | Introduction to Stata" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2020-09-10" />
+<meta name="date" content="2020-10-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="the-basics-of-stata.html"/>
 <link rel="next" href="data-management.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -205,7 +205,7 @@
 <li class="chapter" data-level="6.2.5" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#using-variable-lists"><i class="fa fa-check"></i><b>6.2.5</b> Using Variable Lists</a></li>
 <li class="chapter" data-level="6.2.6" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#stored-statistics"><i class="fa fa-check"></i><b>6.2.6</b> Stored Statistics</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="working-with-data-sets.html"><a href="working-with-data-sets.html#linking-data-sets"><i class="fa fa-check"></i><b>6.3</b> Linking data sets</a>
+<li class="chapter" data-level="6.3" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#linking-data-sets-1"><i class="fa fa-check"></i><b>6.3</b> Linking data sets</a>
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="programming-advanced-features.html"><a href="programming-advanced-features.html#working-with-linked-frames"><i class="fa fa-check"></i><b>6.3.1</b> Working with linked frames</a></li>
 </ul></li>
@@ -249,7 +249,7 @@
 <div id="built-in-data" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Built-in data</h2>
 <p>
-Before we turn to using your own data, it is useful to know that Stata comes with a collection of sample data sets which you can use to try the Stata commands. Additionally, most (if not all) of the examples in [Stata help][stata help] will use these data sets.
+Before we turn to using your own data, it is useful to know that Stata comes with a collection of sample data sets which you can use to try the Stata commands. Additionally, most (if not all) of the examples in <a href="the-basics-of-stata.html#stata-help">Stata help</a> will use these data sets.
 </p>
 <p>
 To see a list of the built-in data sets, use
@@ -306,7 +306,7 @@ As you may have deduced from the <code>sysuse</code> and <code>webuse</code> com
 <pre><code>use &lt;filename&gt;
 </code></pre>
 <p>
-As discussed in the [working directory][working directory] section, Stata can see only files in its working directory, so only the name of the file needs to be passed. If the file exists in a different directory, you will need to give the full (or relative path). For example, if your working directory is “C:\Documents\Stata” and the file you are looking for, “mydata”, is in the “Project” subfolder, you could open it with any of the following:
+As discussed in the <a href="the-basics-of-stata.html#working-directory">working directory</a> section, Stata can see only files in its working directory, so only the name of the file needs to be passed. If the file exists in a different directory, you will need to give the full (or relative path). For example, if your working directory is “C:\Documents\Stata” and the file you are looking for, “mydata”, is in the “Project” subfolder, you could open it with any of the following:
 </p>
 <pre><code>use C:\Documents\Stata\Project\mydata
 use Project\mydata
@@ -330,8 +330,7 @@ As with <code>sysuse</code> and <code>webuse</code>, the <code>clear</code> opti
 <div id="loading-subsets-of-the-data" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Loading subsets of the data</h3>
 <p>
-You can load only a subset of the data into the program at a time. Generally I would recommend loading the full data and then [discarding][discarding
-data] the extraneous information. However, if your data is very large, it might be handy to only load in some of it rather than the entire thing. As this is a lesser-used option we won’t go into too much detail, but as an example, if I wanted to load only the variables named “bp”, “heartrate” and “date” from the data set “patientdata”, restricted to male patients, I might use something like
+You can load only a subset of the data into the program at a time. Generally I would recommend loading the full data and then <a href="data-manipulation.html#discarding-data">discarding</a> the extraneous information. However, if your data is very large, it might be handy to only load in some of it rather than the entire thing. As this is a lesser-used option we won’t go into too much detail, but as an example, if I wanted to load only the variables named “bp”, “heartrate” and “date” from the data set “patientdata”, restricted to male patients, I might use something like
 </p>
 <pre><code>use bp heartrate date if gender == &quot;male&quot; using patientdata
 </code></pre>
@@ -339,7 +338,7 @@ data] the extraneous information. However, if your data is very large, it might 
 Here, <code>using</code> and <code>if</code> are subcommands, which we will see used more as the day goes on.
 </p>
 <p>
-The statement <code>gender == “male”</code> is a conditional statement which only loads male patients. We’ll discuss later about [conditional statements][Restricting commands to subsets].
+The statement <code>gender == “male”</code> is a conditional statement which only loads male patients. We’ll discuss later about <a href="data-manipulation.html#restricting-commands-to-subsets">conditional statements</a>.
 </p>
 <p>
 Alternatively, if you have a very large data set, you can load in a small chunk of it.
@@ -357,7 +356,7 @@ For further details, see <code>help use</code>, specifically the manual which ha
 <div id="editing-data-manually" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Editing data manually</h2>
 <p>
-We will discuss in [Data Manipulation][data manipulation] how to edit your data on a larger scale and in an automated fashion, but Stata does support modifying a spreadsheet of your data similar to Excel. At the top of the main window, you’ll see two buttons, “Data Editor” and “Data Browser”. These open the same new Data window, the only difference is that Stata is protecting you from yourself and if you open the “Data Browser” (or switch to it in the Data window), you cannot modify the data.
+We will discuss in <a href="data-manipulation.html#data-manipulation">Data Manipulation</a> how to edit your data on a larger scale and in an automated fashion, but Stata does support modifying a spreadsheet of your data similar to Excel. At the top of the main window, you’ll see two buttons, “Data Editor” and “Data Browser”. These open the same new Data window, the only difference is that Stata is protecting you from yourself and if you open the “Data Browser” (or switch to it in the Data window), you cannot modify the data.
 </p>
 <p>
 Once in the Data window, you can select cells and edit them as desired. Note that whenever you make a modification in the Data Editor, there is a corresponding command produced which actually performs the modification.
@@ -368,8 +367,7 @@ Once in the Data window, you can select cells and edit them as desired. Note tha
 <div id="colors-as-variable-type" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Colors as variable type</h3>
 <p>
-When viewing the data, the color of each column’s text provides information about the type of variable. We’ll go into more details [later][describing
-the data] what these types mean. Below, for the <code>auto</code> data, you can see the <code>make</code> variable is red, indicating a string, the <code>foreign</code> variable is blue indicating a variable with an attached [value label][labeling values] and the remainder of the variables are black for numeric.
+When viewing the data, the color of each column’s text provides information about the type of variable. We’ll go into more details <a href="data-management.html#describing-the-data">later</a> what these types mean. Below, for the <code>auto</code> data, you can see the <code>make</code> variable is red, indicating a string, the <code>foreign</code> variable is blue indicating a variable with an attached <a href="data-management.html#labeling-values">value label</a> and the remainder of the variables are black for numeric.
 </p>
 <p>
 <a target="_blank" href="./images/datacolors.png"><img src="images/datacolors.png" alt="" /></a>
@@ -522,12 +520,12 @@ If all else fails, there is software Stat Transfer, <a target="_blank" href="htt
 <div id="switching-between-data-sets" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Switching between data sets</h2>
 <p>
-Here we’ll discuss two ways to switch between data sets. Later we’ll discuss the third way to work with multiple data sets, [merging][Merging Files].
+Here we’ll discuss two ways to switch between data sets. Later we’ll discuss the third way to work with multiple data sets, <a href="data-manipulation.html#merging-files">merging</a>.
 </p>
 <div id="temporarily-preserving-and-restoring-data" class="section level3" number="3.6.1">
 <h3><span class="header-section-number">3.6.1</span> Temporarily preserving and restoring data</h3>
 <p>
-Say you want to carry out a destructive operation on your data, temporarily. This could be either to close your data and load another, or to make a change to the current data.For example, say you want to [remove][discarding data] some subset of your observations. One workflow to use would be:
+Say you want to carry out a destructive operation on your data, temporarily. This could be either to close your data and load another, or to make a change to the current data.For example, say you want to <a href="data-manipulation.html#discarding-data">remove</a> some subset of your observations. One workflow to use would be:
 </p>
 <pre><code>sysuse auto
 &lt;modify data set as desired&gt;
@@ -667,7 +665,7 @@ Note that you cannot copy into an existing frame; you must either delete the old
 <div id="linking-data-sets" class="section level4" number="3.6.2.3">
 <h4><span class="header-section-number">3.6.2.3</span> Linking data sets</h4>
 <p>
-We’re not going to go into it now, but please see the <a href="working-with-data-sets.html#linking-data-sets">section</a> in the [Programming &amp; Advanced Features] section for details. You can link data sets between frames to either enable moving variables across frames, or if the data are at different units of analysis (e.g. a patient file and a clinic file), to easily merge the files together.
+We’re not going to go into it now, but please see the <a href="programming-advanced-features.html#linking-data-sets-1">section</a> in the <a href="programming-advanced-features.html#programming-advanced-features">Programming &amp; Advanced Features</a> section for details. You can link data sets between frames to either enable moving variables across frames, or if the data are at different units of analysis (e.g. a patient file and a clinic file), to easily merge the files together.
 </p>
 </div>
 </div>
@@ -688,7 +686,7 @@ Close the Data window. Load the built-in data set “sandstone”. Don’t forge
 <a href="working-with-data-sets.html#saving-data">Save a copy</a> of this data to your computer.
 <ol>
 <li>
-Check your [working directory][working directory]. Make sure it is set somewhere convenient.
+Check your <a href="the-basics-of-stata.html#working-directory">working directory</a>. Make sure it is set somewhere convenient.
 </li>
 <li>
 Use <code>save</code>. Make sure to give it a name!
