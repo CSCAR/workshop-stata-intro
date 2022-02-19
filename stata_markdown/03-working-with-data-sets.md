@@ -40,7 +40,7 @@ sysuse auto, clear
 
 In addition to the data sets distributed with Stata, Stata also makes available a large collection of data sets on their website which can be accessed
 with the `webuse` command. These data sets are used as examples in the Manual and can be seen listed
-as [http://www.stata-press.com/data/r16/](http://www.stata-press.com/data/r16/).
+as [http://www.stata-press.com/data/r17/](http://www.stata-press.com/data/r17/).
 
 ```
 webuse hiway

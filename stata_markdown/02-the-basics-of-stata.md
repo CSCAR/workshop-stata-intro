@@ -65,7 +65,7 @@ version
 ~~~~
 
 The first line proceeded by the `.` indicates the command that was written, `version`, and the rest is the output. Here, I am running Stata version
-16.0 (your version may vary).
+17.0 (your version may vary).
 
 In this document, if you see a single command without a period, it indicates something that was not run - either it's not designed to be run (it's
 fake code designed to illustrate a point), or more likely, the output is not interesting or unnecessary. If you instead see a Results output where the
@@ -100,8 +100,8 @@ of this class. If you are interested in this functionality, I'd be happy to help
 ^#^^#^ Updating
 
 If you have administrative access on your computer (e.g. if it is your personal machine, or your IT department has given you the ability), you can
-update Stata freely. Major point upgrades such as the newly released 16.0 require purchase and re-installation, but minor upgrades (such as the 14.1
-and 14.2 updates) as well as minor internal updates are free.
+update Stata freely. Major point upgrades such as the newly released 17.0 require purchase and re-installation, but minor upgrades (such as the 16.1
+and 16.2 updates) as well as minor internal updates are free.
 
 To check for updates, you can run
 
@@ -272,8 +272,8 @@ that your code may operate differently with the new version. If you add
 version 14.2
 ```
 
-to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you've updated to Stata 16. This
-works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 16 when you only have Stata 14 installed.)
+to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you've updated to Stata 17. This
+works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 17 when you only have Stata 14 installed.)
 
 Note that this `version` is the same command as the `version` we've been discussing [before][give stata a command]. It operates in this special
 fashion only when included at the top of a Do-file.

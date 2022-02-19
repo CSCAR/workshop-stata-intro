@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Working with Data Sets | Introduction to Stata</title>
   <meta name="description" content="Chapter 3 Working with Data Sets | Introduction to Stata" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Working with Data Sets | Introduction to Stata" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2021-02-19" />
+<meta name="date" content="2022-02-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="the-basics-of-stata.html"/>
 <link rel="next" href="data-management.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 
@@ -255,20 +258,20 @@ Before we turn to using your own data, it is useful to know that Stata comes wit
 To see a list of the built-in data sets, use
 </p>
 <pre><code>. sysuse dir
-  auto.dta        citytemp.dta    nlsw88.dta      tsline2.dta
+  auto.dta        census.dta      network1a.dta   tsline1.dta
+  auto16.dta      citytemp.dta    nlsw88.dta      tsline2.dta
   auto2.dta       citytemp4.dta   nlswide1.dta    uslifeexp.dta
   autornd.dta     educ99gdp.dta   pop2000.dta     uslifeexp2.dta
   bplong.dta      gnp96.dta       sandstone.dta   voter.dta
   bpwide.dta      lifeexp.dta     sp500.dta       xtline1.dta
   cancer.dta      network1.dta    surface.dta
-  census.dta      network1a.dta   tsline1.dta
 
 </code></pre>
 <p>
 and use <code>sysuse</code> again to load data, for example the <code>auto</code> data which contains characteristics of various cars from a 1978 Consumer’s Report magazine.
 </p>
 <pre><code>. sysuse auto
-(1978 Automobile Data)
+(1978 automobile data)
 
 </code></pre>
 <p>
@@ -280,13 +283,13 @@ If you make any modifications to your data, Stata will try and protect you by re
 or passing it as an option to <code>sysuse</code>,
 </p>
 <pre><code>. sysuse auto, clear
-(1978 Automobile Data)
+(1978 automobile data)
 
 </code></pre>
 <div id="stata-website-data" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Stata Website Data</h3>
 <p>
-In addition to the data sets distributed with Stata, Stata also makes available a large collection of data sets on their website which can be accessed with the <code>webuse</code> command. These data sets are used as examples in the Manual and can be seen listed as <a target="_blank" href="http://www.stata-press.com/data/r16/">http://www.stata-press.com/data/r16/</a>.
+In addition to the data sets distributed with Stata, Stata also makes available a large collection of data sets on their website which can be accessed with the <code>webuse</code> command. These data sets are used as examples in the Manual and can be seen listed as <a target="_blank" href="http://www.stata-press.com/data/r17/">http://www.stata-press.com/data/r17/</a>.
 </p>
 <pre><code>webuse hiway
 </code></pre>
@@ -584,7 +587,7 @@ and move between frames via <code>frame change</code> or <code>cwf</code>.
 If we look at all frames with <code>frame dir</code>,
 </p>
 <pre><code>. frame dir
-  default   74 x 12; 1978 Automobile Data
+  default   74 x 12; 1978 automobile data
   newframe  0 x 0
 
 </code></pre>
@@ -594,11 +597,11 @@ we can see that the default frame has the most recent data we loaded, the <code>
 <pre><code>. cwf newframe
 
 . sysuse bplong
-(fictional blood-pressure data)
+(Fictional blood-pressure data)
 
 . frame dir
-  default   74 x 12; 1978 Automobile Data
-  newframe  240 x 5; fictional blood-pressure data
+  default   74 x 12; 1978 automobile data
+  newframe  240 x 5; Fictional blood-pressure data
 
 </code></pre>
 <p>
@@ -607,8 +610,8 @@ Note that commands operate on our current frame, so calling <code>describe</code
 <pre><code>. describe, short
 
 Contains data from /Applications/Stata/ado/base/b/bplong.dta
-  obs:           240                          fictional blood-pressure data
- vars:             5                          1 May 2018 11:28
+ Observations:           240                  Fictional blood-pressure data
+    Variables:             5                  1 May 2020 11:28
 Sorted by: patient
 
 </code></pre>
@@ -618,8 +621,8 @@ We can run commands on the other frame either by changing to that frame with <co
 <pre><code>. frame default: describe, short
 
 Contains data from /Applications/Stata/ado/base/a/auto.dta
-  obs:            74                          1978 Automobile Data
- vars:            12                          13 Apr 2018 17:45
+ Observations:            74                  1978 automobile data
+    Variables:            12                  13 Apr 2020 17:45
 Sorted by: foreign
 
 </code></pre>
@@ -632,13 +635,13 @@ When you load a data set, it gets loaded into your computer’s memory. If you k
 Use <code>frame drop</code> to dispose of old frames.
 </p>
 <pre><code>. frame dir
-  default   74 x 12; 1978 Automobile Data
-  newframe  240 x 5; fictional blood-pressure data
+  default   74 x 12; 1978 automobile data
+  newframe  240 x 5; Fictional blood-pressure data
 
 . frame drop default
 
 . frame dir
-  newframe  240 x 5; fictional blood-pressure data
+  newframe  240 x 5; Fictional blood-pressure data
 
 </code></pre>
 </div>
@@ -652,10 +655,10 @@ Often you may want to create a <code>collapse</code>’d or otherwise modified v
 . frame newframe2: collapse (mean) bp, by(patient)
 
 . frame dir
-  newframe   240 x 5; fictional blood-pressure data
-* newframe2  120 x 2; fictional blood-pressure data
+  newframe   240 x 5; Fictional blood-pressure data
+* newframe2  120 x 2; Fictional blood-pressure data
 
-Note: frames marked with * contain unsaved data
+Note: Frames marked with * contain unsaved data.
 
 </code></pre>
 <p>
@@ -710,7 +713,6 @@ If you haven’t already, play with <a href="working-with-data-sets.html#tempora
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -740,6 +742,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

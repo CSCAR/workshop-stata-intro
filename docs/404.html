@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Appendix | Introduction to Stata</title>
-  <meta name="description" content="Chapter 7 Appendix | Introduction to Stata" />
+  <title>Page not found | Introduction to Stata</title>
+  <meta name="description" content="Page not found | Introduction to Stata" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Appendix | Introduction to Stata" />
+  <meta property="og:title" content="Page not found | Introduction to Stata" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Appendix | Introduction to Stata" />
+  <meta name="twitter:title" content="Page not found | Introduction to Stata" />
   
   
   
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="programming-advanced-features.html"/>
+
 
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -247,382 +247,18 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="appendix" class="section level1" number="7">
-<h1><span class="header-section-number">Chapter 7</span> Appendix</h1>
-<div id="solutions" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Solutions</h2>
-<div id="exercise-1-solution" class="section level3" number="7.1.1">
-<h3><span class="header-section-number">7.1.1</span> Exercise 1 Solution</h3>
-<p>
-<a href="working-with-data-sets.html#exercise-1">Exercise 1</a>
-</p>
-<p>
-1:
-</p>
-<pre><code>sysuse lifeexp
-</code></pre>
-<p>
-3:
-</p>
-<pre><code>sysuse sandstone, clear
-</code></pre>
-<p>
-or
-</p>
-<pre><code>clear
-sysuse sandstone
-</code></pre>
-<p>
-4: If the working directory isn’t convenient, change it using the dialogue box. Then, <code>save sandstone</code>.
-</p>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
-<div id="exercise-2-solution" class="section level3" number="7.1.2">
-<h3><span class="header-section-number">7.1.2</span> Exercise 2 Solution</h3>
-<p>
-<a href="data-management.html#exercise-2">Exercise 2</a>
-</p>
-<p>
-1:
-</p>
-<pre><code>webuse census9, clear
-</code></pre>
-<p>
-2: Data is from the 1980 census, which we can see by the label (visible in <code>describe, simple</code>). We’ve got two identifiers of state, death rate, population, median age and census region.
-</p>
-<p>
-3: Since there data has 50 rows, it’s a good guess there are no missing sates.
-</p>
-<p>
-4: Looking at <code>describe</code>, we see that the two state identifiers are strings, the rest numeric.
-</p>
-<p>
-5: <code>compress</code>. Nothing saved! Because Stata already did it before posting it!
-</p>
-</div>
-<div id="exercise-3-solution" class="section level3" number="7.1.3">
-<h3><span class="header-section-number">7.1.3</span> Exercise 3 Solution</h3>
-<p>
-<a href="data-management.html#exercise-3">Exercise 3</a>
-</p>
-<p>
-1:
-</p>
-<pre><code>. webuse census9, clear
-(1980 Census data by state)
-
-. save mycensus9
-file mycensus9.dta saved
-
-</code></pre>
-<p>
-2:
-</p>
-<pre><code>. rename drate deathrate
-
-. label variable deathrate &quot;Death rate per 10,000&quot;
-
-</code></pre>
-<p>
-3:
-</p>
-<pre><code>. tab region
-
-     Census |
-     region |      Freq.     Percent        Cum.
-------------+-----------------------------------
-         NE |          9       18.00       18.00
-    N Cntrl |         12       24.00       42.00
-      South |         16       32.00       74.00
-       West |         13       26.00      100.00
-------------+-----------------------------------
-      Total |         50      100.00
-
-. label list cenreg
-cenreg:
-           1 NE
-           2 N Cntrl
-           3 South
-           4 West
-
-. label define region_label 1 &quot;Northeast&quot; 2 &quot;North Central&quot; 3 &quot;South&quot; 4 &quot;West&quot;
-
-. label values region region_label
-
-. label drop cenreg
-
-. label list
-region_label:
-           1 Northeast
-           2 North Central
-           3 South
-           4 West
-
-. tab region
-
-Census region |      Freq.     Percent        Cum.
---------------+-----------------------------------
-    Northeast |          9       18.00       18.00
-North Central |         12       24.00       42.00
-        South |         16       32.00       74.00
-         West |         13       26.00      100.00
---------------+-----------------------------------
-        Total |         50      100.00
-
-</code></pre>
-<p>
-4:
-</p>
-<pre><code>. save, replace
-file mycensus9.dta saved
-
-</code></pre>
-</div>
-<div id="exercise-4-solution" class="section level3" number="7.1.4">
-<h3><span class="header-section-number">7.1.4</span> Exercise 4 Solution</h3>
-<p>
-<a href="data-management.html#exercise-4">Exercise 4</a>
-</p>
-<p>
-1: Use <code>summarize</code> and <code>codebook</code> to take a look at the mean/max/min. No errors detected/
-</p>
-<p>
-2:
-</p>
-<pre><code>. codebook, compact
-
-Variable   Obs Unique     Mean     Min       Max  Label
--------------------------------------------------------------------------------
-state       50     50        .       .         .  State
-state2      50     50        .       .         .  Two-letter state abbreviation
-deathrate   50     30     84.3      40       107  Death rate per 10,000
-pop         50     50  4518149  401851  2.37e+07  Population
-medage      50     37    29.54    24.2      34.7  Median age
-region      50      4     2.66       1         4  Census region
--------------------------------------------------------------------------------
-
-</code></pre>
-<p>
-<code>deathrate</code> and <code>medage</code> both have less than 50 unique values. This is due to both being heavily rounded. If we saw more precision, there would be more unique entires.
-</p>
-<p>
-3:
-</p>
-<pre><code>. codebook, problems
-
-   Potential problems in dataset   mycensus9.dta
-
-               potential problem   variables
---------------------------------------------------
-  string vars with embedded blanks   state
---------------------------------------------------
-
-</code></pre>
-<p>
-This just flags spaces (" ") in the data. Not a real problem!
-</p>
-</div>
-<div id="exercise-5-solution" class="section level3" number="7.1.5">
-<h3><span class="header-section-number">7.1.5</span> Exercise 5 Solution</h3>
-<p>
-<a href="data-manipulation.html#exercise-5">Exercise 5</a>
-</p>
-<p>
-1:
-</p>
-<pre><code>. gen deathperc = deathrate/10000
-
-. label variable deathperc &quot;Percentage of population deceeased in 1980&quot;
-
-. list death* in 1/5
-
-     +---------------------+
-     | deathr~e   deathp~c |
-     |---------------------|
-  1. |       91      .0091 |
-  2. |       40       .004 |
-  3. |       78      .0078 |
-  4. |       99      .0099 |
-  5. |       79      .0079 |
-     +---------------------+
-
-</code></pre>
-<p>
-2:
-</p>
-<pre><code>. gen agecat = 1 if medage &lt; .
-
-. replace agecat = 2 if medage &gt; 26.2 &amp; medage &lt;= 30.1
-(30 real changes made)
-
-. replace agecat = 3 if medage &gt; 30.1 &amp; medage &lt;= 32.8
-(17 real changes made)
-
-. replace agecat = 4 if medage &gt; 32.8
-(1 real change made)
-
-. label define agecat_label 1 &quot;Significantly below national average&quot; ///
-&gt;                           2 &quot;Below national average&quot; ///
-&gt;                           3 &quot;Above national average&quot; ///
-&gt;                           4 &quot;Significantly above national average&quot;
-
-. label values agecat agecat_label
-
-. tab agecat, mi
-
-                              agecat |      Freq.     Percent        Cum.
--------------------------------------+-----------------------------------
-Significantly below national average |          2        4.00        4.00
-              Below national average |         30       60.00       64.00
-              Above national average |         17       34.00       98.00
-Significantly above national average |          1        2.00      100.00
--------------------------------------+-----------------------------------
-                               Total |         50      100.00
-
-</code></pre>
-<p>
-We have no missing data (seen with <code>summarize</code> and <code>codebook</code> in the previous exercise) but it’s good practice to check for them anyways.
-</p>
-<p>
-3:
-</p>
-<pre><code>. bysort agecat: summarize deathrate
-
--------------------------------------------------------------------------------
--&gt; agecat = Significantly below national average
-
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
--------------+---------------------------------------------------------
-   deathrate |          2        47.5     10.6066         40         55
-
--------------------------------------------------------------------------------
--&gt; agecat = Below national average
-
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
--------------+---------------------------------------------------------
-   deathrate |         30    81.76667    9.761583         50         94
-
--------------------------------------------------------------------------------
--&gt; agecat = Above national average
-
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
--------------+---------------------------------------------------------
-   deathrate |         17    91.76471    8.422659         73        104
-
--------------------------------------------------------------------------------
--&gt; agecat = Significantly above national average
-
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
--------------+---------------------------------------------------------
-   deathrate |          1         107           .        107        107
-
-
-</code></pre>
-<p>
-We see that the groups with the higher median age tend to have higher deathrates.
-</p>
-<p>
-4:
-</p>
-<pre><code>. preserve
-
-. gsort -deathrate
-
-. list state deathrate in 1
-
-     +--------------------+
-     | state     deathr~e |
-     |--------------------|
-  1. | Florida        107 |
-     +--------------------+
-
-. gsort +deathrate
-
-. list state deathrate in 1
-
-     +-------------------+
-     | state    deathr~e |
-     |-------------------|
-  1. | Alaska         40 |
-     +-------------------+
-
-. gsort -medage
-
-. list state medage in 1
-
-     +------------------+
-     | state     medage |
-     |------------------|
-  1. | Florida    34.70 |
-     +------------------+
-
-. gsort +medage
-
-. list state medage in 1
-
-     +----------------+
-     | state   medage |
-     |----------------|
-  1. | Utah     24.20 |
-     +----------------+
-
-. restore
-
-</code></pre>
-<p>
-5:
-</p>
-<pre><code>. encode state2, gen(statecodes)
-
-. codebook statecodes
-
--------------------------------------------------------------------------------
-statecodes                                        Two-letter state abbreviation
--------------------------------------------------------------------------------
-
-                  type:  numeric (long)
-                 label:  statecodes
-
-                 range:  [1,50]                       units:  1
-         unique values:  50                       missing .:  0/50
-
-              examples:  10    GA
-                         20    MD
-                         30    NH
-                         40    SC
-
-</code></pre>
-
-</div>
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="programming-advanced-features.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
 
     </div>
   </div>

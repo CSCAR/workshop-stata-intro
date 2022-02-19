@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 The Basics of Stata | Introduction to Stata</title>
   <meta name="description" content="Chapter 2 The Basics of Stata | Introduction to Stata" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 The Basics of Stata | Introduction to Stata" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2021-02-19" />
+<meta name="date" content="2022-02-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="working-with-data-sets.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 
@@ -338,11 +341,11 @@ Let’s try running a Stata command. In the command pane, type (or copy and past
 The following should appear in the Results pane:
 </p>
 <pre><code>. version
-version 16.0
+version 17.0
 
 </code></pre>
 <p>
-The first line proceeded by the <code>.</code> indicates the command that was written, <code>version</code>, and the rest is the output. Here, I am running Stata version 16.0 (your version may vary).
+The first line proceeded by the <code>.</code> indicates the command that was written, <code>version</code>, and the rest is the output. Here, I am running Stata version 17.0 (your version may vary).
 </p>
 <p>
 In this document, if you see a single command without a period, it indicates something that was not run - either it’s not designed to be run (it’s fake code designed to illustrate a point), or more likely, the output is not interesting or unnecessary. If you instead see a Results output where the first line is the command prefaced by the <code>.</code>, that was run in Stata and only the Results are included since they include the command. The command can still be run, <em>but should be run without the <code>.</code></em><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.
@@ -388,7 +391,7 @@ Version 15 of Stata introduced “dyndoc” which allows you to weave together n
 <div id="updating" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Updating</h2>
 <p>
-If you have administrative access on your computer (e.g. if it is your personal machine, or your IT department has given you the ability), you can update Stata freely. Major point upgrades such as the newly released 16.0 require purchase and re-installation, but minor upgrades (such as the 14.1 and 14.2 updates) as well as minor internal updates are free.
+If you have administrative access on your computer (e.g. if it is your personal machine, or your IT department has given you the ability), you can update Stata freely. Major point upgrades such as the newly released 17.0 require purchase and re-installation, but minor upgrades (such as the 16.1 and 16.2 updates) as well as minor internal updates are free.
 </p>
 <p>
 To check for updates, you can run
@@ -481,11 +484,11 @@ compress
 Once the lines are in the editor, highlight the commands (you do not need to highlight the entire line, you merely need to ensure your selection includes part of every line you want run) and press the “Execute/Do” (on Windows) or “Do” (on Mac) button. You should see the following appear in your Results pane.
 </p>
 <pre><code>. sysuse auto, clear
-(1978 Automobile Data)
+(1978 automobile data)
 
 . summarize price
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         74    6165.257    2949.496       3291      15906
 
@@ -515,7 +518,7 @@ First, to comment out an entire line, precede it by <code>*</code>:
 Second, you can add a comment to the end of a line with <code>//</code>
 </p>
 <pre><code>. version // Returns the Stata version number
-version 16.0
+version 17.0
 
 . // You can also use it to comment out an entire line.
 </code></pre>
@@ -535,7 +538,7 @@ Thirdly, you can comment out a section by wrapping it in <code>/*</code> and <co
 &gt; It just keeps going. */
 . summarize /* comment in the middle of a command! */ price
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         74    6165.257    2949.496       3291      15906
 
@@ -549,7 +552,7 @@ Finally, there’s the special comment, <code>///</code>. Stata commands must be
 <pre><code>. summarize ///
 &gt; price
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         74    6165.257    2949.496       3291      15906
 
@@ -569,7 +572,7 @@ When writing a Do-file, you generally are creating it while using a single versi
 <pre><code>version 14.2
 </code></pre>
 <p>
-to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you’ve updated to Stata 16. This works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 16 when you only have Stata 14 installed.)
+to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you’ve updated to Stata 17. This works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 17 when you only have Stata 14 installed.)
 </p>
 <p>
 Note that this <code>version</code> is the same command as the <code>version</code> we’ve been discussing <a href="the-basics-of-stata.html#give-stata-a-command">before</a>. It operates in this special fashion only when included at the top of a Do-file.
@@ -767,7 +770,6 @@ There are some distinctions between Windows and Mac in regards to file paths, th
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -797,6 +799,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
