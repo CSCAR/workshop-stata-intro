@@ -24,7 +24,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2022-02-19" />
+<meta name="date" content="2022-02-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -478,7 +478,7 @@ Let’s manually add some commands to a Do-file to see how to execute the comman
 </p>
 <pre><code>sysuse auto, clear
 summarize price
-compress
+tabulate foreign
 </code></pre>
 <p>
 Once the lines are in the editor, highlight the commands (you do not need to highlight the entire line, you merely need to ensure your selection includes part of every line you want run) and press the “Execute/Do” (on Windows) or “Do” (on Mac) button. You should see the following appear in your Results pane.
@@ -492,17 +492,18 @@ Once the lines are in the editor, highlight the commands (you do not need to hig
 -------------+---------------------------------------------------------
        price |         74    6165.257    2949.496       3291      15906
 
-. compress
-  variable mpg was int now byte
-  variable rep78 was int now byte
-  variable trunk was int now byte
-  variable turn was int now byte
-  variable make was str18 now str17
-  (370 bytes saved)
+. tabulate foreign
+
+ Car origin |      Freq.     Percent        Cum.
+------------+-----------------------------------
+   Domestic |         52       70.27       70.27
+    Foreign |         22       29.73      100.00
+------------+-----------------------------------
+      Total |         74      100.00
 
 </code></pre>
 <p>
-We will cover in later sections what each of these commands does (<a href="working-with-data-sets.html#built-in-data"><code>sysuse</code></a>, <a href="data-management.html#summarizing-the-data"><code>summarize</code></a>, <a href="data-management.html#compressing-data"><code>compress</code></a>).
+We will cover in later sections what each of these commands does (<a href="working-with-data-sets.html#built-in-data"><code>sysuse</code></a>, <a href="data-management.html#summarizing-the-data"><code>summarize</code></a>, <a href="data-management.html#labeling-values"><code>tabulate</code></a>).
 </p>
 <div id="comments" class="section level3" number="2.6.1">
 <h3><span class="header-section-number">2.6.1</span> Comments</h3>
@@ -628,10 +629,7 @@ Depending on the command, the list of variables can contain 0 variables, 1 varia
 Above, in the do-file, we ran three lines of code. The first, <code>sysuse auto</code>, is a system command that we’ll discuss later.
 </p>
 <p>
-The second, <code>summarize price</code>, follows the basic syntax - “summarize” is the command, and “price” is a single variable it operates on.
-</p>
-<p>
-The last line, <code>compress</code>, has “compress” as the command and has no additional variables.
+The second and third lines, <code>summarize price mpg</code> and <code>tabulate foreign</code>, follow the basic syntax - “<code>summarize</code>” and “<code>tabulate</code>” are the commands. “<code>summarize</code>” is operating on two variables, “price” and “mpg”; the order in which the variables appear in the command controls the order in which they appear in the table. “<code>tabulate</code>” is operating on a single variable, creating a one-way table; putting a second variable transforms it into a two-way table.
 </p>
 <p>
 The options are not required (none of the above commands have options), but if they are given, they too are separated by spaces. There are some options that are consistent across a number of commands, and some options are specific to commands.
@@ -721,6 +719,9 @@ In the same sense, when referring to files, any file in the working directory ca
 </p>
 <pre><code>use mydata.dta
 </code></pre>
+<p>
+(Technically you could just run <code>use mydata</code> as Stata will search for a file with the appropriate “.dta” extension automatically.)
+</p>
 <p>
 If you were in a different working directory, you need to specify the full path to the file:
 </p>

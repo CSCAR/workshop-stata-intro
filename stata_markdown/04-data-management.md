@@ -226,7 +226,7 @@ category.
 
 ~~~~
 <<dd_do>>
-tab foreign
+tabulate foreign
 <</dd_do>>
 ~~~~
 
@@ -245,7 +245,7 @@ Let's look at that table ignoring the value labels:
 
 ~~~~
 <<dd_do>>
-tab foreign, nolabel
+tabulate foreign, nolabel
 <</dd_do>>
 ~~~~
 
@@ -331,7 +331,7 @@ label list
 ~~~~
 
 This will *not* remove the value labels from any variables, but they will no longer be active (i.e. if you run `describe` it will still show that the
-value labels are attached, but running `tab` will not use them). So in order to completely remove a value label, you'll need to both remove it from
+value labels are attached, but running `tabulate` will not use them). So in order to completely remove a value label, you'll need to both remove it from
 the variable as well as the data.
 
 **Do not forget** that modifying value labels counts as modifying the data. Make sure you `save, replace` after making these modifications (if you
@@ -428,7 +428,7 @@ If you've changed to a different data set, load "census9" back up with `webuse`.
     1. [Create a new value label][labeling values] which uses "Northeast" and "North Central" instead of "NE" and "N Cntrl".
     2. Attach this new value label to `region`.
     3. Remove the existing value label "cenreg".
-    4. Use `label list` and `tab` to confirm it worked.
+    4. Use `label list` and `tabulate` to confirm it worked.
 4. Save the data, replacing the version you created in step 1.
 
 ^#^^#^ Summarizing the data

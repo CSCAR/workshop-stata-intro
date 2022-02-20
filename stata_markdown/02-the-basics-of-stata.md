@@ -185,7 +185,7 @@ Let's manually add some commands to a Do-file to see how to execute the commands
 ```
 sysuse auto, clear
 summarize price
-compress
+tabulate foreign
 ```
 
 Once the lines are in the editor, highlight the commands (you do not need to highlight the entire line, you merely need to ensure your selection
@@ -196,12 +196,12 @@ Results pane.
 <<dd_do>>
 sysuse auto, clear
 summarize price
-compress
+tabulate foreign
 <</dd_do>>
 ~~~~
 
 We will cover in later sections what each of these commands does ([`sysuse`][built-in data], [`summarize`][summarizing the data],
-[`compress`][compressing data]).
+[`tabulate`][labeling values]).
 
 ^#^^#^^#^ Comments
 
@@ -314,9 +314,10 @@ variables matters depends on the specific command.
 
 Above, in the do-file, we ran three lines of code. The first, `sysuse auto`, is a system command that we'll discuss later.
 
-The second, `summarize price`, follows the basic syntax - "summarize" is the command, and "price" is a single variable it operates on.
-
-The last line, `compress`, has "compress" as the command and has no additional variables.
+The second and third lines, `summarize price mpg` and `tabulate foreign`, follow the basic syntax - "`summarize`" and "`tabulate`" are the commands.
+"`summarize`" is operating on two variables, "price" and "mpg"; the order in which the variables appear in the command controls the order in which
+they appear in the table. "`tabulate`" is operating on a single variable, creating a one-way table; putting a second variable transforms it into a
+two-way table.
 
 The options are not required (none of the above commands have options), but if they are given, they too are separated by spaces. There are some
 options that are consistent across a number of commands, and some options are specific to commands.
@@ -395,6 +396,8 @@ into detail about doing this [later][opening data]) named "mydata.dta" which is 
 ```
 use mydata.dta
 ```
+
+(Technically you could just run `use mydata` as Stata will search for a file with the appropriate ".dta" extension automatically.)
 
 If you were in a different working directory, you need to specify the full path to the file:
 

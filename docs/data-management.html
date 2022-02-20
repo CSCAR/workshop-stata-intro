@@ -24,7 +24,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2022-02-19" />
+<meta name="date" content="2022-02-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -253,7 +253,7 @@
 Throughout this chapter, we’ll be using the “auto” data set which is distributed with Stata. It can be loaded via
 </p>
 <pre><code>. sysuse auto
-(1978 Automobile Data)
+(1978 automobile data)
 
 </code></pre>
 <p>
@@ -317,8 +317,8 @@ Finally, you often don’t need to give the entire name of the variable, just en
 </p>
 <pre><code>. describe headr
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 headroom        float   %6.1f                 Headroom (in.)
 
@@ -343,25 +343,25 @@ The first command you should run is <code>describe</code>.
 <pre><code>. describe
 
 Contains data from /Applications/Stata/ado/base/a/auto.dta
-  obs:            74                          1978 Automobile Data
- vars:            12                          13 Apr 2018 17:45
+ Observations:            74                  1978 automobile data
+    Variables:            12                  13 Apr 2020 17:45
                                               (_dta has notes)
 -------------------------------------------------------------------------------
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
-make            str18   %-18s                 Make and Model
+make            str18   %-18s                 Make and model
 price           int     %8.0gc                Price
 mpg             int     %8.0g                 Mileage (mpg)
-rep78           int     %8.0g                 Repair Record 1978
+rep78           int     %8.0g                 Repair record 1978
 headroom        float   %6.1f                 Headroom (in.)
 trunk           int     %8.0g                 Trunk space (cu. ft.)
 weight          int     %8.0gc                Weight (lbs.)
 length          int     %8.0g                 Length (in.)
-turn            int     %8.0g                 Turn Circle (ft.)
+turn            int     %8.0g                 Turn circle (ft.)
 displacement    int     %8.0g                 Displacement (cu. in.)
-gear_ratio      float   %6.2f                 Gear Ratio
-foreign         byte    %8.0g      origin     Car type
+gear_ratio      float   %6.2f                 Gear ratio
+foreign         byte    %8.0g      origin     Car origin
 -------------------------------------------------------------------------------
 Sorted by: foreign
 
@@ -391,15 +391,15 @@ Finally, if the data is sorted, <code>describe</code> will provide information a
 </p>
 <pre><code>. describe mpg
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 mpg             int     %8.0g                 Mileage (mpg)
 
 . describe trunk displacement
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 trunk           int     %8.0g                 Trunk space (cu. ft.)
 displacement    int     %8.0g                 Displacement (cu. in.)
@@ -411,8 +411,8 @@ If you have a very large number of variables you may wish to suppress the table 
 <pre><code>. describe, short
 
 Contains data from /Applications/Stata/ado/base/a/auto.dta
-  obs:            74                          1978 Automobile Data
- vars:            12                          13 Apr 2018 17:45
+ Observations:            74                  1978 automobile data
+    Variables:            12                  13 Apr 2020 17:45
 Sorted by: foreign
 
 </code></pre>
@@ -445,8 +445,8 @@ Understanding the above is not that important these days as computer power and s
 . describe, short
 
 Contains data from /Applications/Stata/ado/base/a/auto.dta
-  obs:            74                          1978 Automobile Data
- vars:            12                          13 Apr 2018 17:45
+ Observations:            74                  1978 automobile data
+    Variables:            12                  13 Apr 2020 17:45
 Sorted by: foreign
      Note: Dataset has changed since last saved.
 
@@ -497,25 +497,25 @@ We can easily add more information with a variable label. If you look at the <co
 <pre><code>. describe
 
 Contains data from /Applications/Stata/ado/base/a/auto.dta
-  obs:            74                          1978 Automobile Data
- vars:            12                          13 Apr 2018 17:45
+ Observations:            74                  1978 automobile data
+    Variables:            12                  13 Apr 2020 17:45
                                               (_dta has notes)
 -------------------------------------------------------------------------------
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
-make            str17   %-17s                 Make and Model
+make            str17   %-17s                 Make and model
 price           int     %8.0gc                Price
 mpg             byte    %8.0g                 Mileage (mpg)
-rep78           byte    %8.0g                 Repair Record 1978
+rep78           byte    %8.0g                 Repair record 1978
 headroom        float   %6.1f                 Headroom (in.)
 trunk           byte    %8.0g                 Trunk space (cu. ft.)
 weight          int     %8.0gc                Weight (lbs.)
 length          int     %8.0g                 Length (in.)
-turn            byte    %8.0g                 Turn Circle (ft.)
+turn            byte    %8.0g                 Turn circle (ft.)
 displacement    int     %8.0g                 Displacement (cu. in.)
-gear_ratio      float   %6.2f                 Gear Ratio
-foreign         byte    %8.0g      origin     Car type
+gear_ratio      float   %6.2f                 Gear ratio
+foreign         byte    %8.0g      origin     Car origin
 -------------------------------------------------------------------------------
 Sorted by: foreign
      Note: Dataset has changed since last saved.
@@ -533,8 +533,8 @@ For example:
 
 . describe turn
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 turn            byte    %8.0g                 Some new label for turn
 
@@ -546,8 +546,8 @@ To remove a variable label, you can call <code>label variable &lt;varname&gt;</c
 
 . describe turn
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 turn            byte    %8.0g                 
 
@@ -561,9 +561,9 @@ It is tempting to store categorical variables as strings. If you ask, for exampl
 <p>
 Stata allows you to store this value labels information within the data set, such that whenever the values are output, the labels are printed instead. Let’s take a look at the <code>foreign</code> variable. This variable takes on two levels, and we can tabulate it to see how many cars are in each category.
 </p>
-<pre><code>. tab foreign
+<pre><code>. tabulate foreign
 
-   Car type |      Freq.     Percent        Cum.
+ Car origin |      Freq.     Percent        Cum.
 ------------+-----------------------------------
    Domestic |         52       70.27       70.27
     Foreign |         22       29.73      100.00
@@ -576,10 +576,10 @@ Here it appears that <code>foreign</code> is stored as two strings, but we know 
 </p>
 <pre><code>. describe foreign
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
-foreign         byte    %8.0g      origin     Car type
+foreign         byte    %8.0g      origin     Car origin
 
 </code></pre>
 <p>
@@ -588,9 +588,9 @@ Additionally, if you look at the data through Data Editor or Data Browser, you s
 <p>
 Let’s look at that table ignoring the value labels:
 </p>
-<pre><code>. tab foreign, nolabel
+<pre><code>. tabulate foreign, nolabel
 
-   Car type |      Freq.     Percent        Cum.
+ Car origin |      Freq.     Percent        Cum.
 ------------+-----------------------------------
           0 |         52       70.27       70.27
           1 |         22       29.73      100.00
@@ -606,10 +606,10 @@ Look at the <code>describe</code> output:
 </p>
 <pre><code>. describe foreign
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
-foreign         byte    %8.0g      origin     Car type
+foreign         byte    %8.0g      origin     Car origin
 
 </code></pre>
 <p>
@@ -659,10 +659,10 @@ To remove the value labels from a variable, use the <code>label values &lt;varia
 
 . describe foreign
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
-foreign         byte    %8.0g                 Car type
+foreign         byte    %8.0g                 Car origin
 
 </code></pre>
 <p>
@@ -689,7 +689,7 @@ origin:
 
 </code></pre>
 <p>
-This will <em>not</em> remove the value labels from any variables, but they will no longer be active (i.e. if you run <code>describe</code> it will still show that the value labels are attached, but running <code>tab</code> will not use them). So in order to completely remove a value label, you’ll need to both remove it from the variable as well as the data.
+This will <em>not</em> remove the value labels from any variables, but they will no longer be active (i.e. if you run <code>describe</code> it will still show that the value labels are attached, but running <code>tabulate</code> will not use them). So in order to completely remove a value label, you’ll need to both remove it from the variable as well as the data.
 </p>
 <p>
 <strong>Do not forget</strong> that modifying value labels counts as modifying the data. Make sure you <code>save, replace</code> after making these modifications (if you want to keep them) or they’ll be lost!
@@ -821,7 +821,7 @@ Attach this new value label to <code>region</code>.
 Remove the existing value label “cenreg”.
 </li>
 <li>
-Use <code>label list</code> and <code>tab</code> to confirm it worked.
+Use <code>label list</code> and <code>tabulate</code> to confirm it worked.
 </li>
 </ol>
 </li>
@@ -857,7 +857,7 @@ There are numerous ways to look at summary statistics, from obtaining one-number
 </p>
 <pre><code>. summarize
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
      foreign |         74    .2972973    .4601885          0          1
         make |          0
@@ -900,7 +900,7 @@ Are the max and min reasonable? If the minimum <code>LENGTH</code> was -9, that�
 </p>
 <pre><code>. summarize t*
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
         turn |         74    39.64865    4.399354         31         51
        trunk |         74    13.75676    4.277404          5         23
@@ -913,26 +913,26 @@ For more detailed information, we can look at the codebook. <code>codebook</code
 First, categorical data:
 </p>
 <pre><code>. sysuse auto, clear
-(1978 Automobile Data)
+(1978 automobile data)
 
 . codebook rep78
 
 -------------------------------------------------------------------------------
-rep78                                                        Repair Record 1978
+rep78                                                        Repair record 1978
 -------------------------------------------------------------------------------
 
-                  type:  numeric (int)
+                  Type: Numeric (int)
 
-                 range:  [1,5]                        units:  1
-         unique values:  5                        missing .:  5/74
+                 Range: [1,5]                         Units: 1
+         Unique values: 5                         Missing .: 5/74
 
-            tabulation:  Freq.  Value
-                             2  1
-                             8  2
-                            30  3
-                            18  4
-                            11  5
-                             5  .
+            Tabulation: Freq.  Value
+                            2  1
+                            8  2
+                           30  3
+                           18  4
+                           11  5
+                            5  .
 
 </code></pre>
 <p>
@@ -947,16 +947,16 @@ Next, continuous variables:
 price                                                                     Price
 -------------------------------------------------------------------------------
 
-                  type:  numeric (int)
+                  Type: Numeric (int)
 
-                 range:  [3291,15906]                 units:  1
-         unique values:  74                       missing .:  0/74
+                 Range: [3291,15906]                  Units: 1
+         Unique values: 74                        Missing .: 0/74
 
-                  mean:   6165.26
-              std. dev:    2949.5
+                  Mean: 6165.26
+             Std. dev.:  2949.5
 
-           percentiles:        10%       25%       50%       75%       90%
-                              3895      4195    5006.5      6342     11385
+           Percentiles:     10%       25%       50%       75%       90%
+                           3895      4195    5006.5      6342     11385
 
 </code></pre>
 <p>
@@ -968,19 +968,19 @@ Finally, string variables:
 <pre><code>. codebook make
 
 -------------------------------------------------------------------------------
-make                                                             Make and Model
+make                                                             Make and model
 -------------------------------------------------------------------------------
 
-                  type:  string (str18), but longest is str17
+                  Type: String (str18), but longest is str17
 
-         unique values:  74                       missing &quot;&quot;:  0/74
+         Unique values: 74                        Missing &quot;&quot;: 0/74
 
-              examples:  &quot;Cad. Deville&quot;
-                         &quot;Dodge Magnum&quot;
-                         &quot;Merc. XR-7&quot;
-                         &quot;Pont. Catalina&quot;
+              Examples: &quot;Cad. Deville&quot;
+                        &quot;Dodge Magnum&quot;
+                        &quot;Merc. XR-7&quot;
+                        &quot;Pont. Catalina&quot;
 
-               warning:  variable has embedded blanks
+               Warning: Variable has embedded blanks.
 
 </code></pre>
 <p>
@@ -993,18 +993,18 @@ Two options for <code>codebook</code> which come in handy:
 
 Variable      Obs Unique      Mean   Min    Max  Label
 -------------------------------------------------------------------------------
-make           74     74         .     .      .  Make and Model
+make           74     74         .     .      .  Make and model
 price          74     74  6165.257  3291  15906  Price
 mpg            74     21   21.2973    12     41  Mileage (mpg)
-rep78          69      5  3.405797     1      5  Repair Record 1978
+rep78          69      5  3.405797     1      5  Repair record 1978
 headroom       74      8  2.993243   1.5      5  Headroom (in.)
 trunk          74     18  13.75676     5     23  Trunk space (cu. ft.)
 weight         74     64  3019.459  1760   4840  Weight (lbs.)
 length         74     47  187.9324   142    233  Length (in.)
-turn           74     18  39.64865    31     51  Turn Circle (ft.)
+turn           74     18  39.64865    31     51  Turn circle (ft.)
 displacement   74     31  197.2973    79    425  Displacement (cu. in.)
-gear_ratio     74     36  3.014865  2.19   3.89  Gear Ratio
-foreign        74      2  .2972973     0      1  Car type
+gear_ratio     74     36  3.014865  2.19   3.89  Gear ratio
+foreign        74      2  .2972973     0      1  Car origin
 -------------------------------------------------------------------------------
 
 </code></pre>
@@ -1013,12 +1013,12 @@ foreign        74      2  .2972973     0      1  Car type
 </p>
 <pre><code>. codebook, problems
 
-   Potential problems in dataset   /Applications/Stata/ado/base/a/auto.dta
+Potential problems in dataset /Applications/Stata/ado/base/a/auto.dta
 
-               potential problem   variables
+               Potential problem   Variables
 --------------------------------------------------
-  str# vars that may be compressed   make
-  string vars with embedded blanks   make
+str# vars that may be compressed   make
+string vars with embedded blanks   make
 --------------------------------------------------
 
 </code></pre>

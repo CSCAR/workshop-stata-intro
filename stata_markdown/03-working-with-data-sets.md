@@ -110,7 +110,7 @@ use patientdata in 1/100
 
 This loads just the first 100 rows (`a/b` is a "numlist" counting from "a" to "b" by integers).
 
-For further details, see `help use`, specifically the manual which has the full documentation.
+For further details, see `help use`, specifically the [manual](https://www.stata.com/manuals/duse.pdf) which has the full documentation.
 
 ^#^^#^ Editing data manually
 
@@ -181,7 +181,7 @@ technically none of these are "required", ignoring them will lead to a lot more 
 - Ensure each column is of one "type" - if the column is supposed to be numbers, don't include any words!
 - Make missing values blank (unless you are interested in types of missingness, in which case be sure to have a coherent coding scheme).
 
-Once you have cleaned your data, you can choose "File -> Import -> Excel Spreadsheet (*.xls, *.xlsx)". The next dialog allows you to tweak the
+Once you have cleaned your data, you can choose "File -> Import -> Excel Spreadsheet (.xls, .xlsx)". The next dialog allows you to tweak the
 options. Important options include
 
 - *Worksheet*: Make sure you are importing the correct sheet!
