@@ -492,8 +492,8 @@ codebook rep78
 <</dd_do>>
 ~~~~
 
-We see that `rep78` takes on six unique values (Up to 5 repairs, plus the missing data represented by `.`). If the unique values is more than
-expected, it's something to investigate.
+We see that `rep78` takes on five unique values, as well as having some missing values (`.`). If the unique values is more than expected, it's
+something to investigate.
 
 Next, continuous variables:
 
