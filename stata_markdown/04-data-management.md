@@ -79,8 +79,7 @@ describe
 
 This displays a large amount of information, so let's break in down.
 
-First, the header displays general data set information - the number of observations (`obs`, the number of rows) and variables (`vars`), as well as
-the file size^[Reported in bytes. Roughly 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, 1000 megabytes = 1 gigabyte.].
+First, the header displays general data set information - the number of observations (`obs`, the number of rows) and variables (`vars`).
 
 Next, there is a table listing each variable in the data and some information about them. The "storage type" can be one of `byte`, `int`, `long`,
 `float`, `double`; all of which are simply numbers. We'll touch on the differences between these when we discuss [`compress`][compressing data], but
@@ -140,14 +139,20 @@ Understanding the above is not that important these days as computer power and s
 reaching its limits. However, Stata does offer the `compress` command which attempts to store variables in the smallest possible type. For example, if
 a variable which is a float takes on only values 1 through 10, it is replaced by a byte (and similarly, strings are as long as the longest value).
 
+The `memory` command lets us see the size of our data, particularlly the first entry of "Data" under "Used" shows that we start with 3,182 bytes or
+roughly 3Kb.
+
 ~~~~
 <<dd_do>>
+memory
 compress
-describe, short
+memory
 <</dd_do>>
 ~~~~
 
 We see here a very modest saving (370 bytes, about 12%), but sometimes you can see much more significant gains.
+
+(When running Stata, instead of using `memory`, you can look at the "Size" entry in the [properties pane][the stata environment].)
 
 Don't be afraid of artificially restricting yourself going forward; if one of your values exceeds the limitations its type supports, Stata will
 automatically change types. So don't hesitate to run `compress` when loading new data or after some manipulations.

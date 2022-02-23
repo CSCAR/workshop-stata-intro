@@ -24,7 +24,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2022-02-22" />
+<meta name="date" content="2022-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -546,7 +546,7 @@ There are a lot of functions that can be used. We list some commonly used mathem
 <code>exp( )</code>: returns the exponential function of (e^x)
 </li>
 <li>
-<code>log( )</code> or <code>ln( )</code>: returns the natural logarithm of the argument<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>
+<code>log( )</code> or <code>ln( )</code>: returns the natural logarithm of the argument<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>
 </li>
 <li>
 <code>round( )</code>, <code>ceil( )</code>, <code>floor( )</code>: returns the rounded value (rounded to nearest integer, rounded up, and rounded down)
@@ -563,7 +563,7 @@ You can see a full accounting of all functions you can use in this setting in
 <div id="creating-dummies" class="section level3" number="5.2.1">
 <h3><span class="header-section-number">5.2.1</span> Creating dummies</h3>
 <p>
-Dummy variables (also known as indicator variables or binary variables) are variables which take on two values, 0 and 1<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>. These are typically used in a setting where the 0 represents an absence of something (or an answer of “no”) and 1 represents the presence (or an answer of “yes”). When naming dummy variables, you should keep this in mind to make understanding the variable easier, as well as extracting interpretations regarding the variable in a model.
+Dummy variables (also known as indicator variables or binary variables) are variables which take on two values, 0 and 1<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>. These are typically used in a setting where the 0 represents an absence of something (or an answer of “no”) and 1 represents the presence (or an answer of “yes”). When naming dummy variables, you should keep this in mind to make understanding the variable easier, as well as extracting interpretations regarding the variable in a model.
 </p>
 <p>
 For example, “gender” is a poor dummy variable - what does 0 gender or 1 gender represent? Obviously we could (and should) use <a href="data-management.html#labeling-values">value labels</a> to associate 0 and 1 with particular genders, but it is more straightforward to use “female” as the dummy variable - a 0 represents “no” to the question of “Female?”, hence male; and a 1 represents a “yes”, hence female.
@@ -572,7 +572,7 @@ For example, “gender” is a poor dummy variable - what does 0 gender or 1 gen
 If you are collecting data, consider collecting data as dummies where appropriate - if the question has a binary response, encode it as a dummy instead of strings. If a question has categorical responses, consider encoding them as a series of dummy variables instead (e.g. “Are you from MI?”, “Are you from OH?” etc). These changes will (usually) need to be made later anyways.
 </p>
 <p>
-Now here’s the trick: In Stata<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>, <a href="data-manipulation.html#restricting-commands-to-subsets">conditional statements</a> return 1 (True) and 0 (False). So we can use them in <code>generate</code> statements to create binary variables easily.
+Now here’s the trick: In Stata<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>, <a href="data-manipulation.html#restricting-commands-to-subsets">conditional statements</a> return 1 (True) and 0 (False). So we can use them in <code>generate</code> statements to create binary variables easily.
 </p>
 <pre><code>. generate price4k = price &gt; 4000
 
@@ -627,7 +627,7 @@ The <code>list</code> commands conditions on <code>cheap == 1</code> because aga
 <div id="hidden-variables" class="section level3" number="5.2.2">
 <h3><span class="header-section-number">5.2.2</span> Hidden variables</h3>
 <p>
-The name “hidden variables” may be slightly more dramatic than need be. In Stata, under the <a href="the-basics-of-stata.html#one-data">One Data</a> principal, any information in the data<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> must be in a variable. This includes the so called “hidden variables” of <code>_n</code> and <code>_N</code>. You can imagine that each row of your data has two additional columns of data, one for <code>_n</code> and one for <code>_N</code>.
+The name “hidden variables” may be slightly more dramatic than need be. In Stata, under the <a href="the-basics-of-stata.html#one-data">One Data</a> principal, any information in the data<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> must be in a variable. This includes the so called “hidden variables” of <code>_n</code> and <code>_N</code>. You can imagine that each row of your data has two additional columns of data, one for <code>_n</code> and one for <code>_N</code>.
 </p>
 <p>
 <code>_n</code> represents the row number currently. Currently, meaning if the data is re-sorted, <code>_n</code> can change.
@@ -723,7 +723,7 @@ variable weight was int now float
 
 </code></pre>
 <p>
-<code>replace</code> features syntax identical to <code>generate</code>.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>
+<code>replace</code> features syntax identical to <code>generate</code>.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>
 </p>
 <div id="conditional-variable-generation" class="section level3" number="5.3.1">
 <h3><span class="header-section-number">5.3.1</span> Conditional variable generation</h3>
@@ -946,7 +946,7 @@ First, we check the label to make sure we’re looking at the appropriate value 
 
 </code></pre>
 <p>
-we see that American cars are cheaper on average<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>.
+we see that American cars are cheaper on average<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>.
 </p>
 <div id="repeat-commands-on-subsets" class="section level3" number="5.5.1">
 <h3><span class="header-section-number">5.5.1</span> Repeat commands on subsets</h3>
@@ -1307,7 +1307,7 @@ mpg2            byte    %10.0g                Mileage (mpg)
 
 </code></pre>
 <p>
-And we’re back to the original set-up.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>
+And we’re back to the original set-up.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>
 </p>
 <p>
 When using <code>destring</code> to convert a string variable (that it storing numeric data as strings - “13”, “14”) to a numeric variable, if there are <em>any</em> non-numeric entries, <code>destring</code> will fail. For example, lets replace one the car “make” with a numeric.
@@ -2043,14 +2043,14 @@ If you have wide data and many time-varying variables, there is no shorthand for
 </div>
 <div class="footnotes">
 <hr />
-<ol start="8">
-<li id="fn8"><p>If you want log with a different base, you can use the transformation that dividing by <code>log(b)</code> is equivalent to using <code>b</code> as a base. In other words, if you need log base 10, use <code>gen newvar = log(oldvar)/log(10)</code>.<a href="data-manipulation.html#fnref8" class="footnote-back">↩︎</a></p></li>
-<li id="fn9"><p>Technically and mathematically they can take on any two values, but your life will be easier if you stick with the 0/1 convention.<a href="data-manipulation.html#fnref9" class="footnote-back">↩︎</a></p></li>
-<li id="fn10"><p>This is true of most statistical software in fact.<a href="data-manipulation.html#fnref10" class="footnote-back">↩︎</a></p></li>
-<li id="fn11"><p>We’ll see some exceptions to this in the <a target="_blank" href="programming-advanced-features.html">programming</a> section.<a href="data-manipulation.html#fnref11" class="footnote-back">↩︎</a></p></li>
-<li id="fn12"><p><code>generate</code> has a few features we do not discuss which <code>replace</code> does not support. Namely, <code>generate</code> can set the <a href="data-management.html#describing-the-data">type</a> manually (instead of letting Stata choose the best type <a href="data-management.html#compressing-data">automatically</a>), and <code>generate</code> can place the new variable as desired rather than <a href="data-management.html#changing-variable-ordering">using <code>order</code></a>. Clearly, neither of these features are needed for <code>replace</code>.<a href="data-manipulation.html#fnref12" class="footnote-back">↩︎</a></p></li>
-<li id="fn13"><p>Note that this is not a statistical claim, we would have to do a two-sample t-test to make any statistical claim.<a href="data-manipulation.html#fnref13" class="footnote-back">↩︎</a></p></li>
-<li id="fn14"><p>If you are sharp-eyed, you may have noticed that the original <code>mpg</code> was an “int” whereas the final one is a “byte”. If we had called <a href="data-management.html#compressing-data"><code>compress</code></a> on the original data, it would have done that type conversion anyways - so we’re ok!<a href="data-manipulation.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<ol start="7">
+<li id="fn7"><p>If you want log with a different base, you can use the transformation that dividing by <code>log(b)</code> is equivalent to using <code>b</code> as a base. In other words, if you need log base 10, use <code>gen newvar = log(oldvar)/log(10)</code>.<a href="data-manipulation.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>Technically and mathematically they can take on any two values, but your life will be easier if you stick with the 0/1 convention.<a href="data-manipulation.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>This is true of most statistical software in fact.<a href="data-manipulation.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>We’ll see some exceptions to this in the <a target="_blank" href="programming-advanced-features.html">programming</a> section.<a href="data-manipulation.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p><code>generate</code> has a few features we do not discuss which <code>replace</code> does not support. Namely, <code>generate</code> can set the <a href="data-management.html#describing-the-data">type</a> manually (instead of letting Stata choose the best type <a href="data-management.html#compressing-data">automatically</a>), and <code>generate</code> can place the new variable as desired rather than <a href="data-management.html#changing-variable-ordering">using <code>order</code></a>. Clearly, neither of these features are needed for <code>replace</code>.<a href="data-manipulation.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>Note that this is not a statistical claim, we would have to do a two-sample t-test to make any statistical claim.<a href="data-manipulation.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>If you are sharp-eyed, you may have noticed that the original <code>mpg</code> was an “int” whereas the final one is a “byte”. If we had called <a href="data-management.html#compressing-data"><code>compress</code></a> on the original data, it would have done that type conversion anyways - so we’re ok!<a href="data-manipulation.html#fnref13" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

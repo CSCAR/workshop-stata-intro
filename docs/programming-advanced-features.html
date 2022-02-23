@@ -24,7 +24,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2022-02-22" />
+<meta name="date" content="2022-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -287,7 +287,7 @@ label values `vars' mylab
 duplicates list `vars'
 </code></pre>
 <p>
-The first command, <code>local</code>, defines what is known as a “local macro”<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>. Whenever it is referred to, wrapped in a backtick (to the left of the 1 key at the top-left of the keyboard) and a single quote, Stata replaces it with the original text. So when you enter
+The first command, <code>local</code>, defines what is known as a “local macro”<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>. Whenever it is referred to, wrapped in a backtick (to the left of the 1 key at the top-left of the keyboard) and a single quote, Stata replaces it with the original text. So when you enter
 </p>
 <pre><code>list `vars' in 1/5
 </code></pre>
@@ -401,7 +401,7 @@ functions:
 Rather than try and keep track of what gets stored where, if you look at the very bottom of any help file, it will say something like “<code>summarize</code> stores the following in <code>r()</code>:” or “<code>mean</code> stores the following in <code>e()</code>:”, corresponding to <code>return</code> and <code>ereturn</code> respectively.
 </p>
 <p>
-Along with the <a href="the-basics-of-stata.html#one-data">One Data</a> principal, Stata also follows the One _-class principal - meaning you can only view the <code>return</code> or <code>ereturn</code> for the most recent command of that class. So if you run a <code>summarize</code> command, then do a bunch of n-class calls (<code>gsort</code> for example), the <code>return list</code> call will still give you the returns for that first <code>summarize</code>. However, as soon as you run another r-class command, you lose access to the first one. You can save any piece of it using a <a href="programming-advanced-features.html#macros">macro</a>. For example, to calculate the average difference in price between foreign and domestic cars<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>:
+Along with the <a href="the-basics-of-stata.html#one-data">One Data</a> principal, Stata also follows the One _-class principal - meaning you can only view the <code>return</code> or <code>ereturn</code> for the most recent command of that class. So if you run a <code>summarize</code> command, then do a bunch of n-class calls (<code>gsort</code> for example), the <code>return list</code> call will still give you the returns for that first <code>summarize</code>. However, as soon as you run another r-class command, you lose access to the first one. You can save any piece of it using a <a href="programming-advanced-features.html#macros">macro</a>. For example, to calculate the average difference in price between foreign and domestic cars<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>:
 </p>
 <pre><code>. summ price if foreign == 1
 
@@ -502,7 +502,7 @@ This produces a surprisingly large amount of output. When you initialize the use
 There is a potential fifth system variable list, <code>vldummy</code>, which is created when option <code>dummy</code> is passed. Unsurprisingly, this will take variables containing only values 0 and 1 out of <code>vlcategorical</code> and into this list.
 </p>
 <p>
-The “Notes” given below the output are generic; they appear regardless of how well Stata was able to categorize the variables. They can be suppressed with the <code>nonotes</code> option to <code>vl set</code><a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>.
+The “Notes” given below the output are generic; they appear regardless of how well Stata was able to categorize the variables. They can be suppressed with the <code>nonotes</code> option to <code>vl set</code><a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>.
 </p>
 <p>
 The two thresholds given above, 10 and 100, can be adjusted by the <code>categorical</code> and <code>uncertain</code> options. For example,
@@ -1782,10 +1782,10 @@ With a command that doesn’t error (listing <code>price</code>), both <code>qui
 </div>
 <div class="footnotes">
 <hr />
-<ol start="15">
-<li id="fn15"><p>“Local” as opposed to “global”, a distinction which is not important until you get deep into programming. For now, <code>local</code> is the safer option.<a href="programming-advanced-features.html#fnref15" class="footnote-back">↩︎</a></p></li>
-<li id="fn16"><p>There are obviously other ways to compute this, but this gives a flavor of the use.<a href="programming-advanced-features.html#fnref16" class="footnote-back">↩︎</a></p></li>
-<li id="fn17"><p>My guess is that <code>nonotes</code> will become the default in a version or 2, once users become used to <code>vl</code>.<a href="programming-advanced-features.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<ol start="14">
+<li id="fn14"><p>“Local” as opposed to “global”, a distinction which is not important until you get deep into programming. For now, <code>local</code> is the safer option.<a href="programming-advanced-features.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>There are obviously other ways to compute this, but this gives a flavor of the use.<a href="programming-advanced-features.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>My guess is that <code>nonotes</code> will become the default in a version or 2, once users become used to <code>vl</code>.<a href="programming-advanced-features.html#fnref16" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

@@ -24,7 +24,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2022-02-22" />
+<meta name="date" content="2022-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -370,7 +370,7 @@ Sorted by: foreign
 This displays a large amount of information, so let’s break in down.
 </p>
 <p>
-First, the header displays general data set information - the number of observations (<code>obs</code>, the number of rows) and variables (<code>vars</code>), as well as the file size<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.
+First, the header displays general data set information - the number of observations (<code>obs</code>, the number of rows) and variables (<code>vars</code>).
 </p>
 <p>
 Next, there is a table listing each variable in the data and some information about them. The “storage type” can be one of <code>byte</code>, <code>int</code>, <code>long</code>, <code>float</code>, <code>double</code>; all of which are simply numbers. We’ll touch on the differences between these when we discuss <a href="data-management.html#compressing-data"><code>compress</code></a>, but for now they all represent numeric variables. String variables are represented as <code>str##</code> where the <code>##</code> represent the number of characters that the string can be, e.g. <code>str18</code> shows that <code>make</code> has a maximum of 18 letters. (This limit is irrelevant, again, see <a href="data-management.html#compressing-data"><code>compress</code></a> for details.)
@@ -434,7 +434,38 @@ As mentioned <a href="data-management.html#describing-the-data">above</a>, there
 <p>
 Understanding the above is not that important these days as computer power and storage has increased to the point where the majority of us will not be reaching its limits. However, Stata does offer the <code>compress</code> command which attempts to store variables in the smallest possible type. For example, if a variable which is a float takes on only values 1 through 10, it is replaced by a byte (and similarly, strings are as long as the longest value).
 </p>
-<pre><code>. compress
+<p>
+The <code>memory</code> command lets us see the size of our data, particularlly the first entry of “Data” under “Used” shows that we start with 3,182 bytes or roughly 3Kb.
+</p>
+<pre><code>. memory
+
+Memory usage
+                                         Used                Allocated
+----------------------------------------------------------------------
+Data                                    3,182               67,108,864
+strLs                                       0                        0
+----------------------------------------------------------------------
+Data &amp; strLs                            3,182               67,108,864
+
+----------------------------------------------------------------------
+Data &amp; strLs                            3,182               67,108,864
+Variable names, %fmts, ...              4,178                   68,030
+Overhead                            1,081,344                1,082,136
+
+Stata matrices                              0                        0
+ado-files                              23,088                   23,088
+Stored results                              0                        0
+
+Mata matrices                           1,904                    1,904
+Mata functions                          2,448                    2,448
+
+set maxvar usage                    4,636,521                4,636,521
+
+Other                                  19,009                   19,009
+----------------------------------------------------------------------
+Total                               5,753,230               72,942,000
+
+. compress
   variable mpg was int now byte
   variable rep78 was int now byte
   variable trunk was int now byte
@@ -442,17 +473,40 @@ Understanding the above is not that important these days as computer power and s
   variable make was str18 now str17
   (370 bytes saved)
 
-. describe, short
+. memory
 
-Contains data from /Applications/Stata/ado/base/a/auto.dta
- Observations:            74                  1978 automobile data
-    Variables:            12                  13 Apr 2020 17:45
-Sorted by: foreign
-     Note: Dataset has changed since last saved.
+Memory usage
+                                         Used                Allocated
+----------------------------------------------------------------------
+Data                                    2,812               67,108,864
+strLs                                       0                        0
+----------------------------------------------------------------------
+Data &amp; strLs                            2,812               67,108,864
+
+----------------------------------------------------------------------
+Data &amp; strLs                            2,812               67,108,864
+Variable names, %fmts, ...              4,178                   68,030
+Overhead                            1,081,344                1,082,136
+
+Stata matrices                              0                        0
+ado-files                              23,088                   23,088
+Stored results                              0                        0
+
+Mata matrices                           1,904                    1,904
+Mata functions                          2,448                    2,448
+
+set maxvar usage                    4,636,521                4,636,521
+
+Other                                  19,009                   19,009
+----------------------------------------------------------------------
+Total                               5,752,860               72,942,000
 
 </code></pre>
 <p>
 We see here a very modest saving (370 bytes, about 12%), but sometimes you can see much more significant gains.
+</p>
+<p>
+(When running Stata, instead of using <code>memory</code>, you can look at the “Size” entry in the <a href="the-basics-of-stata.html#the-stata-environment">properties pane</a>.)
 </p>
 <p>
 Don’t be afraid of artificially restricting yourself going forward; if one of your values exceeds the limitations its type supports, Stata will automatically change types. So don’t hesitate to run <code>compress</code> when loading new data or after some manipulations.
@@ -556,7 +610,7 @@ turn            byte    %8.0g
 <div id="labeling-values" class="section level3" number="4.5.2">
 <h3><span class="header-section-number">4.5.2</span> Labeling values</h3>
 <p>
-It is tempting to store categorical variables as strings. If you ask, for example, for someone’s state of residence, you might store the answers as “MI”, “OH”, “FL”, etc. However, Stata (like most statistical software) cannot handle string variables.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> A much better way to store this data would be to assign each state a numerical value, say MI = 1, OH = 2, FL = 3, etc, then keep a data dictionary linking the values to the labels they represent.
+It is tempting to store categorical variables as strings. If you ask, for example, for someone’s state of residence, you might store the answers as “MI”, “OH”, “FL”, etc. However, Stata (like most statistical software) cannot handle string variables.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> A much better way to store this data would be to assign each state a numerical value, say MI = 1, OH = 2, FL = 3, etc, then keep a data dictionary linking the values to the labels they represent.
 </p>
 <p>
 Stata allows you to store this value labels information within the data set, such that whenever the values are output, the labels are printed instead. Let’s take a look at the <code>foreign</code> variable. This variable takes on two levels, and we can tabulate it to see how many cars are in each category.
@@ -876,7 +930,7 @@ displacement |         74    197.2973    91.83722         79        425
 
 </code></pre>
 <p>
-The table reports the total number of non-missing values (<code>make</code> appears to be entirely missing because it is non-numeric), the mean (the average value), the standard deviation (a measure of how spread out the data is) and the minimum and maximum non-missing<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> values observed.
+The table reports the total number of non-missing values (<code>make</code> appears to be entirely missing because it is non-numeric), the mean (the average value), the standard deviation (a measure of how spread out the data is) and the minimum and maximum non-missing<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> values observed.
 </p>
 <p>
 Here’s some suggestions of how to look at these values.
@@ -1060,9 +1114,8 @@ Are there any problems with the data?
 <hr />
 <ol start="4">
 <li id="fn4"><p>This is the reason why <code>*</code> as a comment does not work in the middle of a line (and we use <code>//</code> instead).<a href="data-management.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>Reported in bytes. Roughly 1000 bytes = 1 kilobyte, 1000 kilobytes = 1 megabyte, 1000 megabytes = 1 gigabyte.<a href="data-management.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>In the few situations where it can, it doesn’t handle them cleanly.<a href="data-management.html#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p>As we discuss <a href="data-manipulation.html#conditional-variable-generation">later</a>, in Stata, missing values (represented by <code>.</code> in the data) are considered to be higher than any other number (so 99999 &lt; .).<a href="data-management.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>In the few situations where it can, it doesn’t handle them cleanly.<a href="data-management.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>As we discuss <a href="data-manipulation.html#conditional-variable-generation">later</a>, in Stata, missing values (represented by <code>.</code> in the data) are considered to be higher than any other number (so 99999 &lt; .).<a href="data-management.html#fnref6" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
