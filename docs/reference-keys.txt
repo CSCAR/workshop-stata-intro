@@ -57,7 +57,7 @@ data-manipulation
 restricting-commands-to-subsets
 generating-new-variables
 creating-dummies
-hidden-variables
+system-variables
 extensions-to-generate
 replacing-existing-variables
 conditional-variable-generation

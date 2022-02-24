@@ -63,17 +63,19 @@ false. We can assign values of true and false to any such conditional statements
 | \&         | and (both statements are true) | ^$^(4 \gt 2)^$^ \& ^$^(3 == 3)^$^   | ^$^(4 \gt 2)^$^ \& ^$^(1 \gt 2)^$^ |
 | ^$^\|^$^   | or (either statement is true)  | ^$^(3 == 2) \| (1 \lt= 2)^$^        | ^$^(4 \lt 2) \| (1 \gt 2)^$^       |
 
-You can also use parentheses in combination with \& and ^$^\|^$^ to create more logical statements (e.g. `True & (False | True)` returns true).
-
 
 So we could summarize a variable only when some other variables have some values.
 
 ~~~~
 <<dd_do>>
 summarize weight if foreign == 1
-summ weight if foreign == 1 | (mpg > 20 & headroom < 10)
+summarize weight if foreign == 1 | (mpg > 20 & headroom < 10)
 <</dd_do>>
 ~~~~
+
+Note in the second example we used parentheses to evaluate a more complex expression; we follow order of operations (remember PEMBAS?) and evaluate
+the inner-most parantheses first. So first `mpg > 20 & headroom < 10` gets evaluated and returns `TRUE` or `FALSE`; then following that, we evaluate
+either `foreign == 1 | TRUE` or `foreign == 1 | FALSE` depending on what the first result was.
 
 We saw the usage of this earlier when discussing [loading subsets of the data][loading subsets of the data].
 
@@ -109,6 +111,10 @@ list weight* in 1/5
 <</dd_do>>
 ~~~~
 
+(Note: I use `list` here because I need the variables outputted to create the document. When using Stata interactively, it'd probably be nicer to use
+`browse` or `edit` in the exact same fashion, e.g. `browse weights* in 1/5`. These enter the Data Browser (`browse`) or Data Browser (Edit Mode)
+(`edit`) showing the same subset of rows/columns as requested.)
+
 If you check the arithmetic, you'll see that we've got the right answer. We should probably add a variable label to our new `weight`
 
 ~~~~
@@ -119,8 +125,8 @@ describe weight*
 ~~~~
 
 In addition to direct arithmetic equations, we can use a number of functions to perform calculations. For example, a common transformation is to take
-the log of any dollar amount variable, in our case `price`. This is done because typical dollar amount variables, such as price or salary, tend to be
-very right-skewed - most people make $30k-50k, and a few people make 6 or 7 digit incomes.
+the log of any monetary variable, in our case `price`. This is done because typical monetary variables, such as price or salary, tend to be very
+right-skewed - most people make $30k-50k, and a few people make 6 or 7 digit incomes.
 
 ~~~~
 <<dd_do>>
@@ -196,23 +202,23 @@ list make price rep78 mpg if cheap == 1
 <</dd_do>>
 ~~~~
 
-The `list` commands conditions on `cheap == 1` because again, the conditional statement will return 1 for true and 0 for false. So we see three cheap
-cars, two with low cost and one with low maintenance.
+The `list` commands conditions on `cheap == 1` because again, the conditional statement will return 1 for true and 0 for false. We see 6 cheap cars;
+the Chevette and Zephyr are cheap because of their cost, whereas the other four cars are cheap because of the maintenance costs.
 
-^#^^#^^#^ Hidden variables
+^#^^#^^#^ System Variables
 
-The name "hidden variables" may be slightly more dramatic than need be. In Stata, under the [One Data][one data] principal, any information in the
-data^[We'll see some exceptions to this in the [programming](programming-advanced-features.html) section.] must be in a variable. This includes the so
-called "hidden variables" of `_n` and `_N`. You can imagine that each row of your data has two additional columns of data, one for `_n` and one for
-`_N`.
+In Stata, under the [One Data][one data] principal, any information in the data^[We'll see some exceptions to this in the
+[programming](programming-advanced-features.html) section.] must be in a variable. This includes the System Variables of `_n` and `_N`. You can
+imagine that every data st you ever open has two additional columns of data, one for `_n` and one for `_N`.
 
-`_n` represents the row number currently. Currently, meaning if the data is re-sorted, `_n` can change.
+`_n` represents the row number, currently. "Currently" means if the data is re-sorted, `_n` can change.
 
 `_N` represents the total number of rows in the data, hence this is the same for every row. Again, if the data changes (e.g. you [drop][discarding
 data] some data) then `_N` may be updated.
 
-While you cannot access these hidden variables normally, you can use them in generating variables or conditional statements. For example, we've seen
-that `list` can use `in` to restrict the rows it outputs, and we've seen that it can use `if` to choose conditionally. We can combine these:
+While you cannot access these System Variables normally (e.g. they don't appear in the Data Browser), you can use them in generating variables or
+conditional statements. For example, we've seen that `list` can use `in` to restrict the rows it outputs, and we've seen that it can use `if` to
+choose conditionally. We can combine these:
 
 ~~~~
 <<dd_do>>
@@ -241,7 +247,7 @@ The command `egen` offers some functionality that `generate` lacks, for example 
 egen <newvar> = rowmean(var1, var2, var3)
 ```
 
-The functions which `egen` support are fairly esoteric; you can see the full list in the help:
+The functions which `egen` support are fairly random; you can see the full list in the help:
 
 ```
 help egen
@@ -421,38 +427,24 @@ The `2 = 4` rule will never take place because 2 is already recoded to 7 in the 
 
 ^#^^#^ Subsetting
 
-Almost any Stata command which operates on variables can operate on a subset of the data instead of the entire data, using the conditional statements
-we just learned. Specifically, we can append the `if <condition>` to a command, and the command will be executed as if the data for which the
-conditional does not return True does not exist. This is equivalent to throwing away some data and then performing the command. In general, you should
-avoid discarding data as you never know when you will possible use it. Of course, you could use [`preserve` and `restore`][Temporarily preserving and
-restoring data] to temporarily remove the data, but using the conditional subsetting is more straightforward.
+Almost any Stata command which operates on variables can operate on a subset of the data instead of the entire data, [as we saw before](Restricting
+commands to subsets), by using the `if` or `in` statements in the command. This is equivalent to throwing away some data and then performing the
+command. In general, you should avoid discarding data as you never know when you will possible use it. Of course, you could use [`preserve` and
+`restore`][Temporarily preserving and restoring data] to temporarily remove the data, but using the conditional subsetting is more straightforward.
+
+If the conditional logic we want to use involves subsets of the data, we could use this to give us results within each group.
 
 ~~~~
 <<dd_do>>
-summ price
+summarize price
+summarize price if foreign == 0
+summarize price if foreign == 1
 <</dd_do>>
 ~~~~
 
-This gives us a summary of price across all cars. What if we wanted to look at the summary only for non-foreign cars?
-
-~~~~
-<<dd_do>>
-codebook foreign
-summ price if foreign == 0
-<</dd_do>>
-~~~~
-
-First, we check the label to make sure we're looking at the appropriate value of `foreign`. Now, notice that "Obs", the number of rows of the data, is
-only 52 as we expect! If we look also at foreign cars,
-
-~~~~
-<<dd_do>>
-summ price if foreign == 1
-<</dd_do>>
-~~~~
-
-we see that American cars are cheaper on average^[Note that this is not a statistical claim, we would have to do a two-sample t-test to make any
-statistical claim.].
+Keep track of the number of observations, "Obs", to see that the second and third commands are in fact operating on the subsets. We see here that
+American cars are cheaper on average^[Note that this is not a statistical claim, we would have to do a two-sample t-test to make any statistical
+claim.].
 
 ^#^^#^^#^ Repeat commands on subsets
 
@@ -477,7 +469,7 @@ bysort foreign: summ price
 `bysort` is identical to sorting (which we'll discuss [later][sorting]) first and running the `by` statement afterwards. In general, it is recommended
 to always use `bysort` instead of `by`, *unless* you believe the data is already sorted and want an error if that assumption is violated.
 
-Before running these commands, consider generating a [original ordering variable][hidden variables] first.
+Before running these commands, consider generating a [original ordering variable][system variables] first.
 
 `bysort`'s variables cannot be conditional statements, so if you wanted to for example get summaries by low and high mileage cars, you'd need to
 generate a dummy variable first.
@@ -586,7 +578,7 @@ Other useful commands include
 ^#^^#^ Sorting
 
 We already saw sorting [in the context of `bysort`][repeat commands on subsets]. We can also sort as a standalone operation. As before, consider
-generating a [original ordering variable][hidden variables] first.
+generating a [original ordering variable][system variables] first.
 
 We'll switch back to "auto" first.
 

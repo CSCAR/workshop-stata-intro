@@ -24,7 +24,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2022-02-23" />
+<meta name="date" content="2022-02-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -164,7 +164,7 @@
 <li class="chapter" data-level="5.2" data-path="data-manipulation.html"><a href="data-manipulation.html#generating-new-variables"><i class="fa fa-check"></i><b>5.2</b> Generating new variables</a>
 <ul>
 <li class="chapter" data-level="5.2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#creating-dummies"><i class="fa fa-check"></i><b>5.2.1</b> Creating dummies</a></li>
-<li class="chapter" data-level="5.2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#hidden-variables"><i class="fa fa-check"></i><b>5.2.2</b> Hidden variables</a></li>
+<li class="chapter" data-level="5.2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#system-variables"><i class="fa fa-check"></i><b>5.2.2</b> System Variables</a></li>
 <li class="chapter" data-level="5.2.3" data-path="data-manipulation.html"><a href="data-manipulation.html#extensions-to-generate"><i class="fa fa-check"></i><b>5.2.3</b> Extensions to generate</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="data-manipulation.html"><a href="data-manipulation.html#replacing-existing-variables"><i class="fa fa-check"></i><b>5.3</b> Replacing existing variables</a>
@@ -253,7 +253,7 @@
 Let’s reload the “auto” data to discard any changes made in previous sections and to start fresh.
 </p>
 <pre><code>. sysuse auto, clear
-(1978 Automobile Data)
+(1978 automobile data)
 
 </code></pre>
 <div id="restricting-commands-to-subsets" class="section level2" number="5.1">
@@ -280,13 +280,13 @@ Using <code>in</code>, we pass a number list which consists of a lower bound, a 
 </p>
 <pre><code>. summarize weight
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
       weight |         74    3019.459    777.1936       1760       4840
 
 . summarize weight in 1/10
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
       weight |         10        3271    558.3796       2230       4080
 
@@ -436,24 +436,24 @@ or (either statement is true)
 </tbody>
 </table>
 <p>
-You can also use parentheses in combination with &amp; and <span class="math inline">\(|\)</span> to create more logical statements (e.g. <code>True &amp; (False | True)</code> returns true).
-</p>
-<p>
 So we could summarize a variable only when some other variables have some values.
 </p>
 <pre><code>. summarize weight if foreign == 1
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
       weight |         22    2315.909    433.0035       1760       3420
 
-. summ weight if foreign == 1 | (mpg &gt; 20 &amp; headroom &lt; 10)
+. summarize weight if foreign == 1 | (mpg &gt; 20 &amp; headroom &lt; 10)
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
       weight |         41    2505.122     585.291       1760       4290
 
 </code></pre>
+<p>
+Note in the second example we used parentheses to evaluate a more complex expression; we follow order of operations (remember PEMBAS?) and evaluate the inner-most parantheses first. So first <code>mpg &gt; 20 &amp; headroom &lt; 10</code> gets evaluated and returns <code>TRUE</code> or <code>FALSE</code>; then following that, we evaluate either <code>foreign == 1 | TRUE</code> or <code>foreign == 1 | FALSE</code> depending on what the first result was.
+</p>
 <p>
 We saw the usage of this earlier when discussing <a href="working-with-data-sets.html#loading-subsets-of-the-data">loading subsets of the data</a>.
 </p>
@@ -465,8 +465,8 @@ The <code>generate</code> command can be used to create new variables which are 
 </p>
 <pre><code>. describe weight
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 weight          int     %8.0gc                Weight (lbs.)
 
@@ -496,21 +496,24 @@ The <code>list</code> command can be used to output some data, let’s use it he
 
 </code></pre>
 <p>
+(Note: I use <code>list</code> here because I need the variables outputted to create the document. When using Stata interactively, it’d probably be nicer to use <code>browse</code> or <code>edit</code> in the exact same fashion, e.g. <code>browse weights* in 1/5</code>. These enter the Data Browser (<code>browse</code>) or Data Browser (Edit Mode) (<code>edit</code>) showing the same subset of rows/columns as requested.)
+</p>
+<p>
 If you check the arithmetic, you’ll see that we’ve got the right answer. We should probably add a variable label to our new <code>weight</code>
 </p>
 <pre><code>. label variable weight2 &quot;Weight (tons)&quot;
 
 . describe weight*
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 weight          int     %8.0gc                Weight (lbs.)
 weight2         float   %9.0g                 Weight (tons)
 
 </code></pre>
 <p>
-In addition to direct arithmetic equations, we can use a number of functions to perform calculations. For example, a common transformation is to take the log of any dollar amount variable, in our case <code>price</code>. This is done because typical dollar amount variables, such as price or salary, tend to be very right-skewed - most people make $30k-50k, and a few people make 6 or 7 digit incomes.
+In addition to direct arithmetic equations, we can use a number of functions to perform calculations. For example, a common transformation is to take the log of any monetary variable, in our case <code>price</code>. This is done because typical monetary variables, such as price or salary, tend to be very right-skewed - most people make $30k-50k, and a few people make 6 or 7 digit incomes.
 </p>
 <pre><code>. generate logprice = log(price)
 
@@ -621,22 +624,22 @@ For a slightly more complicated example, lets create a dummy variable representi
 
 </code></pre>
 <p>
-The <code>list</code> commands conditions on <code>cheap == 1</code> because again, the conditional statement will return 1 for true and 0 for false. So we see three cheap cars, two with low cost and one with low maintenance.
+The <code>list</code> commands conditions on <code>cheap == 1</code> because again, the conditional statement will return 1 for true and 0 for false. We see 6 cheap cars; the Chevette and Zephyr are cheap because of their cost, whereas the other four cars are cheap because of the maintenance costs.
 </p>
 </div>
-<div id="hidden-variables" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> Hidden variables</h3>
+<div id="system-variables" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> System Variables</h3>
 <p>
-The name “hidden variables” may be slightly more dramatic than need be. In Stata, under the <a href="the-basics-of-stata.html#one-data">One Data</a> principal, any information in the data<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> must be in a variable. This includes the so called “hidden variables” of <code>_n</code> and <code>_N</code>. You can imagine that each row of your data has two additional columns of data, one for <code>_n</code> and one for <code>_N</code>.
+In Stata, under the <a href="the-basics-of-stata.html#one-data">One Data</a> principal, any information in the data<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> must be in a variable. This includes the System Variables of <code>_n</code> and <code>_N</code>. You can imagine that every data st you ever open has two additional columns of data, one for <code>_n</code> and one for <code>_N</code>.
 </p>
 <p>
-<code>_n</code> represents the row number currently. Currently, meaning if the data is re-sorted, <code>_n</code> can change.
+<code>_n</code> represents the row number, currently. “Currently” means if the data is re-sorted, <code>_n</code> can change.
 </p>
 <p>
 <code>_N</code> represents the total number of rows in the data, hence this is the same for every row. Again, if the data changes (e.g. you <a href="data-manipulation.html#discarding-data">drop</a> some data) then <code>_N</code> may be updated.
 </p>
 <p>
-While you cannot access these hidden variables normally, you can use them in generating variables or conditional statements. For example, we’ve seen that <code>list</code> can use <code>in</code> to restrict the rows it outputs, and we’ve seen that it can use <code>if</code> to choose conditionally. We can combine these:
+While you cannot access these System Variables normally (e.g. they don’t appear in the Data Browser), you can use them in generating variables or conditional statements. For example, we’ve seen that <code>list</code> can use <code>in</code> to restrict the rows it outputs, and we’ve seen that it can use <code>if</code> to choose conditionally. We can combine these:
 </p>
 <pre><code>. list make in 1/2
 
@@ -686,7 +689,7 @@ The command <code>egen</code> offers some functionality that <code>generate</cod
 <pre><code>egen &lt;newvar&gt; = rowmean(var1, var2, var3)
 </code></pre>
 <p>
-The functions which <code>egen</code> support are fairly esoteric; you can see the full list in the help:
+The functions which <code>egen</code> support are fairly random; you can see the full list in the help:
 </p>
 <pre><code>help egen
 </code></pre>
@@ -900,53 +903,32 @@ The <code>2 = 4</code> rule will never take place because 2 is already recoded t
 <div id="subsetting" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Subsetting</h2>
 <p>
-Almost any Stata command which operates on variables can operate on a subset of the data instead of the entire data, using the conditional statements we just learned. Specifically, we can append the <code>if &lt;condition&gt;</code> to a command, and the command will be executed as if the data for which the conditional does not return True does not exist. This is equivalent to throwing away some data and then performing the command. In general, you should avoid discarding data as you never know when you will possible use it. Of course, you could use <a href="working-with-data-sets.html#temporarily-preserving-and-restoring-data"><code>preserve</code> and <code>restore</code></a> to temporarily remove the data, but using the conditional subsetting is more straightforward.
+Almost any Stata command which operates on variables can operate on a subset of the data instead of the entire data, <a href="Restricting%20commands%20to%20subsets">as we saw before</a>, by using the <code>if</code> or <code>in</code> statements in the command. This is equivalent to throwing away some data and then performing the command. In general, you should avoid discarding data as you never know when you will possible use it. Of course, you could use <a href="working-with-data-sets.html#temporarily-preserving-and-restoring-data"><code>preserve</code> and <code>restore</code></a> to temporarily remove the data, but using the conditional subsetting is more straightforward.
 </p>
-<pre><code>. summ price
+<p>
+If the conditional logic we want to use involves subsets of the data, we could use this to give us results within each group.
+</p>
+<pre><code>. summarize price
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         74    6165.257    2949.496       3291      15906
 
-</code></pre>
-<p>
-This gives us a summary of price across all cars. What if we wanted to look at the summary only for non-foreign cars?
-</p>
-<pre><code>. codebook foreign
+. summarize price if foreign == 0
 
--------------------------------------------------------------------------------
-foreign                                                                Car type
--------------------------------------------------------------------------------
-
-                  type:  numeric (byte)
-                 label:  origin
-
-                 range:  [0,1]                        units:  1
-         unique values:  2                        missing .:  0/74
-
-            tabulation:  Freq.   Numeric  Label
-                            52         0  Domestic
-                            22         1  Foreign
-
-. summ price if foreign == 0
-
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         52    6072.423    3097.104       3291      15906
 
-</code></pre>
-<p>
-First, we check the label to make sure we’re looking at the appropriate value of <code>foreign</code>. Now, notice that “Obs”, the number of rows of the data, is only 52 as we expect! If we look also at foreign cars,
-</p>
-<pre><code>. summ price if foreign == 1
+. summarize price if foreign == 1
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         22    6384.682    2621.915       3748      12990
 
 </code></pre>
 <p>
-we see that American cars are cheaper on average<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>.
+Keep track of the number of observations, “Obs”, to see that the second and third commands are in fact operating on the subsets. We see here that American cars are cheaper on average<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>.
 </p>
 <div id="repeat-commands-on-subsets" class="section level3" number="5.5.1">
 <h3><span class="header-section-number">5.5.1</span> Repeat commands on subsets</h3>
@@ -961,14 +943,14 @@ Instead, we can use <code>by</code> and <code>bysort</code> to perform the same 
 -------------------------------------------------------------------------------
 -&gt; foreign = Domestic
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         52    6072.423    3097.104       3291      15906
 
 -------------------------------------------------------------------------------
 -&gt; foreign = Foreign
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         22    6384.682    2621.915       3748      12990
 
@@ -983,7 +965,7 @@ There is a strong assumption here that the data is already sorted by the variabl
 <code>bysort</code> is identical to sorting (which we’ll discuss <a href="data-manipulation.html#sorting">later</a>) first and running the <code>by</code> statement afterwards. In general, it is recommended to always use <code>bysort</code> instead of <code>by</code>, <em>unless</em> you believe the data is already sorted and want an error if that assumption is violated.
 </p>
 <p>
-Before running these commands, consider generating a <a href="data-manipulation.html#hidden-variables">original ordering variable</a> first.
+Before running these commands, consider generating a <a href="data-manipulation.html#system-variables">original ordering variable</a> first.
 </p>
 <p>
 <code>bysort</code>’s variables cannot be conditional statements, so if you wanted to for example get summaries by low and high mileage cars, you’d need to generate a dummy variable first.
@@ -995,14 +977,14 @@ Before running these commands, consider generating a <a href="data-manipulation.
 -------------------------------------------------------------------------------
 -&gt; highmileage = 0
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         38    6937.316    3262.392       3291      14500
 
 -------------------------------------------------------------------------------
 -&gt; highmileage = 1
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         36    5350.306    2358.612       3299      15906
 
@@ -1016,28 +998,28 @@ Before running these commands, consider generating a <a href="data-manipulation.
 -------------------------------------------------------------------------------
 -&gt; foreign = Domestic, highmileage = 0
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         33    6585.606    3149.214       3291      14500
 
 -------------------------------------------------------------------------------
 -&gt; foreign = Domestic, highmileage = 1
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         19    5181.105    2867.906       3299      15906
 
 -------------------------------------------------------------------------------
 -&gt; foreign = Foreign, highmileage = 0
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |          5      9258.6    3369.459       5719      12990
 
 -------------------------------------------------------------------------------
 -&gt; foreign = Foreign, highmileage = 1
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         17    5539.412    1686.472       3748       9735
 
@@ -1088,14 +1070,14 @@ r(198);
 If your data is not expected to have duplicates, either across all variables or within certain variables, the <code>duplicates</code> command can make their detection and correction easier. The most basic command is <code>duplicates report</code>, which simply reports on the status of duplicate rows. Let’s use the built-in “bplong” data. This data contains 120 patients (<code>patient</code>) with measures of blood pressure (<code>bp</code>) at two different time points (<code>when</code>, a Before and After), and some descriptive variables (<code>sex</code> and <code>agegrp</code>).
 </p>
 <pre><code>. sysuse bplong, clear
-(fictional blood-pressure data)
+(Fictional blood-pressure data)
 
 . duplicates report
 
 Duplicates in terms of all variables
 
 --------------------------------------
-   copies | observations       surplus
+   Copies | Observations       Surplus
 ----------+---------------------------
         1 |          240             0
 --------------------------------------
@@ -1109,7 +1091,7 @@ This report is not very interesting; it reports that there are 240 observations 
 Duplicates in terms of bp when
 
 --------------------------------------
-   copies | observations       surplus
+   Copies | Observations       Surplus
 ----------+---------------------------
         1 |           23             0
         2 |           42            21
@@ -1151,13 +1133,13 @@ Other useful commands include
 <div id="sorting" class="section level2" number="5.7">
 <h2><span class="header-section-number">5.7</span> Sorting</h2>
 <p>
-We already saw sorting <a href="data-manipulation.html#repeat-commands-on-subsets">in the context of <code>bysort</code></a>. We can also sort as a standalone operation. As before, consider generating a <a href="data-manipulation.html#hidden-variables">original ordering variable</a> first.
+We already saw sorting <a href="data-manipulation.html#repeat-commands-on-subsets">in the context of <code>bysort</code></a>. We can also sort as a standalone operation. As before, consider generating a <a href="data-manipulation.html#system-variables">original ordering variable</a> first.
 </p>
 <p>
 We’ll switch back to “auto” first.
 </p>
 <pre><code>. sysuse auto, clear
-(1978 Automobile Data)
+(1978 automobile data)
 
 . gen order = _n
 
@@ -1229,8 +1211,8 @@ Both commands can take the options <code>replace</code> (to replace the existing
 </p>
 <pre><code>. desc mpg
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 mpg             int     %8.0g                 Mileage (mpg)
 
@@ -1239,8 +1221,8 @@ mpg2 generated as str2
 
 . desc mpg2
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 mpg2            str2    %9s                   Mileage (mpg)
 
@@ -1272,8 +1254,8 @@ Let’s go the other way around:
 </p>
 <pre><code>. desc mpg
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 mpg             str2    %9s                   Mileage (mpg)
 
@@ -1282,8 +1264,8 @@ mpg: all characters numeric; mpg2 generated as byte
 
 . desc mpg2
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 mpg2            byte    %10.0g                Mileage (mpg)
 
@@ -1329,7 +1311,7 @@ make: contains nonnumeric characters; make2 generated as byte
 . tab make2, mi
 
    Make and |
-      Model |      Freq.     Percent        Cum.
+      model |      Freq.     Percent        Cum.
 ------------+-----------------------------------
           1 |          1        1.35        1.35
           . |         73       98.65      100.00
@@ -1353,7 +1335,7 @@ We’ll switch to the “hbp2” data set from the Stata website, records some b
 
 . tab sex, missing
 
-        sex |      Freq.     Percent        Cum.
+        Sex |      Freq.     Percent        Cum.
 ------------+-----------------------------------
             |          2        0.18        0.18
      female |        433       38.32       38.50
@@ -1363,10 +1345,10 @@ We’ll switch to the “hbp2” data set from the Stata website, records some b
 
 . desc sex
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
-sex             str6    %9s                   
+sex             str6    %9s                   Sex
 
 </code></pre>
 <p>
@@ -1418,7 +1400,7 @@ Instead, we can easily use <code>encode</code>:
 
 . tab sex2, missing
 
-       sex2 |      Freq.     Percent        Cum.
+        Sex |      Freq.     Percent        Cum.
 ------------+-----------------------------------
      female |        433       38.32       38.32
        male |        695       61.50       99.82
@@ -1428,7 +1410,7 @@ Instead, we can easily use <code>encode</code>:
 
 . tab sex2, missing nolabel
 
-       sex2 |      Freq.     Percent        Cum.
+        Sex |      Freq.     Percent        Cum.
 ------------+-----------------------------------
           1 |        433       38.32       38.32
           2 |        695       61.50       99.82
@@ -1446,7 +1428,7 @@ However, we see that <code>encode</code> starts numbering at 1 instead of 0, whi
 
 . tab sex3, missing
 
-       sex3 |      Freq.     Percent        Cum.
+        Sex |      Freq.     Percent        Cum.
 ------------+-----------------------------------
      female |        433       38.32       38.32
        male |        695       61.50       99.82
@@ -1456,7 +1438,7 @@ However, we see that <code>encode</code> starts numbering at 1 instead of 0, whi
 
 . tab sex3, missing nolabel
 
-       sex3 |      Freq.     Percent        Cum.
+        Sex |      Freq.     Percent        Cum.
 ------------+-----------------------------------
           0 |        433       38.32       38.32
           1 |        695       61.50       99.82
@@ -1475,14 +1457,14 @@ This can be extended to allow any sort of ordering desired. For this trivial bin
 
 . desc sex4
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
-sex4            str6    %9s                   
+sex4            str6    %9s                   Sex
 
 . tab sex4, missing
 
-       sex4 |      Freq.     Percent        Cum.
+        Sex |      Freq.     Percent        Cum.
 ------------+-----------------------------------
             |          2        0.18        0.18
      female |        433       38.32       38.50
@@ -1629,8 +1611,7 @@ It does not truly matter which data set is the master data and which is the usin
 (6th through 8th even numbers)
 
 . append using http://www.stata-press.com/data/r16/odd
-(note: variable number was byte, now float to accommodate using data's
-       values)
+(variable number was byte, now float to accommodate using data's values)
 
 . list
 
@@ -1682,7 +1663,7 @@ The second match, many-to-one, occurs when the data are measured on different �
 We’ll use data sets off Stata’s website again to demonstrate, specifically the “autosize” and “autocost” data which splits the “auto” data into two pieces.
 </p>
 <pre><code>. webuse autosize, clear
-(1978 Automobile Data)
+(1978 automobile data)
 
 . list in 1/5
 
@@ -1697,7 +1678,7 @@ We’ll use data sets off Stata’s website again to demonstrate, specifically t
      +------------------------------------+
 
 . webuse autocost
-(1978 Automobile Data)
+(1978 automobile data)
 
 . list in 1/5
 
@@ -1722,13 +1703,13 @@ All that needs to be specified is the variable to match cases by and the name of
 </p>
 <pre><code>. merge 1:1 make using http://www.stata-press.com/data/r16/autoexpense
 
-    Result                           # of obs.
+    Result                      Number of obs
     -----------------------------------------
-    not matched                            69
+    Not matched                            69
         from master                        69  (_merge==1)
         from using                          0  (_merge==2)
 
-    matched                                 5  (_merge==3)
+    Matched                                 5  (_merge==3)
     -----------------------------------------
 
 . list in 1/7
@@ -1736,14 +1717,14 @@ All that needs to be specified is the variable to match cases by and the name of
      +-------------------------------------------------------+
      |          make   price   rep78   mpg            _merge |
      |-------------------------------------------------------|
-  1. |   AMC Concord    4099       3     .   master only (1) |
-  2. |     AMC Pacer    4749       3     .   master only (1) |
-  3. |    AMC Spirit    3799       .     .   master only (1) |
-  4. |     Audi 5000    9690       5     .   master only (1) |
-  5. |      Audi Fox    6295       3     .   master only (1) |
+  1. |   AMC Concord    4099       3     .   Master only (1) |
+  2. |     AMC Pacer    4749       3     .   Master only (1) |
+  3. |    AMC Spirit    3799       .     .   Master only (1) |
+  4. |     Audi 5000    9690       5     .   Master only (1) |
+  5. |      Audi Fox    6295       3     .   Master only (1) |
      |-------------------------------------------------------|
-  6. |      BMW 320i    9735       4    25       matched (3) |
-  7. | Buick Century    4816       3     .   master only (1) |
+  6. |      BMW 320i    9735       4    25       Matched (3) |
+  7. | Buick Century    4816       3     .   Master only (1) |
      +-------------------------------------------------------+
 
 </code></pre>
@@ -1823,7 +1804,7 @@ reshape wide X, i(ID) j(Index)
 As an example, we’ll use the built-in data set “bplong”
 </p>
 <pre><code>. sysuse bplong, clear
-(fictional blood-pressure data)
+(Fictional blood-pressure data)
 
 . list in 1/5
 
@@ -1856,12 +1837,12 @@ Each patient has two rows representing their before and after measurements. <cod
 Putting this together,
 </p>
 <pre><code>. reshape wide bp, i(patient) j(when)
-(note: j = 1 2)
+(j = 1 2)
 
-Data                               long   -&gt;   wide
+Data                               Long   -&gt;   Wide
 -----------------------------------------------------------------------------
-Number of obs.                      240   -&gt;     120
-Number of variables                   5   -&gt;       5
+Number of observations              240   -&gt;   120         
+Number of variables                   5   -&gt;   5           
 j variable (2 values)              when   -&gt;   (dropped)
 xij variables:
                                      bp   -&gt;   bp1 bp2
@@ -1901,12 +1882,12 @@ Let’s generate the command to convert back to long.
 The command is identical! Just swap <code>wide</code> for <code>long</code>.
 </p>
 <pre><code>. reshape long bp, i(patient) j(when)
-(note: j = 1 2)
+(j = 1 2)
 
-Data                               wide   -&gt;   long
+Data                               Wide   -&gt;   Long
 -----------------------------------------------------------------------------
-Number of obs.                      120   -&gt;     240
-Number of variables                   5   -&gt;       5
+Number of observations              120   -&gt;   240         
+Number of variables                   5   -&gt;   5           
 j variable (2 values)                     -&gt;   when
 xij variables:
                                 bp1 bp2   -&gt;   bp
@@ -1947,12 +1928,12 @@ If you do want to save the text instead of the count, you need to use strings. W
 . rename when2 when
 
 . reshape wide bp, i(patient) j(when) string
-(note: j = After Before)
+(j = After Before)
 
-Data                               long   -&gt;   wide
+Data                               Long   -&gt;   Wide
 -----------------------------------------------------------------------------
-Number of obs.                      240   -&gt;     120
-Number of variables                   5   -&gt;       5
+Number of observations              240   -&gt;   120         
+Number of variables                   5   -&gt;   5           
 j variable (2 values)              when   -&gt;   (dropped)
 xij variables:
                                      bp   -&gt;   bpAfter bpBefore
@@ -1975,12 +1956,12 @@ xij variables:
 Note the <code>string</code> option. When converting back to long, you’ll need to <code>encode</code> the string to get it back to numeric.
 </p>
 <pre><code>. reshape long
-(note: j = After Before)
+(j = After Before)
 
-Data                               wide   -&gt;   long
+Data                               Wide   -&gt;   Long
 -----------------------------------------------------------------------------
-Number of obs.                      120   -&gt;     240
-Number of variables                   5   -&gt;       5
+Number of observations              120   -&gt;   240         
+Number of variables                   5   -&gt;   5           
 j variable (2 values)                     -&gt;   when
 xij variables:
                        bpAfter bpBefore   -&gt;   bp
@@ -1988,8 +1969,8 @@ xij variables:
 
 . desc when
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 when            str6    %9s                   Status
 
@@ -2001,8 +1982,8 @@ when            str6    %9s                   Status
 
 . desc when
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 when            long    %8.0g      when2      Status
 
