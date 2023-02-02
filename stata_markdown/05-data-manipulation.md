@@ -896,15 +896,15 @@ All that needs to be specified is the variable to match cases by and the name of
 
 ~~~~
 <<dd_do>>
-merge 1:1 make using http://www.stata-press.com/data/r16/autoexpense
-list in 1/7
+merge 1:1 make using http://www.stata-press.com/data/r16/autosize
+list in 3/6
 <</dd_do>>
 ~~~~
 
 (Again, we use the full path but for local files, following [working directory][working directory] rules.)
 
-First, take a look at the output of the merge command. We see that 69 cars were not matched, which means they exist in only one of the two data
-sets. In this case, they all exist in master data, but in general you could see a mix of the two. The remaining 5 observations were appropriately
+First, take a look at the output of the merge command. We see that 68 cars were not matched, which means they exist in only one of the two data
+sets. In this case, they all exist in master data, but in general you could see a mix of the two. The remaining 6 observations were appropriately
 matched. This is a terrible merge! Hopefully with your real data, the majority of data is matched and only a few outliers are not matched.
 
 Notice the `(_merge==#)` tags. When you perform a merge, a new variable `_merge` is added which indicates the source for each row: 1 and 2 indicate
