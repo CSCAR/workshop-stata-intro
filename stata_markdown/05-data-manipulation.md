@@ -164,9 +164,10 @@ they can take on any two values, but your life will be easier if you stick with 
 0 represents an absence of something (or an answer of "no") and 1 represents the presence (or an answer of "yes"). When naming dummy variables, you
 should keep this in mind to make understanding the variable easier, as well as extracting interpretations regarding the variable in a model.
 
-For example, "gender" is a poor dummy variable - what does 0 gender or 1 gender represent? Obviously we could (and should) use [value labels][labeling
-values] to associate 0 and 1 with particular genders, but it is more straightforward to use "female" as the dummy variable - a 0 represents "no" to
-the question of "Female?", hence male; and a 1 represents a "yes", hence female.
+For example, "highschool" is a poor dummy variable - what does 0 highschool or 1 highschool represent? Obviously we could (and should) use [value
+labels][labeling values] to associate 0 and 1 with informative labels, but it is more straightforward to use a variable name such as
+"highschool_graduate" or "graduateded_highschool) - a 0 represents "no" to the question of "graduated high school?", hence a non-high school graduate;
+and a 1 represents a "yes", hence a high school graduate.
 
 If you are collecting data, consider collecting data as dummies where appropriate - if the question has a binary response, encode it as a dummy
 instead of strings. If a question has categorical responses, consider encoding them as a series of dummy variables instead (e.g. "Are you from MI?",
