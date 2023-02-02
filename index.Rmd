@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Stata"
 author: "CSCAR Staff"
-date: "`r Sys.Date()`"
+date: "Last updated: `r Sys.Date()`"
 site: bookdown::bookdown_site
 output:
   bookdown::gitbook:
@@ -45,13 +45,17 @@ All images should link to full-size versions to see detail if needed.
 
 ### CSCAR
 
-- Current contact for questions about the notes: Josh Errickson (jerrick@umich.edu)
-- Office Hours: Monday-Friday 9am to 5pm (Closed Tuesday 12-1pm)
-- Phone: 734.764.7828
-- Statistical Assistance: stats-consulting@umich.edu
-- Data Science Assistance: ds-consulting@umich.edu
-- High Performance Computing: hpc-consulting@umich.edu
-- http://cscar.research.umich.edu/
+http://cscar.research.umich.edu/
+
+CSCAR is available for free consultations with PhD statisticians (email deskpeople@umich.edu to request a consultation).
+
+CSCAR also has GSRAs available for more immediate help. Walk-ins to our office in Rackham are welcomed Monday-Friday 9am to 5pm (Closed Tuesdays
+12-1pm). Alternatively, on our website, you can self-schedule into an hour consultation with the graduate students, which can be either remote or
+in-person (these are usually available same- or next-day).
+
+CSCAR operates a email for help with statistical questions, feel free to send concise questions to stats-consulting@umich.edu.
+
+The current contact for questions about the notes: Josh Errickson (jerrick@umich.edu).
 
 
 ## Acknowledgments
