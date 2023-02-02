@@ -733,19 +733,49 @@ variable weight was int now float
 <div id="conditional-variable-generation" class="section level3 hasAnchor" number="5.3.1">
 <h3><span class="header-section-number">5.3.1</span> Conditional variable generation<a href="data-manipulation.html#conditional-variable-generation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
+(We’re going to reload the <code>auto</code> data set at this point to ensure all data is as originally saved.)
+</p>
+<pre><code>. sysuse auto, clear
+(1978 automobile data)
+
+</code></pre>
+<p>
 One frequent task is recoding variables. This can be “binning” continuous variables into a few categories, re-ordering an ordinal variables, or collapsing categories in an already-categorical variable. There are also multi-variable versions; e.g. combining multiple variables into one.
 </p>
 <p>
 The general workflow with these cases will be to optionally use <code>generate</code> to create the new variable, then use <code>replace</code> to conditional replace the original or new variable.
 </p>
 <p>
-As a first example, let’s collapse the <code>rep78</code> variable into a low/mid/high cost of maintenance categorical variable (1 repair, 2-3 repairs, 4-5 repairs). First, we’ll generate the new variable.
+As an example, let’s generate a new variable which categorizes cars into light, medium weight, and heavy cars. We’ll define light cars as a weight below 1 ton (2000 lbs), and heavy cars as having a weight of 2 tons (4000 lbs) or more.
 </p>
-<pre><code>. generate maintcost = 1
+<p>
+Before we do this, we’ve learned that the weight reported for the Pont. Grand Prix was incorrect - we don’t know what the correct weight is, but we know the presented one is wrong, so let’s make it missing. We could of course do this manually - open the data editor and delete the value of <code>weight</code> corresponding to the Pont. Grand Prix. As we saw earlier, <a target="_blank" href="working-with-data-sets.html#editing-data-manually">manually editing</a> the data like this produces a <code>replace</code> call that we can move into our <a target="_blank" href="the-basics-of-stata.html#do-files">Do file for reproducibility</a>. However, this <code>replace</code> call would refer to a row number, something like
+</p>
+<pre><code>replace weight = . in 49
+</code></pre>
+<p>
+What would happen if our data was shuffled prior to running this command? It would no longer be applied to the correct row. Therefore, it will be safer to use a <a href="data-manipulation.html#restricting-commands-to-subsets">conditional statement</a> to identify the row corresponding to <code>"Pont. Grand Prix"</code>.
+</p>
+<pre><code>. replace weight = . if make == &quot;Pont. Grand Prix&quot;
+(1 real change made, 1 to missing)
 
-. tab maintcost
+. list make weight if make == &quot;Pont. Grand Prix&quot;
 
-  maintcost |      Freq.     Percent        Cum.
+     +---------------------------+
+     | make               weight |
+     |---------------------------|
+ 49. | Pont. Grand Prix        . |
+     +---------------------------+
+
+</code></pre>
+<p>
+Now, we’ll return to generating the categorical weight variable. First, we’ll generate the new variable to store this information.
+</p>
+<pre><code>. generate weight_cat = 1
+
+. tab weight_cat
+
+ weight_cat |      Freq.     Percent        Cum.
 ------------+-----------------------------------
           1 |         74      100.00      100.00
 ------------+-----------------------------------
@@ -753,34 +783,58 @@ As a first example, let’s collapse the <code>rep78</code> variable into a low/
 
 </code></pre>
 <p>
-Without any variables or conditions, every row is set to 1. We’ll let the 1 represent the “low” category, so next we’ll replace it with 2 for cars in the “mid” category.
+Without any conditional statements, every observation’s <code>weight_cat</code> is set to 1. We’ll let the 1 represent the “light” category, so next we’ll replace it with 2 for cars in the “medium” category.
 </p>
-<pre><code>. replace maintcost = 2 if rep78 &gt;= 2 &amp; rep78 &lt;= 3
-(38 real changes made)
+<pre><code>. replace weight_cat = 2 if weight &gt;= 2000 &amp; weight &lt; 4000
+(57 real changes made)
 
-. tab maintcost
+. tab weight_cat
 
-  maintcost |      Freq.     Percent        Cum.
+ weight_cat |      Freq.     Percent        Cum.
 ------------+-----------------------------------
-          1 |         36       48.65       48.65
-          2 |         38       51.35      100.00
+          1 |         17       22.97       22.97
+          2 |         57       77.03      100.00
 ------------+-----------------------------------
       Total |         74      100.00
 
 </code></pre>
 <p>
-Finish with the “high” category.
+Note the choice of <code>&gt;=</code> instead of <code>&gt;</code> and <code>&lt;</code> instead of <code>&lt;=</code>. As above, we stated that light cars have weight <strong>below</strong> 2000 lbs, so medium cars have a value of 2000 <strong>or more</strong> (greater than <strong>or equal</strong>). On the other end, heavy cars have a weght of 4000 lbs <strong>or more</strong>, so medium cars are <strong>strictly</strong> less than 4000 lbs (less than).
 </p>
-<pre><code>. replace maintcost = 3 if rep78 &gt; 3
-(34 real changes made)
+<p>
+Finish with the “heavy” cars
+</p>
+<pre><code>. replace weight_cat = 3 if weight &gt;= 4000
+(10 real changes made)
 
-. tab maintcost
+. tab weight_cat
 
-  maintcost |      Freq.     Percent        Cum.
+ weight_cat |      Freq.     Percent        Cum.
 ------------+-----------------------------------
-          1 |          2        2.70        2.70
-          2 |         38       51.35       54.05
-          3 |         34       45.95      100.00
+          1 |          7        9.46        9.46
+          2 |         57       77.03       86.49
+          3 |         10       13.51      100.00
+------------+-----------------------------------
+      Total |         74      100.00
+
+</code></pre>
+<p>
+When using less than/greater than conditinal statements to split a variable into groups, you always want to ensure that when the two “endpoints” are the same, one uses strictly less/more, and the other uses “or equal”. If both use “or equal”, you’ll get inconsistent results for exact values. If neither use “or equal”, exact values will not be classified. (For example, if we had used <code>weight &lt; 4000</code> and <code>weight &gt; 4000</code>, any car with exact weight of 4000 would not fall into either [and its <code>weight_cat</code> would stay 1, a light car]. On the other hand, if we had used <code>weight &lt;= 4000</code> and <code>weight &gt;= 4000</code>, a car with exact weight of 4000 would be assigned to whichever of the lines was run last.)
+</p>
+<p>
+Lastly, we’ll add some nice labels.
+</p>
+<pre><code>. label define weight_cat 1 &quot;Light&quot; 2 &quot;Medium&quot; 3 &quot;Heavy&quot;
+
+. label values weight_cat weight_cat
+
+. tab weight_cat
+
+ weight_cat |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      Light |          7        9.46        9.46
+     Medium |         57       77.03       86.49
+      Heavy |         10       13.51      100.00
 ------------+-----------------------------------
       Total |         74      100.00
 
@@ -795,49 +849,49 @@ There’s one additional complication. Stata represents missing values by <code>
 is true! There is some discussion <a target="_blank" href="http://www.stata.com/support/faqs/data-management/logical-expressions-and-missing-values/">on the Stata FAQs</a> that goes into the rationale behind it, but the short version is that this slightly complicates variable generation but greatly simplifies and protects some data management tasks.
 </p>
 <p>
-The complication referred to can be seen in row 3 here:
+The complication referred to can be seen in the row corresponding to the Pont. Grand Prix
 </p>
-<pre><code>. list make rep78 maintcost in 1/5
+<pre><code>. list make weight weight_cat in 46/50
 
-     +----------------------------------+
-     | make            rep78   maintc~t |
-     |----------------------------------|
-  1. | AMC Concord         3          2 |
-  2. | AMC Pacer           3          2 |
-  3. | AMC Spirit          .          3 |
-  4. | Buick Century       3          2 |
-  5. | Buick Electra       4          3 |
-     +----------------------------------+
+     +--------------------------------------+
+     | make               weight   weight~t |
+     |--------------------------------------|
+ 46. | Plym. Volare        3,330     Medium |
+ 47. | Pont. Catalina      3,700     Medium |
+ 48. | Pont. Firebird      3,470     Medium |
+ 49. | Pont. Grand Prix        .      Heavy |
+ 50. | Pont. Le Mans       3,200     Medium |
+     +--------------------------------------+
 
 </code></pre>
 <p>
-The AMC Spirit has a high repair cost even though we do not have its repair record. We can fix this easily.
+Even though the Grand Prix has no weight, it is categorized as “Heavy”
 </p>
-<pre><code>. replace maintcost = . if missing(rep78)
-(5 real changes made, 5 to missing)
+<pre><code>. replace weight_cat = . if missing(weight)
+(1 real change made, 1 to missing)
 
-. tab maintcost, missing
+. tab weight_cat, missing
 
-  maintcost |      Freq.     Percent        Cum.
+ weight_cat |      Freq.     Percent        Cum.
 ------------+-----------------------------------
-          1 |          2        2.70        2.70
-          2 |         38       51.35       54.05
-          3 |         29       39.19       93.24
-          . |          5        6.76      100.00
+      Light |          7        9.46        9.46
+     Medium |         57       77.03       86.49
+      Heavy |          9       12.16       98.65
+          . |          1        1.35      100.00
 ------------+-----------------------------------
       Total |         74      100.00
 
 </code></pre>
 <p>
-The <code>missing()</code> function returns true for each row with a missing value, and false for each row with an observed value, for the variable inside the parantheses (in this case, <code>rep78</code>).
+The <code>missing()</code> function returns true for each row with a missing value, and false for each row with an observed value, for the variable inside the parantheses (in this case, <code>weight</code>).
 </p>
 <p>
-You may occasionally see <code>if rep78 != .</code> or <code>if rep78 &lt;= .</code> instead of the <code>missing()</code> function. Recall that missing values are sorted to be larger than the largest observed value, so this works just as well as <code>missing()</code>. However, Stata allows you to define “reasons” for missing, specifically <code>.a</code>, <code>.b</code>, all the way through <code>.z</code>. These are sorted such that <code>.</code> &lt; <code>.a</code> &lt; <code>.b</code> &lt; … &lt; <code>.z</code>. For this reason, <code>!= .</code> is not suggested, as while <code>.</code> will be captured as missing, <code>.a</code>, etc will not be. Using <code>missing()</code> removes the temptation to write <code>!=</code> instead of <code>&lt;=</code>.
+You may occasionally see <code>if weight != .</code> or <code>if weight &lt;= .</code> instead of the <code>missing()</code> function. Recall that missing values are sorted to be larger than the largest observed value, so this works just as well as <code>missing()</code>. However, Stata allows you to define “reasons” for missing, specifically <code>.a</code>, <code>.b</code>, all the way through <code>.z</code>. These are sorted such that <code>.</code> &lt; <code>.a</code> &lt; <code>.b</code> &lt; … &lt; <code>.z</code>. For this reason, <code>!= .</code> is not suggested, as while <code>.</code> will be captured as missing, <code>.a</code>, etc will not be. Using <code>missing()</code> removes the temptation to write <code>!=</code> instead of <code>&lt;=</code>.
 </p>
 <p>
 The <code>missing()</code> function can be proceeded with an exclamation point to indicate not missing. For example
 </p>
-<pre><code>replace maintcost = 2 if !missing(rep78)
+<pre><code>replace x = 2 if !missing(y)
 </code></pre>
 <p>
 The <code>missing</code> option to <code>tab</code> forces it to show a row for any missing values. Without it, missing rows are suppressed.
@@ -845,25 +899,25 @@ The <code>missing</code> option to <code>tab</code> forces it to show a row for 
 <p>
 To summarize, we used the following commands:
 </p>
-<pre><code>generate maintcost = 1
-replace maintcost = 2 if rep78 &gt;= 2 &amp; rep78 &lt;= 3
-replace maintcost = 3 if rep78 &gt; 3
-replace maintcost = . if missing(rep78)
+<pre><code>generate weight_cat = 1
+replace weight_cat = 2 if weight &gt;= 2000 &amp; weight &lt; 4000
+replace weight_cat = 3 if weight &gt;= 4000
+replace weight_cat = . if missing(weight)
 </code></pre>
 <p>
 There are various other ways it could have been done, such as
 </p>
-<pre><code>generate maintcost = 1 if rep78 == 1
-replace maintcost = 2 if rep78 &gt;= 2 &amp; rep78 &lt;= 3
-replace maintcost = 3 if rep78 &gt; 3 &amp; !missing(rep78)
+<pre><code>generate weight_cat = 1 if weight &lt; 2000
+replace weight_cat = 2 if weight &gt;= 2000 &amp; weight &lt; 4000
+replace weight_cat = 3 if weight &gt;= 4000 &amp; !missing(weight)
 </code></pre>
-<pre><code>generate maintcost = .
-replace maintcost = 1 if rep78 == 1
-replace maintcost = 2 if rep78 &gt;= 2 &amp; rep78 &lt;= 3
-replace maintcost = 3 if rep78 &gt; 3 &amp; !missing(rep78)
+<pre><code>generate weight_cat = .
+replace weight_cat = 1 if weight &lt; 2000
+replace weight_cat = 2 if weight &gt;= 2000 &amp; weight &lt;= 4000
+replace weight_cat = 3 if weight &gt; 4000 &amp; !missing(weight)
 </code></pre>
 <p>
-Of course, we could also generate it in the reverse order (3 to 1). There are also alternate ways to write the various conditionals, such as replacing <code>rep78 &gt; 3</code> with <code>rep78 &gt;=4</code> or even <code>rep78 == 4 | rep78 == 5</code> (though the last is a bit wordy). There are usually multiple correct ways to specify any conditional.
+Of course, we could also generate it in the reverse order (3 to 1) or even mixed up (3, 1, 2). There are also alternate ways to write the various conditionals, such as replacing <code>weight &gt; 4000</code> with <code>weight &gt;= 4001</code>. There are usually multiple correct ways to specify any conditional.
 </p>
 </div>
 </div>
@@ -878,12 +932,12 @@ The <code>recode</code> command syntax is fairly simple,
 <pre><code>recode &lt;oldvar&gt; (&lt;rule 1&gt;) (&lt;rule 2&gt;) ...., generate(&lt;newvar&gt;)
 </code></pre>
 <p>
-The different rules define the recoding to take place. For example, the above creation of <code>maintcost</code> can be written as
+The different rules define the recoding to take place. For example, the above creation of <code>weight_cat</code> can be written as
 </p>
-<pre><code>recode rep78 (1 = 1) (2 3 = 2) (4 5 = 3) (missing = .), generate(maintcost)
+<pre><code>recode weight (1/1999 = 1) (2000/4000 = 2) (4001/99999999 = 3) (missing = .), generate(weight_cat)
 </code></pre>
 <p>
-Each rule has the form of <code>old value(s) = new value</code>, where the old values can be either a single number, several numbers (either listed as above, <code>1 5 10</code>, or a <a href="working-with-data-sets.html#loading-subsets-of-the-data">numlist</a> like <code>7/12</code> to include all values between 7 and 12), the phrases “missing”, “nonmissing” or “else” to capture anything not elsewhere defined. The new value must be a single number or a missing value (<code>.</code> or <code>.a</code>, etc). “else” cannot be used if “missing” or “nonmissing” is defined (and vice-versa), and all of those must be the last rules defined. E.g.,
+Each rule has the form of <code>old value(s) = new value</code>, where the old values can be either a single number (<code>(5 = 2)</code>), several numbers (either listed as above in a <a href="Restricting%20commands%20to%20subsets">numlist</a> [note the use of a very large non-missing value for the upper bound], or just a space-separated list of values (<code>(1 5 10 = 4)</code>), the phrases “missing”, “nonmissing” or “else” to capture anything not elsewhere defined. The new value must be a single number or a missing value (<code>.</code> or <code>.a</code>, etc). “else” cannot be used if “missing” or “nonmissing” is defined (and vice-versa), and all of those must be the last rules defined. E.g.,
 </p>
 <pre><code>recode x (missing = 5) (2 = 4) (else = 3) (1 = 2), generate(y)
 </code></pre>

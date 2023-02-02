@@ -280,38 +280,88 @@ needed for `replace`.]
 
 ^#^^#^^#^ Conditional variable generation
 
+(We're going to reload the `auto` data set at this point to ensure all data is as originally saved.)
+
+~~~~
+<<dd_do>>
+sysuse auto, clear
+<</dd_do>>
+~~~~
+
 One frequent task is recoding variables. This can be "binning" continuous variables into a few categories, re-ordering an ordinal variables, or
 collapsing categories in an already-categorical variable. There are also multi-variable versions; e.g. combining multiple variables into one.
 
 The general workflow with these cases will be to optionally use `generate` to create the new variable, then use `replace` to conditional replace the
 original or new variable.
 
-As a first example, let's collapse the `rep78` variable into a low/mid/high cost of maintenance categorical variable (1 repair, 2-3 repairs, 4-5
-repairs). First, we'll generate the new variable.
+As an example, let's generate a new variable which categorizes cars into light, medium weight, and heavy cars. We'll define light cars as a weight
+below 1 ton (2000 lbs), and heavy cars as having a weight of 2 tons (4000 lbs) or more.
+
+Before we do this, we've learned that the weight reported for the Pont. Grand Prix was incorrect - we don't know what the correct weight is, but we
+know the presented one is wrong, so let's make it missing. We could of course do this manually - open the data editor and delete the value of `weight`
+corresponding to the Pont. Grand Prix. As we saw earlier, [manually editing](working-with-data-sets.html#editing-data-manually) the data like this
+produces a `replace` call that we can move into our [Do file for reproducibility](the-basics-of-stata.html#do-files). However, this `replace` call
+would refer to a row number, something like
+
+```
+replace weight = . in 49
+```
+
+What would happen if our data was shuffled prior to running this command? It would no longer be applied to the correct row. Therefore, it will be
+safer to use a [conditional statement][restricting commands to subsets] to identify the row corresponding to `"Pont. Grand Prix"`.
 
 ~~~~
 <<dd_do>>
-generate maintcost = 1
-tab maintcost
+replace weight = . if make == "Pont. Grand Prix"
+list make weight if make == "Pont. Grand Prix"
 <</dd_do>>
 ~~~~
 
-Without any variables or conditions, every row is set to 1. We'll let the 1 represent the "low" category, so next we'll replace it with 2 for cars in
-the "mid" category.
+Now, we'll return to generating the categorical weight variable. First, we'll generate the new variable to store this information.
 
 ~~~~
 <<dd_do>>
-replace maintcost = 2 if rep78 >= 2 & rep78 <= 3
-tab maintcost
+generate weight_cat = 1
+tab weight_cat
 <</dd_do>>
 ~~~~
 
-Finish with the "high" category.
+Without any conditional statements, every observation's `weight_cat` is set to 1. We'll let the 1 represent the "light" category, so next we'll replace
+it with 2 for cars in the "medium" category.
 
 ~~~~
 <<dd_do>>
-replace maintcost = 3 if rep78 > 3
-tab maintcost
+replace weight_cat = 2 if weight >= 2000 & weight < 4000
+tab weight_cat
+<</dd_do>>
+~~~~
+
+Note the choice of `>=` instead of `>` and `<` instead of `<=`. As above, we stated that light cars have weight **below** 2000 lbs, so medium cars
+have a value of 2000 **or more** (greater than **or equal**). On the other end, heavy cars have a weght of 4000 lbs **or more**, so medium cars are
+**strictly** less than 4000 lbs (less than).
+
+Finish with the "heavy" cars
+
+~~~~
+<<dd_do>>
+replace weight_cat = 3 if weight >= 4000
+tab weight_cat
+<</dd_do>>
+~~~~
+
+When using less than/greater than conditinal statements to split a variable into groups, you always want to ensure that when the two "endpoints" are
+the same, one uses strictly less/more, and the other uses "or equal". If both use "or equal", you'll get inconsistent results for exact values. If
+neither use "or equal", exact values will not be classified. (For example, if we had used `weight < 4000` and `weight > 4000`, any car with exact
+weight of 4000 would not fall into either [and its `weight_cat` would stay 1, a light car]. On the other hand, if we had used `weight <= 4000` and
+`weight >= 4000`, a car with exact weight of 4000 would be assigned to whichever of the lines was run last.)
+
+Lastly, we'll add some nice labels.
+
+~~~~
+<<dd_do>>
+label define weight_cat 1 "Light" 2 "Medium" 3 "Heavy"
+label values weight_cat weight_cat
+tab weight_cat
 <</dd_do>>
 ~~~~
 
@@ -325,27 +375,27 @@ is true! There is some discussion [on the Stata FAQs](http://www.stata.com/suppo
 goes into the rationale behind it, but the short version is that this slightly complicates variable generation but greatly simplifies and protects
 some data management tasks.
 
-The complication referred to can be seen in row 3 here:
+The complication referred to can be seen in the row corresponding to the Pont. Grand Prix
 
 ~~~~
 <<dd_do>>
-list make rep78 maintcost in 1/5
+list make weight weight_cat in 46/50
 <</dd_do>>
 ~~~~
 
-The AMC Spirit has a high repair cost even though we do not have its repair record. We can fix this easily.
+Even though the Grand Prix has no weight, it is categorized as "Heavy"
 
 ~~~~
 <<dd_do>>
-replace maintcost = . if missing(rep78)
-tab maintcost, missing
+replace weight_cat = . if missing(weight)
+tab weight_cat, missing
 <</dd_do>>
 ~~~~
 
 The `missing()` function returns true for each row with a missing value, and false for each row with an observed value, for the variable inside the
-parantheses (in this case, `rep78`).
+parantheses (in this case, `weight`).
 
-You may occasionally see `if rep78 != .` or `if rep78 <= .` instead of the `missing()` function. Recall that missing values are sorted to be larger
+You may occasionally see `if weight != .` or `if weight <= .` instead of the `missing()` function. Recall that missing values are sorted to be larger
 than the largest observed value, so this works just as well as `missing()`. However, Stata allows you to define "reasons" for missing, specifically
 `.a`, `.b`, all the way through `.z`. These are sorted such that `.` < `.a` < `.b` < ... < `.z`. For this reason, `!= .` is not suggested, as while
 `.` will be captured as missing, `.a`, etc will not be. Using `missing()` removes the temptation to write `!=` instead of `<=`.
@@ -353,7 +403,7 @@ than the largest observed value, so this works just as well as `missing()`. Howe
 The `missing()` function can be proceeded with an exclamation point to indicate not missing. For example
 
 ```
-replace maintcost = 2 if !missing(rep78)
+replace x = 2 if !missing(y)
 ```
 
 The `missing` option to `tab` forces it to show a row for any missing values. Without it, missing rows are suppressed.
@@ -361,30 +411,29 @@ The `missing` option to `tab` forces it to show a row for any missing values. Wi
 To summarize, we used the following commands:
 
 ```
-generate maintcost = 1
-replace maintcost = 2 if rep78 >= 2 & rep78 <= 3
-replace maintcost = 3 if rep78 > 3
-replace maintcost = . if missing(rep78)
+generate weight_cat = 1
+replace weight_cat = 2 if weight >= 2000 & weight < 4000
+replace weight_cat = 3 if weight >= 4000
+replace weight_cat = . if missing(weight)
 ```
 
 There are various other ways it could have been done, such as
 
 ```
-generate maintcost = 1 if rep78 == 1
-replace maintcost = 2 if rep78 >= 2 & rep78 <= 3
-replace maintcost = 3 if rep78 > 3 & !missing(rep78)
+generate weight_cat = 1 if weight < 2000
+replace weight_cat = 2 if weight >= 2000 & weight < 4000
+replace weight_cat = 3 if weight >= 4000 & !missing(weight)
 ```
 
 ```
-generate maintcost = .
-replace maintcost = 1 if rep78 == 1
-replace maintcost = 2 if rep78 >= 2 & rep78 <= 3
-replace maintcost = 3 if rep78 > 3 & !missing(rep78)
+generate weight_cat = .
+replace weight_cat = 1 if weight < 2000
+replace weight_cat = 2 if weight >= 2000 & weight <= 4000
+replace weight_cat = 3 if weight > 4000 & !missing(weight)
 ```
 
-Of course, we could also generate it in the reverse order (3 to 1). There are also alternate ways to write the various conditionals, such as replacing
-`rep78 > 3` with `rep78 >=4` or even `rep78 == 4 | rep78 == 5` (though the last is a bit wordy). There are usually multiple correct ways to specify
-any conditional.
+Of course, we could also generate it in the reverse order (3 to 1) or even mixed up (3, 1, 2). There are also alternate ways to write the various
+conditionals, such as replacing `weight > 4000` with `weight >= 4001`. There are usually multiple correct ways to specify any conditional.
 
 ^#^^#^ More complicated replaces
 
@@ -397,16 +446,17 @@ The `recode` command syntax is fairly simple,
 recode <oldvar> (<rule 1>) (<rule 2>) ...., generate(<newvar>)
 ```
 
-The different rules define the recoding to take place. For example, the above creation of `maintcost` can be written as
+The different rules define the recoding to take place. For example, the above creation of `weight_cat` can be written as
 
 ```
-recode rep78 (1 = 1) (2 3 = 2) (4 5 = 3) (missing = .), generate(maintcost)
+recode weight (1/1999 = 1) (2000/4000 = 2) (4001/99999999 = 3) (missing = .), generate(weight_cat)
 ```
 
-Each rule has the form of `old value(s) = new value`, where the old values can be either a single number, several numbers (either listed as above, `1
-5 10`, or a [numlist][loading subsets of the data] like `7/12` to include all values between 7 and 12), the phrases "missing", "nonmissing" or "else"
-to capture anything not elsewhere defined. The new value must be a single number or a missing value (`.` or `.a`, etc). "else" cannot be used if
-"missing" or "nonmissing" is defined (and vice-versa), and all of those must be the last rules defined. E.g.,
+Each rule has the form of `old value(s) = new value`, where the old values can be either a single number (`(5 = 2)`), several numbers (either listed
+as above in a [numlist](Restricting commands to subsets) [note the use of a very large non-missing value for the upper bound], or just a
+space-separated list of values (`(1 5 10 = 4)`), the phrases "missing", "nonmissing" or "else" to capture anything not elsewhere defined. The new
+value must be a single number or a missing value (`.` or `.a`, etc). "else" cannot be used if "missing" or "nonmissing" is defined (and vice-versa),
+and all of those must be the last rules defined. E.g.,
 
 ```
 recode x (missing = 5) (2 = 4) (else = 3) (1 = 2), generate(y)
