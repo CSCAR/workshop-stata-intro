@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 The Basics of Stata | Introduction to Stata</title>
   <meta name="description" content="Chapter 2 The Basics of Stata | Introduction to Stata" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 The Basics of Stata | Introduction to Stata" />
   <meta property="og:type" content="book" />
-  
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
@@ -24,7 +23,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2022-02-24" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="working-with-data-sets.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 
@@ -85,7 +84,10 @@
 </ul></li>
 <li class="chapter" data-level="2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html"><i class="fa fa-check"></i><b>2</b> The Basics of Stata</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#the-stata-environment"><i class="fa fa-check"></i><b>2.1</b> The Stata Environment</a></li>
+<li class="chapter" data-level="2.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#the-stata-environment"><i class="fa fa-check"></i><b>2.1</b> The Stata Environment</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#alternate-layout"><i class="fa fa-check"></i><b>2.1.1</b> Alternate Layout</a></li>
+</ul></li>
 <li class="chapter" data-level="2.2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#one-data"><i class="fa fa-check"></i><b>2.2</b> One Data</a></li>
 <li class="chapter" data-level="2.3" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#give-stata-a-command"><i class="fa fa-check"></i><b>2.3</b> Give Stata a command</a>
 <ul>
@@ -247,10 +249,10 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-basics-of-stata" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> The Basics of Stata</h1>
-<div id="the-stata-environment" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> The Stata Environment</h2>
+<div id="the-basics-of-stata" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> The Basics of Stata<a href="the-basics-of-stata.html#the-basics-of-stata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="the-stata-environment" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> The Stata Environment<a href="the-basics-of-stata.html#the-stata-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 <a target="_blank" href="./images/stata_main_screen.png"><img src="images/stata_main_screen.png" alt="" /></a>
 </p>
@@ -283,7 +285,7 @@ This pane displays all of the variables in the data set that is currently open i
 </ul>
 </li>
 <li>
-The Review Pane
+The History Pane
 <ul>
 <li>
 Stata will keep a running record of all Stata commands that have been submitted in the current session in this pane. Users can simply click on previous commands in this pane to recall them in the Command pane.
@@ -305,9 +307,21 @@ Each of these five panes will be nested within the main Stata session, which con
 <p>
 In the lower left-hand corner of the main Stata window (below the panes), there will be a directory displayed. This is known as the <a href="the-basics-of-stata.html#working-directory">working directory</a>, and is where Stata will look to find data files and other associated Stata files unless the user specifies another directory. We will cover examples of changing the working directory.
 </p>
+<div id="alternate-layout" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Alternate Layout<a href="the-basics-of-stata.html#alternate-layout" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>
+<a target="_blank" href="./images/stata_main_screen.png"><img src="images/stata_main_screen.png" alt="" /></a>
+</p>
+<p>
+An alternate layout (found in View -&gt; Layout) places the History and Variables pane in tabs on the right hand side instead.
+</p>
+<p>
+(Note that this screenshot is taken on a Mac, as opposed to the original screenshot on Windows, just for comparison.)
+</p>
 </div>
-<div id="one-data" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> One Data</h2>
+</div>
+<div id="one-data" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> One Data<a href="the-basics-of-stata.html#one-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 One functionality where Stata differs than most other statistical or data analysis software is that Stata can only work with a single data set at a time.
 </p>
@@ -330,8 +344,8 @@ Merge the data sets, the better option. We’ll discuss <a href="data-manipulati
 </li>
 </ol>
 </div>
-<div id="give-stata-a-command" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Give Stata a command</h2>
+<div id="give-stata-a-command" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Give Stata a command<a href="the-basics-of-stata.html#give-stata-a-command" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 Let’s try running a Stata command. In the command pane, type (or copy and paste) the following:
 </p>
@@ -350,8 +364,8 @@ The first line proceeded by the <code>.</code> indicates the command that was wr
 <p>
 In this document, if you see a single command without a period, it indicates something that was not run - either it’s not designed to be run (it’s fake code designed to illustrate a point), or more likely, the output is not interesting or unnecessary. If you instead see a Results output where the first line is the command prefaced by the <code>.</code>, that was run in Stata and only the Results are included since they include the command. The command can still be run, <em>but should be run without the <code>.</code></em><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.
 </p>
-<div id="saving-results" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Saving Results</h3>
+<div id="saving-results" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Saving Results<a href="the-basics-of-stata.html#saving-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 Any output that appears in the Results pane (including the echoed commands and any errors) can be copied and pasted into another location, such as Word. In addition, if you highlight text and right-click, you also have the options:
 </p>
@@ -381,15 +395,15 @@ There are a few commands that can be useful for saving results which we will not
 </li>
 </ul>
 </div>
-<div id="dyndoc" class="section level3" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> dyndoc</h3>
+<div id="dyndoc" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> dyndoc<a href="the-basics-of-stata.html#dyndoc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 Version 15 of Stata introduced “dyndoc” which allows you to weave together narrative text and Stata code to produce a high-quality output (html, word or pdf). This document is written (<a href="index.html#how-to-use-this-document">in part</a>) in dyndoc. It is extremely powerful but is well outside the mandate of this class. If you are interested in this functionality, I’d be happy to help.
 </p>
 </div>
 </div>
-<div id="updating" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Updating</h2>
+<div id="updating" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Updating<a href="the-basics-of-stata.html#updating" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 If you have administrative access on your computer (e.g. if it is your personal machine, or your IT department has given you the ability), you can update Stata freely. Major point upgrades such as the newly released 17.0 require purchase and re-installation, but minor upgrades (such as the 16.1 and 16.2 updates) as well as minor internal updates are free.
 </p>
@@ -407,8 +421,8 @@ If any updates are available (regardless of whether you ran a query first), you 
 If you do not have administrative access on your computer, you’ll need to reach out to your IT administrators to update.
 </p>
 </div>
-<div id="installing-user-written-commands" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> Installing user-written commands</h2>
+<div id="installing-user-written-commands" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Installing user-written commands<a href="the-basics-of-stata.html#installing-user-written-commands" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 In addition to built in commands, Stata supports user-written programs, know as “ado-files”<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Once installed, these user-written programs operate identically to any built-in command, with the caveat that they may not be quite as polished or complete since they’re volunteer written. Documentation is rarely up to <a href="the-basics-of-stata.html#stata-help">Stata standards</a> and often relegates details to a manuscript.
 </p>
@@ -441,8 +455,8 @@ to list all available updates and
 to perform all updates.
 </p>
 </div>
-<div id="do-files" class="section level2" number="2.6">
-<h2><span class="header-section-number">2.6</span> Do-files</h2>
+<div id="do-files" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Do-files<a href="the-basics-of-stata.html#do-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 We <a href="the-basics-of-stata.html#give-stata-a-command">saw</a> that commands can be typed interactively, one command at a time, and the results immediately observed. From this, the output can be copied/exported/printed, or the results can be saved. However, a better paradigm would save all the commands run separately so that the analysis is <a target="_blank" href="https://ropensci.github.io/reproducibility-guide/sections/introduction/">reproducible</a>.
 </p>
@@ -467,11 +481,11 @@ You can enter the command:
 </code></pre>
 <ul>
 <li>
-If you select some commands in the Review pane, you can right click and choose “Send select to Do-file Editor”.
+If you select some commands in the History pane, you can right click and choose “Send select to Do-file Editor”.
 </li>
 </ul>
 <p>
-For the last option there, note that performing that twice will create two separate Do-files instead of appending the commands. Instead, you can copy and paste from the Review pane to add to an existing Do-file.
+For the last option there, note that performing that twice will create two separate Do-files instead of appending the commands. Instead, you can copy and paste from the History pane to add to an existing Do-file.
 </p>
 <p>
 Let’s manually add some commands to a Do-file to see how to execute the commands. In a Do-file editor, enter the following
@@ -505,8 +519,8 @@ Once the lines are in the editor, highlight the commands (you do not need to hig
 <p>
 We will cover in later sections what each of these commands does (<a href="working-with-data-sets.html#built-in-data"><code>sysuse</code></a>, <a href="data-management.html#summarizing-the-data"><code>summarize</code></a>, <a href="data-management.html#labeling-values"><code>tabulate</code></a>).
 </p>
-<div id="comments" class="section level3" number="2.6.1">
-<h3><span class="header-section-number">2.6.1</span> Comments</h3>
+<div id="comments" class="section level3 hasAnchor" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> Comments<a href="the-basics-of-stata.html#comments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 Comments are information in a Do-file which Stata will ignore. They can be used to stop a command from running without deleting it, or more usefully, to add information about the code which may be useful for others (or yourself in the future) to understand how some code works or to justify why you made certain choices. In general, comments can also help readability. There are three different ways to enter comments (and one additional special way).
 </p>
@@ -565,8 +579,8 @@ As with <code>//</code>, there needs to be a space before the <code>///</code>.
 Only the <code>*</code> works on interactive commands entered in the Command pane. All four versions work in Do-files.
 </p>
 </div>
-<div id="version-control" class="section level3" number="2.6.2">
-<h3><span class="header-section-number">2.6.2</span> Version control</h3>
+<div id="version-control" class="section level3 hasAnchor" number="2.6.2">
+<h3><span class="header-section-number">2.6.2</span> Version control<a href="the-basics-of-stata.html#version-control" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 When writing a Do-file, you generally are creating it while using a single version of Stata. If a new version of Stata were released, its possible that your code may operate differently with the new version. If you add
 </p>
@@ -583,8 +597,8 @@ Best practices is to always include a <code>version ##.#</code> line at the top 
 </p>
 </div>
 </div>
-<div id="exercise-0" class="section level2" number="2.7">
-<h2><span class="header-section-number">2.7</span> Exercise 0</h2>
+<div id="exercise-0" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> Exercise 0<a href="the-basics-of-stata.html#exercise-0" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 Get familiar with the Stata interface. If you’ve been following along, you may have already done all these!
 </p>
@@ -609,8 +623,8 @@ Be sure you know how to run these commands from the Do file.
 </li>
 </ol>
 </div>
-<div id="basic-command-syntax" class="section level2" number="2.8">
-<h2><span class="header-section-number">2.8</span> Basic command syntax</h2>
+<div id="basic-command-syntax" class="section level2 hasAnchor" number="2.8">
+<h2><span class="header-section-number">2.8</span> Basic command syntax<a href="the-basics-of-stata.html#basic-command-syntax" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 Most Stata commands which operate on variables (as opposed to system commands such as <code>version</code>, <code>update</code>, <code>query</code>, etc.) follow the same general format. Recognizing this format will make it easier to understand new commands to which you are introduced.
 </p>
@@ -635,8 +649,8 @@ The second and third lines, <code>summarize price mpg</code> and <code>tabulate 
 The options are not required (none of the above commands have options), but if they are given, they too are separated by spaces. There are some options that are consistent across a number of commands, and some options are specific to commands.
 </p>
 </div>
-<div id="stata-help" class="section level2" number="2.9">
-<h2><span class="header-section-number">2.9</span> Stata Help</h2>
+<div id="stata-help" class="section level2 hasAnchor" number="2.9">
+<h2><span class="header-section-number">2.9</span> Stata Help<a href="the-basics-of-stata.html#stata-help" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 Stata has, hands down, the best built-in help files of any of the “Big 4” statistical software.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> Stata’s help should be your first stop for any of the following:
 </p>
@@ -687,8 +701,8 @@ We will discuss the “Stored results” in the [Programming][programming] secti
 <p>
 Finally, <code>help help</code> works and brings up some more information on the <code>help</code> command.
 </p>
-<div id="short-commands" class="section level3" number="2.9.1">
-<h3><span class="header-section-number">2.9.1</span> Short commands</h3>
+<div id="short-commands" class="section level3 hasAnchor" number="2.9.1">
+<h3><span class="header-section-number">2.9.1</span> Short commands<a href="the-basics-of-stata.html#short-commands" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 You’ll frequently see commands with partial underlining; for example <code>summarize</code> has the “su” underlined. Only the underlined part needs to be given for Stata to understand the command; e.g. the following are all equivalent:
 </p>
@@ -709,8 +723,8 @@ The short commands are very useful for quickly writing commands, but not so grea
 </p>
 </div>
 </div>
-<div id="working-directory" class="section level2" number="2.10">
-<h2><span class="header-section-number">2.10</span> Working directory</h2>
+<div id="working-directory" class="section level2 hasAnchor" number="2.10">
+<h2><span class="header-section-number">2.10</span> Working directory<a href="the-basics-of-stata.html#working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 We mentioned <a href="the-basics-of-stata.html#the-stata-environment">earlier</a> the notion of a “working directory”, the current one you can see in the bottom left of the Stata window. You can think of a working directory as an open folder inside Windows Explorer (or Finder if you’re on a Mac). You can easily access any file within that folder without any additional trouble. You can access files in other folders (directories), but it requires moving to that folder.
 </p>
@@ -744,8 +758,8 @@ You can change the working directory by passing a path to <code>cd</code> (Chang
 <p>
 Alternatively and perhaps more easily, you can change the working directory by the menus, choosing “Files -&gt; Change working directory”. After selecting the appropriate directory, the full <code>cd</code> command will be printed in the Results, so you can save it in a Do-file for later use.
 </p>
-<div id="file-paths" class="section level3" number="2.10.1">
-<h3><span class="header-section-number">2.10.1</span> File paths</h3>
+<div id="file-paths" class="section level3 hasAnchor" number="2.10.1">
+<h3><span class="header-section-number">2.10.1</span> File paths<a href="the-basics-of-stata.html#file-paths" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 There are some distinctions between Windows and Mac in regards to file paths, the most blatant that Windows uses forward slash (<code>\</code>) whereas Mac uses back slashes (<code>/</code>). You can see full details of this by running <code>help filename</code>.
 </p>
@@ -817,7 +831,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

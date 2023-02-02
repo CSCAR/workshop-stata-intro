@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Data Manipulation | Introduction to Stata</title>
   <meta name="description" content="Chapter 5 Data Manipulation | Introduction to Stata" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Data Manipulation | Introduction to Stata" />
   <meta property="og:type" content="book" />
-  
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
@@ -24,7 +23,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2022-02-24" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="data-management.html"/>
 <link rel="next" href="programming-advanced-features.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 
@@ -85,7 +84,10 @@
 </ul></li>
 <li class="chapter" data-level="2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html"><i class="fa fa-check"></i><b>2</b> The Basics of Stata</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#the-stata-environment"><i class="fa fa-check"></i><b>2.1</b> The Stata Environment</a></li>
+<li class="chapter" data-level="2.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#the-stata-environment"><i class="fa fa-check"></i><b>2.1</b> The Stata Environment</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#alternate-layout"><i class="fa fa-check"></i><b>2.1.1</b> Alternate Layout</a></li>
+</ul></li>
 <li class="chapter" data-level="2.2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#one-data"><i class="fa fa-check"></i><b>2.2</b> One Data</a></li>
 <li class="chapter" data-level="2.3" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#give-stata-a-command"><i class="fa fa-check"></i><b>2.3</b> Give Stata a command</a>
 <ul>
@@ -247,8 +249,8 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-manipulation" class="section level1" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Data Manipulation</h1>
+<div id="data-manipulation" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Data Manipulation<a href="data-manipulation.html#data-manipulation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>
 Let’s reload the “auto” data to discard any changes made in previous sections and to start fresh.
 </p>
@@ -256,8 +258,8 @@ Let’s reload the “auto” data to discard any changes made in previous secti
 (1978 automobile data)
 
 </code></pre>
-<div id="restricting-commands-to-subsets" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Restricting commands to subsets</h2>
+<div id="restricting-commands-to-subsets" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Restricting commands to subsets<a href="data-manipulation.html#restricting-commands-to-subsets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 We’ll discuss operating on subsets of the data in far more detail a bit <a href="data-manipulation.html#subsetting">later</a>, but first we’ll discuss how to modify the <a href="the-basics-of-stata.html#basic-command-syntax">basic command syntax</a> to run a command only on some rows of data.
 </p>
@@ -458,8 +460,8 @@ Note in the second example we used parentheses to evaluate a more complex expres
 We saw the usage of this earlier when discussing <a href="working-with-data-sets.html#loading-subsets-of-the-data">loading subsets of the data</a>.
 </p>
 </div>
-<div id="generating-new-variables" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Generating new variables</h2>
+<div id="generating-new-variables" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Generating new variables<a href="data-manipulation.html#generating-new-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 The <code>generate</code> command can be used to create new variables which are functions of existing variables. For example, if we look at the variable label for <code>weight</code>, we see that it is measured in pounds.
 </p>
@@ -563,8 +565,8 @@ You can see a full accounting of all functions you can use in this setting in
 </p>
 <pre><code>help functions
 </code></pre>
-<div id="creating-dummies" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Creating dummies</h3>
+<div id="creating-dummies" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Creating dummies<a href="data-manipulation.html#creating-dummies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 Dummy variables (also known as indicator variables or binary variables) are variables which take on two values, 0 and 1<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>. These are typically used in a setting where the 0 represents an absence of something (or an answer of “no”) and 1 represents the presence (or an answer of “yes”). When naming dummy variables, you should keep this in mind to make understanding the variable easier, as well as extracting interpretations regarding the variable in a model.
 </p>
@@ -627,8 +629,8 @@ For a slightly more complicated example, lets create a dummy variable representi
 The <code>list</code> commands conditions on <code>cheap == 1</code> because again, the conditional statement will return 1 for true and 0 for false. We see 6 cheap cars; the Chevette and Zephyr are cheap because of their cost, whereas the other four cars are cheap because of the maintenance costs.
 </p>
 </div>
-<div id="system-variables" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> System Variables</h3>
+<div id="system-variables" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> System Variables<a href="data-manipulation.html#system-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 In Stata, under the <a href="the-basics-of-stata.html#one-data">One Data</a> principal, any information in the data<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> must be in a variable. This includes the System Variables of <code>_n</code> and <code>_N</code>. You can imagine that every data st you ever open has two additional columns of data, one for <code>_n</code> and one for <code>_N</code>.
 </p>
@@ -681,8 +683,8 @@ A more useful example is to save the initial row numbering in your data. When we
 
 </code></pre>
 </div>
-<div id="extensions-to-generate" class="section level3" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> Extensions to generate</h3>
+<div id="extensions-to-generate" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Extensions to generate<a href="data-manipulation.html#extensions-to-generate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 The command <code>egen</code> offers some functionality that <code>generate</code> lacks, for example creating the mean of several variables
 </p>
@@ -695,8 +697,8 @@ The functions which <code>egen</code> support are fairly random; you can see the
 </code></pre>
 </div>
 </div>
-<div id="replacing-existing-variables" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> Replacing existing variables</h2>
+<div id="replacing-existing-variables" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Replacing existing variables<a href="data-manipulation.html#replacing-existing-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 <a href="data-manipulation.html#generating-new-variables">Earlier</a> we created the <code>weight2</code> variable which changed the units on weight from pounds to tons. What if, instead of creating a new variable, we tried to just change the existing <code>weight</code> variable.
 </p>
@@ -728,8 +730,8 @@ variable weight was int now float
 <p>
 <code>replace</code> features syntax identical to <code>generate</code>.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>
 </p>
-<div id="conditional-variable-generation" class="section level3" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> Conditional variable generation</h3>
+<div id="conditional-variable-generation" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Conditional variable generation<a href="data-manipulation.html#conditional-variable-generation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 One frequent task is recoding variables. This can be “binning” continuous variables into a few categories, re-ordering an ordinal variables, or collapsing categories in an already-categorical variable. There are also multi-variable versions; e.g. combining multiple variables into one.
 </p>
@@ -865,8 +867,8 @@ Of course, we could also generate it in the reverse order (3 to 1). There are al
 </p>
 </div>
 </div>
-<div id="more-complicated-replaces" class="section level2" number="5.4">
-<h2><span class="header-section-number">5.4</span> More complicated replaces</h2>
+<div id="more-complicated-replaces" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> More complicated replaces<a href="data-manipulation.html#more-complicated-replaces" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 The above example for <code>replace</code> was fairly simplistic, but you can imagine the need for a much more complicated replacing structure (perhaps based on the value of multiple variables). If, however, you do have something this simple, the <code>recode</code> command could be used instead.
 </p>
@@ -900,8 +902,8 @@ Finally, the rules are executed left-to-right. So if you have two rules referrin
 The <code>2 = 4</code> rule will never take place because 2 is already recoded to 7 in the <code>1/5 = 7</code> rule.
 </p>
 </div>
-<div id="subsetting" class="section level2" number="5.5">
-<h2><span class="header-section-number">5.5</span> Subsetting</h2>
+<div id="subsetting" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Subsetting<a href="data-manipulation.html#subsetting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 Almost any Stata command which operates on variables can operate on a subset of the data instead of the entire data, <a href="Restricting%20commands%20to%20subsets">as we saw before</a>, by using the <code>if</code> or <code>in</code> statements in the command. This is equivalent to throwing away some data and then performing the command. In general, you should avoid discarding data as you never know when you will possible use it. Of course, you could use <a href="working-with-data-sets.html#temporarily-preserving-and-restoring-data"><code>preserve</code> and <code>restore</code></a> to temporarily remove the data, but using the conditional subsetting is more straightforward.
 </p>
@@ -930,8 +932,8 @@ If the conditional logic we want to use involves subsets of the data, we could u
 <p>
 Keep track of the number of observations, “Obs”, to see that the second and third commands are in fact operating on the subsets. We see here that American cars are cheaper on average<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>.
 </p>
-<div id="repeat-commands-on-subsets" class="section level3" number="5.5.1">
-<h3><span class="header-section-number">5.5.1</span> Repeat commands on subsets</h3>
+<div id="repeat-commands-on-subsets" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Repeat commands on subsets<a href="data-manipulation.html#repeat-commands-on-subsets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 To look at the average price for American and foreign cars, we ran two individual commands. If we wanted to look at the summaries by <code>rep78</code>, that would take 6 commands (values 1 through 5 and <code>.</code>)!
 </p>
@@ -1034,8 +1036,8 @@ When specifying <code>bysort</code>, you can optionally specify a variable to so
 By placing <code>date</code> in parentheses, this ensures that within each <code>id</code>, the data is sorted by <code>date</code>. Therefore the first row for each patient is their first visit, so <code>_n == 1</code> evaluates to 1 only in that first row and 0 zero otherwise.
 </p>
 </div>
-<div id="discarding-data" class="section level3" number="5.5.2">
-<h3><span class="header-section-number">5.5.2</span> Discarding data</h3>
+<div id="discarding-data" class="section level3 hasAnchor" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Discarding data<a href="data-manipulation.html#discarding-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 If you do want to discard data, you can use <code>keep</code> or <code>drop</code> to do so. They each can perform on variables:
 </p>
@@ -1064,8 +1066,8 @@ r(198);
 </p>
 </div>
 </div>
-<div id="dealing-with-duplicates" class="section level2" number="5.6">
-<h2><span class="header-section-number">5.6</span> Dealing with duplicates</h2>
+<div id="dealing-with-duplicates" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> Dealing with duplicates<a href="data-manipulation.html#dealing-with-duplicates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 If your data is not expected to have duplicates, either across all variables or within certain variables, the <code>duplicates</code> command can make their detection and correction easier. The most basic command is <code>duplicates report</code>, which simply reports on the status of duplicate rows. Let’s use the built-in “bplong” data. This data contains 120 patients (<code>patient</code>) with measures of blood pressure (<code>bp</code>) at two different time points (<code>when</code>, a Before and After), and some descriptive variables (<code>sex</code> and <code>agegrp</code>).
 </p>
@@ -1130,8 +1132,8 @@ Other useful commands include
 </li>
 </ul>
 </div>
-<div id="sorting" class="section level2" number="5.7">
-<h2><span class="header-section-number">5.7</span> Sorting</h2>
+<div id="sorting" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Sorting<a href="data-manipulation.html#sorting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 We already saw sorting <a href="data-manipulation.html#repeat-commands-on-subsets">in the context of <code>bysort</code></a>. We can also sort as a standalone operation. As before, consider generating a <a href="data-manipulation.html#system-variables">original ordering variable</a> first.
 </p>
@@ -1187,19 +1189,19 @@ You can append “+” or “-” to each variable to change whether it is ascen
 Recall that missing values (<code>.</code>) are <a href="data-manipulation.html#conditional-variable-generation">larger than any other values</a>. When sorting with missing values, they follow this rule as well. If you want to treat missing values as smaller than all other values, you can pass the <code>mfirst</code> option to <code>gsort</code>. Note this does <em>not</em> make missingness “less than” anywhere else, only for the purposes of the current sort.
 </p>
 <p>
-Sorting strings does work and is done alphabetically. All capital letters are “less than” all lower case letters, and a blank string ("“) is the “smallest”. For example, if you have the strings “DBC”, “Daa”, "“, “EEE”, the sorted ascending order would be "“, “DBC”, “Daa”, “EEE”. The blank is first; the two strings starting with “D” are before the string “EEE”, and the upper case “B” precedes the lower case “a”.
+Sorting strings does work and is done alphabetically. All capital letters are “less than” all lower case letters, and a blank string ("") is the “smallest”. For example, if you have the strings “DBC”, “Daa”, "", “EEE”, the sorted ascending order would be "", “DBC”, “Daa”, “EEE”. The blank is first; the two strings starting with “D” are before the string “EEE”, and the upper case “B” precedes the lower case “a”.
 </p>
 <p>
 As a side note, there is an additional command, <code>sort</code>, which can perform sorting. It does not allow sorting in descending order, however it does allow you to sort only a certain number of rows; that is, passing something like <code>sort &lt;varname&gt; in 100/200</code> would sort only rows 100 through 200, leaving the remaining rows remain <em>in their exact same position</em>.
 </p>
 </div>
-<div id="working-with-strings-and-categorical-variables" class="section level2" number="5.8">
-<h2><span class="header-section-number">5.8</span> Working with strings and categorical variables</h2>
+<div id="working-with-strings-and-categorical-variables" class="section level2 hasAnchor" number="5.8">
+<h2><span class="header-section-number">5.8</span> Working with strings and categorical variables<a href="data-manipulation.html#working-with-strings-and-categorical-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 String variables are commonly used during data collection but are ultimately not very useful from a statistical point of view. Typically string variables should be represented as <a href="data-management.html#labeling-values">categorical variables with value labels</a> as we’ve previously discussed. Here are some useful commands for operating on strings and categorical variables.
 </p>
-<div id="converting-between-string-and-numeric" class="section level3" number="5.8.1">
-<h3><span class="header-section-number">5.8.1</span> Converting between string and numeric</h3>
+<div id="converting-between-string-and-numeric" class="section level3 hasAnchor" number="5.8.1">
+<h3><span class="header-section-number">5.8.1</span> Converting between string and numeric<a href="data-manipulation.html#converting-between-string-and-numeric" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 These two commands convert strings and numerics between each other.
 </p>
@@ -1323,8 +1325,8 @@ make: contains nonnumeric characters; make2 generated as byte
 <code>tostring</code> also accepts the <code>force</code> option when using <code>replace</code>, we recommend instead to <strong>never</strong> use <code>replace</code> with <code>tostring</code> (you probably should not use it with <code>destring</code> either!).
 </p>
 </div>
-<div id="converting-strings-into-labeled-numbers" class="section level3" number="5.8.2">
-<h3><span class="header-section-number">5.8.2</span> Converting strings into labeled numbers</h3>
+<div id="converting-strings-into-labeled-numbers" class="section level3 hasAnchor" number="5.8.2">
+<h3><span class="header-section-number">5.8.2</span> Converting strings into labeled numbers<a href="data-manipulation.html#converting-strings-into-labeled-numbers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 If we have a string variable which has non-numerical values (e.g. <code>race</code> with values “white”, “black”, “Hispanic”, etc), the ideal way to store it is as numerical with <a href="data-management.html#labeling-values">value labels</a> attached. While we could do this manually using a combination of <code>gen</code> and <code>replace</code> with some conditionals, a less tedious way to do so is via <code>encode</code>.
 </p>
@@ -1477,8 +1479,8 @@ sex4            str6    %9s                   Sex
 <code>decode</code> will fail if its target does not have value labels attached.
 </p>
 </div>
-<div id="string-manipulation" class="section level3" number="5.8.3">
-<h3><span class="header-section-number">5.8.3</span> String manipulation</h3>
+<div id="string-manipulation" class="section level3 hasAnchor" number="5.8.3">
+<h3><span class="header-section-number">5.8.3</span> String manipulation<a href="data-manipulation.html#string-manipulation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 If you find yourself in a situation where you simply must manipulate the strings directly, there are a number of string functions. You can see the full list in <code>help string functions</code>, but below we list a few commonly used ones.
 </p>
@@ -1496,7 +1498,7 @@ If you find yourself in a situation where you simply must manipulate the strings
 <code>strupper</code> and <code>strlower</code>: Converts to lower/upper case.
 </li>
 <li>
-<code>strtrim</code>: Removes white space before and after strings (e.g. <code>strtrim(" string “) =”string"</code>). To remove only left (preceding) or right (following) spaces, use <code>strltrim</code> or <code>strrtrim</code>.
+<code>strtrim</code>: Removes white space before and after strings (e.g. <code>strtrim(" string ") = "string"</code>). To remove only left (preceding) or right (following) spaces, use <code>strltrim</code> or <code>strrtrim</code>.
 </li>
 <li>
 <code>substr</code>: Returns the substring starting at an index for a given number of characters (e.g. `substr(“abcdefg”, 2, 3) = “bcd”).
@@ -1526,8 +1528,8 @@ These are used inside <code>gen</code> and <code>replace</code>, e.g.
 </code></pre>
 </div>
 </div>
-<div id="exercise-5" class="section level2" number="5.9">
-<h2><span class="header-section-number">5.9</span> Exercise 5</h2>
+<div id="exercise-5" class="section level2 hasAnchor" number="5.9">
+<h2><span class="header-section-number">5.9</span> Exercise 5<a href="data-manipulation.html#exercise-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 Open the <em>saved</em> version of “census9” with <code>use</code>, not the original version with <code>webuse</code>.
 </p>
@@ -1563,13 +1565,13 @@ Each state has a single observation here, but if we had multiple years of data, 
 </li>
 </ol>
 </div>
-<div id="merging-files" class="section level2" number="5.10">
-<h2><span class="header-section-number">5.10</span> Merging Files</h2>
+<div id="merging-files" class="section level2 hasAnchor" number="5.10">
+<h2><span class="header-section-number">5.10</span> Merging Files<a href="data-manipulation.html#merging-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 When managing data sets, the need often arises to merge two data sets together, either by matching two files together according to values on certain variables, or by adding cases to an existing data set. We’ll start with the simpler case of adding cases to an existing data set.
 </p>
-<div id="appending-files" class="section level3" number="5.10.1">
-<h3><span class="header-section-number">5.10.1</span> Appending Files</h3>
+<div id="appending-files" class="section level3 hasAnchor" number="5.10.1">
+<h3><span class="header-section-number">5.10.1</span> Appending Files<a href="data-manipulation.html#appending-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 Appending is straightforward. Observations in a new data set (called the “using” data) are appended to the current data set (called the “master” data), matching variable names. If a variable in the using data exists already in the master data, its values are entered there. If a variable in the using data does not exist in the master, the new variable is added to the appended data set which is missing for all members of the master data. This is easiest to visualize. There are two data sets on <a href="working-with-data-sets.html#stata-website-data">Stata’s website</a> which we can append, “odd” and “even”.
 </p>
@@ -1645,8 +1647,8 @@ Stata is case sensitive in its variable names, so “varname” and “Varname�
 but it is better to ensure before appending that the shared variables have identical names.
 </p>
 </div>
-<div id="match-merging-data" class="section level3" number="5.10.2">
-<h3><span class="header-section-number">5.10.2</span> Match-merging Data</h3>
+<div id="match-merging-data" class="section level3 hasAnchor" number="5.10.2">
+<h3><span class="header-section-number">5.10.2</span> Match-merging Data<a href="data-manipulation.html#match-merging-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 A more common data management necessity is to add variables from another data set to a master data set, match-merging the cases in the data sets by values on a single ID variable (or by values on multiple variables). There are two general forms of this match-merging.
 </p>
@@ -1701,38 +1703,34 @@ Now we can perform the merge using the syntax.
 <p>
 All that needs to be specified is the variable to match cases by and the name of the data set with variables to be added. We could replace <code>1:1</code> with <code>m:1</code> or <code>1:m</code> as desired.
 </p>
-<pre><code>. merge 1:1 make using http://www.stata-press.com/data/r16/autoexpense
+<pre><code>. merge 1:1 make using http://www.stata-press.com/data/r16/autosize
 
     Result                      Number of obs
     -----------------------------------------
-    Not matched                            69
-        from master                        69  (_merge==1)
+    Not matched                            68
+        from master                        68  (_merge==1)
         from using                          0  (_merge==2)
 
-    Matched                                 5  (_merge==3)
+    Matched                                 6  (_merge==3)
     -----------------------------------------
 
-. list in 1/7
+. list in 3/6
 
-     +-------------------------------------------------------+
-     |          make   price   rep78   mpg            _merge |
-     |-------------------------------------------------------|
-  1. |   AMC Concord    4099       3     .   Master only (1) |
-  2. |     AMC Pacer    4749       3     .   Master only (1) |
-  3. |    AMC Spirit    3799       .     .   Master only (1) |
-  4. |     Audi 5000    9690       5     .   Master only (1) |
-  5. |      Audi Fox    6295       3     .   Master only (1) |
-     |-------------------------------------------------------|
-  6. |      BMW 320i    9735       4    25       Matched (3) |
-  7. | Buick Century    4816       3     .   Master only (1) |
-     +-------------------------------------------------------+
+     +----------------------------------------------------------------+
+     |       make   price   rep78   weight   length            _merge |
+     |----------------------------------------------------------------|
+  3. | AMC Spirit    3799       .        .        .   Master only (1) |
+  4. |  Audi 5000    9690       5        .        .   Master only (1) |
+  5. |   Audi Fox    6295       3        .        .   Master only (1) |
+  6. |   BMW 320i    9735       4    2,650      177       Matched (3) |
+     +----------------------------------------------------------------+
 
 </code></pre>
 <p>
 (Again, we use the full path but for local files, following <a href="the-basics-of-stata.html#working-directory">working directory</a> rules.)
 </p>
 <p>
-First, take a look at the output of the merge command. We see that 69 cars were not matched, which means they exist in only one of the two data sets. In this case, they all exist in master data, but in general you could see a mix of the two. The remaining 5 observations were appropriately matched. This is a terrible merge! Hopefully with your real data, the majority of data is matched and only a few outliers are not matched.
+First, take a look at the output of the merge command. We see that 68 cars were not matched, which means they exist in only one of the two data sets. In this case, they all exist in master data, but in general you could see a mix of the two. The remaining 6 observations were appropriately matched. This is a terrible merge! Hopefully with your real data, the majority of data is matched and only a few outliers are not matched.
 </p>
 <p>
 Notice the <code>(_merge==#)</code> tags. When you perform a merge, a new variable <code>_merge</code> is added which indicates the source for each row: 1 and 2 indicate the data was only found in the master data or using data respectively, while 3 indicates a match. There are two other possible values (4 and 5) which occur rarely, see the documentation at <code>help merge</code> for details.
@@ -1756,8 +1754,8 @@ IMPORTANT NOTE: Make sure that the only variables common to both files when perf
 </ul>
 </div>
 </div>
-<div id="reshaping-files" class="section level2" number="5.11">
-<h2><span class="header-section-number">5.11</span> Reshaping Files</h2>
+<div id="reshaping-files" class="section level2 hasAnchor" number="5.11">
+<h2><span class="header-section-number">5.11</span> Reshaping Files<a href="data-manipulation.html#reshaping-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 Different data formats are needed for various statistical methods. Stata prefers data in “Long” format, but also makes it easy to convert between Long and “Wide”. Stata uses the <code>reshape</code> command to convert data formats.
 </p>
@@ -2090,7 +2088,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

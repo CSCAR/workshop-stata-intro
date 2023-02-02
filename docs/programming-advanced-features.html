@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Programming &amp; Advanced Features | Introduction to Stata</title>
   <meta name="description" content="Chapter 6 Programming &amp; Advanced Features | Introduction to Stata" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Programming &amp; Advanced Features | Introduction to Stata" />
   <meta property="og:type" content="book" />
-  
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
@@ -24,7 +23,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2022-02-24" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="data-manipulation.html"/>
 <link rel="next" href="appendix.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 
@@ -85,7 +84,10 @@
 </ul></li>
 <li class="chapter" data-level="2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html"><i class="fa fa-check"></i><b>2</b> The Basics of Stata</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#the-stata-environment"><i class="fa fa-check"></i><b>2.1</b> The Stata Environment</a></li>
+<li class="chapter" data-level="2.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#the-stata-environment"><i class="fa fa-check"></i><b>2.1</b> The Stata Environment</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#alternate-layout"><i class="fa fa-check"></i><b>2.1.1</b> Alternate Layout</a></li>
+</ul></li>
 <li class="chapter" data-level="2.2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#one-data"><i class="fa fa-check"></i><b>2.2</b> One Data</a></li>
 <li class="chapter" data-level="2.3" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#give-stata-a-command"><i class="fa fa-check"></i><b>2.3</b> Give Stata a command</a>
 <ul>
@@ -247,8 +249,8 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="programming-advanced-features" class="section level1" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Programming &amp; Advanced Features</h1>
+<div id="programming-advanced-features" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Programming &amp; Advanced Features<a href="programming-advanced-features.html#programming-advanced-features" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>
 Stata features the ability to create user-written commands. These can range from simple data manipulation commands to completely new statistical models. This is an advanced feature that not many users will need.
 </p>
@@ -259,11 +261,11 @@ However, there are several components of the programming capabilities which are 
 Let’s open a fresh version of “auto”:
 </p>
 <pre><code>. sysuse auto, clear
-(1978 Automobile Data)
+(1978 automobile data)
 
 </code></pre>
-<div id="macros" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> Macros</h2>
+<div id="macros" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Macros<a href="programming-advanced-features.html#macros" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 While variables stored as strings aren’t of much use to us, strings stored as other strings can be quite useful. Imagine the following scenario: You have a collection of 5 variables that you want to perform several different operations on. You might have code like this:
 </p>
@@ -328,11 +330,11 @@ abc
 </code></pre>
 <ul>
 <li>
-You may occasionally see code that excludes the <code>=</code> in defining a macro (e.g. <code>local vars “var1 var2”</code>). The differences between including and excluding the <code>=</code> are mostly unimportant, so I recommend sticking with the <code>=</code> unless you specifically need the other version.
+You may occasionally see code that excludes the <code>=</code> in defining a macro (e.g. <code>local vars "var1 var2"</code>). The differences between including and excluding the <code>=</code> are mostly unimportant, so I recommend sticking with the <code>=</code> unless you specifically need the other version.
 </li>
 </ul>
-<div id="class-and-return" class="section level3" number="6.1.1">
-<h3><span class="header-section-number">6.1.1</span> Class and Return</h3>
+<div id="class-and-return" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Class and Return<a href="programming-advanced-features.html#class-and-return" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 Every command in Stata is of a particular type. One major aspect of the type is what the command “returns”. Some commands are n-class, which means they don’t return anything. Some are c-class, which are only used by programmers and rarely useful elsewhere. The two common ones are e-class and r-class. The distinction between the two is inconsequential, besides that they store their “returns” in different places.
 </p>
@@ -341,7 +343,7 @@ Here, <code>summarize</code> is a r-class command, so it stores its returns in �
 </p>
 <pre><code>. summ price
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         74    6165.257    2949.496       3291      15906
 
@@ -359,10 +361,10 @@ scalars:
 
 . mean price
 
-Mean estimation                   Number of obs   =         74
+Mean estimation                             Number of obs = 74
 
 --------------------------------------------------------------
-             |       Mean   Std. Err.     [95% Conf. Interval]
+             |       Mean   Std. err.     [95% conf. interval]
 -------------+------------------------------------------------
        price |   6165.257   342.8719      5481.914      6848.6
 --------------------------------------------------------------
@@ -405,7 +407,7 @@ Along with the <a href="the-basics-of-stata.html#one-data">One Data</a> principa
 </p>
 <pre><code>. summ price if foreign == 1
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         22    6384.682    2621.915       3748      12990
 
@@ -413,7 +415,7 @@ Along with the <a href="the-basics-of-stata.html#one-data">One Data</a> principa
 
 . summ price if foreign == 0
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
        price |         52    6072.423    3097.104       3291      15906
 
@@ -425,8 +427,8 @@ Along with the <a href="the-basics-of-stata.html#one-data">One Data</a> principa
 </code></pre>
 </div>
 </div>
-<div id="variable-lists" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> Variable Lists</h2>
+<div id="variable-lists" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Variable Lists<a href="programming-advanced-features.html#variable-lists" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 Introduced in Stata 16, variable lists solves a common technique used in previous versions of Stata to define a global containing a list of variables to be used later in the document. For example, you might see something like this at the top of a Do file:
 </p>
@@ -441,13 +443,13 @@ logit z $predictors
 <p>
 Stata has formalized this concept with the addition of the <code>vl</code> command (<strong>v</strong>ariable <strong>l</strong>ist). It works similarly to the use of globals: lists of variables are defined, then later reference via the <code>$name</code> syntax. However, using <code>vl</code> has the benefits of improved organization, customizations unique to variable lists, error checking, and overall convenience.
 </p>
-<div id="initialization-of-variable-lists" class="section level3" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> Initialization of Variable Lists</h3>
+<div id="initialization-of-variable-lists" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Initialization of Variable Lists<a href="programming-advanced-features.html#initialization-of-variable-lists" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 To begin using variable lists, <code>vl set</code> must be run.
 </p>
 <pre><code>. sysuse auto
-(1978 Automobile Data)
+(1978 automobile data)
 
 . vl set
 
@@ -538,8 +540,8 @@ System            |
 In the above, we changed our minds and wanted to include the <code>vldummy</code> list, but since we’d already <code>vl</code>-set, we had the <code>clear</code> the existing set.
 </p>
 </div>
-<div id="viewing-lists" class="section level3" number="6.2.2">
-<h3><span class="header-section-number">6.2.2</span> Viewing lists</h3>
+<div id="viewing-lists" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Viewing lists<a href="programming-advanced-features.html#viewing-lists" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 When initializing the variable lists, we’re treated to a nice table of all defined lists. We can replay it via
 </p>
@@ -640,8 +642,8 @@ The <code>(_all)</code> tells Stata to report on all variables, and sorting (whe
 <p>
 This will also list any numeric variables which are not found in <strong>any</strong> list.
 </p>
-<div id="moving-variables-in-system-lists" class="section level4" number="6.2.2.1">
-<h4><span class="header-section-number">6.2.2.1</span> Moving variables in system lists</h4>
+<div id="moving-variables-in-system-lists" class="section level4 hasAnchor" number="6.2.2.1">
+<h4><span class="header-section-number">6.2.2.1</span> Moving variables in system lists<a href="programming-advanced-features.html#moving-variables-in-system-lists" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>
 After initializing the variable lists, if you plan on using the system lists, you may need to move variables around (e.g. classifying the <code>vluncertain</code> variables into their proper lists). This can be done via <code>vl move</code> which has the syntax
 </p>
@@ -665,7 +667,7 @@ displacement | $vluncertain    integers &gt;=0       31
 ----------------------------------------------------
 
 . vl move (price mpg trunk weight length turn displacement) vlcontinuous
-note: 7 variables specified and 7 variables moved
+note: 7 variables specified and 7 variables moved.
 
 ------------------------------
 Macro          # Added/Removed
@@ -712,7 +714,7 @@ System            |
 -------------------------------------------------------------------------------
 
 . vl move ($vluncertain) vlcontinuous
-note: 7 variables specified and 7 variables moved
+note: 7 variables specified and 7 variables moved.
 
 ------------------------------
 Macro          # Added/Removed
@@ -730,16 +732,16 @@ Note that variable lists are essentially just global macros so can be referred t
 </p>
 </div>
 </div>
-<div id="user-variable-lists" class="section level3" number="6.2.3">
-<h3><span class="header-section-number">6.2.3</span> User Variable Lists</h3>
+<div id="user-variable-lists" class="section level3 hasAnchor" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> User Variable Lists<a href="programming-advanced-features.html#user-variable-lists" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 In addition to the System variable lists, you can define your own User variables lists, which I imagine will be used far more often. These are easy to create with <code>vl create</code>:
 </p>
 <pre><code>. vl create mylist1 = (weight mpg)
-note: $mylist1 initialized with 2 variables
+note: $mylist1 initialized with 2 variables.
 
 . vl create mylist2 = (weight length trunk)
-note: $mylist2 initialized with 3 variables
+note: $mylist2 initialized with 3 variables.
 
 . vl dir, user
 
@@ -814,8 +816,8 @@ User              |
 -------------------------------------------------------------------------------
 
 </code></pre>
-<div id="modifying-user-variable-lists" class="section level4" number="6.2.3.1">
-<h4><span class="header-section-number">6.2.3.1</span> Modifying User Variable Lists</h4>
+<div id="modifying-user-variable-lists" class="section level4 hasAnchor" number="6.2.3.1">
+<h4><span class="header-section-number">6.2.3.1</span> Modifying User Variable Lists<a href="programming-advanced-features.html#modifying-user-variable-lists" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>
 First, note that with User Variable Lists, the <code>vl move</code> command <strong>does not work</strong>. It only works with system variable lists.
 </p>
@@ -823,7 +825,7 @@ First, note that with User Variable Lists, the <code>vl move</code> command <str
 We can create new user variable lists which build off old lists with <code>vl create</code>. To add a new variable:
 </p>
 <pre><code>. vl create mylist3 = mylist2 + (gear_ratio)
-note: $mylist3 initialized with 4 variables
+note: $mylist3 initialized with 4 variables.
 
 . vl list, user
 
@@ -842,7 +844,7 @@ gear_ratio | $mylist3        noninteger
 --------------------------------------------------
 
 . vl create mylist4 = mylist2 - (turn)
-note: $mylist4 initialized with 3 variables
+note: $mylist4 initialized with 3 variables.
 
 . vl list, user
 
@@ -868,7 +870,7 @@ gear_ratio | $mylist3        noninteger
 Instead of adding (or removing) single variables at a time, we can instead add or remove lists. Keeping with the comment above, you do <em>not</em> use <code>$</code> here to refer to the list.
 </p>
 <pre><code>. vl create mylist5 = mylist2 - mylist1
-note: $mylist5 initialized with 2 variables
+note: $mylist5 initialized with 2 variables.
 
 . vl list mylist5
 
@@ -884,16 +886,16 @@ Variable | Macro           Values         Levels
 However, if we want to simply modify an existing list, a better approach would be the <code>vl modify</code> command. <code>vl create</code> and <code>vl modify</code> are similar to <code>generate</code> and <code>replace</code>; the former creates a new variable list while the later changes an existing variable list, but the syntax right of the <code>=</code> is the same.
 </p>
 <pre><code>. vl modify mylist3 = mylist3 + (headroom)
-note: 1 variable added to $mylist3
+note: 1 variable added to $mylist3.
 
 . vl modify mylist3 = mylist3 - (weight)
-note: 1 variable removed from $mylist3
+note: 1 variable removed from $mylist3.
 
 </code></pre>
 </div>
 </div>
-<div id="dropping-variable-list" class="section level3" number="6.2.4">
-<h3><span class="header-section-number">6.2.4</span> Dropping variable list</h3>
+<div id="dropping-variable-list" class="section level3 hasAnchor" number="6.2.4">
+<h3><span class="header-section-number">6.2.4</span> Dropping variable list<a href="programming-advanced-features.html#dropping-variable-list" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 Variable lists can be dropped via <code>vl drop</code>
 </p>
@@ -932,27 +934,27 @@ User              |
 System lists cannot be dropped; if you run <code>vl drop vlcontinuous</code> it just removes all the variables from it.
 </p>
 </div>
-<div id="using-variable-lists" class="section level3" number="6.2.5">
-<h3><span class="header-section-number">6.2.5</span> Using Variable Lists</h3>
+<div id="using-variable-lists" class="section level3 hasAnchor" number="6.2.5">
+<h3><span class="header-section-number">6.2.5</span> Using Variable Lists<a href="programming-advanced-features.html#using-variable-lists" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 To be explicit, we can use variable lists in any command which would take the variables in that list. For example,
 </p>
 <pre><code>. describe $mylist3
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
 length          int     %8.0g                 Length (in.)
 trunk           int     %8.0g                 Trunk space (cu. ft.)
-gear_ratio      float   %6.2f                 Gear Ratio
+gear_ratio      float   %6.2f                 Gear ratio
 headroom        float   %6.1f                 Headroom (in.)
 
 . describe $vlcategorical
 
-              storage   display    value
-variable name   type    format     label      variable label
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
 -------------------------------------------------------------------------------
-rep78           int     %8.0g                 Repair Record 1978
+rep78           int     %8.0g                 Repair record 1978
 
 </code></pre>
 <p>
@@ -968,7 +970,7 @@ We can also use them in a modeling setting.
        Total |  2443.45946        73  33.4720474   Root MSE        =    3.5668
 
 ------------------------------------------------------------------------------
-         mpg |      Coef.   Std. Err.      t    P&gt;|t|     [95% Conf. Interval]
+         mpg | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
 -------------+----------------------------------------------------------------
       length |  -.1837962   .0327629    -5.61   0.000    -.2491564   -.1184361
        trunk |  -.0103867   .1627025    -0.06   0.949    -.3349693    .3141959
@@ -1011,7 +1013,7 @@ User              |
 
 </code></pre>
 <p>
-Note the use of <code>display “$listname”</code> instead of <code>vl list</code>. Factor-variable lists are not just lists of vairables, they also can include the features above, so must be displayed. Note that in the <code>vl dir</code>, “sublist1” has no number of variables listed, making it stand apart.
+Note the use of <code>display "$listname"</code> instead of <code>vl list</code>. Factor-variable lists are not just lists of vairables, they also can include the features above, so must be displayed. Note that in the <code>vl dir</code>, “sublist1” has no number of variables listed, making it stand apart.
 </p>
 <p>
 We can make this more interesting by actually including continuous/factor indicatores and/or interactions.
@@ -1035,7 +1037,7 @@ Note the need to specify that mylist1 is continuous (with <code>c.</code>). It f
        Total |   635065396        73  8699525.97   Root MSE        =    2043.3
 
 ------------------------------------------------------------------------------
-       price |      Coef.   Std. Err.      t    P&gt;|t|     [95% Conf. Interval]
+       price | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
 -------------+----------------------------------------------------------------
       weight |   4.415037   .8529259     5.18   0.000      2.71305    6.117024
          mpg |    237.691   125.0383     1.90   0.062    -11.81907     487.201
@@ -1055,8 +1057,8 @@ Note the need to specify that mylist1 is continuous (with <code>c.</code>). It f
 ------------------------------------------------------------------------------
 
 </code></pre>
-<div id="updating-factor-variable-lists" class="section level4" number="6.2.5.1">
-<h4><span class="header-section-number">6.2.5.1</span> Updating factor-variable Lists</h4>
+<div id="updating-factor-variable-lists" class="section level4 hasAnchor" number="6.2.5.1">
+<h4><span class="header-section-number">6.2.5.1</span> Updating factor-variable Lists<a href="programming-advanced-features.html#updating-factor-variable-lists" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>
 Factor-variable lists cannot be directly modified.
 </p>
@@ -1073,10 +1075,10 @@ sublist1 not allowed
 However, if you create a factor-variable list using only other variable lists, if those lists get updated, so does the factor-variable list!
 </p>
 <pre><code>. vl create continuous = (turn trunk)
-note: $continuous initialized with 2 variables
+note: $continuous initialized with 2 variables.
 
 . vl create categorical = (rep78 foreign)
-note: $categorical initialized with 2 variables
+note: $categorical initialized with 2 variables.
 
 . vl substitute predictors = c.continuous##i.categorical
 
@@ -1085,7 +1087,7 @@ turn trunk i.rep78 i.foreign i.rep78#c.turn i.foreign#c.turn i.rep78#c.trunk i.
 &gt; foreign#c.trunk
 
 . vl modify continuous = continuous - (trunk)
-note: 1 variable removed from $continuous
+note: 1 variable removed from $continuous.
 
 . quiet vl rebuild
 
@@ -1098,8 +1100,8 @@ Note the call to <code>vl rebuild</code>. Among other things, it will re-generat
 </p>
 </div>
 </div>
-<div id="stored-statistics" class="section level3" number="6.2.6">
-<h3><span class="header-section-number">6.2.6</span> Stored Statistics</h3>
+<div id="stored-statistics" class="section level3 hasAnchor" number="6.2.6">
+<h3><span class="header-section-number">6.2.6</span> Stored Statistics<a href="programming-advanced-features.html#stored-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 You may have noticed that certain characteristics of the variable are reported.
 </p>
@@ -1138,7 +1140,7 @@ This is similar to <a target="_blank" href="https://www.stata.com/manuals/dcodeb
 
 . summarize weight
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
       weight |         39    3653.846    423.5788       3170       4840
 
@@ -1187,8 +1189,8 @@ When the <code>update</code> option is passed, variable lists are not affected, 
 </p>
 </div>
 </div>
-<div id="linking-data-sets-1" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> Linking data sets</h2>
+<div id="linking-data-sets-1" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Linking data sets<a href="programming-advanced-features.html#linking-data-sets-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 In addition to allowing multiple data sets to be open at a time, we can <strong>link</strong> frames together such that rows of data in each frames are connected to each-other and can inter-operate. This requires a linking variable in each data set which will connect the rows. The two data sets can be at the same levels or at different levels.
 </p>
@@ -1229,7 +1231,7 @@ Let’s load some data from NHANES. Each file contains a row per subject.
 * demographics  9971 x 47
 * diet          9544 x 168
 
-Note: frames marked with * contain unsaved data
+Note: Frames marked with * contain unsaved data.
 
 </code></pre>
 <p>
@@ -1271,13 +1273,13 @@ Links are tracked by the variables, we can see the current status of a link via 
 
   History:
   -----------------------------------------------------------------------------
-    Link variable diet created on 19 Feb 2021 by
+    Link variable diet created on 2 Feb 2023 by
 
     . frlink 1:1 seqn, frame(diet)
 
     Frame diet contained an unnamed dataset
   -----------------------------------------------------------------------------
-  Verifying linkage...
+  Verifying linkage ...
   Linkage is up to date.
 
 </code></pre>
@@ -1318,8 +1320,8 @@ Finally, the names of the created variables can be modified via the <code>genera
   the variable is still valid.
 
 </code></pre>
-<div id="working-with-linked-frames" class="section level3" number="6.3.1">
-<h3><span class="header-section-number">6.3.1</span> Working with linked frames</h3>
+<div id="working-with-linked-frames" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Working with linked frames<a href="programming-advanced-features.html#working-with-linked-frames" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 Once we have linked frames, we can use variables in the linked frame in analyses on the main frame.
 </p>
@@ -1336,7 +1338,7 @@ r(111);
 
 . summarize bpxchr
 
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
+    Variable |        Obs        Mean    Std. dev.       Min        Max
 -------------+---------------------------------------------------------
       bpxchr |      1,938    106.5614    21.75754         58        190
 
@@ -1358,12 +1360,13 @@ Note that this calculation used variables from all three frames. A less nonsensi
 </code></pre>
 </div>
 </div>
-<div id="loops" class="section level2" number="6.4">
-<h2><span class="header-section-number">6.4</span> Loops</h2>
+<div id="loops" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Loops<a href="programming-advanced-features.html#loops" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 Using macros can simplify code if you have to use the same string repeatedly, but what if you want to perform the same command repeatedly with different variables? Here we can use a <code>foreach</code> loop. This is easiest to see with examples.
 </p>
 <pre><code>. sysuse pop2000, clear
+(2000 U.S. Census population by age and sex)
 
 </code></pre>
 <p>
@@ -1632,18 +1635,18 @@ loops over just “1” and “3/5”.
 The use of “in” is for when you need to loop over strings that are neither numbers nor variables (such as “male” and “fem” from above).
 </p>
 </div>
-<div id="suppressing-output-and-errors" class="section level2" number="6.5">
-<h2><span class="header-section-number">6.5</span> Suppressing output and errors</h2>
+<div id="suppressing-output-and-errors" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Suppressing output and errors<a href="programming-advanced-features.html#suppressing-output-and-errors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 There are two useful command prefixes that can be handy while writing more elaborate Do-files.
 </p>
-<div id="capturing-an-error" class="section level3" number="6.5.1">
-<h3><span class="header-section-number">6.5.1</span> Capturing an error</h3>
+<div id="capturing-an-error" class="section level3 hasAnchor" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> Capturing an error<a href="programming-advanced-features.html#capturing-an-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 Imagine the following scenario. You want to write a Do-file that generates a new variable. However, you may need to re-run chunks of the Do-file repeatedly, so that the <code>gen</code> statement is hit repeatedly. After the first <code>gen</code>, we can’t call it again and <a target="_blank" href="data-manipulation.html#replacing-existing-variables">need to use <code>replace</code> instead</a>. However, if we used <code>replace</code>, it wouldn’t work the first time! One solution is to <code>drop</code> the variable before we gen it:
 </p>
 <pre><code>. sysuse auto, clear
-(1978 Automobile Data)
+(1978 automobile data)
 
 . drop newvar
 variable newvar not found
@@ -1684,8 +1687,8 @@ Therefore, the best way to generate our new variable is
 . gen newvar = 1
 
 </code></pre>
-<div id="return-code" class="section level4" number="6.5.1.1">
-<h4><span class="header-section-number">6.5.1.1</span> Return Code</h4>
+<div id="return-code" class="section level4 hasAnchor" number="6.5.1.1">
+<h4><span class="header-section-number">6.5.1.1</span> Return Code<a href="programming-advanced-features.html#return-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>
 When you <code>capture</code> a command that errors, Stata saves the error code in the <code>_rc</code> macro.
 </p>
@@ -1729,8 +1732,8 @@ if _rc &gt; 0 {
 </code></pre>
 </div>
 </div>
-<div id="quieting-the-output" class="section level3" number="6.5.2">
-<h3><span class="header-section-number">6.5.2</span> Quieting the output</h3>
+<div id="quieting-the-output" class="section level3 hasAnchor" number="6.5.2">
+<h3><span class="header-section-number">6.5.2</span> Quieting the output<a href="programming-advanced-features.html#quieting-the-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 <code>quietly</code> does the same basic thing as <code>capture</code>, except it does not hide errors. It can be useful combined with <a href="programming-advanced-features.html#class-and-return">the returns</a>:
 </p>
@@ -1844,7 +1847,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

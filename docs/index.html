@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Introduction to Stata</title>
   <meta name="description" content="Introduction to Stata" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Introduction to Stata" />
   <meta property="og:type" content="book" />
-  
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
@@ -24,7 +23,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2022-02-24" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 
 <link rel="next" href="the-basics-of-stata.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 
@@ -85,7 +84,10 @@
 </ul></li>
 <li class="chapter" data-level="2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html"><i class="fa fa-check"></i><b>2</b> The Basics of Stata</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#the-stata-environment"><i class="fa fa-check"></i><b>2.1</b> The Stata Environment</a></li>
+<li class="chapter" data-level="2.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#the-stata-environment"><i class="fa fa-check"></i><b>2.1</b> The Stata Environment</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#alternate-layout"><i class="fa fa-check"></i><b>2.1.1</b> Alternate Layout</a></li>
+</ul></li>
 <li class="chapter" data-level="2.2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#one-data"><i class="fa fa-check"></i><b>2.2</b> One Data</a></li>
 <li class="chapter" data-level="2.3" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#give-stata-a-command"><i class="fa fa-check"></i><b>2.3</b> Give Stata a command</a>
 <ul>
@@ -250,10 +252,10 @@
 <div id="header">
 <h1 class="title">Introduction to Stata</h1>
 <p class="author"><em>CSCAR Staff</em></p>
-<p class="date"><em>2022-02-24</em></p>
+<p class="date"><em>2023-02-02</em></p>
 </div>
-<div id="preface" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Preface</h1>
+<div id="preface" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>These notes are split into four primary sections:</p>
 <ul>
 <li><a href="the-basics-of-stata.html">Chapter 2: The Basics of Stata</a> - Interacting with Stata.</li>
@@ -268,8 +270,8 @@ lecture and exercises. Please ask questions as soon as they arise in your mind. 
 <li><a href="programming-advanced-features.html">Chapter 6: Programming &amp; Advanced Topics</a> - Topics for users who wish to move beyond the basics.</li>
 <li><a href="appendix.html">Appendix</a> - Houses the exercise solutions.</li>
 </ul>
-<div id="how-to-use-this-document" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> How to use this document</h2>
+<div id="how-to-use-this-document" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> How to use this document<a href="index.html#how-to-use-this-document" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>These notes are published in <a href="https://bookdown.org/">bookdown</a> format which enables easy creation of longform documents (using a mixture of
 <a href="https://daringfireball.net/projects/markdown/">markdown</a>, <a href="https://www.r-project.org/">R</a>, and for these notes specifically,
 <a href="http://www.stata.com/">Stata</a>’s <a href="http://www.stata.com/manuals/pdyndoc.pdf">dyndoc</a>, which was added in Stata 15).</p>
@@ -278,10 +280,10 @@ from left to right they 1) Hide/show the table of contents, 2) Search this docum
 keyboard shortcuts.</p>
 <p>All images should link to full-size versions to see detail if needed.</p>
 </div>
-<div id="contact-information" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Contact information</h2>
-<div id="cscar" class="section level3" number="1.2.1">
-<h3><span class="header-section-number">1.2.1</span> CSCAR</h3>
+<div id="contact-information" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Contact information<a href="index.html#contact-information" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="cscar" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> CSCAR<a href="index.html#cscar" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Current contact for questions about the notes: Josh Errickson (<a href="mailto:jerrick@umich.edu" class="email">jerrick@umich.edu</a>)</li>
 <li>Office Hours: Monday-Friday 9am to 5pm (Closed Tuesday 12-1pm)</li>
@@ -293,8 +295,8 @@ keyboard shortcuts.</p>
 </ul>
 </div>
 </div>
-<div id="acknowledgments" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Acknowledgments</h2>
+<div id="acknowledgments" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Acknowledgments<a href="index.html#acknowledgments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>These notes have evolved over the years thanks to many CSCAR statisticians, including Josh Errickson, Giselle Kolenic, Brady West, Heidi Reichert, and
 Lingling Zhang.</p>
 <p>This material was created for use in workshops and short courses presented by faculty and staff from the Consulting for Statistics, Computing &amp;
@@ -358,7 +360,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

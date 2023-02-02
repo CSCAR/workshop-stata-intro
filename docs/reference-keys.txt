@@ -5,6 +5,7 @@ cscar
 acknowledgments
 the-basics-of-stata
 the-stata-environment
+alternate-layout
 one-data
 give-stata-a-command
 saving-results

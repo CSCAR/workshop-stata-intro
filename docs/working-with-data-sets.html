@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Working with Data Sets | Introduction to Stata</title>
   <meta name="description" content="Chapter 3 Working with Data Sets | Introduction to Stata" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Working with Data Sets | Introduction to Stata" />
   <meta property="og:type" content="book" />
-  
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
@@ -24,7 +23,7 @@
 <meta name="author" content="CSCAR Staff" />
 
 
-<meta name="date" content="2022-02-24" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="the-basics-of-stata.html"/>
 <link rel="next" href="data-management.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 
@@ -85,7 +84,10 @@
 </ul></li>
 <li class="chapter" data-level="2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html"><i class="fa fa-check"></i><b>2</b> The Basics of Stata</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#the-stata-environment"><i class="fa fa-check"></i><b>2.1</b> The Stata Environment</a></li>
+<li class="chapter" data-level="2.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#the-stata-environment"><i class="fa fa-check"></i><b>2.1</b> The Stata Environment</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#alternate-layout"><i class="fa fa-check"></i><b>2.1.1</b> Alternate Layout</a></li>
+</ul></li>
 <li class="chapter" data-level="2.2" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#one-data"><i class="fa fa-check"></i><b>2.2</b> One Data</a></li>
 <li class="chapter" data-level="2.3" data-path="the-basics-of-stata.html"><a href="the-basics-of-stata.html#give-stata-a-command"><i class="fa fa-check"></i><b>2.3</b> Give Stata a command</a>
 <ul>
@@ -247,10 +249,10 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="working-with-data-sets" class="section level1" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Working with Data Sets</h1>
-<div id="built-in-data" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Built-in data</h2>
+<div id="working-with-data-sets" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Working with Data Sets<a href="working-with-data-sets.html#working-with-data-sets" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="built-in-data" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Built-in data<a href="working-with-data-sets.html#built-in-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 Before we turn to using your own data, it is useful to know that Stata comes with a collection of sample data sets which you can use to try the Stata commands. Additionally, most (if not all) of the examples in <a href="the-basics-of-stata.html#stata-help">Stata help</a> will use these data sets.
 </p>
@@ -286,8 +288,8 @@ or passing it as an option to <code>sysuse</code>,
 (1978 automobile data)
 
 </code></pre>
-<div id="stata-website-data" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Stata Website Data</h3>
+<div id="stata-website-data" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Stata Website Data<a href="working-with-data-sets.html#stata-website-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 In addition to the data sets distributed with Stata, Stata also makes available a large collection of data sets on their website which can be accessed with the <code>webuse</code> command. These data sets are used as examples in the Manual and can be seen listed as <a target="_blank" href="http://www.stata-press.com/data/r17/">http://www.stata-press.com/data/r17/</a>.
 </p>
@@ -301,8 +303,8 @@ The exercises in this workshop will be using mostly built-in data sets as it mak
 </p>
 </div>
 </div>
-<div id="opening-data" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Opening data</h2>
+<div id="opening-data" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Opening data<a href="working-with-data-sets.html#opening-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 As you may have deduced from the <code>sysuse</code> and <code>webuse</code> commands above, the command to load local data is <code>use</code>:
 </p>
@@ -330,8 +332,8 @@ If the location of your file is much different than your working directory, it c
 <p>
 As with <code>sysuse</code> and <code>webuse</code>, the <code>clear</code> option discards the existing data regardless of unsaved changes.
 </p>
-<div id="loading-subsets-of-the-data" class="section level3" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Loading subsets of the data</h3>
+<div id="loading-subsets-of-the-data" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Loading subsets of the data<a href="working-with-data-sets.html#loading-subsets-of-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 You can load only a subset of the data into the program at a time. Generally I would recommend loading the full data and then <a href="data-manipulation.html#discarding-data">discarding</a> the extraneous information. However, if your data is very large, it might be handy to only load in some of it rather than the entire thing. As this is a lesser-used option we won’t go into too much detail, but as an example, if I wanted to load only the variables named “bp”, “heartrate” and “date” from the data set “patientdata”, restricted to male patients, I might use something like
 </p>
@@ -341,7 +343,7 @@ You can load only a subset of the data into the program at a time. Generally I w
 Here, <code>using</code> and <code>if</code> are subcommands, which we will see used more as the day goes on.
 </p>
 <p>
-The statement <code>gender == “male”</code> is a conditional statement which only loads male patients. We’ll discuss later about <a href="data-manipulation.html#restricting-commands-to-subsets">conditional statements</a>.
+The statement <code>gender == "male"</code> is a conditional statement which only loads male patients. We’ll discuss later about <a href="data-manipulation.html#restricting-commands-to-subsets">conditional statements</a>.
 </p>
 <p>
 Alternatively, if you have a very large data set, you can load in a small chunk of it.
@@ -356,8 +358,8 @@ For further details, see <code>help use</code>, specifically the <a target="_bla
 </p>
 </div>
 </div>
-<div id="editing-data-manually" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Editing data manually</h2>
+<div id="editing-data-manually" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Editing data manually<a href="working-with-data-sets.html#editing-data-manually" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 We will discuss in <a href="data-manipulation.html#data-manipulation">Data Manipulation</a> how to edit your data on a larger scale and in an automated fashion, but Stata does support modifying a spreadsheet of your data similar to Excel. At the top of the main window, you’ll see two buttons, “Data Editor” and “Data Browser”. These open the same new Data window, the only difference is that Stata is protecting you from yourself and if you open the “Data Browser” (or switch to it in the Data window), you cannot modify the data.
 </p>
@@ -367,8 +369,8 @@ Once in the Data window, you can select cells and edit them as desired. Note tha
 <pre><code>. replace age = 27 in 11
 (1 real change made)
 </code></pre>
-<div id="colors-as-variable-type" class="section level3" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> Colors as variable type</h3>
+<div id="colors-as-variable-type" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Colors as variable type<a href="working-with-data-sets.html#colors-as-variable-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 When viewing the data, the color of each column’s text provides information about the type of variable. We’ll go into more details <a href="data-management.html#describing-the-data">later</a> what these types mean. Below, for the <code>auto</code> data, you can see the <code>make</code> variable is red, indicating a string, the <code>foreign</code> variable is blue indicating a variable with an attached <a href="data-management.html#labeling-values">value label</a> and the remainder of the variables are black for numeric.
 </p>
@@ -377,8 +379,8 @@ When viewing the data, the color of each column’s text provides information ab
 </p>
 </div>
 </div>
-<div id="saving-data" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Saving data</h2>
+<div id="saving-data" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Saving data<a href="working-with-data-sets.html#saving-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 Saving data is done with the <code>save</code> command. There are two variations of running.
 </p>
@@ -403,16 +405,16 @@ As before, wrap the file name in quotes if it (or the path) includes any spaces.
 Prior to Stata 14, the save format was different. If you need to save a data set in the older format (perhaps to pass to a collaborator who is woefully behind the times), check <code>help saveold</code>.
 </p>
 </div>
-<div id="importing-data" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> Importing data</h2>
+<div id="importing-data" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Importing data<a href="working-with-data-sets.html#importing-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 The need often arises to import data from another format (such as Excel or SPSS). Stata has a suite of very useful commands for importing data sets having other formats. To see the types of data that Stata can import, select “File -&gt; Import”.
 </p>
 <p>
 While there are commands to do the importing (such as <code>import excel file.xlsx</code>), the dialog boxes for importation provide a preview of the imported data, making it easier to ensure that the importation will go smoothly. Just as with <a href="working-with-data-sets.html#editing-data-manually">editing the data</a>, after performing an import with the dialog box, the corresponding command is executed in the results window and can be copied in a Do-file for reproducibility.
 </p>
-<div id="importing-excel-data" class="section level3" number="3.5.1">
-<h3><span class="header-section-number">3.5.1</span> Importing Excel data</h3>
+<div id="importing-excel-data" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Importing Excel data<a href="working-with-data-sets.html#importing-excel-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 Data stored in Excel can be ported into Stata easily. To make your life easier, make sure the data adheres to these general principals. While technically none of these are “required”, ignoring them will lead to a lot more work down the road!
 </p>
@@ -468,8 +470,8 @@ If Stata makes mistakes here (usually because the data is formatted oddly), thin
 Once the preview looks accurate, go ahead and import. As usual, this will create an <code>import excel</code> command in the Results that you can save for the future in a Do-file, but using <code>save</code> to create a Stata data set to load in later is probably a better option.
 </p>
 </div>
-<div id="importing-a-csv-file" class="section level3" number="3.5.2">
-<h3><span class="header-section-number">3.5.2</span> Importing a CSV File</h3>
+<div id="importing-a-csv-file" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Importing a CSV File<a href="working-with-data-sets.html#importing-a-csv-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 CSV files (comma separated values) are a very useful format for passing data between software. Files specific for software (e.g. .dta for Stata, .xlsx for Excel, .sav for SPSS) carry a lot of overhead information - very useful when working exclusively within that software, but confusing for other software. The import menu in Stata (and other software) can often address this, but a CSV file bypasses this. Data in CSV format might look like
 </p>
@@ -501,8 +503,8 @@ Important options include:
 </li>
 </ul>
 </div>
-<div id="importing-from-a-file-not-supported-directly-by-stata" class="section level3" number="3.5.3">
-<h3><span class="header-section-number">3.5.3</span> Importing from a file not supported directly by Stata</h3>
+<div id="importing-from-a-file-not-supported-directly-by-stata" class="section level3 hasAnchor" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Importing from a file not supported directly by Stata<a href="working-with-data-sets.html#importing-from-a-file-not-supported-directly-by-stata" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 If you have data in a format not supported by Stata, there are three options:
 </p>
@@ -520,13 +522,13 @@ If all else fails, there is software Stat Transfer, <a target="_blank" href="htt
 </p>
 </div>
 </div>
-<div id="switching-between-data-sets" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> Switching between data sets</h2>
+<div id="switching-between-data-sets" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Switching between data sets<a href="working-with-data-sets.html#switching-between-data-sets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>
 Here we’ll discuss two ways to switch between data sets. Later we’ll discuss the third way to work with multiple data sets, <a href="data-manipulation.html#merging-files">merging</a>.
 </p>
-<div id="temporarily-preserving-and-restoring-data" class="section level3" number="3.6.1">
-<h3><span class="header-section-number">3.6.1</span> Temporarily preserving and restoring data</h3>
+<div id="temporarily-preserving-and-restoring-data" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Temporarily preserving and restoring data<a href="working-with-data-sets.html#temporarily-preserving-and-restoring-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 Say you want to carry out a destructive operation on your data, temporarily. This could be either to close your data and load another, or to make a change to the current data.For example, say you want to <a href="data-manipulation.html#discarding-data">remove</a> some subset of your observations. One workflow to use would be:
 </p>
@@ -557,8 +559,8 @@ The <code>preserve</code> command saves an image of the data as they are now, an
 One thing to note about the use of <code>preserve</code> and <code>restore</code> in Do-files: If you run a chunk of commands which include a <code>preserve</code> statement, after the code executes <code>restore</code> is automatically run <em>even if <code>restore</code> was not in the set of commands you ran</em>!
 </p>
 </div>
-<div id="frames" class="section level3" number="3.6.2">
-<h3><span class="header-section-number">3.6.2</span> Frames</h3>
+<div id="frames" class="section level3 hasAnchor" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Frames<a href="working-with-data-sets.html#frames" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>
 Starting in Stata 16, Stata can load multiple data sets into different “frames”, though you still work with a single data set at a time. Each frame has a name; when you first open Stata the frame you start with is named “<code>default</code>”.
 </p>
@@ -626,8 +628,8 @@ Contains data from /Applications/Stata/ado/base/a/auto.dta
 Sorted by: foreign
 
 </code></pre>
-<div id="dropping-frames" class="section level4" number="3.6.2.1">
-<h4><span class="header-section-number">3.6.2.1</span> Dropping frames</h4>
+<div id="dropping-frames" class="section level4 hasAnchor" number="3.6.2.1">
+<h4><span class="header-section-number">3.6.2.1</span> Dropping frames<a href="working-with-data-sets.html#dropping-frames" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>
 When you load a data set, it gets loaded into your computer’s memory. If you keep creating new frames and loading data, you can very quickly run out of memory!
 </p>
@@ -645,8 +647,8 @@ Use <code>frame drop</code> to dispose of old frames.
 
 </code></pre>
 </div>
-<div id="copying-data-into-frames" class="section level4" number="3.6.2.2">
-<h4><span class="header-section-number">3.6.2.2</span> Copying data into frames</h4>
+<div id="copying-data-into-frames" class="section level4 hasAnchor" number="3.6.2.2">
+<h4><span class="header-section-number">3.6.2.2</span> Copying data into frames<a href="working-with-data-sets.html#copying-data-into-frames" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>
 Often you may want to create a <code>collapse</code>’d or otherwise modified version of your current data. You can use <code>frame copy</code> to create a duplicate which you can then destroy.
 </p>
@@ -665,16 +667,16 @@ Note: Frames marked with * contain unsaved data.
 Note that you cannot copy into an existing frame; you must either delete the old frame or copy into a new name.
 </p>
 </div>
-<div id="linking-data-sets" class="section level4" number="3.6.2.3">
-<h4><span class="header-section-number">3.6.2.3</span> Linking data sets</h4>
+<div id="linking-data-sets" class="section level4 hasAnchor" number="3.6.2.3">
+<h4><span class="header-section-number">3.6.2.3</span> Linking data sets<a href="working-with-data-sets.html#linking-data-sets" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>
-We’re not going to go into it now, but please see the <a href="programming-advanced-features.html#linking-data-sets-1">section</a> in the <a href="programming-advanced-features.html#programming-advanced-features">Programming &amp; Advanced Features</a> section for details. You can link data sets between frames to either enable moving variables across frames, or if the data are at different units of analysis (e.g. a patient file and a clinic file), to easily merge the files together.
+We’re not going to go into it now, but please see the <a href="working-with-data-sets.html#linking-data-sets">section</a> in the <a href="programming-advanced-features.html#programming-advanced-features">Programming &amp; Advanced Features</a> section for details. You can link data sets between frames to either enable moving variables across frames, or if the data are at different units of analysis (e.g. a patient file and a clinic file), to easily merge the files together.
 </p>
 </div>
 </div>
 </div>
-<div id="exercise-1" class="section level2" number="3.7">
-<h2><span class="header-section-number">3.7</span> Exercise 1</h2>
+<div id="exercise-1" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Exercise 1<a href="working-with-data-sets.html#exercise-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol>
 <li>
 Load the <a href="working-with-data-sets.html#built-in-data">built-in</a> data set “lifeexp”.
@@ -759,7 +761,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
