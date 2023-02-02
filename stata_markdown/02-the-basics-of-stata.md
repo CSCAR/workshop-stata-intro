@@ -17,7 +17,7 @@ When a user first opens Stata, there are five panes that will appear in the main
 - The Variables Pane
     - This pane displays all of the variables in the data set that is currently open in Stata, and users can click on variable names in this pane to
       carry the variables over into Stata commands in the Command pane. Note that Stata allows only [one data-set][one data] to be open in a session.
-- The Review Pane
+- The History Pane
     - Stata will keep a running record of all Stata commands that have been submitted in the current session in this pane. Users can simply click on
       previous commands in this pane to recall them in the Command pane.
 - The Properties Pane
@@ -32,6 +32,14 @@ manually]), and the Do-file Editor window (for use when writing [.do files][do-f
 In the lower left-hand corner of the main Stata window (below the panes), there will be a directory displayed. This is known as the [working
 directory][working directory], and is where Stata will look to find data files and other associated Stata files unless the user specifies another
 directory. We will cover examples of changing the working directory.
+
+^#^^#^^#^ Alternate Layout
+
+[![](./images/stata_main_screen.png)](./images/stata_main_screen.png)
+
+An alternate layout (found in View -> Layout) places the History and Variables pane in tabs on the right hand side instead.
+
+(Note that this screenshot is taken on a Mac, as opposed to the original screenshot on Windows, just for comparison.)
 
 ^#^^#^ One Data
 
@@ -175,10 +183,10 @@ There are several ways to start a new Do-file.
 ```
 doedit
 ```
-- If you select some commands in the Review pane, you can right click and choose "Send select to Do-file Editor".
+- If you select some commands in the History pane, you can right click and choose "Send select to Do-file Editor".
 
 For the last option there, note that performing that twice will create two separate Do-files instead of appending the commands. Instead, you can copy
-and paste from the Review pane to add to an existing Do-file.
+and paste from the History pane to add to an existing Do-file.
 
 Let's manually add some commands to a Do-file to see how to execute the commands. In a Do-file editor, enter the following
 
