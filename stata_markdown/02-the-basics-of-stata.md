@@ -35,7 +35,7 @@ directory. We will cover examples of changing the working directory.
 
 ^#^^#^^#^ Alternate Layout
 
-[![](./images/stata_main_screen.png)](./images/stata_main_screen.png)
+[![](./images/stata_main_screen_alt.png)](./images/stata_main_screen_alt.png)
 
 An alternate layout (found in View -> Layout) places the History and Variables pane in tabs on the right hand side instead.
 
