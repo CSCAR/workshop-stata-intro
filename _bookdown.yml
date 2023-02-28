@@ -10,4 +10,3 @@ rmd_files: ["index.Rmd",
             "stata_markdown/05-data-manipulation.Rmd",
             "stata_markdown/06-programming.Rmd",
             "stata_markdown/07-appendix.Rmd"]
-view: https://github.com/CSCAR/workshop-stata-intro/blob/master/%s
