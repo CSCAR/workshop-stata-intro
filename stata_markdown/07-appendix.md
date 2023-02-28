@@ -1,8 +1,8 @@
-^#^ Appendix
+# Appendix
 
-^#^^#^ Solutions
+## Solutions
 
-^#^^#^^#^ Exercise 1 Solution
+### Exercise 1 Solution
 
 [Exercise 1][Exercise 1]
 
@@ -24,11 +24,12 @@ sysuse sandstone
 4:
 If the working directory isn't convenient, change it using the dialogue box. Then, `save sandstone`.
 
-^#^^#^^#^ Exercise 2 Solution
+### Exercise 2 Solution
 
 [Exercise 2][Exercise 2]
 
 1:
+
 ```
 webuse census9, clear
 ```
@@ -42,11 +43,12 @@ webuse census9, clear
 
 5: `compress`. Nothing saved! Because Stata already did it before posting it!
 
-^#^^#^^#^ Exercise 3 Solution
+### Exercise 3 Solution
 
 [Exercise 3][Exercise 3]
 
 1:
+
 ~~~~
 <<dd_do>>
 webuse census9, clear
@@ -55,6 +57,7 @@ save mycensus9
 ~~~~
 
 2:
+
 ~~~~
 <<dd_do>>
 rename drate deathrate
@@ -63,6 +66,7 @@ label variable deathrate "Death rate per 10,000"
 ~~~~
 
 3:
+
 ~~~~
 <<dd_do>>
 tab region
@@ -76,39 +80,48 @@ tab region
 ~~~~
 
 4:
+
 ~~~~
 <<dd_do>>
 save, replace
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^ Exercise 4 Solution
+### Exercise 4 Solution
 
 [Exercise 4][Exercise 4]
 
-1: Use `summarize` and `codebook` to take a look at the mean/max/min. No errors detected/
+1: Use `summarize` and `codebook` to take a look at the mean/max/min. No errors
+detected.
 
 2:
+
 ~~~~
 <<dd_do>>
 codebook, compact
 <</dd_do>>
 ~~~~
-`deathrate` and `medage` both have less than 50 unique values. This is due to both being heavily rounded. If we saw more precision, there would be more unique entires.
+
+`deathrate` and `medage` both have less than 50 unique values. This is due to
+both being heavily rounded. If we saw more precision, there would be more unique
+entires.
 
 3:
+
 ~~~~
 <<dd_do>>
 codebook, problems
 <</dd_do>>
 ~~~~
+
 This just flags spaces (" ") in the data. Not a real problem!
 
-^#^^#^^#^ Exercise 5 Solution
+### Exercise 5 Solution
 
 [Exercise 5][Exercise 5]
 
 1:
+
 ~~~~
 <<dd_do>>
 gen deathperc = deathrate/10000
@@ -118,6 +131,7 @@ list death* in 1/5
 ~~~~
 
 2:
+
 ~~~~
 <<dd_do>>
 gen agecat = 1 if medage < .
@@ -132,17 +146,22 @@ label values agecat agecat_label
 tab agecat, mi
 <</dd_do>>
 ~~~~
-We have no missing data (seen with `summarize` and `codebook` in the previous exercise) but it's good practice to check for them anyways.
+
+We have no missing data (seen with `summarize` and `codebook` in the previous
+exercise) but it's good practice to check for them anyways.
 
 3:
+
 ~~~~
 <<dd_do>>
 bysort agecat: summarize deathrate
 <</dd_do>>
 ~~~~
+
 We see that the groups with the higher median age tend to have higher deathrates.
 
 4:
+
 ~~~~
 <<dd_do>>
 preserve
@@ -159,6 +178,7 @@ restore
 ~~~~
 
 5:
+
 ~~~~
 <<dd_do>>
 encode state2, gen(statecodes)

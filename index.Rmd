@@ -2,7 +2,7 @@
 title: "Introduction to Stata"
 author: "CSCAR Staff"
 date: "Last updated: `r Sys.Date()`"
-site: bookdown::bookdown_site
+site: bookdown::gitbook
 output:
   bookdown::gitbook:
     config:

@@ -1,6 +1,6 @@
-^#^ Working with Data Sets
+# Working with Data Sets
 
-^#^^#^ Built-in data
+## Built-in data
 
 Before we turn to using your own data, it is useful to know that Stata comes with a collection of sample data sets which you can use to try the Stata
 commands. Additionally, most (if not all) of the examples in [Stata help][stata help] will use these data sets.
@@ -36,7 +36,7 @@ sysuse auto, clear
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^ Stata Website Data
+### Stata Website Data
 
 In addition to the data sets distributed with Stata, Stata also makes available a large collection of data sets on their website which can be accessed
 with the `webuse` command. These data sets are used as examples in the Manual and can be seen listed
@@ -50,7 +50,7 @@ webuse hiway
 
 The exercises in this workshop will be using mostly built-in data sets as it makes distribution easy!
 
-^#^^#^ Opening data
+## Opening data
 
 As you may have deduced from the `sysuse` and `webuse` commands above, the command to load local data is `use`:
 
@@ -86,7 +86,7 @@ Do-file.
 
 As with `sysuse` and `webuse`, the `clear` option discards the existing data regardless of unsaved changes.
 
-^#^^#^^#^ Loading subsets of the data
+### Loading subsets of the data
 
 You can load only a subset of the data into the program at a time. Generally I would recommend loading the full data and then [discarding][discarding
 data] the extraneous information. However, if your data is very large, it might be handy to only load in some of it rather than the entire thing. As
@@ -112,7 +112,7 @@ This loads just the first 100 rows (`a/b` is a "numlist" counting from "a" to "b
 
 For further details, see `help use`, specifically the [manual](https://www.stata.com/manuals/duse.pdf) which has the full documentation.
 
-^#^^#^ Editing data manually
+## Editing data manually
 
 We will discuss in [Data Manipulation][data manipulation] how to edit your data on a larger scale and in an automated fashion, but Stata does
 support modifying a spreadsheet of your data similar to Excel. At the top of the main window, you'll see two buttons, "Data Editor" and "Data
@@ -127,7 +127,7 @@ corresponding command produced which actually performs the modification.
 (1 real change made)
 ```
 
-^#^^#^^#^ Colors as variable type
+### Colors as variable type
 
 When viewing the data, the color of each column's text provides information about the type of variable. We'll go into more details [later][describing
 the data] what these types mean. Below, for the `auto` data, you can see the `make` variable is red, indicating a string, the `foreign` variable is
@@ -136,7 +136,7 @@ blue indicating a variable with an attached [value label][labeling values] and t
 [![](./images/datacolors.png)](./images/datacolors.png)
 
 
-^#^^#^ Saving data
+## Saving data
 
 Saving data is done with the `save` command. There are two variations of running.
 
@@ -162,7 +162,7 @@ As before, wrap the file name in quotes if it (or the path) includes any spaces.
 Prior to Stata 14, the save format was different. If you need to save a data set in the older format (perhaps to pass to a collaborator who is
 woefully behind the times), check `help saveold`.
 
-^#^^#^ Importing data
+## Importing data
 
 The need often arises to import data from another format (such as Excel or SPSS). Stata has a suite of very useful commands for importing data sets
 having other formats. To see the types of data that Stata can import, select "File -> Import".
@@ -171,7 +171,7 @@ While there are commands to do the importing (such as `import excel file.xlsx`),
 data, making it easier to ensure that the importation will go smoothly. Just as with [editing the data][Editing data manually], after performing an
 import with the dialog box, the corresponding command is executed in the results window and can be copied in a Do-file for reproducibility.
 
-^#^^#^^#^ Importing Excel data
+### Importing Excel data
 
 Data stored in Excel can be ported into Stata easily. To make your life easier, make sure the data adheres to these general principals. While
 technically none of these are "required", ignoring them will lead to a lot more work down the road!
@@ -206,7 +206,7 @@ be slow!)
 Once the preview looks accurate, go ahead and import. As usual, this will create an `import excel` command in the Results that you can save for the
 future in a Do-file, but using `save` to create a Stata data set to load in later is probably a better option.
 
-^#^^#^^#^ Importing a CSV File
+### Importing a CSV File
 
 CSV files (comma separated values) are a very useful format for passing data between software. Files specific for software (e.g. .dta for Stata, .xlsx
 for Excel, .sav for SPSS) carry a lot of overhead information - very useful when working exclusively within that software, but confusing for other
@@ -236,7 +236,7 @@ Important options include:
   want that to be four variables instead of a bunch of other missing entries, select this option.
 - *Use first row for variable names* - Same as the Excel version.
 
-^#^^#^^#^ Importing from a file not supported directly by Stata
+### Importing from a file not supported directly by Stata
 
 If you have data in a format not supported by Stata, there are three options:
 
@@ -253,11 +253,11 @@ Finally, see if you can open the data in the other software and export it into C
 If all else fails, there is software Stat Transfer, https://www.stattransfer.com, which can transfer between all sorts of formats with a click, but is
 not free. Your department or organization may offer access to it.
 
-^#^^#^ Switching between data sets
+## Switching between data sets
 
 Here we'll discuss two ways to switch between data sets. Later we'll discuss the third way to work with multiple data sets, [merging][Merging Files].
 
-^#^^#^^#^ Temporarily preserving and restoring data
+### Temporarily preserving and restoring data
 
 Say you want to carry out a destructive operation on your data, temporarily. This could be either to close your data and load another, or to make a
 change to the current data.For example, say you want to [remove][discarding data] some subset of your observations. One workflow to use would be:
@@ -294,7 +294,7 @@ restore, not
 One thing to note about the use of `preserve` and `restore` in Do-files: If you run a chunk of commands which include a `preserve` statement, after
 the code executes `restore` is automatically run *even if `restore` was not in the set of commands you ran*!
 
-^#^^#^^#^ Frames
+### Frames
 
 Starting in Stata 16, Stata can load multiple data sets into different "frames", though you still work with a single data set at a time. Each frame
 has a name; when you first open Stata the frame you start with is named "`default`".
@@ -357,7 +357,7 @@ frame default: describe, short
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^^#^ Dropping frames
+#### Dropping frames
 
 When you load a data set, it gets loaded into your computer's memory. If you keep creating new frames and loading data, you can very quickly run out of memory!
 
@@ -371,7 +371,7 @@ frame dir
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^^#^ Copying data into frames
+#### Copying data into frames
 
 Often you may want to create a `collapse`'d or otherwise modified version of your current data. You can use `frame copy` to create a duplicate which you can then destroy.
 
@@ -385,11 +385,11 @@ frame dir
 
 Note that you cannot copy into an existing frame; you must either delete the old frame or copy into a new name.
 
-^#^^#^^#^^#^ Linking data sets
+#### Linking data sets
 
 We're not going to go into it now, but please see the [section][Linking data sets] in the [Programming & Advanced Features] section for details. You can link data sets between frames to either enable moving variables across frames, or if the data are at different units of analysis (e.g. a patient file and a clinic file), to easily merge the files together.
 
-^#^^#^ Exercise 1
+## Exercise 1
 
 1. Load the [built-in][built-in data] data set "lifeexp".
 2. Open the Data Editor window. [Modify][editing data manually] at least one of the cells.

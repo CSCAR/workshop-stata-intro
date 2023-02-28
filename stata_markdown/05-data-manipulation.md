@@ -1,4 +1,4 @@
-^#^ Data Manipulation
+# Data Manipulation
 
 Let's reload the "auto" data to discard any changes made in previous sections and to start fresh.
 
@@ -8,7 +8,7 @@ sysuse auto, clear
 <</dd_do>>
 ~~~~
 
-^#^^#^ Restricting commands to subsets
+## Restricting commands to subsets
 
 We'll discuss operating on subsets of the data in far more detail a bit [later][subsetting], but first we'll discuss how to modify the [basic command
 syntax][basic command syntax] to run a command only on some rows of data.
@@ -42,26 +42,26 @@ As you can see, the second call to `summarize` thinks there are only 10 rows of 
 
 The `if` requires defining a conditional statement. Consider the following statements
 
-^$$^
+$$
   4 \gt 2
-^$$^
-^$$^
+$$
+$$
   1 \gt 2
-^$$^
+$$
 
-Remembering back to middle school math classes that ^$^\gt^$^ means "greater than", clearly the first statement is true and the second statement is
+Remembering back to middle school math classes that $\gt$ means "greater than", clearly the first statement is true and the second statement is
 false. We can assign values of true and false to any such conditional statements, which use the following set of conditional operators:
 
 | Sign       | Definition                     | True example                        | False example                      |
 |:----------:|:-------------------------------|:-----------------------------------:|:----------------------------------:|
-| ^$^==^$^   | equality                       | ^$^3 == 3^$^                        | ^$^3 == 2^$^                       |
-| ^$^!=^$^   | not equal                      | ^$^3 != 4^$^                        | ^$^3 != 3^$^                       |
-| ^$^\gt^$^  | greater than                   | ^$^4 \gt 2^$^                       | ^$^1 \gt 2^$^                      |
-| ^$^\lt^$^  | less  than                     | ^$^1 \lt 2^$^                       | ^$^4 \lt 2^$^                      |
-| ^$^\gt=^$^ | greater than or equal to       | ^$^4 \gt= 4^$^                      | ^$^1 \gt= 2^$^                     |
-| ^$^\lt=^$^ | less than or equal to          | ^$^1 \lt= 1^$^                      | ^$^4 \lt= 2^$^                     |
-| \&         | and (both statements are true) | ^$^(4 \gt 2)^$^ \& ^$^(3 == 3)^$^   | ^$^(4 \gt 2)^$^ \& ^$^(1 \gt 2)^$^ |
-| ^$^\|^$^   | or (either statement is true)  | ^$^(3 == 2) \| (1 \lt= 2)^$^        | ^$^(4 \lt 2) \| (1 \gt 2)^$^       |
+| $==$   | equality                       | $3 == 3$                        | $3 == 2$                       |
+| $!=$   | not equal                      | $3 != 4$                        | $3 != 3$                       |
+| $\gt$  | greater than                   | $4 \gt 2$                       | $1 \gt 2$                      |
+| $\lt$  | less  than                     | $1 \lt 2$                       | $4 \lt 2$                      |
+| $\gt=$ | greater than or equal to       | $4 \gt= 4$                      | $1 \gt= 2$                     |
+| $\lt=$ | less than or equal to          | $1 \lt= 1$                      | $4 \lt= 2$                     |
+| \&         | and (both statements are true) | $(4 \gt 2)$ \& $(3 == 3)$   | $(4 \gt 2)$ \& $(1 \gt 2)$ |
+| $\|$   | or (either statement is true)  | $(3 == 2) \| (1 \lt= 2)$        | $(4 \lt 2) \| (1 \gt 2)$       |
 
 
 So we could summarize a variable only when some other variables have some values.
@@ -79,7 +79,7 @@ either `foreign == 1 | TRUE` or `foreign == 1 | FALSE` depending on what the fir
 
 We saw the usage of this earlier when discussing [loading subsets of the data][loading subsets of the data].
 
-^#^^#^ Generating new variables
+## Generating new variables
 
 The `generate` command can be used to create new variables which are functions of existing variables. For example, if we look at the variable label
 for `weight`, we see that it is measured in pounds.
@@ -157,7 +157,7 @@ help functions
 ```
 
 
-^#^^#^^#^ Creating dummies
+### Creating dummies
 
 Dummy variables (also known as indicator variables or binary variables) are variables which take on two values, 0 and 1^[Technically and mathematically
 they can take on any two values, but your life will be easier if you stick with the 0/1 convention.]. These are typically used in a setting where the
@@ -206,7 +206,7 @@ list make price rep78 mpg if cheap == 1
 The `list` commands conditions on `cheap == 1` because again, the conditional statement will return 1 for true and 0 for false. We see 6 cheap cars;
 the Chevette and Zephyr are cheap because of their cost, whereas the other four cars are cheap because of the maintenance costs.
 
-^#^^#^^#^ System Variables
+### System Variables
 
 In Stata, under the [One Data][one data] principal, any information in the data^[We'll see some exceptions to this in the
 [programming](programming-advanced-features.html) section.] must be in a variable. This includes the System Variables of `_n` and `_N`. You can
@@ -240,7 +240,7 @@ list row totalobs in 1/5
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^ Extensions to generate
+### Extensions to generate
 
 The command `egen` offers some functionality that `generate` lacks, for example creating the mean of several variables
 
@@ -254,7 +254,7 @@ The functions which `egen` support are fairly random; you can see the full list 
 help egen
 ```
 
-^#^^#^ Replacing existing variables
+## Replacing existing variables
 
 [Earlier][generating new variables] we created the `weight2` variable which changed the units on weight from pounds to tons. What if, instead of
 creating a new variable, we tried to just change the existing `weight` variable.
@@ -279,7 +279,7 @@ list weight in 1/5
 `generate` can place the new variable as desired rather than [using `order`][changing variable ordering]. Clearly, neither of these features are
 needed for `replace`.]
 
-^#^^#^^#^ Conditional variable generation
+### Conditional variable generation
 
 (We're going to reload the `auto` data set at this point to ensure all data is as originally saved.)
 
@@ -368,9 +368,9 @@ tab weight_cat
 
 There's one additional complication. Stata represents missing values by `.`, and `.` has a value of positive infinity. That means that
 
-^$$^
+$$
   400 \lt .
-^$$^
+$$
 
 is true! There is some discussion [on the Stata FAQs](http://www.stata.com/support/faqs/data-management/logical-expressions-and-missing-values/) that
 goes into the rationale behind it, but the short version is that this slightly complicates variable generation but greatly simplifies and protects
@@ -436,7 +436,7 @@ replace weight_cat = 3 if weight > 4000 & !missing(weight)
 Of course, we could also generate it in the reverse order (3 to 1) or even mixed up (3, 1, 2). There are also alternate ways to write the various
 conditionals, such as replacing `weight > 4000` with `weight >= 4001`. There are usually multiple correct ways to specify any conditional.
 
-^#^^#^ More complicated replaces
+## More complicated replaces
 
 The above example for `replace` was fairly simplistic, but you can imagine the need for a much more complicated replacing structure (perhaps based on
 the value of multiple variables). If, however, you do have something this simple, the `recode` command could be used instead.
@@ -476,7 +476,7 @@ recode x (1/5 = 7) (2 = 4), generate(y)
 
 The `2 = 4` rule will never take place because 2 is already recoded to 7 in the `1/5 = 7` rule.
 
-^#^^#^ Subsetting
+## Subsetting
 
 Almost any Stata command which operates on variables can operate on a subset of the data instead of the entire data, [as we saw before](Restricting
 commands to subsets), by using the `if` or `in` statements in the command. This is equivalent to throwing away some data and then performing the
@@ -497,7 +497,7 @@ Keep track of the number of observations, "Obs", to see that the second and thir
 American cars are cheaper on average^[Note that this is not a statistical claim, we would have to do a two-sample t-test to make any statistical
 claim.].
 
-^#^^#^^#^ Repeat commands on subsets
+### Repeat commands on subsets
 
 To look at the average price for American and foreign cars, we ran two individual commands. If we wanted to look at the summaries by `rep78`, that
 would take 6 commands (values 1 through 5 and `.`)!
@@ -551,7 +551,7 @@ bysort id (date): gen firstvisit = _n == 1
 By placing `date` in parentheses, this ensures that within each `id`, the data is sorted by `date`. Therefore the first row for each patient is their
 first visit, so `_n == 1` evaluates to 1 only in that first row and 0 zero otherwise.
 
-^#^^#^^#^ Discarding data
+### Discarding data
 
 If you do want to discard data, you can use `keep` or `drop` to do so. They each can perform on variables:
 
@@ -579,7 +579,7 @@ drop turn if mpg > 20
 
 `drop` removes any listed variables, or removes any row which the conditional returns true.
 
-^#^^#^ Dealing with duplicates
+## Dealing with duplicates
 
 If your data is not expected to have duplicates, either across all variables or within certain variables, the `duplicates` command can make their
 detection and correction easier. The most basic command is `duplicates report`, which simply reports on the status of duplicate rows. Let's use the
@@ -626,7 +626,7 @@ Other useful commands include
 - `duplicates drop`: Be cautious with this, as it drops any row which is a duplicate of a previous row (in other words keeps the first entry of every
   set of duplicates).
 
-^#^^#^ Sorting
+## Sorting
 
 We already saw sorting [in the context of `bysort`][repeat commands on subsets]. We can also sort as a standalone operation. As before, consider
 generating a [original ordering variable][system variables] first.
@@ -673,13 +673,13 @@ As a side note, there is an additional command, `sort`, which can perform sortin
 allow you to sort only a certain number of rows; that is, passing something like `sort <varname> in 100/200` would sort only rows 100 through 200,
 leaving the remaining rows remain *in their exact same position*.
 
-^#^^#^ Working with strings and categorical variables
+## Working with strings and categorical variables
 
 String variables are commonly used during data collection but are ultimately not very useful from a statistical point of view. Typically string
 variables should be represented as [categorical variables with value labels][labeling values] as we've previously discussed. Here are some useful
 commands for operating on strings and categorical variables.
 
-^#^^#^^#^ Converting between string and numeric
+### Converting between string and numeric
 
 These two commands convert strings and numerics between each other.
 
@@ -700,7 +700,9 @@ desc mpg2
 list mpg* in 1/5
 <</dd_do>>
 ~~~~
+
 Now that the new string is correct, we can replace the existing `mpg`.
+
 ~~~~
 <<dd_do>>
 drop mpg
@@ -708,7 +710,9 @@ rename mpg2 mpg
 order mpg, after(price)
 <</dd_do>>
 ~~~~
+
 Let's go the other way around:
+
 ~~~~
 <<dd_do>>
 desc mpg
@@ -720,6 +724,7 @@ rename mpg2 mpg
 order mpg, after(price)
 <</dd_do>>
 ~~~~
+
 And we're back to the original set-up.^[If you are sharp-eyed, you may have noticed that the original `mpg` was an "int" whereas the final one is a
 "byte". If we had called [`compress`][compressing data] on the original data, it would have done that type conversion anyways - so we're
 ok!]
@@ -746,7 +751,7 @@ tab make2, mi
 `tostring` also accepts the `force` option when using `replace`, we recommend instead to **never** use `replace` with `tostring` (you probably should
 not use it with `destring` either!).
 
-^#^^#^^#^ Converting strings into labeled numbers
+### Converting strings into labeled numbers
 
 If we have a string variable which has non-numerical values (e.g. `race` with values "white", "black", "Hispanic", etc), the ideal way to store it is
 as numerical with [value labels][labeling values] attached. While we could do this manually using a combination of `gen` and
@@ -815,7 +820,7 @@ tab sex4, missing
 
 `decode` will fail if its target does not have value labels attached.
 
-^#^^#^^#^ String manipulation
+### String manipulation
 
 If you find yourself in a situation where you simply must manipulate the strings directly, there are a number of string functions. You can see the
 full list in `help string functions`, but below we list a few commonly used ones.
@@ -838,7 +843,7 @@ list sex sexupper sexinitial in 1/5
 <</dd_do>>
 ~~~~
 
-^#^^#^ Exercise 5
+## Exercise 5
 
 Open the *saved* version of "census9" with `use`, not the original version with `webuse`.
 
@@ -856,12 +861,12 @@ Open the *saved* version of "census9" with `use`, not the original version with 
    rows per state. To prepare for this sort of data, [encode][Converting strings into labeled numbers] the two-letter state abbreviation into a
    numeric value with value labels.
 
-^#^^#^ Merging Files
+## Merging Files
 
 When managing data sets, the need often arises to merge two data sets together, either by matching two files together according to values on certain
 variables, or by adding cases to an existing data set. We’ll start with the simpler case of adding cases to an existing data set.
 
-^#^^#^^#^ Appending Files
+### Appending Files
 
 Appending is straightforward. Observations in a new data set (called the "using" data) are appended to the current data set (called the "master"
 data), matching variable names. If a variable in the using data exists already in the master data, its values are entered there. If a variable in the
@@ -908,7 +913,7 @@ replace varname = Varname if varname == .
 
 but it is better to ensure before appending that the shared variables have identical names.
 
-^#^^#^^#^ Match-merging Data
+### Match-merging Data
 
 A more common data management necessity is to add variables from another data set to a master data set, match-merging the cases in the data sets by
 values on a single ID variable (or by values on multiple variables). There are two general forms of this match-merging.
@@ -972,8 +977,7 @@ A few notes:
   one file and is not defined as a matching variable. This may cause problems when performing merges. (You can overwrite this behavior with the
   `update` or `replace` options, see the documentation for details.)
 
-^#^^#^ Reshaping Files
-
+## Reshaping Files
 
 Different data formats are needed for various statistical methods. Stata prefers data in "Long" format, but also makes it easy to convert between Long
 and "Wide". Stata uses the `reshape` command to convert data formats.

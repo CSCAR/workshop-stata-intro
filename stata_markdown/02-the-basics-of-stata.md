@@ -1,6 +1,6 @@
-^#^ The Basics of Stata
+# The Basics of Stata
 
-^#^^#^ The Stata Environment
+## The Stata Environment
 
 [![](./images/stata_main_screen.png)](./images/stata_main_screen.png)
 
@@ -33,7 +33,7 @@ In the lower left-hand corner of the main Stata window (below the panes), there 
 directory][working directory], and is where Stata will look to find data files and other associated Stata files unless the user specifies another
 directory. We will cover examples of changing the working directory.
 
-^#^^#^^#^ Alternate Layout
+### Alternate Layout
 
 [![](./images/stata_main_screen_alt.png)](./images/stata_main_screen_alt.png)
 
@@ -41,7 +41,7 @@ An alternate layout (found in View -> Layout) places the History and Variables p
 
 (Note that this screenshot is taken on a Mac, as opposed to the original screenshot on Windows, just for comparison.)
 
-^#^^#^ One Data
+## One Data
 
 One functionality where Stata differs than most other statistical or data analysis software is that Stata can only work with a single data set at a
 time.
@@ -56,7 +56,7 @@ If you have multiple data sets you need to work with, you can either
 
 2. Merge the data sets, the better option. We'll discuss [merging][merging files] towards the end of the course.
 
-^#^^#^ Give Stata a command
+## Give Stata a command
 
 Let's try running a Stata command. In the command pane, type (or copy and paste) the following:
 
@@ -81,7 +81,7 @@ first line is the command prefaced by the `.`, that was run in Stata and only th
 still be run, *but should be run without the `.`*^[Stata can handle commands that are prefaced by `.` (with a space between the period and comand) so
 you can copy/paste the `. version` and run it as is. However, don't get used to that habit! The correct command is just `version`.].
 
-^#^^#^^#^ Saving Results
+### Saving Results
 
 Any output that appears in the Results pane (including the echoed commands and any errors) can be copied and pasted into another location, such as
 Word. In addition, if you highlight text and right-click, you also have the options:
@@ -99,13 +99,13 @@ into [the help][stata help] for them.
 - `putexcel`: Adds to a spreadsheet specific strings or output.
 - `outreg2`: A [user-written][installing user-written commands] command to output the results of a model (e.g. regression) in a clean format.
 
-^#^^#^^#^ dyndoc
+### dyndoc
 
 Version 15 of Stata introduced "dyndoc" which allows you to weave together narrative text and Stata code to produce a high-quality output (html, word
 or pdf). This document is written ([in part][how to use this document]) in dyndoc. It is extremely powerful but is well outside the mandate
 of this class. If you are interested in this functionality, I'd be happy to help.
 
-^#^^#^ Updating
+## Updating
 
 If you have administrative access on your computer (e.g. if it is your personal machine, or your IT department has given you the ability), you can
 update Stata freely. Major point upgrades such as the newly released 17.0 require purchase and re-installation, but minor upgrades (such as the 16.1
@@ -125,7 +125,7 @@ update all
 
 If you do not have administrative access on your computer, you'll need to reach out to your IT administrators to update.
 
-^#^^#^ Installing user-written commands
+## Installing user-written commands
 
 In addition to built in commands, Stata supports user-written programs, know as "ado-files"^[As we'll see in [a bit][do-files], you can save Stata
 commands in a "do-file". While I've never seen an official definition, I tend to think of "ado" as "automatic do".]. Once installed, these
@@ -165,7 +165,7 @@ adoupdate, update
 
 to perform all updates.
 
-^#^^#^ Do-files
+## Do-files
 
 We [saw][give stata a command] that commands can be typed interactively, one command at a time, and the results immediately observed. From this, the
 output can be copied/exported/printed, or the results can be saved. However, a better paradigm would save all the commands run separately so that the
@@ -211,7 +211,7 @@ tabulate foreign
 We will cover in later sections what each of these commands does ([`sysuse`][built-in data], [`summarize`][summarizing the data],
 [`tabulate`][labeling values]).
 
-^#^^#^^#^ Comments
+### Comments
 
 Comments are information in a Do-file which Stata will ignore. They can be used to stop a command from running without deleting it, or more usefully,
 to add information about the code which may be useful for others (or yourself in the future) to understand how some code works or to justify why you
@@ -271,7 +271,7 @@ As with `//`, there needs to be a space before the `///`.
 
 Only the `*` works on interactive commands entered in the Command pane. All four versions work in Do-files.
 
-^#^^#^^#^ Version control
+### Version control
 
 When writing a Do-file, you generally are creating it while using a single version of Stata. If a new version of Stata were released, its possible
 that your code may operate differently with the new version. If you add
@@ -289,7 +289,7 @@ fashion only when included at the top of a Do-file.
 Best practices is to always include a `version ##.#` line at the top of each Do-file, but if its code that will continue to see use, you should test
 it with the newer releases and update the code as necessary!
 
-^#^^#^ Exercise 0
+## Exercise 0
 
 Get familiar with the Stata interface. If you've been following along, you may have already done all these!
 
@@ -304,7 +304,7 @@ Get familiar with the Stata interface. If you've been following along, you may h
 5. Be sure you know how to run these commands from the Do file.
 6. [Comment][comments] out the `query memory` command; we won't need it anymore.
 
-^#^^#^ Basic command syntax
+## Basic command syntax
 
 Most Stata commands which operate on variables (as opposed to system commands such as `version`, `update`, `query`, etc.) follow the same general
 format. Recognizing this format will make it easier to understand new commands to which you are introduced.
@@ -330,7 +330,7 @@ two-way table.
 The options are not required (none of the above commands have options), but if they are given, they too are separated by spaces. There are some
 options that are consistent across a number of commands, and some options are specific to commands.
 
-^#^^#^ Stata Help
+## Stata Help
 
 Stata has, hands down, the best built-in help files of any of the "Big 4" statistical software.^[I consider the "Big 4" as Stata, SAS, SPSS, and
 R. SPSS has terrible help; SAS's is good but dense and difficult to navigate if you don't already know what you're looking for; R's is very
@@ -368,7 +368,7 @@ using the command.
 
 Finally, `help help` works and brings up some more information on the `help` command.
 
-^#^^#^^#^ Short commands
+### Short commands
 
 You'll frequently see commands with partial underlining; for example `summarize` has the "su" underlined. Only the underlined part needs to be given
 for Stata to understand the command; e.g. the following are all equivalent:
@@ -392,7 +392,7 @@ The short commands are very useful for quickly writing commands, but not so grea
 saw `su, d`, you might have trouble figuring that out unless you already knew that short command. Thankfully, the short commands can be used with
 `help`, so `help su` will bring up the full `summarize` documentation.
 
-^#^^#^ Working directory
+## Working directory
 
 We mentioned [earlier][the stata environment] the notion of a "working directory", the current one you can see in the bottom left of the Stata
 window. You can think of a working directory as an open folder inside Windows Explorer (or Finder if you're on a Mac). You can easily access any file
@@ -431,7 +431,7 @@ cd C:\Documents\Stata\Project
 Alternatively and perhaps more easily, you can change the working directory by the menus, choosing "Files -> Change working directory". After
 selecting the appropriate directory, the full `cd` command will be printed in the Results, so you can save it in a Do-file for later use.
 
-^#^^#^^#^ File paths
+### File paths
 
 There are some distinctions between Windows and Mac in regards to file paths, the most blatant that Windows uses forward slash (`\\`) whereas Mac uses
 back slashes (`\/`). You can see full details of this by running `help filename`.

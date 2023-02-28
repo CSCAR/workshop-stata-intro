@@ -1,4 +1,4 @@
-^#^ Data Management
+# Data Management
 
 Throughout this chapter, we'll be using the "auto" data set which is distributed with Stata. It can be loaded via
 
@@ -29,7 +29,7 @@ You'll notice that there are no statistical questions here - we're not even worr
 In this chapter we'll go over various tools and commands you can use to answer these questions (and more) and overall to gain a familiarity with the
 logistics of your data.
 
-^#^^#^ Referring to variables
+## Referring to variables
 
 When we discussed [basic command syntax][basic command syntax], we said that the optional list of variables can include any number of variables (for
 some commands). Writing out all the variables can get very tedious as the number of variables increases. Thankfully there are two alternatives.
@@ -67,7 +67,7 @@ describe t
 Be very careful with this approach. I only recommend it's use when exploring the data using the Command window; when writing a Do-file, use the full
 variable name to prevent errors!
 
-^#^^#^ Describing the data
+## Describing the data
 
 The first command you should run is `describe`.
 
@@ -127,7 +127,7 @@ describe, simple
 ~~~~
 
 
-^#^^#^ Compressing data
+## Compressing data
 
 As mentioned [above][describing the data], there are different ways to store a number variable, such as `byte` and `long`. The various options take
 more space to save - types which take less space can store only smaller numbers whereas types that take more space can store larger numbers. For
@@ -157,7 +157,7 @@ We see here a very modest saving (370 bytes, about 12%), but sometimes you can s
 Don't be afraid of artificially restricting yourself going forward; if one of your values exceeds the limitations its type supports, Stata will
 automatically change types. So don't hesitate to run `compress` when loading new data or after some manipulations.
 
-^#^^#^ Exercise 2
+## Exercise 2
 
 1. "census9" is accesible via [`webuse`][stata website data]. Load it.
 2. Spend a minute looking at the data. What does this data seem to represent? What variables do we have? ([`describe`][describing the data] will come
@@ -167,7 +167,7 @@ automatically change types. So don't hesitate to run `compress` when loading new
 5. [Compress][compressing data] the data. How much space is saved? Why do you think this is?
 
 
-^#^^#^ Labels
+## Labels
 
 A raw data set is very sparse on context. In addition to the data itself, it will have at most a variable name, which in Stata cannot include spaces
 and is limited to 32 characters. All other context associated with the data must either be documented in a data dictionary or exist in the
@@ -178,7 +178,7 @@ etc. However, Stata does not allow such arbitrary storage. In contrast, Stata al
 information which will be displayed in the appropriate Results, to make Stata output much easier to read as well as removing the need for an external
 data dictionary.
 
-^#^^#^^#^ Labeling variables
+### Labeling variables
 
 Variables names, as mentioned, are limited to 32 characters and do not allow spaces (or several other special characters). This is to encourage you to
 choose short, simple, and memorable variable names, since you'll likely be typing them a lot!
@@ -218,7 +218,7 @@ describe turn
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^ Labeling values
+### Labeling values
 
 It is tempting to store categorical variables as strings. If you ask, for example, for someone's state of residence, you might store the answers as
 "MI", "OH", "FL", etc. However, Stata (like most statistical software) cannot handle string variables.^[In the few situations where it can, it doesn't
@@ -342,14 +342,14 @@ the variable as well as the data.
 **Do not forget** that modifying value labels counts as modifying the data. Make sure you `save, replace` after making these modifications (if you
 want to keep them) or they'll be lost!
 
-^#^^#^ Managing variables
+## Managing variables
 
 In Stata, managing the names and order of variables is important to make entering commands easier due to the [shortcuts for referring to
 variables][referring to variables]. Recall that variables can be referred to using wildcards (e.g. `a*` to include `age`, `address` or `a10`, or using
 `var1-var10` to include all variables between `var1` and `var10` as they are ordered). Of course, you may also want to rename or re-order variables
 for other reasons such as making the data easier to look at.
 
-^#^^#^^#^ Renaming variables
+### Renaming variables
 
 To rename variables:
 
@@ -404,7 +404,7 @@ rename _all, lower
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^  Changing variable ordering
+###  Changing variable ordering
 
 The `order` command takes a list of variables and moves them to the front/end/before a certain variable/after a certain variable. The options `first`,
 `last`, `before(<variable>)` and `after(<variable>)` control this.
@@ -420,7 +420,7 @@ describe, simple
 <</dd_do>>
 ~~~~
 
-^#^^#^ Exercise 3
+## Exercise 3
 
 If you've changed to a different data set, load "census9" back up with `webuse`.
 
@@ -436,7 +436,7 @@ If you've changed to a different data set, load "census9" back up with `webuse`.
     4. Use `label list` and `tabulate` to confirm it worked.
 4. Save the data, replacing the version you created in step 1.
 
-^#^^#^ Summarizing the data
+## Summarizing the data
 
 While these notes will not cover anything statistical, it can be handy from a data management perspective to look at some summary statistics, mostly
 to identify problematic variables. Among other things, we can try and detect
@@ -547,7 +547,7 @@ This reports potential issues Stata has discovered in the data. In this data, ne
   variable takes on values unaccounted for in the value label).
 - Issues with date variables.
 
-^#^^#^ Exercise 4
+## Exercise 4
 
 Using [`summarize` and `codebook`][summarizing the data] to explore the "census9" data and answer the following questions:
 

@@ -252,12 +252,9 @@
 <h1><span class="header-section-number">Chapter 3</span> Working with Data Sets<a href="working-with-data-sets.html#working-with-data-sets" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="built-in-data" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Built-in data<a href="working-with-data-sets.html#built-in-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>
-Before we turn to using your own data, it is useful to know that Stata comes with a collection of sample data sets which you can use to try the Stata commands. Additionally, most (if not all) of the examples in <a href="the-basics-of-stata.html#stata-help">Stata help</a> will use these data sets.
-</p>
-<p>
-To see a list of the built-in data sets, use
-</p>
+<p>Before we turn to using your own data, it is useful to know that Stata comes with a collection of sample data sets which you can use to try the Stata
+commands. Additionally, most (if not all) of the examples in <a href="the-basics-of-stata.html#stata-help">Stata help</a> will use these data sets.</p>
+<p>To see a list of the built-in data sets, use</p>
 <pre><code>. sysuse dir
   auto.dta        census.dta      network1a.dta   tsline1.dta
   auto16.dta      citytemp.dta    nlsw88.dta      tsline2.dta
@@ -266,335 +263,225 @@ To see a list of the built-in data sets, use
   bplong.dta      gnp96.dta       sandstone.dta   voter.dta
   bpwide.dta      lifeexp.dta     sp500.dta       xtline1.dta
   cancer.dta      network1.dta    surface.dta
-
 </code></pre>
-<p>
-and use <code>sysuse</code> again to load data, for example the <code>auto</code> data which contains characteristics of various cars from a 1978 Consumer’s Report magazine.
-</p>
+<p>and use <code>sysuse</code> again to load data, for example the <code>auto</code> data which contains characteristics of various cars from a 1978 Consumer’s Report magazine.</p>
 <pre><code>. sysuse auto
 (1978 automobile data)
-
 </code></pre>
-<p>
-If you make any modifications to your data, Stata will try and protect you by refusing to load a new data set which would dispose of your changes. If you are willing to dispose of your changes, you can either manually do it by calling
-</p>
-<pre><code>clear
-</code></pre>
-<p>
-or passing it as an option to <code>sysuse</code>,
-</p>
+<p>If you make any modifications to your data, Stata will try and protect you by refusing to load a new data set which would dispose of your changes. If
+you are willing to dispose of your changes, you can either manually do it by calling</p>
+<pre><code>clear</code></pre>
+<p>or passing it as an option to <code>sysuse</code>,</p>
 <pre><code>. sysuse auto, clear
 (1978 automobile data)
-
 </code></pre>
 <div id="stata-website-data" class="section level3 hasAnchor" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Stata Website Data<a href="working-with-data-sets.html#stata-website-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>
-In addition to the data sets distributed with Stata, Stata also makes available a large collection of data sets on their website which can be accessed with the <code>webuse</code> command. These data sets are used as examples in the Manual and can be seen listed as <a target="_blank" href="http://www.stata-press.com/data/r17/">http://www.stata-press.com/data/r17/</a>.
-</p>
-<pre><code>webuse hiway
-</code></pre>
-<p>
-<code>webuse</code> supports the <code>clear</code> option as well.
-</p>
-<p>
-The exercises in this workshop will be using mostly built-in data sets as it makes distribution easy!
-</p>
+<p>In addition to the data sets distributed with Stata, Stata also makes available a large collection of data sets on their website which can be accessed
+with the <code>webuse</code> command. These data sets are used as examples in the Manual and can be seen listed
+as <a href="http://www.stata-press.com/data/r17/">http://www.stata-press.com/data/r17/</a>.</p>
+<pre><code>webuse hiway</code></pre>
+<p><code>webuse</code> supports the <code>clear</code> option as well.</p>
+<p>The exercises in this workshop will be using mostly built-in data sets as it makes distribution easy!</p>
 </div>
 </div>
 <div id="opening-data" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Opening data<a href="working-with-data-sets.html#opening-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>
-As you may have deduced from the <code>sysuse</code> and <code>webuse</code> commands above, the command to load local data is <code>use</code>:
-</p>
-<pre><code>use &lt;filename&gt;
-</code></pre>
-<p>
-As discussed in the <a href="the-basics-of-stata.html#working-directory">working directory</a> section, Stata can see only files in its working directory, so only the name of the file needs to be passed. If the file exists in a different directory, you will need to give the full (or relative path). For example, if your working directory is “C:\Documents\Stata” and the file you are looking for, “mydata”, is in the “Project” subfolder, you could open it with any of the following:
-</p>
+<p>As you may have deduced from the <code>sysuse</code> and <code>webuse</code> commands above, the command to load local data is <code>use</code>:</p>
+<pre><code>use &lt;filename&gt;</code></pre>
+<p>As discussed in the <a href="the-basics-of-stata.html#working-directory">working directory</a> section, Stata can see only files in its working directory, so only the name of the file
+needs to be passed. If the file exists in a different directory, you will need to give the full (or relative path). For example, if your working
+directory is “C:\\” and the file you are looking for, “mydata”, is in the “Project” subfolder, you could open it with any of the
+following:</p>
 <pre><code>use C:\Documents\Stata\Project\mydata
 use Project\mydata
 cd Project
-use mydata
-</code></pre>
-<p>
-Note that if the path (or file name) contains any spaces, you need to wrap the entire thing in quotes:
-</p>
-<pre><code>use &quot;C:\Documents\Stata\My Project\My Data&quot;
-</code></pre>
-<p>
-It is never wrong to use quotes (just not always required), so perhaps that’s a safer option.
-</p>
-<p>
-If the location of your file is much different than your working directory, it can be quicker just to use the menu “File -&gt; Open” and use the file open dialog box instead. As with all commands, the <code>use</code> command will be echoed in the Results after using the dialog box, allowing you to add it to a Do-file.
-</p>
-<p>
-As with <code>sysuse</code> and <code>webuse</code>, the <code>clear</code> option discards the existing data regardless of unsaved changes.
-</p>
+use mydata</code></pre>
+<p>Note that if the path (or file name) contains any spaces, you need to wrap the entire thing in quotes:</p>
+<pre><code>use &quot;C:\Documents\Stata\My Project\My Data&quot;</code></pre>
+<p>It is never wrong to use quotes (just not always required), so perhaps that’s a safer option.</p>
+<p>If the location of your file is much different than your working directory, it can be quicker just to use the menu “File -&gt; Open” and use the file
+open dialog box instead. As with all commands, the <code>use</code> command will be echoed in the Results after using the dialog box, allowing you to add it to a
+Do-file.</p>
+<p>As with <code>sysuse</code> and <code>webuse</code>, the <code>clear</code> option discards the existing data regardless of unsaved changes.</p>
 <div id="loading-subsets-of-the-data" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Loading subsets of the data<a href="working-with-data-sets.html#loading-subsets-of-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>
-You can load only a subset of the data into the program at a time. Generally I would recommend loading the full data and then <a href="data-manipulation.html#discarding-data">discarding</a> the extraneous information. However, if your data is very large, it might be handy to only load in some of it rather than the entire thing. As this is a lesser-used option we won’t go into too much detail, but as an example, if I wanted to load only the variables named “bp”, “heartrate” and “date” from the data set “patientdata”, restricted to male patients, I might use something like
-</p>
-<pre><code>use bp heartrate date if gender == &quot;male&quot; using patientdata
-</code></pre>
-<p>
-Here, <code>using</code> and <code>if</code> are subcommands, which we will see used more as the day goes on.
-</p>
-<p>
-The statement <code>gender == "male"</code> is a conditional statement which only loads male patients. We’ll discuss later about <a href="data-manipulation.html#restricting-commands-to-subsets">conditional statements</a>.
-</p>
-<p>
-Alternatively, if you have a very large data set, you can load in a small chunk of it.
-</p>
-<pre><code>use patientdata in 1/100
-</code></pre>
-<p>
-This loads just the first 100 rows (<code>a/b</code> is a “numlist” counting from “a” to “b” by integers).
-</p>
-<p>
-For further details, see <code>help use</code>, specifically the <a target="_blank" href="https://www.stata.com/manuals/duse.pdf">manual</a> which has the full documentation.
-</p>
+<p>You can load only a subset of the data into the program at a time. Generally I would recommend loading the full data and then <a href="data-manipulation.html#discarding-data">discarding</a> the extraneous information. However, if your data is very large, it might be handy to only load in some of it rather than the entire thing. As
+this is a lesser-used option we won’t go into too much detail, but as an example, if I wanted to load only the variables named “bp”, “heartrate” and
+“date” from the data set “patientdata”, restricted to male patients, I might use something like</p>
+<pre><code>use bp heartrate date if gender == &quot;male&quot; using patientdata</code></pre>
+<p>Here, <code>using</code> and <code>if</code> are subcommands, which we will see used more as the day goes on.</p>
+<p>The statement <code>gender == "male"</code> is a conditional statement which only loads male patients. We’ll discuss later about <a href="data-manipulation.html#restricting-commands-to-subsets">conditional
+statements</a>.</p>
+<p>Alternatively, if you have a very large data set, you can load in a small chunk of it.</p>
+<pre><code>use patientdata in 1/100</code></pre>
+<p>This loads just the first 100 rows (<code>a/b</code> is a “numlist” counting from “a” to “b” by integers).</p>
+<p>For further details, see <code>help use</code>, specifically the <a href="https://www.stata.com/manuals/duse.pdf">manual</a> which has the full documentation.</p>
 </div>
 </div>
 <div id="editing-data-manually" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Editing data manually<a href="working-with-data-sets.html#editing-data-manually" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>
-We will discuss in <a href="data-manipulation.html#data-manipulation">Data Manipulation</a> how to edit your data on a larger scale and in an automated fashion, but Stata does support modifying a spreadsheet of your data similar to Excel. At the top of the main window, you’ll see two buttons, “Data Editor” and “Data Browser”. These open the same new Data window, the only difference is that Stata is protecting you from yourself and if you open the “Data Browser” (or switch to it in the Data window), you cannot modify the data.
-</p>
-<p>
-Once in the Data window, you can select cells and edit them as desired. Note that whenever you make a modification in the Data Editor, there is a corresponding command produced which actually performs the modification.
-</p>
+<p>We will discuss in <a href="data-manipulation.html#data-manipulation">Data Manipulation</a> how to edit your data on a larger scale and in an automated fashion, but Stata does
+support modifying a spreadsheet of your data similar to Excel. At the top of the main window, you’ll see two buttons, “Data Editor” and “Data
+Browser”. These open the same new Data window, the only difference is that Stata is protecting you from yourself and if you open the “Data Browser”
+(or switch to it in the Data window), you cannot modify the data.</p>
+<p>Once in the Data window, you can select cells and edit them as desired. Note that whenever you make a modification in the Data Editor, there is a
+corresponding command produced which actually performs the modification.</p>
 <pre><code>. replace age = 27 in 11
-(1 real change made)
-</code></pre>
+(1 real change made)</code></pre>
 <div id="colors-as-variable-type" class="section level3 hasAnchor" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Colors as variable type<a href="working-with-data-sets.html#colors-as-variable-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>
-When viewing the data, the color of each column’s text provides information about the type of variable. We’ll go into more details <a href="data-management.html#describing-the-data">later</a> what these types mean. Below, for the <code>auto</code> data, you can see the <code>make</code> variable is red, indicating a string, the <code>foreign</code> variable is blue indicating a variable with an attached <a href="data-management.html#labeling-values">value label</a> and the remainder of the variables are black for numeric.
-</p>
-<p>
-<a target="_blank" href="./images/datacolors.png"><img src="images/datacolors.png" alt="" /></a>
-</p>
+<p>When viewing the data, the color of each column’s text provides information about the type of variable. We’ll go into more details <a href="data-management.html#describing-the-data">later</a> what these types mean. Below, for the <code>auto</code> data, you can see the <code>make</code> variable is red, indicating a string, the <code>foreign</code> variable is
+blue indicating a variable with an attached <a href="data-management.html#labeling-values">value label</a> and the remainder of the variables are black for numeric.</p>
+<p><a href="./images/datacolors.png"><img src="images/datacolors.png" /></a></p>
 </div>
 </div>
 <div id="saving-data" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Saving data<a href="working-with-data-sets.html#saving-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>
-Saving data is done with the <code>save</code> command. There are two variations of running.
-</p>
-<pre><code>save, replace
-</code></pre>
-<p>
-In this first variation, by not giving a file name and passing the <code>replace</code> option, Stata will overwrite whichever file you loaded with <code>use</code>. (It will error if you loaded a file via <code>sysuse</code> or <code>webuse</code>.)
-</p>
-<p>
-The second variation takes a file name:
-</p>
+<p>Saving data is done with the <code>save</code> command. There are two variations of running.</p>
+<pre><code>save, replace</code></pre>
+<p>In this first variation, by not giving a file name and passing the <code>replace</code> option, Stata will overwrite whichever file you loaded with <code>use</code>. (It
+will error if you loaded a file via <code>sysuse</code> or <code>webuse</code>.)</p>
+<p>The second variation takes a file name:</p>
 <pre><code>save newfile
-save newfile, replace
-</code></pre>
-<p>
-Here, <code>save</code> will save a copy named “newfile.dta” in the working directory. You can pass it a full path just like with <code>use</code> to refer to a location outside of the working directory. By default, <code>save</code> will not overwrite existing files, but can be overwritten with the <code>replace</code> option.
-</p>
-<p>
-As before, wrap the file name in quotes if it (or the path) includes any spaces.
-</p>
-<p>
-Prior to Stata 14, the save format was different. If you need to save a data set in the older format (perhaps to pass to a collaborator who is woefully behind the times), check <code>help saveold</code>.
-</p>
+save newfile, replace</code></pre>
+<p>Here, <code>save</code> will save a copy named “newfile.dta” in the working directory. You can pass it a full path just like with <code>use</code> to refer to a location
+outside of the working directory. By default, <code>save</code> will not overwrite existing files, but can be overwritten with the <code>replace</code> option.</p>
+<p>As before, wrap the file name in quotes if it (or the path) includes any spaces.</p>
+<p>Prior to Stata 14, the save format was different. If you need to save a data set in the older format (perhaps to pass to a collaborator who is
+woefully behind the times), check <code>help saveold</code>.</p>
 </div>
 <div id="importing-data" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Importing data<a href="working-with-data-sets.html#importing-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>
-The need often arises to import data from another format (such as Excel or SPSS). Stata has a suite of very useful commands for importing data sets having other formats. To see the types of data that Stata can import, select “File -&gt; Import”.
-</p>
-<p>
-While there are commands to do the importing (such as <code>import excel file.xlsx</code>), the dialog boxes for importation provide a preview of the imported data, making it easier to ensure that the importation will go smoothly. Just as with <a href="working-with-data-sets.html#editing-data-manually">editing the data</a>, after performing an import with the dialog box, the corresponding command is executed in the results window and can be copied in a Do-file for reproducibility.
-</p>
+<p>The need often arises to import data from another format (such as Excel or SPSS). Stata has a suite of very useful commands for importing data sets
+having other formats. To see the types of data that Stata can import, select “File -&gt; Import”.</p>
+<p>While there are commands to do the importing (such as <code>import excel file.xlsx</code>), the dialog boxes for importation provide a preview of the imported
+data, making it easier to ensure that the importation will go smoothly. Just as with <a href="working-with-data-sets.html#editing-data-manually">editing the data</a>, after performing an
+import with the dialog box, the corresponding command is executed in the results window and can be copied in a Do-file for reproducibility.</p>
 <div id="importing-excel-data" class="section level3 hasAnchor" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> Importing Excel data<a href="working-with-data-sets.html#importing-excel-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>
-Data stored in Excel can be ported into Stata easily. To make your life easier, make sure the data adheres to these general principals. While technically none of these are “required”, ignoring them will lead to a lot more work down the road!
-</p>
+<p>Data stored in Excel can be ported into Stata easily. To make your life easier, make sure the data adheres to these general principals. While
+technically none of these are “required”, ignoring them will lead to a lot more work down the road!</p>
 <ul>
-<li>
-Remove extraneous information (plots, notes, data dictionaries, summary statistics).
-</li>
-<li>
-Remove “fancy” formatting - merged cells, empty rows/columns.
-</li>
-<li>
-Ensure each column is of one “type” - if the column is supposed to be numbers, don’t include any words!
-</li>
-<li>
-Make missing values blank (unless you are interested in types of missingness, in which case be sure to have a coherent coding scheme).
-</li>
+<li>Remove extraneous information (plots, notes, data dictionaries, summary statistics).</li>
+<li>Remove “fancy” formatting - merged cells, empty rows/columns.</li>
+<li>Ensure each column is of one “type” - if the column is supposed to be numbers, don’t include any words!</li>
+<li>Make missing values blank (unless you are interested in types of missingness, in which case be sure to have a coherent coding scheme).</li>
 </ul>
-<p>
-Once you have cleaned your data, you can choose “File -&gt; Import -&gt; Excel Spreadsheet (.xls, .xlsx)”. The next dialog allows you to tweak the options. Important options include
-</p>
+<p>Once you have cleaned your data, you can choose “File -&gt; Import -&gt; Excel Spreadsheet (.xls, .xlsx)”. The next dialog allows you to tweak the
+options. Important options include</p>
 <ul>
-<li>
-<em>Worksheet</em>: Make sure you are importing the correct sheet!
-</li>
-<li>
-<em>Cell range</em>: If you have extraneous information in your spreadsheet, you can exclude it here. (Though in my experience it is better to remove the extraneous data from Excel, as its easy to forget something here!)
-</li>
-<li>
-<em>Import first row as variable names</em>: In Excel, it is common to have the first row being the variable names with the second row starting the data. In Stata, the variable names have their own special field, so only data should exist in the data. Check this to ensure the variables are properly named.
-</li>
-<li>
-<em>Import all data as strings</em>: It should rarely be useful to use this.
-</li>
+<li><em>Worksheet</em>: Make sure you are importing the correct sheet!</li>
+<li><em>Cell range</em>: If you have extraneous information in your spreadsheet, you can exclude it here. (Though in my experience it is better to remove the
+extraneous data from Excel, as its easy to forget something here!)</li>
+<li><em>Import first row as variable names</em>: In Excel, it is common to have the first row being the variable names with the second row starting
+the data. In Stata, the variable names have their own special field, so only data should exist in the data. Check this to ensure the variables are
+properly named.</li>
+<li><em>Import all data as strings</em>: It should rarely be useful to use this.</li>
 </ul>
-<p>
-Stata reads all the data and tries to predict whether each column represents a number or a string. To do so, it goes through some logic.
-</p>
-<ol>
-<li>
-Is anything in the column non-numeric? If yes, it is a String. If no, continue.
-</li>
-<li>
-Is anything in the column formatted as a Date or Time? If yes, it is a Date or Time. If no, continue.
-</li>
-<li>
-It is a number.
-</li>
+<p>Stata reads all the data and tries to predict whether each column represents a number or a string. To do so, it goes through some logic.</p>
+<ol style="list-style-type: decimal">
+<li>Is anything in the column non-numeric? If yes, it is a String. If no, continue.</li>
+<li>Is anything in the column formatted as a Date or Time? If yes, it is a Date or Time. If no, continue.</li>
+<li>It is a number.</li>
 </ol>
-<p>
-If Stata makes mistakes here (usually because the data is formatted oddly), things can go wrong. The last option, “Import all data as strings” can be used to force Stata to treat everything as a string so that it reads in the data <em>exactly</em> as stored in the Excel sheet so that you can clean it up later. Note that cleaning this up is usually more complicated then just fixing the Excel sheet first! (Note also that for larger data, this scan can be slow!)
-</p>
-<p>
-Once the preview looks accurate, go ahead and import. As usual, this will create an <code>import excel</code> command in the Results that you can save for the future in a Do-file, but using <code>save</code> to create a Stata data set to load in later is probably a better option.
-</p>
+<p>If Stata makes mistakes here (usually because the data is formatted oddly), things can go wrong. The last option, “Import all data as strings” can be
+used to force Stata to treat everything as a string so that it reads in the data <em>exactly</em> as stored in the Excel sheet so that you can clean it up
+later. Note that cleaning this up is usually more complicated then just fixing the Excel sheet first! (Note also that for larger data, this scan can
+be slow!)</p>
+<p>Once the preview looks accurate, go ahead and import. As usual, this will create an <code>import excel</code> command in the Results that you can save for the
+future in a Do-file, but using <code>save</code> to create a Stata data set to load in later is probably a better option.</p>
 </div>
 <div id="importing-a-csv-file" class="section level3 hasAnchor" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> Importing a CSV File<a href="working-with-data-sets.html#importing-a-csv-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>
-CSV files (comma separated values) are a very useful format for passing data between software. Files specific for software (e.g. .dta for Stata, .xlsx for Excel, .sav for SPSS) carry a lot of overhead information - very useful when working exclusively within that software, but confusing for other software. The import menu in Stata (and other software) can often address this, but a CSV file bypasses this. Data in CSV format might look like
-</p>
+<p>CSV files (comma separated values) are a very useful format for passing data between software. Files specific for software (e.g. .dta for Stata, .xlsx
+for Excel, .sav for SPSS) carry a lot of overhead information - very useful when working exclusively within that software, but confusing for other
+software. The import menu in Stata (and other software) can often address this, but a CSV file bypasses this. Data in CSV format might look like</p>
 <pre><code>id,salary,exprior,market,admin,yearsdg,rank,male
 1,38361.75,0,.72,0,14,2,0
-2,68906,2,1,,31,3,1
-</code></pre>
-<p>
-The first row is the variable names, all separated by commas. The 2nd row starts the data, where each variable is again separated by commas. Multiple commas in a row indicate a missing value.
-</p>
-<p>
-The downside of CSV files is we lose any auxiliary information, such as descriptive titles, labels etc. Often, if you are obtaining CSV files from an online resource, they will provide a Do-file alongside the data that reads in the CSV file and applies labels, titles, etc. If not you’ll have to do this yourself!
-</p>
-<p>
-A CSV files can be imported using “File -&gt; Import -&gt; Text Data (delimited, *.csv, …)”
-</p>
-<p>
-Important options include:
-</p>
+2,68906,2,1,,31,3,1</code></pre>
+<p>The first row is the variable names, all separated by commas. The 2nd row starts the data, where each variable is again separated by commas. Multiple
+commas in a row indicate a missing value.</p>
+<p>The downside of CSV files is we lose any auxiliary information, such as descriptive titles, labels etc. Often, if you are obtaining CSV files from an
+online resource, they will provide a Do-file alongside the data that reads in the CSV file and applies labels, titles, etc. If not you’ll have to do
+this yourself!</p>
+<p>A CSV files can be imported using “File -&gt; Import -&gt; Text Data (delimited, *.csv, …)”</p>
+<p>Important options include:</p>
 <ul>
-<li>
-<em>Delimiter</em> - There are other _SV types of files, such as tab or white space. Generally you can leave this at Automatic, but may need to be precise if your data has a lot of strings in it.
-</li>
-<li>
-<em>Treat sequential delimiters as one</em> - If you have missing data, it will appear as <code>5,4,,2,1</code>. If this option is <strong>not</strong> selected, Stata will recognize the missing third entry. On the other hand, if your deliminator is white space, you may have data like <code>3 1 2 5</code>. If you want that to be four variables instead of a bunch of other missing entries, select this option.
-</li>
-<li>
-<em>Use first row for variable names</em> - Same as the Excel version.
-</li>
+<li><em>Delimiter</em> - There are other _SV types of files, such as tab or white space. Generally you can leave this at Automatic, but may need to be precise
+if your data has a lot of strings in it.</li>
+<li><em>Treat sequential delimiters as one</em> - If you have missing data, it will appear as <code>5,4,,2,1</code>. If this option is <strong>not</strong> selected, Stata will
+recognize the missing third entry. On the other hand, if your deliminator is white space, you may have data like <code>3 1    2 5</code>. If you
+want that to be four variables instead of a bunch of other missing entries, select this option.</li>
+<li><em>Use first row for variable names</em> - Same as the Excel version.</li>
 </ul>
 </div>
 <div id="importing-from-a-file-not-supported-directly-by-stata" class="section level3 hasAnchor" number="3.5.3">
 <h3><span class="header-section-number">3.5.3</span> Importing from a file not supported directly by Stata<a href="working-with-data-sets.html#importing-from-a-file-not-supported-directly-by-stata" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>
-If you have data in a format not supported by Stata, there are three options:
-</p>
-<p>
-First, try opening the the data in a word processor and see if it is delimited instead of more complicated (e.g. a CSV file with a different file extension). This is a long shot, but the easiest! If you open it in something like Word, make sure you don’t save it in .doc format! Instead, rename the file “.txt” or “.csv” and try importing it as that.
-</p>
-<p>
-Second, see if the software which created the data can write it into Stata (.dta) format. Some software such as R supports this, though some software (such as SPSS) only supports writing to older versions of Stata. You can still try this, though be sure to double check that nothing went wrong, and re-save your data (which saves it as the new save format).
-</p>
-<p>
-Finally, see if you can open the data in the other software and export it into CSV or a similar common format.
-</p>
-<p>
-If all else fails, there is software Stat Transfer, <a target="_blank" href="https://www.stattransfer.com">https://www.stattransfer.com</a>, which can transfer between all sorts of formats with a click, but is not free. Your department or organization may offer access to it.
-</p>
+<p>If you have data in a format not supported by Stata, there are three options:</p>
+<p>First, try opening the the data in a word processor and see if it is delimited instead of more complicated (e.g. a CSV file with a different file
+extension). This is a long shot, but the easiest! If you open it in something like Word, make sure you don’t save it in .doc format! Instead, rename
+the file “.txt” or “.csv” and try importing it as that.</p>
+<p>Second, see if the software which created the data can write it into Stata (.dta) format. Some software such as R supports this, though some software
+(such as SPSS) only supports writing to older versions of Stata. You can still try this, though be sure to double check that nothing went wrong, and
+re-save your data (which saves it as the new save format).</p>
+<p>Finally, see if you can open the data in the other software and export it into CSV or a similar common format.</p>
+<p>If all else fails, there is software Stat Transfer, <a href="https://www.stattransfer.com" class="uri">https://www.stattransfer.com</a>, which can transfer between all sorts of formats with a click, but is
+not free. Your department or organization may offer access to it.</p>
 </div>
 </div>
 <div id="switching-between-data-sets" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Switching between data sets<a href="working-with-data-sets.html#switching-between-data-sets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>
-Here we’ll discuss two ways to switch between data sets. Later we’ll discuss the third way to work with multiple data sets, <a href="data-manipulation.html#merging-files">merging</a>.
-</p>
+<p>Here we’ll discuss two ways to switch between data sets. Later we’ll discuss the third way to work with multiple data sets, <a href="data-manipulation.html#merging-files">merging</a>.</p>
 <div id="temporarily-preserving-and-restoring-data" class="section level3 hasAnchor" number="3.6.1">
 <h3><span class="header-section-number">3.6.1</span> Temporarily preserving and restoring data<a href="working-with-data-sets.html#temporarily-preserving-and-restoring-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>
-Say you want to carry out a destructive operation on your data, temporarily. This could be either to close your data and load another, or to make a change to the current data.For example, say you want to <a href="data-manipulation.html#discarding-data">remove</a> some subset of your observations. One workflow to use would be:
-</p>
+<p>Say you want to carry out a destructive operation on your data, temporarily. This could be either to close your data and load another, or to make a
+change to the current data.For example, say you want to <a href="data-manipulation.html#discarding-data">remove</a> some subset of your observations. One workflow to use would be:</p>
 <pre><code>sysuse auto
 &lt;modify data set as desired&gt;
 save tmp
 &lt;subset data&gt;
 &lt;obtain results&gt;
 use tmp, clear
-&lt;delete the tmp file manually&gt;
-</code></pre>
-<p>
-Alternatively, the <code>preserve</code> and <code>restore</code> commands perform the same set of operations in a more automated fashion:
-</p>
+&lt;delete the tmp file manually&gt;</code></pre>
+<p>Alternatively, the <code>preserve</code> and <code>restore</code> commands perform the same set of operations in a more automated fashion:</p>
 <pre><code>sysuse auto
 &lt;modify data set as desired&gt;
 preserve
 &lt;subset data&gt;
 &lt;obtain results&gt;
-restore
-</code></pre>
-<p>
-The <code>preserve</code> command saves an image of the data as they are now, and the <code>restore</code> command reloads the image of the data, discarding any interim changes. There can only be a single image of the data preserved at a time, so if you <code>preserve</code>, then make a change and want to <code>preserve</code> again (without an intervening <code>restore</code>), you can pass the option <code>not</code> to <code>restore</code> to discard the preserved image of the data.
-</p>
-<pre><code>restore, not
-</code></pre>
-<p>
-One thing to note about the use of <code>preserve</code> and <code>restore</code> in Do-files: If you run a chunk of commands which include a <code>preserve</code> statement, after the code executes <code>restore</code> is automatically run <em>even if <code>restore</code> was not in the set of commands you ran</em>!
-</p>
+restore</code></pre>
+<p>The <code>preserve</code> command saves an image of the data as they are now, and the <code>restore</code> command reloads the image of the data, discarding any interim
+changes. There can only be a single image of the data preserved at a time, so if you <code>preserve</code>, then make a change and want to <code>preserve</code> again
+(without an intervening <code>restore</code>), you can pass the option <code>not</code> to <code>restore</code> to discard the preserved image of the data.</p>
+<pre><code>restore, not</code></pre>
+<p>One thing to note about the use of <code>preserve</code> and <code>restore</code> in Do-files: If you run a chunk of commands which include a <code>preserve</code> statement, after
+the code executes <code>restore</code> is automatically run <em>even if <code>restore</code> was not in the set of commands you ran</em>!</p>
 </div>
 <div id="frames" class="section level3 hasAnchor" number="3.6.2">
 <h3><span class="header-section-number">3.6.2</span> Frames<a href="working-with-data-sets.html#frames" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>
-Starting in Stata 16, Stata can load multiple data sets into different “frames”, though you still work with a single data set at a time. Each frame has a name; when you first open Stata the frame you start with is named “<code>default</code>”.
-</p>
+<p>Starting in Stata 16, Stata can load multiple data sets into different “frames”, though you still work with a single data set at a time. Each frame
+has a name; when you first open Stata the frame you start with is named “<code>default</code>”.</p>
 <pre><code>. frame
   (current frame is default)
-
 </code></pre>
-<p>
-The “<code>default</code>” frame is nothing special; it’s simply the name when you open a fresh version of Stata. You can create a new frame via <code>frame create</code>,
-</p>
+<p>The “<code>default</code>” frame is nothing special; it’s simply the name when you open a fresh version of Stata. You can create a new frame via <code>frame create</code>,</p>
 <pre><code>. frame create newframe
-
 </code></pre>
-<p>
-and move between frames via <code>frame change</code> or <code>cwf</code>.
-</p>
+<p>and move between frames via <code>frame change</code> or <code>cwf</code>.</p>
 <pre><code>. cwf newframe
 
 . frame
   (current frame is newframe)
 
 . cwf default
-
 </code></pre>
-<p>
-If we look at all frames with <code>frame dir</code>,
-</p>
+<p>If we look at all frames with <code>frame dir</code>,</p>
 <pre><code>. frame dir
   default   74 x 12; 1978 automobile data
   newframe  0 x 0
-
 </code></pre>
-<p>
-we can see that the default frame has the most recent data we loaded, the <code>auto</code> data. We could switch to the <code>newframe</code> and load a separate data set if we wanted.
-</p>
+<p>we can see that the default frame has the most recent data we loaded, the <code>auto</code> data. We could switch to the <code>newframe</code> and load a separate data set if we wanted.</p>
 <pre><code>. cwf newframe
 
 . sysuse bplong
@@ -603,38 +490,27 @@ we can see that the default frame has the most recent data we loaded, the <code>
 . frame dir
   default   74 x 12; 1978 automobile data
   newframe  240 x 5; Fictional blood-pressure data
-
 </code></pre>
-<p>
-Note that commands operate on our current frame, so calling <code>describe</code> will describe “bplong” since we’re still in newframe.
-</p>
+<p>Note that commands operate on our current frame, so calling <code>describe</code> will describe “bplong” since we’re still in newframe.</p>
 <pre><code>. describe, short
 
 Contains data from /Applications/Stata/ado/base/b/bplong.dta
  Observations:           240                  Fictional blood-pressure data
     Variables:             5                  1 May 2020 11:28
 Sorted by: patient
-
 </code></pre>
-<p>
-We can run commands on the other frame either by changing to that frame with <code>cwf</code>, or by using the <code>frame ___:</code> prefix:
-</p>
+<p>We can run commands on the other frame either by changing to that frame with <code>cwf</code>, or by using the <code>frame ___:</code> prefix:</p>
 <pre><code>. frame default: describe, short
 
 Contains data from /Applications/Stata/ado/base/a/auto.dta
  Observations:            74                  1978 automobile data
     Variables:            12                  13 Apr 2020 17:45
 Sorted by: foreign
-
 </code></pre>
 <div id="dropping-frames" class="section level4 hasAnchor" number="3.6.2.1">
 <h4><span class="header-section-number">3.6.2.1</span> Dropping frames<a href="working-with-data-sets.html#dropping-frames" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>
-When you load a data set, it gets loaded into your computer’s memory. If you keep creating new frames and loading data, you can very quickly run out of memory!
-</p>
-<p>
-Use <code>frame drop</code> to dispose of old frames.
-</p>
+<p>When you load a data set, it gets loaded into your computer’s memory. If you keep creating new frames and loading data, you can very quickly run out of memory!</p>
+<p>Use <code>frame drop</code> to dispose of old frames.</p>
 <pre><code>. frame dir
   default   74 x 12; 1978 automobile data
   newframe  240 x 5; Fictional blood-pressure data
@@ -643,14 +519,11 @@ Use <code>frame drop</code> to dispose of old frames.
 
 . frame dir
   newframe  240 x 5; Fictional blood-pressure data
-
 </code></pre>
 </div>
 <div id="copying-data-into-frames" class="section level4 hasAnchor" number="3.6.2.2">
 <h4><span class="header-section-number">3.6.2.2</span> Copying data into frames<a href="working-with-data-sets.html#copying-data-into-frames" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>
-Often you may want to create a <code>collapse</code>’d or otherwise modified version of your current data. You can use <code>frame copy</code> to create a duplicate which you can then destroy.
-</p>
+<p>Often you may want to create a <code>collapse</code>’d or otherwise modified version of your current data. You can use <code>frame copy</code> to create a duplicate which you can then destroy.</p>
 <pre><code>. frame copy newframe newframe2
 
 . frame newframe2: collapse (mean) bp, by(patient)
@@ -660,46 +533,28 @@ Often you may want to create a <code>collapse</code>’d or otherwise modified v
 * newframe2  120 x 2; Fictional blood-pressure data
 
 Note: Frames marked with * contain unsaved data.
-
 </code></pre>
-<p>
-Note that you cannot copy into an existing frame; you must either delete the old frame or copy into a new name.
-</p>
+<p>Note that you cannot copy into an existing frame; you must either delete the old frame or copy into a new name.</p>
 </div>
 <div id="linking-data-sets" class="section level4 hasAnchor" number="3.6.2.3">
 <h4><span class="header-section-number">3.6.2.3</span> Linking data sets<a href="working-with-data-sets.html#linking-data-sets" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>
-We’re not going to go into it now, but please see the <a href="working-with-data-sets.html#linking-data-sets">section</a> in the <a href="programming-advanced-features.html#programming-advanced-features">Programming &amp; Advanced Features</a> section for details. You can link data sets between frames to either enable moving variables across frames, or if the data are at different units of analysis (e.g. a patient file and a clinic file), to easily merge the files together.
-</p>
+<p>We’re not going to go into it now, but please see the <a href="working-with-data-sets.html#linking-data-sets">section</a> in the <a href="programming-advanced-features.html#programming-advanced-features">Programming &amp; Advanced Features</a> section for details. You can link data sets between frames to either enable moving variables across frames, or if the data are at different units of analysis (e.g. a patient file and a clinic file), to easily merge the files together.</p>
 </div>
 </div>
 </div>
 <div id="exercise-1" class="section level2 hasAnchor" number="3.7">
 <h2><span class="header-section-number">3.7</span> Exercise 1<a href="working-with-data-sets.html#exercise-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ol>
-<li>
-Load the <a href="working-with-data-sets.html#built-in-data">built-in</a> data set “lifeexp”.
-</li>
-<li>
-Open the Data Editor window. <a href="working-with-data-sets.html#editing-data-manually">Modify</a> at least one of the cells.
-</li>
-<li>
-Close the Data window. Load the built-in data set “sandstone”. Don’t forget to <code>clear</code> or pass the <code>clear</code> option.
-</li>
-<li>
-<a href="working-with-data-sets.html#saving-data">Save a copy</a> of this data to your computer.
-<ol>
-<li>
-Check your <a href="the-basics-of-stata.html#working-directory">working directory</a>. Make sure it is set somewhere convenient.
-</li>
-<li>
-Use <code>save</code>. Make sure to give it a name!
-</li>
-</ol>
-</li>
-<li>
-If you haven’t already, play with <a href="working-with-data-sets.html#temporarily-preserving-and-restoring-data"><code>preserve</code> and <code>restore</code></a>. Preserve the data, modify some values, then observe what happens when you restore.
-</li>
+<ol style="list-style-type: decimal">
+<li>Load the <a href="working-with-data-sets.html#built-in-data">built-in</a> data set “lifeexp”.</li>
+<li>Open the Data Editor window. <a href="working-with-data-sets.html#editing-data-manually">Modify</a> at least one of the cells.</li>
+<li>Close the Data window. Load the built-in data set “sandstone”. Don’t forget to <code>clear</code> or pass the <code>clear</code> option.</li>
+<li><a href="working-with-data-sets.html#saving-data">Save a copy</a> of this data to your computer.
+<ol style="list-style-type: decimal">
+<li>Check your <a href="the-basics-of-stata.html#working-directory">working directory</a>. Make sure it is set somewhere convenient.</li>
+<li>Use <code>save</code>. Make sure to give it a name!</li>
+</ol></li>
+<li>If you haven’t already, play with <a href="working-with-data-sets.html#temporarily-preserving-and-restoring-data"><code>preserve</code> and <code>restore</code></a>. Preserve the data, modify some values,
+then observe what happens when you restore.</li>
 </ol>
 
 </div>
@@ -739,7 +594,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": null,
+"link": "https://github.com/CSCAR/workshop-stata-intro/blob/master/stata_markdown/03-working-with-data-sets.Rmd",
 "text": null
 },
 "download": null,

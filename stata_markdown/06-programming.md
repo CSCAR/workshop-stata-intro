@@ -1,4 +1,4 @@
-^#^ Programming & Advanced Features
+# Programming & Advanced Features
 
 Stata features the ability to create user-written commands. These can range from simple data manipulation commands to completely new statistical
 models. This is an advanced feature that not many users will need.
@@ -14,7 +14,7 @@ sysuse auto, clear
 <</dd_do>>
 ~~~~
 
-^#^^#^ Macros
+## Macros
 
 While variables stored as strings aren't of much use to us, strings stored as other strings can be quite useful. Imagine the following scenario: You
 have a collection of 5 variables that you want to perform several different operations on. You might have code like this:
@@ -84,7 +84,7 @@ display "`test'"
 - You may occasionally see code that excludes the `=` in defining a macro (e.g. `local vars "var1 var2"`). The differences between including and
   excluding the `=` are mostly unimportant, so I recommend sticking with the `=` unless you specifically need the other version.
 
-^#^^#^^#^ Class and Return
+### Class and Return
 
 Every command in Stata is of a particular type. One major aspect of the type is what the command "returns". Some commands are n-class, which means
 they don't return anything. Some are c-class, which are only used by programmers and rarely useful elsewhere. The two common ones are e-class and
@@ -122,7 +122,7 @@ display `dprice' - `fprice'
 <</dd_do>>
 ~~~~
 
-^#^^#^ Variable Lists
+## Variable Lists
 
 Introduced in Stata 16, variable lists solves a common technique used in previous versions of Stata to define a global containing a list of variables
 to be used later in the document. For example, you might see something like this at the top of a Do file:
@@ -140,7 +140,7 @@ logit z $predictors
 
 Stata has formalized this concept with the addition of the `vl` command (**v**ariable **l**ist). It works similarly to the use of globals: lists of variables are defined, then later reference via the `$name` syntax. However, using `vl` has the benefits of improved organization, customizations unique to variable lists, error checking, and overall convenience.
 
-^#^^#^^#^ Initialization of Variable Lists
+### Initialization of Variable Lists
 
 To begin using variable lists, `vl set` must be run.
 
@@ -179,7 +179,7 @@ vl set, dummy nonotes clear
 
 In the above, we changed our minds and wanted to include the `vldummy` list, but since we'd already `vl`-set, we had the `clear` the existing set.
 
-^#^^#^^#^ Viewing lists
+### Viewing lists
 
 When initializing the variable lists, we're treated to a nice table of all defined lists. We can replay it via
 
@@ -229,7 +229,7 @@ The `(_all)` tells Stata to report on all variables, and sorting (when you speci
 
 This will also list any numeric variables which are not found in **any** list.
 
-^#^^#^^#^^#^ Moving variables in system lists
+#### Moving variables in system lists
 
 After initializing the variable lists, if you plan on using the system lists, you may need to move variables around (e.g. classifying the `vluncertain` variables into their proper lists). This can be done via `vl move` which has the syntax
 
@@ -258,7 +258,7 @@ vl move ($vluncertain) vlcontinuous
 
 Note that variable lists are essentially just global macros so can be referred to via `\$name`. Note, however, that the `\$` is only used when we want to actually use the variable list as a macro - in this case, we wanted to expand `vluncertain` into it's list of variables. When we're referring to a variable list in the `vl` commands, we *do not* use the `\$`.
 
-^#^^#^^#^ User Variable Lists
+### User Variable Lists
 
 In addition to the System variable lists, you can define your own User variables lists, which I imagine will be used far more often. These are easy to create with `vl create`:
 
@@ -295,7 +295,7 @@ vl dir, user
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^^#^ Modifying User Variable Lists
+#### Modifying User Variable Lists
 
 First, note that with User Variable Lists, the `vl move` command **does not work**. It only works with system variable lists.
 
@@ -328,7 +328,7 @@ vl modify mylist3 = mylist3 - (weight)
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^ Dropping variable list
+### Dropping variable list
 
 Variable lists can be dropped via `vl drop`
 
@@ -342,7 +342,7 @@ vl dir, user
 
 System lists cannot be dropped; if you run `vl drop vlcontinuous` it just removes all the variables from it.
 
-^#^^#^^#^ Using Variable Lists
+### Using Variable Lists
 
 To be explicit, we can use variable lists in any command which would take the variables in that list. For example,
 
@@ -392,7 +392,7 @@ regress price $sublist2
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^^#^ Updating factor-variable Lists
+#### Updating factor-variable Lists
 
 Factor-variable lists cannot be directly modified.
 
@@ -419,7 +419,7 @@ display "$predictors"
 
 Note the call to `vl rebuild`. Among other things, it will re-generate the factor-variable lists. (It produces a `vl dir` output without an option to suppress it, hence the use of [`quiet`](https://errickson.net/stata1/programming.html#quieting-the-output).)
 
-^#^^#^^#^ Stored Statistics
+### Stored Statistics
 
 You may have noticed that certain characteristics of the variable are reported.
 
@@ -458,7 +458,7 @@ vl list (weight), min max obs
 
 When the `update` option is passed, variable lists are not affected, only stored statistics are updated.
 
-^#^^#^ Linking data sets
+## Linking data sets
 
 In addition to allowing multiple data sets to be open at a time, we can **link** frames together such that rows of data in each frames are connected
 to each-other and can inter-operate. This requires a linking variable in each data set which will connect the rows. The two data sets can be at the same levels or at different levels.
@@ -545,7 +545,7 @@ frlink dir
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^ Working with linked frames
+### Working with linked frames
 
 Once we have linked frames, we can use variables in the linked frame in analyses on the main frame.
 
@@ -575,7 +575,7 @@ Note that this calculation used variables from all three frames. A less nonsensi
 gen percentpopulation = population/frval(state, population)
 ```
 
-^#^^#^ Loops
+## Loops
 
 Using macros can simplify code if you have to use the same string repeatedly, but what if you want to perform the same command repeatedly with
 different variables? Here we can use a `foreach` loop. This is easiest to see with examples.
@@ -702,11 +702,11 @@ loops over just "1" and "3/5".
 
 The use of "in" is for when you need to loop over strings that are neither numbers nor variables (such as "male" and "fem" from above).
 
-^#^^#^ Suppressing output and errors
+## Suppressing output and errors
 
 There are two useful command prefixes that can be handy while writing more elaborate Do-files.
 
-^#^^#^^#^ Capturing an error
+### Capturing an error
 
 Imagine the following scenario. You want to write a Do-file that generates a new variable. However, you may need to re-run chunks of the Do-file
 repeatedly, so that the `gen` statement is hit repeatedly. After the first `gen`, we can't call it again and [need to use `replace` instead](data-manipulation.html#replacing-existing-variables).
@@ -742,7 +742,7 @@ gen newvar = 1
 <</dd_do>>
 ~~~~
 
-^#^^#^^#^^#^ Return Code
+#### Return Code
 
 When you `capture` a command that errors, Stata saves the error code in the `_rc` macro.
 
@@ -785,7 +785,7 @@ if _rc > 0 {
 ```
 
 
-^#^^#^^#^ Quieting the output
+### Quieting the output
 
 `quietly` does the same basic thing as `capture`, except it does not hide errors. It can be useful combined
 with [the returns][class and return]:
