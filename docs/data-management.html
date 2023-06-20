@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Data Management | Introduction to Stata</title>
   <meta name="description" content="Chapter 4 Data Management | Introduction to Stata" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Data Management | Introduction to Stata" />
   <meta property="og:type" content="book" />
@@ -54,6 +54,10 @@
 
 
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/standard_html.css" type="text/css" />
 <link rel="stylesheet" href="css/book.css" type="text/css" />
@@ -314,7 +318,7 @@ variable name to prevent errors!</p>
 
 Contains data from /Applications/Stata/ado/base/a/auto.dta
  Observations:            74                  1978 automobile data
-    Variables:            12                  13 Apr 2020 17:45
+    Variables:            12                  13 Apr 2022 17:45
                                               (_dta has notes)
 -------------------------------------------------------------------------------
 Variable      Storage   Display    Value
@@ -370,7 +374,7 @@ displacement    int     %8.0g                 Displacement (cu. in.)
 
 Contains data from /Applications/Stata/ado/base/a/auto.dta
  Observations:            74                  1978 automobile data
-    Variables:            12                  13 Apr 2020 17:45
+    Variables:            12                  13 Apr 2022 17:45
 Sorted by: foreign
 </code></pre>
 <p>Alternatively, the <code>simple</code> option returns only the names of the variables, in column-dominant order (meaning you read down the columns not across the
@@ -405,11 +409,11 @@ Data &amp; strLs                            3,182               67,108,864
 
 ----------------------------------------------------------------------
 Data &amp; strLs                            3,182               67,108,864
-Variable names, %fmts, ...              4,178                   68,030
+Variable names, %fmts, ...              4,370                   71,230
 Overhead                            1,081,344                1,082,136
 
 Stata matrices                              0                        0
-ado-files                              21,262                   21,262
+ado-files                              22,919                   22,919
 Stored results                              0                        0
 
 Mata matrices                           1,904                    1,904
@@ -419,7 +423,7 @@ set maxvar usage                    4,636,521                4,636,521
 
 Other                                  14,942                   14,942
 ----------------------------------------------------------------------
-Total                               5,750,761               72,935,291
+Total                               5,752,186               72,940,148
 
 . compress
   variable mpg was int now byte
@@ -441,11 +445,11 @@ Data &amp; strLs                            2,812               67,108,864
 
 ----------------------------------------------------------------------
 Data &amp; strLs                            2,812               67,108,864
-Variable names, %fmts, ...              4,178                   68,030
+Variable names, %fmts, ...              4,370                   71,230
 Overhead                            1,081,344                1,082,136
 
 Stata matrices                              0                        0
-ado-files                              21,262                   21,262
+ado-files                              22,919                   22,919
 Stored results                              0                        0
 
 Mata matrices                           1,904                    1,904
@@ -455,7 +459,7 @@ set maxvar usage                    4,636,521                4,636,521
 
 Other                                  14,942                   14,942
 ----------------------------------------------------------------------
-Total                               5,750,391               72,935,291
+Total                               5,751,816               72,940,148
 </code></pre>
 <p>We see here a very modest saving (370 bytes, about 12%), but sometimes you can see much more significant gains.</p>
 <p>(When running Stata, instead of using <code>memory</code>, you can look at the “Size” entry in the <a href="the-basics-of-stata.html#the-stata-environment">properties pane</a>.)</p>
@@ -492,7 +496,7 @@ variable labels applied to it.</p>
 
 Contains data from /Applications/Stata/ado/base/a/auto.dta
  Observations:            74                  1978 automobile data
-    Variables:            12                  13 Apr 2020 17:45
+    Variables:            12                  13 Apr 2022 17:45
                                               (_dta has notes)
 -------------------------------------------------------------------------------
 Variable      Storage   Display    Value

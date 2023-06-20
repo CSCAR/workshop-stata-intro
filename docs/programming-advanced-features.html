@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Programming &amp; Advanced Features | Introduction to Stata</title>
   <meta name="description" content="Chapter 6 Programming &amp; Advanced Features | Introduction to Stata" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Programming &amp; Advanced Features | Introduction to Stata" />
   <meta property="og:type" content="book" />
@@ -54,6 +54,10 @@
 
 
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/standard_html.css" type="text/css" />
 <link rel="stylesheet" href="css/book.css" type="text/css" />
@@ -1061,10 +1065,10 @@ Note: Frames marked with * contain unsaved data.
 </code></pre>
 <p>So as you can see, the current frame is the “demographics” frame, and the other frames contains diet and blood pressure information. The variable <code>seqn</code> records person ID.</p>
 <pre><code>. frlink 1:1 seqn, frame(bp)
-  (427 observations in frame demographics unmatched)
+(427 observations in frame demographics unmatched)
 
 . frlink 1:1 seqn, frame(diet)
-  (427 observations in frame demographics unmatched)
+(427 observations in frame demographics unmatched)
 </code></pre>
 <p>The <code>1:1</code> subcommand specifies that it is a 1-to-1 link - each person has no more than 1 row of data in each file. An alternative is <code>m:1</code> which allows multiple rows in the main file to be linked to a single row in the second frame. <code>1:m</code> is <em>not allowed</em> at this point in time.</p>
 <p>These commands created two new variables <code>bp</code> and <code>diet</code> (the same new as the linked frames) which indicate which row of the linked from is connected with the given row.</p>
@@ -1086,7 +1090,7 @@ Note: Frames marked with * contain unsaved data.
 
   History:
   -----------------------------------------------------------------------------
-    Link variable diet created on 28 Feb 2023 by
+    Link variable diet created on 20 Jun 2023 by
 
     . frlink 1:1 seqn, frame(diet)
 
@@ -1111,7 +1115,7 @@ Note: Frames marked with * contain unsaved data.
 </code></pre>
 <p>Finally, the names of the created variables can be modified via the <code>generate</code> option to <code>frlink</code>:</p>
 <pre><code>. frlink 1:1 seqn, frame(diet) generate(linkdiet)
-  (427 observations in frame demographics unmatched)
+(427 observations in frame demographics unmatched)
 
 . frlink dir
   (2 frlink variables found)
@@ -1133,7 +1137,7 @@ r(111);
 
 . frget bpxchr, from(bp)
 (8,033 missing values generated)
-  (1 variable copied from linked frame)
+(1 variable copied from linked frame)
 
 . summarize bpxchr
 
