@@ -8,11 +8,11 @@ several.
 
 Let's open a fresh version of "auto":
 
-~~~~
+```stata
 <<dd_do>>
 sysuse auto, clear
 <</dd_do>>
-~~~~
+```
 
 ## Macros
 
@@ -75,12 +75,12 @@ Some other notes:
     label variable price2 "`pricelab' 2"
     ```
 - You can use `display` to print the content of macros to the output to preview them.
-~~~~
+```stata
 <<dd_do>>
 local test = "abc"
 display "`test'"
 <</dd_do>>
-~~~~
+```
 - You may occasionally see code that excludes the `=` in defining a macro (e.g. `local vars "var1 var2"`). The differences between including and
   excluding the `=` are mostly unimportant, so I recommend sticking with the `=` unless you specifically need the other version.
 
@@ -94,14 +94,14 @@ Here, `summarize` is a r-class command, so it stores its returns in "return". We
 we haven't discussed, but basically displays summary statistics similar to `summarize` but provides some additional functionality) is an e-class
 command, storing its results in `ereturn`:
 
-~~~~
+```stata
 <<dd_do>>
 summ price
 return list
 mean price
 ereturn list
 <</dd_do>>
-~~~~
+```
 
 Rather than try and keep track of what gets stored where, if you look at the very bottom of any help file, it will say something like "`summarize`
 stores the following in `r()`:" or "`mean` stores the following in `e()`:", corresponding to `return` and `ereturn` respectively.
@@ -112,7 +112,7 @@ call will still give you the returns for that first `summarize`. However, as soo
 one. You can save any piece of it using a [macro][macros]. For example, to calculate the average difference in price between foreign and domestic
 cars^[There are obviously other ways to compute this, but this gives a flavor of the use.]:
 
-~~~~
+```stata
 <<dd_do>>
 summ price if foreign == 1
 local fprice = r(mean)
@@ -120,7 +120,7 @@ summ price if foreign == 0
 local dprice = r(mean)
 display `dprice' - `fprice'
 <</dd_do>>
-~~~~
+```
 
 ## Variable Lists
 
@@ -144,12 +144,12 @@ Stata has formalized this concept with the addition of the `vl` command (**v**ar
 
 To begin using variable lists, `vl set` must be run.
 
-~~~~
+```stata
 <<dd_do>>
 sysuse auto
 vl set
 <</dd_do>>
-~~~~
+```
 
 This produces a surprisingly large amount of output. When you initialize the use of variable lists, Stata will automatically create four variable lists, called the "System variable lists". Every *numeric* variable in the current data set is automatically placed into one of these four lists:
 
@@ -170,12 +170,12 @@ vl set, categorical(20) uncertain(50)
 
 Running `vl set` on an already `vl`-set data set will result in an error, unless the `clear` option is given, which will re-generate the lists.
 
-~~~~
+```stata
 <<dd_do>>
 vl set, dummy nonotes
 vl set, dummy nonotes clear
 <</dd_do>>
-~~~~
+```
 
 In the above, we changed our minds and wanted to include the `vldummy` list, but since we'd already `vl`-set, we had the `clear` the existing set.
 
@@ -183,47 +183,47 @@ In the above, we changed our minds and wanted to include the `vldummy` list, but
 
 When initializing the variable lists, we're treated to a nice table of all defined lists. We can replay it via
 
-~~~~
+```stata
 <<dd_do>>
 vl dir
 <</dd_do>>
-~~~~
+```
 
 To see the actual contents of the variable lists, we'll need to sue `vl list`.
 
-~~~~
+```stata
 <<dd_do>>
 vl list
 <</dd_do>>
-~~~~
+```
 
 This output produces one row for each variable *in each variable list it is in*. We haven't used this yet, but variables can be in multiple lists.
 
 We can list only specific lists:
 
-~~~~
+```stata
 <<dd_do>>
 vl list vlcategorical
 <</dd_do>>
-~~~~
+```
 
 or specific variables
 
-~~~~
+```stata
 <<dd_do>>
 vl list (turn weight)
 <</dd_do>>
-~~~~
+```
 
 If "turn" was in multiple variable lists, each would appear as a row in this output.
 
 There's a bit of odd notation which can be used to sort the output by variable name, which makes it easier to identify variables which appear in multiple lists.
 
-~~~~
+```stata
 <<dd_do>>
 vl list (_all), sort
 <</dd_do>>
-~~~~
+```
 
 The `(_all)` tells Stata to report on all variables, and sorting (when you specify at least one variable) orders by variable name rather than variable list name.
 
@@ -239,22 +239,22 @@ vl move (<variables to move>) <destination list>
 
 For example, all the variables in `vluncertain` are actually continuous:
 
-~~~~
+```stata
 <<dd_do>>
 vl list vluncertain
 vl move (price mpg trunk weight length turn displacement) vlcontinuous
 vl dir
 <</dd_do>>
-~~~~
+```
 
 Alternatively, since we're moving all variables in `vluncertain`, we can see our first use of the variable list!
 
-~~~~
+```stata
 <<dd_do>>
 vl set, dummy nonotes clear
 vl move ($vluncertain) vlcontinuous
 <</dd_do>>
-~~~~
+```
 
 Note that variable lists are essentially just global macros so can be referred to via `\$name`. Note, however, that the `\$` is only used when we want to actually use the variable list as a macro - in this case, we wanted to expand `vluncertain` into it's list of variables. When we're referring to a variable list in the `vl` commands, we *do not* use the `\$`.
 
@@ -262,22 +262,22 @@ Note that variable lists are essentially just global macros so can be referred t
 
 In addition to the System variable lists, you can define your own User variables lists, which I imagine will be used far more often. These are easy to create with `vl create`:
 
-~~~~
+```stata
 <<dd_do>>
 vl create mylist1 = (weight mpg)
 vl create mylist2 = (weight length trunk)
 vl dir, user
 vl list, user
 <</dd_do>>
-~~~~
+```
 
 Note the addition of the `user` option to `vl list` and `vl dir` to show only User variable lists and suppress the System variable lists. We can also demonstrate the odd sorting syntax here:
 
-~~~~
+```stata
 <<dd_do>>
 vl list (_all), sort user
 <</dd_do>>
-~~~~
+```
 
 You can refer to variable lists in all the usual shortcut ways:
 
@@ -287,13 +287,13 @@ vl create mylist = (x1-x100 z*)
 
 We can add labels to variable lists:
 
-~~~~
+```stata
 <<dd_do>>
 vl label mylist1 "Related to gas consumption"
 vl label mylist2 "Related to size"
 vl dir, user
 <</dd_do>>
-~~~~
+```
 
 #### Modifying User Variable Lists
 
@@ -301,44 +301,44 @@ First, note that with User Variable Lists, the `vl move` command **does not work
 
 We can create new user variable lists which build off old lists with `vl create`. To add a new variable:
 
-~~~~
+```stata
 <<dd_do>>
 vl create mylist3 = mylist2 + (gear_ratio)
 vl list, user
 vl create mylist4 = mylist2 - (turn)
 vl list, user
 <</dd_do>>
-~~~~
+```
 
 Instead of adding (or removing) single variables at a time, we can instead add or remove lists. Keeping with the comment above, you do *not* use `\$` here to refer to the list.
 
-~~~~
+```stata
 <<dd_do>>
 vl create mylist5 = mylist2 - mylist1
 vl list mylist5
 <</dd_do>>
-~~~~
+```
 
 However, if we want to simply modify an existing list, a better approach would be the `vl modify` command. `vl create` and `vl modify` are similar to `generate` and `replace`; the former creates a new variable list while the later changes an existing variable list, but the syntax right of the `=` is the same.
 
-~~~~
+```stata
 <<dd_do>>
 vl modify mylist3 = mylist3 + (headroom)
 vl modify mylist3 = mylist3 - (weight)
 <</dd_do>>
-~~~~
+```
 
 ### Dropping variable list
 
 Variable lists can be dropped via `vl drop`
 
-~~~~
+```stata
 <<dd_do>>
 vl dir, user
 vl drop mylist4 mylist5
 vl dir, user
 <</dd_do>>
-~~~~
+```
 
 System lists cannot be dropped; if you run `vl drop vlcontinuous` it just removes all the variables from it.
 
@@ -346,66 +346,66 @@ System lists cannot be dropped; if you run `vl drop vlcontinuous` it just remove
 
 To be explicit, we can use variable lists in any command which would take the variables in that list. For example,
 
-~~~~
+```stata
 <<dd_do>>
 describe $mylist3
 describe $vlcategorical
 <</dd_do>>
-~~~~
+```
 
 We can also use them in a modeling setting.
 
-~~~~
+```stata
 <<dd_do>>
 regress mpg $mylist3
 <</dd_do>>
-~~~~
+```
 
 However, we'll run into an issue here - how to specify categorical variables or interactions? The `vl substitute` command creates "factor-variable lists" that can include factor variable indicators (`i.`), continuous variable indicators (`c.`), and interactions (`#` or `##`). (The name "factor-variable list" is slightly disingenuous; you could create a "factor-variable list" that includes no actual factors, for example, if you wanted to interact two continuous variables.)
 
 Creating a factor-varible list via `vl substitute` can be done by specifying variables or variable lists.
 
-~~~~
+```stata
 <<dd_do>>
 vl substitute sublist1 = mpg mylist3
 display "$sublist1"
 vl dir
 <</dd_do>>
-~~~~
+```
 
 Note the use of `display "\$listname"` instead of `vl list`. Factor-variable lists are not just lists of vairables, they also can include the features above, so must be displayed. Note that in the `vl dir`, "sublist1" has no number of variables listed, making it stand apart.
 
 We can make this more interesting by actually including continuous/factor indicatores and/or interactions.
 
-~~~~
+```stata
 <<dd_do>>
 vl substitute sublist2 = c.mylist1##i.vldummy
 display "$sublist2"
 <</dd_do>>
-~~~~
+```
 
 Note the need to specify that mylist1 is continuous (with `c.`). It follows the normal convention that Stata assumes predictors in a model are continuous by default, unless they're invloved in an interaction, in which case it assumes they are factors by default.
 
-~~~~
+```stata
 <<dd_do>>
 regress price $sublist2
 <</dd_do>>
-~~~~
+```
 
 #### Updating factor-variable Lists
 
 Factor-variable lists cannot be directly modified.
 
-~~~~
+```stata
 <<dd_do>>
 display "$sublist1"
 vl modify sublist1 = sublist1 - mpg
 <</dd_do>>
-~~~~
+```
 
 However, if you create a factor-variable list using only other variable lists, if those lists get updated, so does the factor-variable list!
 
-~~~~
+```stata
 <<dd_do>>
 vl create continuous = (turn trunk)
 vl create categorical = (rep78 foreign)
@@ -415,7 +415,7 @@ vl modify continuous = continuous - (trunk)
 quiet vl rebuild
 display "$predictors"
 <</dd_do>>
-~~~~
+```
 
 Note the call to `vl rebuild`. Among other things, it will re-generate the factor-variable lists. (It produces a `vl dir` output without an option to suppress it, hence the use of [`quiet`](https://errickson.net/stata1/programming.html#quieting-the-output).)
 
@@ -423,38 +423,38 @@ Note the call to `vl rebuild`. Among other things, it will re-generate the facto
 
 You may have noticed that certain characteristics of the variable are reported.
 
-~~~~
+```stata
 <<dd_do>>
 vl list mylist3
 <</dd_do>>
-~~~~
+```
 
 This reports some characteristics of the variables (integer, whether it's non-negative) and the number of unique values. We can also see some other statistics:
 
-~~~~
+```stata
 <<dd_do>>
 vl list mylist3, min max obs
 <</dd_do>>
-~~~~
+```
 
 This is similar to [`codebook`](https://www.stata.com/manuals/dcodebook.pdf) except faster; these characteristics are saved at the time the variable list is created or modified and not updated automatically. If the data changes, this does *not* get updated.
 
-~~~~
+```stata
 <<dd_do>>
 drop if weight < 3000
 summarize weight
 vl list (weight), min max obs
 <</dd_do>>
-~~~~
+```
 
 To re-generate these stored statistics, we call `vl set` again, with the `update` option.
 
-~~~~
+```stata
 <<dd_do>>
 vl set, update
 vl list (weight), min max obs
 <</dd_do>>
-~~~~
+```
 
 When the `update` option is passed, variable lists are not affected, only stored statistics are updated.
 
@@ -477,7 +477,7 @@ frlink 1:1 linkvar, frame(otherframe)
 
 Let's load some data from NHANES. Each file contains a row per subject.
 
-~~~~
+```stata
 <<dd_do>>
 frame reset
 frame rename default demographics
@@ -489,61 +489,61 @@ frame diet: import sasxport5 "https://wwwn.cdc.gov/Nchs/Nhanes/2015-2016/DR1TOT_
 frame bp: import sasxport5 "https://wwwn.cdc.gov/Nchs/Nhanes/2015-2016/BPX_I.XPT", clear
 frame dir
 <</dd_do>>
-~~~~
+```
 
 So as you can see, the current frame is the "demographics" frame, and the other frames contains diet and blood pressure information. The variable `seqn` records person ID.
 
-~~~~
+```stata
 <<dd_do>>
 frlink 1:1 seqn, frame(bp)
 frlink 1:1 seqn, frame(diet)
 <</dd_do>>
-~~~~
+```
 
 The `1:1` subcommand specifies that it is a 1-to-1 link - each person has no more than 1 row of data in each file. An alternative is `m:1` which allows multiple rows in the main file to be linked to a single row in the second frame. `1:m` is *not allowed* at this point in time.
 
 These commands created two new variables `bp` and `diet` (the same new as the linked frames) which indicate which row of the linked from is connected with the given row.
 
-~~~~
+```stata
 <<dd_do>>
 list bp diet in 25/29
 <</dd_do>>
-~~~~
+```
 
 Here we see that row 27 in the demographics file was not found in either "bp" or "diet" and thus has no entry in the `bp` or `diet` variables.
 
 Links are tracked by the variables, we can see the current status of a link via `frlink describe`:
 
-~~~~
+```stata
 <<dd_do>>
 frlink describe diet
 <</dd_do>>
-~~~~
+```
 
 We can see all links from the current frame via `frlink dir`:
 
-~~~~
+```stata
 <<dd_do>>
 frlink dir
 <</dd_do>>
-~~~~
+```
 
 To unlink frames, simply drop the variable.
 
-~~~~
+```stata
 <<dd_do>>
 drop diet
 <</dd_do>>
-~~~~
+```
 
 Finally, the names of the created variables can be modified via the `generate` option to `frlink`:
 
-~~~~
+```stata
 <<dd_do>>
 frlink 1:1 seqn, frame(diet) generate(linkdiet)
 frlink dir
 <</dd_do>>
-~~~~
+```
 
 ### Working with linked frames
 
@@ -551,23 +551,23 @@ Once we have linked frames, we can use variables in the linked frame in analyses
 
 The `frget` command can copy variables from the linked frame into the primary frame.
 
-~~~~
+```stata
 <<dd_do>>
 summarize bpxchr
 frget bpxchr, from(bp)
 summarize bpxchr
 <</dd_do>>
-~~~~
+```
 
 This merges appropriately, with a `1:1` or `m:1` link, to properly associate the values of the variable with the right observations.
 
 Alternatively, when using `generate`, we can reference a variable in another frame.
 
-~~~~
+```stata
 <<dd_do>>
 gen nonsense = frval(linkdiet, dr1tcalc)/frval(bp, bpxpls) + dmdhrage
 <</dd_do>>
-~~~~
+```
 
 Note that this calculation used variables from all three frames. A less nonsensical example might be where we want the percent of a countries population located in a given state. Imagine we have the primary frame of county data, and then a separate frame "state" containing state level information.
 
@@ -580,22 +580,22 @@ gen percentpopulation = population/frval(state, population)
 Using macros can simplify code if you have to use the same string repeatedly, but what if you want to perform the same command repeatedly with
 different variables? Here we can use a `foreach` loop. This is easiest to see with examples.
 
-~~~~
+```stata
 <<dd_do>>
 sysuse pop2000, clear
 <</dd_do>>
-~~~~
+```
 
 The "pop2000" data contains data from the 2000 census, broken down by age and gender. The values are in total counts, lets say instead we want
 percentages by gender. For example, what percentage of Asians in age 25-29 are male? We could generate this manually.
 
-~~~~
+```stata
 <<dd_do>>
 gen maletotalperc = maletotal/total
 gen femtotalperc = femtotal/total
 gen malewhiteperc = malewhite/white
 <</dd_do>>
-~~~~
+```
 
 This gets tedious fast as we need a total of 12 lines! Notice, however, that each line has a predictable pattern:
 
@@ -605,7 +605,7 @@ gen <gender><race>perc = <gender><race>/<race>
 
 We can exploit this by creating a `foreach` loop over the racial categories and only needing a single command.
 
-~~~~
+```stata
 <<dd_do>>
 drop *perc
 foreach race of varlist total-island {
@@ -614,7 +614,7 @@ foreach race of varlist total-island {
 }
 list *perc in 1, ab(100)
 <</dd_do>>
-~~~~
+```
 
 Let's breakdown each piece of the command. The command syntax for `foreach` is
 
@@ -633,7 +633,7 @@ brace, `}`.
 
 We can also nest these loops. Notice that both `gen` statements above are identical except for "male" vs "fem". Let's put an internal loop:
 
-~~~~
+```stata
 <<dd_do>>
 drop *perc
 foreach race of varlist total-island {
@@ -643,7 +643,7 @@ foreach race of varlist total-island {
 }
 list *perc in 1, ab(100)
 <</dd_do>>
-~~~~
+```
 
 Each time "race" gets set to a new variable, we enter another loop where "gender" gets set first to "male" then to "fem". To help visualize it, here
 is what "race" and "gender" are set to each time the `gen` command is run:
@@ -713,55 +713,55 @@ repeatedly, so that the `gen` statement is hit repeatedly. After the first `gen`
 However, if we used `replace`, it wouldn't work the first time! One solution is to `drop` the variable before we gen it:
 
 
-~~~~
+```stata
 <<dd_do>>
 sysuse auto, clear
 drop newvar
 gen newvar = 1
 <</dd_do>>
-~~~~
+```
 
 That error, while not breaking the code, is awfully annoying! However, if we prefix it by `capture`, the error (and *all output from the command*) are
 "captured" and hidden.
 
-~~~~
+```stata
 <<dd_do>>
 list price in 1/5
 capture list price in 1/5
 list abcd
 capture list abcd
 <</dd_do>>
-~~~~
+```
 
 Therefore, the best way to generate our new variable is
 
-~~~~
+```stata
 <<dd_do>>
 capture drop newvar
 gen newvar = 1
 <</dd_do>>
-~~~~
+```
 
 #### Return Code
 
 When you `capture` a command that errors, Stata saves the error code in the `_rc` macro.
 
-~~~~
+```stata
 <<dd_do>>
 list abc
 capture list abc
 display _rc
 <</dd_do>>
-~~~~
+```
 
 If the command does not error, `_rc` contains 0.
 
-~~~~
+```stata
 <<dd_do>>
 capture list price
 display _rc
 <</dd_do>>
-~~~~
+```
 
 This can be used to offer additional code if an error occurs
 
@@ -790,19 +790,19 @@ if _rc > 0 {
 `quietly` does the same basic thing as `capture`, except it does not hide errors. It can be useful combined
 with [the returns][class and return]:
 
-~~~~
+```stata
 <<dd_do>>
 quietly summ price
 display r(mean)
 <</dd_do>>
-~~~~
+```
 
 This will come in very handy when you start running statistical models, where the output can be over a single screen, whereas you only want a small
 piece of it.
 
 Just to make the difference between `capture` and `quietly` clear:
 
-~~~~
+```stata
 <<dd_do>>
 list price in 1/5
 quietly list price in 1/5
@@ -811,7 +811,7 @@ list abcd in 1/5
 quietly list abcd in 1/5
 capture list abcd in 1/5
 <</dd_do>>
-~~~~
+```
 
 With a command that doesn't error (listing `price`), both `quietly` and `capture` perform the same. However, with a command that does error, `quietly`
 still errors, whereas `capture` just ignores it!

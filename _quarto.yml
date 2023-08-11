@@ -1,0 +1,21 @@
+project:
+  type: book
+  pre-render: make quarto-prerender
+
+book:
+  title: "Introduction to Stata"
+  author: "CSCAR Staff"
+  date: date-modified
+  chapters:
+    - index.qmd
+    - 02-the-basics-of-stata.dyndoc.qmd
+    - 03-working-with-data-sets.qmd
+    - 04-data-management.qmd
+    - 05-data-manipulation.qmd
+    - 06-programming.qmd
+    - 07-appendix.qmd
+
+format:
+  html:
+    theme: flatly # Choose from https://bootswatch.com
+    css: style.css

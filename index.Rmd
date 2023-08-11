@@ -1,17 +1,3 @@
----
-title: "Introduction to Stata"
-author: "CSCAR Staff"
-date: "Last updated: `r Sys.Date()`"
-site: bookdown::gitbook
-output:
-  bookdown::gitbook:
-    config:
-      sharing: null
-documentclass: book
-link-citations: yes
-github-repo: rstudio/bookdown-demo
----
-
 # Preface
 
 These notes are split into four primary sections:

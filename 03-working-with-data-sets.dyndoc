@@ -7,19 +7,19 @@ commands. Additionally, most (if not all) of the examples in [Stata help][stata 
 
 To see a list of the built-in data sets, use
 
-~~~~
+```stata
 <<dd_do>>
 sysuse dir
 <</dd_do>>
-~~~~
+```
 
 and use `sysuse` again to load data, for example the `auto` data which contains characteristics of various cars from a 1978 Consumer's Report magazine.
 
-~~~~
+```stata
 <<dd_do>>
 sysuse auto
 <</dd_do>>
-~~~~
+```
 
 If you make any modifications to your data, Stata will try and protect you by refusing to load a new data set which would dispose of your changes. If
 you are willing to dispose of your changes, you can either manually do it by calling
@@ -30,11 +30,11 @@ clear
 
 or passing it as an option to `sysuse`,
 
-~~~~
+```stata
 <<dd_do>>
 sysuse auto, clear
 <</dd_do>>
-~~~~
+```
 
 ### Stata Website Data
 
@@ -299,63 +299,63 @@ the code executes `restore` is automatically run *even if `restore` was not in t
 Starting in Stata 16, Stata can load multiple data sets into different "frames", though you still work with a single data set at a time. Each frame
 has a name; when you first open Stata the frame you start with is named "`default`".
 
-~~~~
+```stata
 <<dd_do>>
 frame
 <</dd_do>>
-~~~~
+```
 
 The "`default`" frame is nothing special; it's simply the name when you open a fresh version of Stata. You can create a new frame via `frame create`,
 
-~~~~
+```stata
 <<dd_do>>
 frame create newframe
 <</dd_do>>
-~~~~
+```
 
 and move between frames via `frame change` or `cwf`.
 
-~~~~
+```stata
 <<dd_do>>
 cwf newframe
 frame
 cwf default
 <</dd_do>>
-~~~~
+```
 
 If we look at all frames with `frame dir`,
 
-~~~~
+```stata
 <<dd_do>>
 frame dir
 <</dd_do>>
-~~~~
+```
 
 we can see that the default frame has the most recent data we loaded, the `auto` data. We could switch to the `newframe` and load a separate data set if we wanted.
 
-~~~~
+```stata
 <<dd_do>>
 cwf newframe
 sysuse bplong
 frame dir
 <</dd_do>>
-~~~~
+```
 
 Note that commands operate on our current frame, so calling `describe` will describe "bplong" since we're still in newframe.
 
-~~~~
+```stata
 <<dd_do>>
 describe, short
 <</dd_do>>
-~~~~
+```
 
 We can run commands on the other frame either by changing to that frame with `cwf`, or by using the `frame ___:` prefix:
 
-~~~~
+```stata
 <<dd_do>>
 frame default: describe, short
 <</dd_do>>
-~~~~
+```
 
 #### Dropping frames
 
@@ -363,25 +363,25 @@ When you load a data set, it gets loaded into your computer's memory. If you kee
 
 Use `frame drop` to dispose of old frames.
 
-~~~~
+```stata
 <<dd_do>>
 frame dir
 frame drop default
 frame dir
 <</dd_do>>
-~~~~
+```
 
 #### Copying data into frames
 
 Often you may want to create a `collapse`'d or otherwise modified version of your current data. You can use `frame copy` to create a duplicate which you can then destroy.
 
-~~~~
+```stata
 <<dd_do>>
 frame copy newframe newframe2
 frame newframe2: collapse (mean) bp, by(patient)
 frame dir
 <</dd_do>>
-~~~~
+```
 
 Note that you cannot copy into an existing frame; you must either delete the old frame or copy into a new name.
 

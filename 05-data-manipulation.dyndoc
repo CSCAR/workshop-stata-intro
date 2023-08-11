@@ -2,11 +2,11 @@
 
 Let's reload the "auto" data to discard any changes made in previous sections and to start fresh.
 
-~~~~
+```stata
 <<dd_do>>
 sysuse auto, clear
 <</dd_do>>
-~~~~
+```
 
 ## Restricting commands to subsets
 
@@ -31,12 +31,12 @@ Both are optional (obviously), but you can include them if desired.
 Using `in`, we pass a number list which consists of a lower bound, a `/`, and an upper bound. For example, if we wanted to summarize the first 10 rows
 for a variable, we could run:
 
-~~~~
+```stata
 <<dd_do>>
 summarize weight
 summarize weight in 1/10
 <</dd_do>>
-~~~~
+```
 
 As you can see, the second call to `summarize` thinks there are only 10 rows of data.
 
@@ -66,12 +66,12 @@ false. We can assign values of true and false to any such conditional statements
 
 So we could summarize a variable only when some other variables have some values.
 
-~~~~
+```stata
 <<dd_do>>
 summarize weight if foreign == 1
 summarize weight if foreign == 1 | (mpg > 20 & headroom < 10)
 <</dd_do>>
-~~~~
+```
 
 Note in the second example we used parentheses to evaluate a more complex expression; we follow order of operations (remember PEMBAS?) and evaluate
 the inner-most parantheses first. So first `mpg > 20 & headroom < 10` gets evaluated and returns `TRUE` or `FALSE`; then following that, we evaluate
@@ -84,11 +84,11 @@ We saw the usage of this earlier when discussing [loading subsets of the data][l
 The `generate` command can be used to create new variables which are functions of existing variables. For example, if we look at the variable label
 for `weight`, we see that it is measured in pounds.
 
-~~~~
+```stata
 <<dd_do>>
 describe weight
 <</dd_do>>
-~~~~
+```
 
 Let's create a second weight variable measured in tons. The syntax for `generate` is straightforward,
 
@@ -96,20 +96,20 @@ Let's create a second weight variable measured in tons. The syntax for `generate
 generate <new varname> = <function of old variables>
 ```
 
-~~~~
+```stata
 <<dd_do>>
 generate weight2 = weight/2000
 <</dd_do>>
-~~~~
+```
 
 The `list` command can be used to output some data, let's use it here to output the first 5 rows' `weight` and `weight2` variables:
 
 
-~~~~
+```stata
 <<dd_do>>
 list weight* in 1/5
 <</dd_do>>
-~~~~
+```
 
 (Note: I use `list` here because I need the variables outputted to create the document. When using Stata interactively, it'd probably be nicer to use
 `browse` or `edit` in the exact same fashion, e.g. `browse weights* in 1/5`. These enter the Data Browser (`browse`) or Data Browser (Edit Mode)
@@ -117,24 +117,24 @@ list weight* in 1/5
 
 If you check the arithmetic, you'll see that we've got the right answer. We should probably add a variable label to our new `weight`
 
-~~~~
+```stata
 <<dd_do>>
 label variable weight2 "Weight (tons)"
 describe weight*
 <</dd_do>>
-~~~~
+```
 
 In addition to direct arithmetic equations, we can use a number of functions to perform calculations. For example, a common transformation is to take
 the log of any monetary variable, in our case `price`. This is done because typical monetary variables, such as price or salary, tend to be very
 right-skewed - most people make $30k-50k, and a few people make 6 or 7 digit incomes.
 
-~~~~
+```stata
 <<dd_do>>
 generate logprice = log(price)
 label variable logprice "Log price"
 list *price in 1/5
 <</dd_do>>
-~~~~
+```
 
 In that command, `log` is the function name, and it is immediately followed by parentheses which enclose the variable to operate on. Read the
 parentheses as "of", so that `log(price)` is read as "log of price".
@@ -176,32 +176,32 @@ instead of strings. If a question has categorical responses, consider encoding t
 Now here's the trick: In Stata^[This is true of most statistical software in fact.], [conditional statements][Restricting commands to subsets] return
 1 (True) and 0 (False). So we can use them in `generate` statements to create binary variables easily.
 
-~~~~
+```stata
 <<dd_do>>
 generate price4k = price > 4000
 list price* in 1/5
 <</dd_do>>
-~~~~
+```
 
 Note that this is NOT the same thing as using [`if`][Restricting commands to subsets]. E.g., we see the following error:
 
-~~~~
+```stata
 <<dd_do>>
 generate price4k2 = if price > 4000
 <</dd_do>>
-~~~~
+```
 
 Now, `price4k` takes on values 1 and 0 depending on whether the conditional statement was true.
 
 For a slightly more complicated example, lets create a dummy variable representing cheap cars. There are two possible definitions of cheap cars - cars
 which have a low cost, or cars which have low maintenance costs (high mileage and low repairs).
 
-~~~~
+```stata
 <<dd_do>>
 generate cheap = price < 3500 | (rep78 <= 2 & mpg > 20)
 list make price rep78 mpg if cheap == 1
 <</dd_do>>
-~~~~
+```
 
 The `list` commands conditions on `cheap == 1` because again, the conditional statement will return 1 for true and 0 for false. We see 6 cheap cars;
 the Chevette and Zephyr are cheap because of their cost, whereas the other four cars are cheap because of the maintenance costs.
@@ -221,24 +221,24 @@ While you cannot access these System Variables normally (e.g. they don't appear 
 conditional statements. For example, we've seen that `list` can use `in` to restrict the rows it outputs, and we've seen that it can use `if` to
 choose conditionally. We can combine these:
 
-~~~~
+```stata
 <<dd_do>>
 list make in 1/2
 list make if _n <= 2
 <</dd_do>>
-~~~~
+```
 
 A more useful example is to save the initial row numbering in your data. When we discuss [sorting][sorting] later, it may be useful to be able to
 return to the original ordering. Since `_n` changes when the data is re-sorted, if we save the initial row numbers to a permanent variable, we can
 always re-sort by it later. `_N` is slightly less useful but can be used similarly.
 
-~~~~
+```stata
 <<dd_do>>
 generate row = _n
 generate totalobs = _N
 list row totalobs in 1/5
 <</dd_do>>
-~~~~
+```
 
 ### Extensions to generate
 
@@ -259,20 +259,20 @@ help egen
 [Earlier][generating new variables] we created the `weight2` variable which changed the units on weight from pounds to tons. What if, instead of
 creating a new variable, we tried to just change the existing `weight` variable.
 
-~~~~
+```stata
 <<dd_do>>
 generate weight = weight/2000
 <</dd_do>>
-~~~~
+```
 
 Here Stata refuses to proceed since `weight` is already defined. To overwrite `weight`, we'll instead need to use the `replace` command.
 
-~~~~
+```stata
 <<dd_do>>
 replace weight = weight/2000
 list weight in 1/5
 <</dd_do>>
-~~~~
+```
 
 `replace` features syntax identical to `generate`.^[`generate` has a few features we do not discuss which `replace` does not support. Namely,
 `generate` can set the [type][describing the data] manually (instead of letting Stata choose the best type [automatically][compressing data]), and
@@ -283,11 +283,11 @@ needed for `replace`.]
 
 (We're going to reload the `auto` data set at this point to ensure all data is as originally saved.)
 
-~~~~
+```stata
 <<dd_do>>
 sysuse auto, clear
 <</dd_do>>
-~~~~
+```
 
 One frequent task is recoding variables. This can be "binning" continuous variables into a few categories, re-ordering an ordinal variables, or
 collapsing categories in an already-categorical variable. There are also multi-variable versions; e.g. combining multiple variables into one.
@@ -311,31 +311,31 @@ replace weight = . in 49
 What would happen if our data was shuffled prior to running this command? It would no longer be applied to the correct row. Therefore, it will be
 safer to use a [conditional statement][restricting commands to subsets] to identify the row corresponding to `"Pont. Grand Prix"`.
 
-~~~~
+```stata
 <<dd_do>>
 replace weight = . if make == "Pont. Grand Prix"
 list make weight if make == "Pont. Grand Prix"
 <</dd_do>>
-~~~~
+```
 
 Now, we'll return to generating the categorical weight variable. First, we'll generate the new variable to store this information.
 
-~~~~
+```stata
 <<dd_do>>
 generate weight_cat = 1
 tab weight_cat
 <</dd_do>>
-~~~~
+```
 
 Without any conditional statements, every observation's `weight_cat` is set to 1. We'll let the 1 represent the "light" category, so next we'll replace
 it with 2 for cars in the "medium" category.
 
-~~~~
+```stata
 <<dd_do>>
 replace weight_cat = 2 if weight >= 2000 & weight < 4000
 tab weight_cat
 <</dd_do>>
-~~~~
+```
 
 Note the choice of `>=` instead of `>` and `<` instead of `<=`. As above, we stated that light cars have weight **below** 2000 lbs, so medium cars
 have a value of 2000 **or more** (greater than **or equal**). On the other end, heavy cars have a weght of 4000 lbs **or more**, so medium cars are
@@ -343,12 +343,12 @@ have a value of 2000 **or more** (greater than **or equal**). On the other end, 
 
 Finish with the "heavy" cars
 
-~~~~
+```stata
 <<dd_do>>
 replace weight_cat = 3 if weight >= 4000
 tab weight_cat
 <</dd_do>>
-~~~~
+```
 
 When using less than/greater than conditinal statements to split a variable into groups, you always want to ensure that when the two "endpoints" are
 the same, one uses strictly less/more, and the other uses "or equal". If both use "or equal", you'll get inconsistent results for exact values. If
@@ -358,13 +358,13 @@ weight of 4000 would not fall into either [and its `weight_cat` would stay 1, a 
 
 Lastly, we'll add some nice labels.
 
-~~~~
+```stata
 <<dd_do>>
 label define weight_cat 1 "Light" 2 "Medium" 3 "Heavy"
 label values weight_cat weight_cat
 tab weight_cat
 <</dd_do>>
-~~~~
+```
 
 There's one additional complication. Stata represents missing values by `.`, and `.` has a value of positive infinity. That means that
 
@@ -378,20 +378,20 @@ some data management tasks.
 
 The complication referred to can be seen in the row corresponding to the Pont. Grand Prix
 
-~~~~
+```stata
 <<dd_do>>
 list make weight weight_cat in 46/50
 <</dd_do>>
-~~~~
+```
 
 Even though the Grand Prix has no weight, it is categorized as "Heavy"
 
-~~~~
+```stata
 <<dd_do>>
 replace weight_cat = . if missing(weight)
 tab weight_cat, missing
 <</dd_do>>
-~~~~
+```
 
 The `missing()` function returns true for each row with a missing value, and false for each row with an observed value, for the variable inside the
 parantheses (in this case, `weight`).
@@ -485,13 +485,13 @@ command. In general, you should avoid discarding data as you never know when you
 
 If the conditional logic we want to use involves subsets of the data, we could use this to give us results within each group.
 
-~~~~
+```stata
 <<dd_do>>
 summarize price
 summarize price if foreign == 0
 summarize price if foreign == 1
 <</dd_do>>
-~~~~
+```
 
 Keep track of the number of observations, "Obs", to see that the second and third commands are in fact operating on the subsets. We see here that
 American cars are cheaper on average^[Note that this is not a statistical claim, we would have to do a two-sample t-test to make any statistical
@@ -504,11 +504,11 @@ would take 6 commands (values 1 through 5 and `.`)!
 
 Instead, we can use `by` and `bysort` to perform the same operation over each unique value in a variable. For example, we could repeat the above with:
 
-~~~~
+```stata
 <<dd_do>>
 by foreign: summ price
 <</dd_do>>
-~~~~
+```
 
 There is a strong assumption here that the data is already sorted by the variables we are splitting `by` on (e.g. `foreign`). If `foreign` were not
 sorted (or if you simply did not want to check/assume it was), you could instead use
@@ -525,20 +525,20 @@ Before running these commands, consider generating a [original ordering variable
 `bysort`'s variables cannot be conditional statements, so if you wanted to for example get summaries by low and high mileage cars, you'd need to
 generate a dummy variable first.
 
-~~~~
+```stata
 <<dd_do>>
 gen highmileage = mpg > 20
 bysort highmileage: summ price
 <</dd_do>>
-~~~~
+```
 
 `bysort` can take two or more variables, and performs its commands within each unique combination of the variable. For example,
 
-~~~~
+```stata
 <<dd_do>>
 bysort foreign highmileage: summ price
 <</dd_do>>
-~~~~
+```
 
 When specifying `bysort`, you can optionally specify a variable to sort on but not to group by. For example, let's say your data consisted of doctors
 visits for patients, where patients may have more than one appointment. You want to generate a variable indicating whether a visit is the first by the
@@ -569,11 +569,11 @@ drop if <conditional>
 
 Note that these *cannot* be combined:
 
-~~~~
+```stata
 <<dd_do>>
 drop turn if mpg > 20
 <</dd_do>>
-~~~~
+```
 
 `keep` removes all variables except the listed variables, or removes any row which the conditional does not return true.
 
@@ -586,22 +586,22 @@ detection and correction easier. The most basic command is `duplicates report`, 
 built-in "bplong" data. This data contains 120 patients (`patient`) with measures of blood pressure (`bp`) at two different time points (`when`, a
 Before and After), and some descriptive variables (`sex` and `agegrp`).
 
-~~~~
+```stata
 <<dd_do>>
 sysuse bplong, clear
 duplicates report
 <</dd_do>>
-~~~~
+```
 
 This report is not very interesting; it reports that there are 240 observations which have 1 copy (e.g. are unique), and hence no surplus. Given that
 each row should be unique (just in patient ID and before/after alone), this is not surprising. Let's instead look at the duplicates just for `bp` and
 `when`:
 
-~~~~
+```stata
 <<dd_do>>
 duplicates report bp when
 <</dd_do>>
-~~~~
+```
 
 Here we have some duplicates. First, there are 23 observations which are fully unique. All other observations have repeats to some extent.
 
@@ -633,33 +633,33 @@ generating a [original ordering variable][system variables] first.
 
 We'll switch back to "auto" first.
 
-~~~~
+```stata
 <<dd_do>>
 sysuse auto, clear
 gen order = _n
 <</dd_do>>
-~~~~
+```
 
 The `gsort` function takes a list of variables to order by.
 
-~~~~
+```stata
 <<dd_do>>
 gsort rep78 price
 list rep78 price in 1/5
 <</dd_do>>
-~~~~
+```
 
 Stata first sorts the data by `rep78`, ascending (so the lowest value is in row 1). Then within each set of rows that have a common value of `rep78`,
 it sorts by `price`.
 
 You can append "+" or "-" to each variable to change whether it is ascending or descending. Without a prefix, the variable is sorted ascending.
 
-~~~~
+```stata
 <<dd_do>>
 gsort +rep78 -price
 list rep78 price in 1/5
 <</dd_do>>
-~~~~
+```
 
 Recall that missing values (`.`) are [larger than any other values][conditional variable generation]. When sorting with missing values, they follow
 this rule as well. If you want to treat missing values as smaller than all other values, you can pass the `mfirst` option to `gsort`. Note this does
@@ -692,28 +692,28 @@ Both commands can take the options `replace` (to replace the existing variable w
 recommend always using `gen` to double-check that the conversion worked as expected, then using `drop`, `rename` and `order` to replace the existing
 variable.
 
-~~~~
+```stata
 <<dd_do>>
 desc mpg
 tostring mpg, gen(mpg2)
 desc mpg2
 list mpg* in 1/5
 <</dd_do>>
-~~~~
+```
 
 Now that the new string is correct, we can replace the existing `mpg`.
 
-~~~~
+```stata
 <<dd_do>>
 drop mpg
 rename mpg2 mpg
 order mpg, after(price)
 <</dd_do>>
-~~~~
+```
 
 Let's go the other way around:
 
-~~~~
+```stata
 <<dd_do>>
 desc mpg
 destring mpg, gen(mpg2)
@@ -723,7 +723,7 @@ drop mpg
 rename mpg2 mpg
 order mpg, after(price)
 <</dd_do>>
-~~~~
+```
 
 And we're back to the original set-up.^[If you are sharp-eyed, you may have noticed that the original `mpg` was an "int" whereas the final one is a
 "byte". If we had called [`compress`][compressing data] on the original data, it would have done that type conversion anyways - so we're
@@ -732,21 +732,21 @@ ok!]
 When using `destring` to convert a string variable (that it storing numeric data as strings - "13", "14") to a numeric variable, if there are *any*
 non-numeric entries, `destring` will fail. For example, lets replace one the car "make" with a numeric.
 
-~~~~
+```stata
 <<dd_do>>
 replace make = "1" in 1
 destring make, gen(make2)
 <</dd_do>>
-~~~~
+```
 
 We must pass the `force` option. With this option, any strings which have non-numeric variables will be marked as missing.
 
-~~~~
+```stata
 <<dd_do>>
 destring make, gen(make2) force
 tab make2, mi
 <</dd_do>>
-~~~~
+```
 
 `tostring` also accepts the `force` option when using `replace`, we recommend instead to **never** use `replace` with `tostring` (you probably should
 not use it with `destring` either!).
@@ -761,17 +761,17 @@ We'll switch to the "hbp2" data set from the Stata website, records some blood p
 changes! You will not need any modifications you've made to other built-in datasets going forward [except `census9` from [Exercise 3][exercise 3]],
 but if you do want to save it, do so first!)
 
-~~~~
+```stata
 <<dd_do>>
 webuse hbp2, clear
 tab sex, missing
 desc sex
 <</dd_do>>
-~~~~
+```
 
 The `sex` variable is a string with two values. First, let's create a numeric with value labels version manually.
 
-~~~~
+```stata
 <<dd_do>>
 gen male = sex == "male"
 label define male 0 "female" 1 "male"
@@ -781,42 +781,42 @@ replace male = . if sex == ""
 tab male, missing
 tab male, missing nolabel
 <</dd_do>>
-~~~~
+```
 
 Instead, we can easily use `encode`:
 
-~~~~
+```stata
 <<dd_do>>
 encode sex, gen(sex2)
 tab sex2, missing
 tab sex2, missing nolabel
 <</dd_do>>
-~~~~
+```
 
 However, we see that `encode` starts numbering at 1 instead of 0, which is not ideal for dummy variables. To get around this, we can create our value
 label manually first, then pass it as an argument to `encode`.
 
-~~~~
+```stata
 <<dd_do>>
 label define manualsex 0 "female" 1 "male"
 encode sex, gen(sex3) label(manualsex)
 tab sex3, missing
 tab sex3, missing nolabel
 <</dd_do>>
-~~~~
+```
 
 This can be extended to allow any sort of ordering desired. For this trivial binary example, it might actually be faster to use `gen` and do it
 manually, but for a variable with a large number of categories, this is much easier.
 
 `decode` works in the reverse, creating a string out of a numeric vector with labels attached to it.
 
-~~~~
+```stata
 <<dd_do>>
 decode sex3, gen(sex4)
 desc sex4
 tab sex4, missing
 <</dd_do>>
-~~~~
+```
 
 `decode` will fail if its target does not have value labels attached.
 
@@ -835,13 +835,13 @@ full list in `help string functions`, but below we list a few commonly used ones
 
 These are used inside `gen` and `replace`, e.g.
 
-~~~~
+```stata
 <<dd_do>>
 gen sexupper = strupper(sex)
 gen sexinitial = substr(sexupper, 1, 1)
 list sex sexupper sexinitial in 1/5
 <</dd_do>>
-~~~~
+```
 
 ## Exercise 5
 
@@ -874,14 +874,14 @@ using data does not exist in the master, the new variable is added to the append
 is easiest to visualize. There are two data sets on [Stata's website][stata website data] which we can append, "odd" and
 "even".
 
-~~~~
+```stata
 <<dd_do>>
 webuse odd, clear
 list
 webuse even
 list
 <</dd_do>>
-~~~~
+```
 
 It does not truly matter which data set is the master data and which is the using data (it will later in [match-merging][match-merging data]), it will
 only affect the sorted order (the data in master is sorted first). The syntax is simply
@@ -890,13 +890,13 @@ only affect the sorted order (the data in master is sorted first). The syntax is
 append using <using data>
 ```
 
-~~~~
+```stata
 <<dd_do>>
 webuse even
 append using http://www.stata-press.com/data/r16/odd
 list
 <</dd_do>>
-~~~~
+```
 
 (We must specify the complete path to the data instead of the `webuse` shorthand of just the data name. Of course, with real data that you locally
 have on your computer, you follow the [working directory][working directory] rules; if the file exists in your working directory you just give the
@@ -932,14 +932,14 @@ the master data and town is the using data).
 We'll use data sets off Stata's website again to demonstrate, specifically the "autosize" and "autocost" data which splits the "auto" data into two
 pieces.
 
-~~~~
+```stata
 <<dd_do>>
 webuse autosize, clear
 list in 1/5
 webuse autocost
 list in 1/5
 <</dd_do>>
-~~~~
+```
 
 Now we can perform the merge using the syntax.
 
@@ -950,12 +950,12 @@ merge 1:1 <variables to match on> using <using data set>
 All that needs to be specified is the variable to match cases by and the name of the data set with variables to be added. We could replace `1:1` with
 `m:1` or `1:m` as desired.
 
-~~~~
+```stata
 <<dd_do>>
 merge 1:1 make using http://www.stata-press.com/data/r16/autosize
 list in 3/6
 <</dd_do>>
-~~~~
+```
 
 (Again, we use the full path but for local files, following [working directory][working directory] rules.)
 
@@ -1023,12 +1023,12 @@ reshape wide X, i(ID) j(Index)
 
 As an example, we'll use the built-in data set "bplong"
 
-~~~~
+```stata
 <<dd_do>>
 sysuse bplong, clear
 list in 1/5
 <</dd_do>>
-~~~~
+```
 
 Each patient has two rows representing their before and after measurements. `when` indicates which time period the measurement occurs in, and `bp` is
 the only time-varying variable (both `sex` and `agegrp` are constant, presumably the "Before" and "After" occur within a short time period such that
@@ -1040,12 +1040,12 @@ neither of those can change). Let's identify the three components
 
 Putting this together,
 
-~~~~
+```stata
 <<dd_do>>
 reshape wide bp, i(patient) j(when)
 list in 1/5
 <</dd_do>>
-~~~~
+```
 
 Each row represents a single patient, and `bp1` and `bp2` represent the before and after measurements.
 
@@ -1057,12 +1057,12 @@ Let's generate the command to convert back to long.
 
 The command is identical! Just swap `wide` for `long`.
 
-~~~~
+```stata
 <<dd_do>>
 reshape long bp, i(patient) j(when)
 list in 1/5
 <</dd_do>>
-~~~~
+```
 
 The variables are slightly out of order, but we've completely recovered the original data.
 
@@ -1082,7 +1082,7 @@ wanted to save the "before" and "after" labels? Do note that thankfully Stata sa
 If you do want to save the text instead of the count, you need to use strings. We'll use [`decode`][Converting strings into labeled numbers] to
 convert to a string, then use that as the jvar.
 
-~~~~
+```stata
 <<dd_do>>
 decode when, gen(when2)
 drop when
@@ -1090,12 +1090,12 @@ rename when2 when
 reshape wide bp, i(patient) j(when) string
 list in 1/5
 <</dd_do>>
-~~~~
+```
 
 Note the `string` option. When converting back to long, you'll need to `encode` the string to get it back to numeric.
 
 
-~~~~
+```stata
 <<dd_do>>
 reshape long
 desc when
@@ -1104,7 +1104,7 @@ drop when
 rename when2 when
 desc when
 <</dd_do>>
-~~~~
+```
 
 A few notes:
 

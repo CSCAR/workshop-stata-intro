@@ -66,11 +66,11 @@ version
 
 The following should appear in the Results pane:
 
-~~~~
+```stata
 <<dd_do>>
 version
 <</dd_do>>
-~~~~
+```
 
 The first line proceeded by the `.` indicates the command that was written, `version`, and the rest is the output. Here, I am running Stata version
 17.0 (your version may vary).
@@ -200,13 +200,13 @@ Once the lines are in the editor, highlight the commands (you do not need to hig
 includes part of every line you want run) and press the "Execute/Do" (on Windows) or "Do" (on Mac) button. You should see the following appear in your
 Results pane.
 
-~~~~
+```stata
 <<dd_do>>
 sysuse auto, clear
 summarize price
 tabulate foreign
 <</dd_do>>
-~~~~
+```
 
 We will cover in later sections what each of these commands does ([`sysuse`][built-in data], [`summarize`][summarizing the data],
 [`tabulate`][labeling values]).
@@ -220,39 +220,39 @@ way).
 
 First, to comment out an entire line, precede it by `*`:
 
-~~~~
+```stata
 <<dd_do>>
 * This is a comment
 <</dd_do>>
-~~~~
+```
 
 Second, you can add a comment to the end of a line with `//`
 
-~~~~
+```stata
 <<dd_do>>
 version // Returns the Stata version number
 // You can also use it to comment out an entire line.
 <</dd_do>>
-~~~~
+```
 
 There must be a space before the `//` if it comes after a command:
 
-~~~~
+```stata
 <<dd_do>>
 version// Returns the Stata version number
 <</dd_do>>
-~~~~
+```
 
 Thirdly, you can comment out a section by wrapping it in `/\*` and `\*/`
 
-~~~~
+```stata
 <<dd_do>>
 /* Here's a several
 line comment.
 It just keeps going. */
 summarize /* comment in the middle of a command! */ price
 <</dd_do>>
-~~~~
+```
 
 Note that when a command wraps to more than one line in the Results pane (either due to a manual line break like this or a command that's too wide for
 the Results pane), the prefix changes from `.` to `>` to indicate that its all one command.
@@ -260,12 +260,12 @@ the Results pane), the prefix changes from `.` to `>` to indicate that its all o
 Finally, there's the special comment, `///`. Stata commands must be on a single line. However, complicated commands may get very long, such that its
 hard to read them on a single line. Using `///` instead of `//` allows wrapping onto the next line.
 
-~~~~
+```stata
 <<dd_do>>
 summarize ///
 price
 <</dd_do>>
-~~~~
+```
 
 As with `//`, there needs to be a space before the `///`.
 

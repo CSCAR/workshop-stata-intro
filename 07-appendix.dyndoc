@@ -49,25 +49,25 @@ webuse census9, clear
 
 1:
 
-~~~~
+```stata
 <<dd_do>>
 webuse census9, clear
 save mycensus9
 <</dd_do>>
-~~~~
+```~
 
 2:
 
-~~~~
+```stata
 <<dd_do>>
 rename drate deathrate
 label variable deathrate "Death rate per 10,000"
 <</dd_do>>
-~~~~
+```
 
 3:
 
-~~~~
+```stata
 <<dd_do>>
 tab region
 label list cenreg
@@ -77,15 +77,15 @@ label drop cenreg
 label list
 tab region
 <</dd_do>>
-~~~~
+```
 
 4:
 
-~~~~
+```stata
 <<dd_do>>
 save, replace
 <</dd_do>>
-~~~~
+```
 
 ### Exercise 4 Solution
 
@@ -96,11 +96,11 @@ detected.
 
 2:
 
-~~~~
+```stata
 <<dd_do>>
 codebook, compact
 <</dd_do>>
-~~~~
+```
 
 `deathrate` and `medage` both have less than 50 unique values. This is due to
 both being heavily rounded. If we saw more precision, there would be more unique
@@ -108,11 +108,11 @@ entires.
 
 3:
 
-~~~~
+```stata
 <<dd_do>>
 codebook, problems
 <</dd_do>>
-~~~~
+```
 
 This just flags spaces (" ") in the data. Not a real problem!
 
@@ -122,17 +122,17 @@ This just flags spaces (" ") in the data. Not a real problem!
 
 1:
 
-~~~~
+```stata
 <<dd_do>>
 gen deathperc = deathrate/10000
 label variable deathperc "Percentage of population deceeased in 1980"
 list death* in 1/5
 <</dd_do>>
-~~~~
+```
 
 2:
 
-~~~~
+```stata
 <<dd_do>>
 gen agecat = 1 if medage < .
 replace agecat = 2 if medage > 26.2 & medage <= 30.1
@@ -145,24 +145,24 @@ label define agecat_label 1 "Significantly below national average" ///
 label values agecat agecat_label
 tab agecat, mi
 <</dd_do>>
-~~~~
+```
 
 We have no missing data (seen with `summarize` and `codebook` in the previous
 exercise) but it's good practice to check for them anyways.
 
 3:
 
-~~~~
+```stata
 <<dd_do>>
 bysort agecat: summarize deathrate
 <</dd_do>>
-~~~~
+```
 
 We see that the groups with the higher median age tend to have higher deathrates.
 
 4:
 
-~~~~
+```stata
 <<dd_do>>
 preserve
 gsort -deathrate
@@ -175,13 +175,13 @@ gsort +medage
 list state medage in 1
 restore
 <</dd_do>>
-~~~~
+```
 
 5:
 
-~~~~
+```stata
 <<dd_do>>
 encode state2, gen(statecodes)
 codebook statecodes
 <</dd_do>>
-~~~~
+```

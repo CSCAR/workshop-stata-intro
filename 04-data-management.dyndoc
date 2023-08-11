@@ -2,11 +2,11 @@
 
 Throughout this chapter, we'll be using the "auto" data set which is distributed with Stata. It can be loaded via
 
-~~~~
+```stata
 <<dd_do>>
 sysuse auto
 <</dd_do>>
-~~~~
+```
 
 You can reload it as necessary (if you modify it and want the original) by re-running this with the `clear` option. Feel free to make frequent use of
 [`preserve` and `restore`][Temporarily preserving and restoring data].
@@ -50,19 +50,19 @@ later to re-order variables.
 Finally, you often don't need to give the entire name of the variable, just enough characters for Stata to be able to uniquely identify it (similar to
 [short names][short commands]). We'll see in a minute more about the `describe` command, but for example,
 
-~~~~
+```stata
 <<dd_do>>
 describe headr
 <</dd_do>>
-~~~~
+```
 
 Stata will error if you don't use enough characters:
 
-~~~~
+```stata
 <<dd_do>>
 describe t
 <</dd_do>>
-~~~~
+```
 
 Be very careful with this approach. I only recommend it's use when exploring the data using the Command window; when writing a Do-file, use the full
 variable name to prevent errors!
@@ -71,11 +71,11 @@ variable name to prevent errors!
 
 The first command you should run is `describe`.
 
-~~~~
+```stata
 <<dd_do>>
 describe
 <</dd_do>>
-~~~~
+```
 
 This displays a large amount of information, so let's break in down.
 
@@ -102,29 +102,29 @@ Finally, if the data is sorted, `describe` will provide information about the so
 
 `describe` can also be used on a per variable basis:
 
-~~~~
+```stata
 <<dd_do>>
 describe mpg
 describe trunk displacement
 <</dd_do>>
-~~~~
+```
 
 If you have a very large number of variables you may wish to suppress the table of variables entirely:
 
-~~~~
+```stata
 <<dd_do>>
 describe, short
 <</dd_do>>
-~~~~
+```
 
 Alternatively, the `simple` option returns only the names of the variables, in column-dominant order (meaning you read down the columns not across the
 rows).
 
-~~~~
+```stata
 <<dd_do>>
 describe, simple
 <</dd_do>>
-~~~~
+```
 
 
 ## Compressing data
@@ -142,13 +142,13 @@ a variable which is a float takes on only values 1 through 10, it is replaced by
 The `memory` command lets us see the size of our data, particularlly the first entry of "Data" under "Used" shows that we start with 3,182 bytes or
 roughly 3Kb.
 
-~~~~
+```stata
 <<dd_do>>
 memory
 compress
 memory
 <</dd_do>>
-~~~~
+```
 
 We see here a very modest saving (370 bytes, about 12%), but sometimes you can see much more significant gains.
 
@@ -186,11 +186,11 @@ choose short, simple, and memorable variable names, since you'll likely be typin
 We can easily add more information with a variable label. If you look at the `describe` output, you'll notice that the auto data set already has
 variable labels applied to it.
 
-~~~~
+```stata
 <<dd_do>>
 describe
 <</dd_do>>
-~~~~
+```
 
 We can see variable `rep78` (an utterly incomprehensible name at first glance, as opposed to `mpg`) has the label "Repair Record 1978". You can apply
 your own variable labels (or overwrite existing by using the command:
@@ -201,22 +201,22 @@ label variable <variable name> "Variable label"
 
 For example:
 
-~~~~
+```stata
 <<dd_do>>
 label variable turn "Some new label for turn"
 describe turn
 <</dd_do>>
-~~~~
+```
 
 To remove a variable label, you can call `label variable <varname>` without a new label to remove the existing one. (Equivalent to `label variable
 <varname> ""`, so passing an empty variable label.)
 
-~~~~
+```stata
 <<dd_do>>
 label variable turn
 describe turn
 <</dd_do>>
-~~~~
+```
 
 ### Labeling values
 
@@ -229,40 +229,40 @@ Stata allows you to store this value labels information within the data set, suc
 instead. Let's take a look at the `foreign` variable. This variable takes on two levels, and we can tabulate it to see how many cars are in each
 category.
 
-~~~~
+```stata
 <<dd_do>>
 tabulate foreign
 <</dd_do>>
-~~~~
+```
 
 Here it appears that `foreign` is stored as two strings, but we know from `describe` that it is not:
 
-~~~~
+```stata
 <<dd_do>>
 describe foreign
 <</dd_do>>
-~~~~
+```
 
 Additionally, if you look at the data through Data Editor or Data Browser, you see that instead of `foreign` being red (as a string) it is blue, as we
 discussed [earlier][colors as variable type].
 
 Let's look at that table ignoring the value labels:
 
-~~~~
+```stata
 <<dd_do>>
 tabulate foreign, nolabel
 <</dd_do>>
-~~~~
+```
 
 Now we see the values which are actually stored.
 
 Look at the `describe` output:
 
-~~~~
+```stata
 <<dd_do>>
 describe foreign
 <</dd_do>>
-~~~~
+```
 
 You'll notice that the "value label" column has `origin` attached to `foreign`. In Stata, the value labels information are *stored separately* from
 the variables. They are two separate components - there is a variable and there is a value label. You connect the value label to a variable to use it.
@@ -279,27 +279,27 @@ label define <label name> <value> "<label>" <value> "<label>" .....
 
 For example, if we wanted to recreate the value label associated with `foreign`:
 
-~~~~
+```stata
 <<dd_do>>
 label define foreign_label 0 "Domestic" 1 "Foreign"
 <</dd_do>>
-~~~~
+```
 
 Value labels exist in the data set, regardless of whether they are attached to any variables, we can see all value labels:
 
-~~~~
+```stata
 <<dd_do>>
 label list
 <</dd_do>>
-~~~~
+```
 
 Here we see the original `origin` as well as our new `foreign_label`. To attach it to the variable `foreign`:
 
-~~~~
+```stata
 <<dd_do>>
 label values foreign foreign_label
 <</dd_do>>
-~~~~
+```
 
 If we wanted to attach a single value label to multiple variables, we could simply provide a list of variables:
 
@@ -310,30 +310,30 @@ label values <var1> <var2> <var3> <label>
 
 To remove the value labels from a variable, use the `label values <variable>` command with no label name following the variable name:
 
-~~~~
+```stata
 <<dd_do>>
 label values foreign
 describe foreign
 <</dd_do>>
-~~~~
+```
 
 You can view all value labels in the data set:
 
-~~~~
+```stata
 <<dd_do>>
 label list
 <</dd_do>>
-~~~~
+```
 
 Note that value labels exist within a data set regardless of whether they are attached to a variable. If there is a label value that you no longer
 want to keep in the data-set, you can drop it:
 
-~~~~
+```stata
 <<dd_do>>
 label drop foreign_label
 label list
 <</dd_do>>
-~~~~
+```
 
 This will *not* remove the value labels from any variables, but they will no longer be active (i.e. if you run `describe` it will still show that the
 value labels are attached, but running `tabulate` will not use them). So in order to completely remove a value label, you'll need to both remove it from
@@ -359,12 +359,12 @@ rename <oldname> <newname>
 
 For example:
 
-~~~~
+```stata
 <<dd_do>>
 rename rep78 repair_record_1978
 describe, simple
 <</dd_do>>
-~~~~
+```
 
 The output truncated the name because it was so long.
 
@@ -387,29 +387,29 @@ rename visit1_* *1
 Finally, you can change a variable name to upper/lower/proper case easily by passing `upper`/`lower`/`proper` as an argument and giving no new
 variable name.
 
-~~~~
+```stata
 <<dd_do>>
 rename length, upper
 describe, simple
 <</dd_do>>
-~~~~
+```
 
 You can also do this for the whole data set with the special variable list `_all`
 
-~~~~
+```stata
 <<dd_do>>
 rename _all, upper
 describe, simple
 rename _all, lower
 <</dd_do>>
-~~~~
+```
 
 ###  Changing variable ordering
 
 The `order` command takes a list of variables and moves them to the front/end/before a certain variable/after a certain variable. The options `first`,
 `last`, `before(<variable>)` and `after(<variable>)` control this.
 
-~~~~
+```stata
 <<dd_do>>
 order foreign // The default is `first`
 describe, simple
@@ -418,7 +418,7 @@ describe, simple
 order mpg trunk, before(displacement)
 describe, simple
 <</dd_do>>
-~~~~
+```
 
 ## Exercise 3
 
@@ -451,11 +451,11 @@ There are numerous ways to look at summary statistics, from obtaining one-number
 
 `summarize` produces basic summary statistics *for numeric variables*.
 
-~~~~
+```stata
 <<dd_do>>
 summarize
 <</dd_do>>
-~~~~
+```
 
 The table reports the total number of non-missing values (`make` appears to be entirely missing because it is non-numeric), the mean (the average
 value), the standard deviation (a measure of how spread out the data is) and the minimum and maximum non-missing^[As we discuss [later][conditional
@@ -477,11 +477,11 @@ Here's some suggestions of how to look at these values.
 
 `summarize` can also take a list of variables, e.g.
 
-~~~~
+```stata
 <<dd_do>>
 summarize t*
 <</dd_do>>
-~~~~
+```
 
 For more detailed information, we can look at the codebook. `codebook` works similarly to `describe` and `summarize` in the sense that without any
 additional arguments, it displays information on every variable; you can pass it a list of variables to only operate on those. Because `codebook`'s
@@ -490,34 +490,34 @@ earlier!
 
 First, categorical data:
 
-~~~~
+```stata
 <<dd_do>>
 sysuse auto, clear
 codebook rep78
 <</dd_do>>
-~~~~
+```
 
 We see that `rep78` takes on five unique values, as well as having some missing values (`.`). If the unique values is more than expected, it's
 something to investigate.
 
 Next, continuous variables:
 
-~~~~
+```stata
 <<dd_do>>
 codebook price
 <</dd_do>>
-~~~~
+```
 
 We still see the number of unique values reported, but here every observation has a unique value (74 unique values, 74 rows in the data). There is no
 missing data. The percentiles should be checked to see if they're reasonable, if 90% of the cars had a price under $100, something's not right.
 
 Finally, string variables:
 
-~~~~
+```stata
 <<dd_do>>
 codebook make
 <</dd_do>>
-~~~~
+```
 
 We get less information here, but still useful to check that the data is as expected. There are no empty strings nor any repeated strings. The warning
 about "embedded blanks" is spaces; it's telling us that there are spaces in some of the cars (e.g. "Dodge Magnum"). The reason it is a warning is that
@@ -525,19 +525,19 @@ about "embedded blanks" is spaces; it's telling us that there are spaces in some
 
 Two options for `codebook` which come in handy:
 
-~~~~
+```stata
 <<dd_do>>
 codebook, compact
 <</dd_do>>
-~~~~
+```
 
 `compact` shows a reduced size version, most useful for the "Unique" column. (Useful if that's the only thing you're running the codebook for.)
 
-~~~~
+```stata
 <<dd_do>>
 codebook, problems
 <</dd_do>>
-~~~~
+```
 
 This reports potential issues Stata has discovered in the data. In this data, neither are really concerns. (We can run `compress`, but this isn't a
 "problem" so much as a suggestion. We already saw above the concern about "embedded blanks.") More serious problems that it can detect include:
