@@ -1,11 +1,10 @@
 project:
   type: book
   pre-render: make quarto-prerender
+  output-dir: docs
 
 book:
   title: "Introduction to Stata"
-  author: "CSCAR Staff"
-  date: date-modified
   chapters:
     - index.qmd
     - 02-the-basics-of-stata.qmd
@@ -17,4 +16,5 @@ book:
 
 format:
   html:
-    theme: flatly # Choose from https://bootswatch.com
+    theme: cosmo
+    callout-appearance: simple

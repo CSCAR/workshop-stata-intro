@@ -1,3 +1,9 @@
+---
+engine: knitr
+---
+
+Last modified: `r Sys.Date()`
+
 # Preface
 
 These notes are split into four primary sections:

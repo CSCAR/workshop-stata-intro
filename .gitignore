@@ -1,13 +1,8 @@
 .Rproj.user
 .Rhistory
 .RData
-_publish.R
-_book
-_bookdown_files
 rsconnect
-0*.Rmd
 *.log
 .DS_Store
 mycensus9.dta
-
 /.quarto/
