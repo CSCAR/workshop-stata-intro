@@ -1,6 +1,6 @@
-dyndocs = 02-the-basics-of-stata.qmd	03-working-with-data-sets.qmd \
-					04-data-management.qmd	05-data-manipulation.qmd	\
-					06-programming.qmd 07-appendix.qmd
+dyndocs = 01-the-basics-of-stata.qmd	02-working-with-data-sets.qmd \
+					03-data-management.qmd	04-data-manipulation.qmd	\
+					05-programming.qmd appendix.qmd
 
 
 .PHONY:default

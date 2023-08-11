@@ -1,8 +1,8 @@
-# Appendix
+# Appendix {.unnumbered}
 
-## Solutions
+## Solutions {.unnumbered}
 
-### Exercise 1 Solution
+### Exercise 1 Solution {.unnumbered}
 
 [Exercise 1][Exercise 1]
 
@@ -24,7 +24,7 @@ sysuse sandstone
 4:
 If the working directory isn't convenient, change it using the dialogue box. Then, `save sandstone`.
 
-### Exercise 2 Solution
+### Exercise 2 Solution {.unnumbered}
 
 [Exercise 2][Exercise 2]
 
@@ -43,7 +43,7 @@ webuse census9, clear
 
 5: `compress`. Nothing saved! Because Stata already did it before posting it!
 
-### Exercise 3 Solution
+### Exercise 3 Solution {.unnumbered}
 
 [Exercise 3][Exercise 3]
 
@@ -87,7 +87,7 @@ save, replace
 <</dd_do>>
 ```
 
-### Exercise 4 Solution
+### Exercise 4 Solution {.unnumbered}
 
 [Exercise 4][Exercise 4]
 
@@ -116,7 +116,7 @@ codebook, problems
 
 This just flags spaces (" ") in the data. Not a real problem!
 
-### Exercise 5 Solution
+### Exercise 5 Solution {.unnumbered}
 
 [Exercise 5][Exercise 5]
 

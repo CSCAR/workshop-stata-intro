@@ -4,17 +4,17 @@ engine: knitr
 
 Last modified: `r Sys.Date()`
 
-# Preface
+# Preface {.unnumbered}
 
 These notes are split into four primary sections:
 
-- [Chapter 2: The Basics of Stata](02-the-basics-of-stata.html) - Interacting
+- [Chapter 1: The Basics of Stata](01-the-basics-of-stata.html) - Interacting
   with Stata.
-- [Chapter 3: Working with Data Sets](03-working-with-data-sets.html) -
+- [Chapter 2: Working with Data Sets](02-working-with-data-sets.html) -
   Importing, opening, and saving data sets.
-- [Chapter 4: Data Management](04-data-management.html) - The basics of
+- [Chapter 3: Data Management](03-data-management.html) - The basics of
   maintaining and exploring a data set.
-- [Chapter 5: Data Manipulation](05-data-manipulation.html) - Creating and
+- [Chapter 4: Data Manipulation](04-data-manipulation.html) - Creating and
   modifying variables and other ways of manipulating your data.
 
 These sections will generally be presented in sequence. The discussion will
@@ -24,11 +24,11 @@ provide feedback or voice concerns.
 
 There are two additional sections:
 
-- [Chapter 6: Programming & Advanced Topics](06-programming.html) - Topics for
+- [Chapter 5: Programming & Advanced Topics](05-programming.html) - Topics for
   users who wish to move beyond the basics.
-- [Appendix](07-appendix.html) - Houses the exercise solutions.
+- [Appendix](06-appendix.html) - Houses the exercise solutions.
 
-## Creation of this document
+## Creation of this document {.unnumbered}
 
 These notes are published using [Quarto](https://quarto.org). The Stata code is
 first rendered using a Stata [dynamic
@@ -38,9 +38,9 @@ source code for these notes can be found at
 
 All images should link to full-size versions to see detail if needed.
 
-## Contact information
+## Contact information {.unnumbered}
 
-### CSCAR
+### CSCAR {.unnumbered}
 
 <http://cscar.research.umich.edu/>
 
@@ -60,7 +60,7 @@ The current contact for questions about the notes: Josh Errickson
 (jerrick@umich.edu).
 
 
-## Acknowledgments
+## Acknowledgments {.unnumbered}
 
 These notes have evolved over the years thanks to many CSCAR statisticians,
 including Josh Errickson, Giselle Kolenic, Brady West, Heidi Reichert, and
