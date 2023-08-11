@@ -5,6 +5,8 @@ project:
 
 book:
   title: "Introduction to Stata"
+  sidebar:
+    title: "Introduction to Stata"
   chapters:
     - index.qmd
     - 01-the-basics-of-stata.qmd

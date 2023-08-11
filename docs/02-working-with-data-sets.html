@@ -235,28 +235,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="built-in-data" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="built-in-data"><span class="header-section-number">2.1</span> Built-in data</h2>
-<p>Before we turn to using your own data, it is useful to know that Stata comes with a collection of sample data sets which you can use to try the Stata commands. Additionally, most (if not all) of the examples in [Stata help][stata help] will use these data sets.</p>
+<p>Before we turn to using your own data, it is useful to know that Stata comes with a collection of sample data sets which you can use to try the Stata commands. Additionally, most (if not all) of the examples in <a href="01-the-basics-of-stata.html#stata-help">Stata help</a> will use these data sets.</p>
 <p>To see a list of the built-in data sets, use</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">sysuse</span> <span class="ot">dir</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  auto.dta        census.dta      network1a.dta   tsline1.dta</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  auto16.dta      citytemp.dta    nlsw88.dta      tsline2.dta</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  auto2.dta       citytemp4.dta   nlswide1.dta    uslifeexp.dta</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  autornd.dta     educ99gdp.dta   pop2000.dta     uslifeexp2.dta</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  bplong.dta      gnp96.dta       sandstone.dta   voter.dta</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  bpwide.dta      lifeexp.dta     sp500.dta       xtline1.dta</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  cancer.dta      network1.dta    surface.dta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  auto.dta        census.dta      network1.dta    surface.dta</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  auto16.dta      citytemp.dta    network1a.dta   tsline1.dta</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  auto2.dta       citytemp4.dta   nlsw88.dta      tsline2.dta</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  autornd.dta     educ99gdp.dta   nlswide1.dta    uslifeexp.dta</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  bplong.dta      gnp96.dta       pop2000.dta     uslifeexp2.dta</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  bpwide.dta      lifeexp.dta     sandstone.dta   voter.dta</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  cancer.dta      mycensus9.dta   sp500.dta       xtline1.dta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and use <code>sysuse</code> again to load data, for example the <code>auto</code> data which contains characteristics of various cars from a 1978 Consumer’s Report magazine.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">sysuse</span> auto</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>(1978 automobile <span class="kw">data</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If you make any modifications to your data, Stata will try and protect you by refusing to load a new data set which would dispose of your changes. If you are willing to dispose of your changes, you can either manually do it by calling</p>
-<pre><code>clear</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>or passing it as an option to <code>sysuse</code>,</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">sysuse</span> auto, <span class="kw">clear</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>(1978 automobile <span class="kw">data</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="stata-website-data" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="stata-website-data"><span class="header-section-number">2.1.1</span> Stata Website Data</h3>
-<p>In addition to the data sets distributed with Stata, Stata also makes available a large collection of data sets on their website which can be accessed with the <code>webuse</code> command. These data sets are used as examples in the Manual and can be seen listed as <a href="http://www.stata-press.com/data/r17/">http://www.stata-press.com/data/r17/</a>.</p>
-<pre><code>webuse hiway</code></pre>
+<p>In addition to the data sets distributed with Stata, Stata also makes available a large collection of data sets on their website which can be accessed with the <code>webuse</code> command. These data sets are used as examples in the Manual and can be seen listed as <a href="http://www.stata-press.com/data/r18/" class="uri">http://www.stata-press.com/data/r18/</a>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">webuse</span> hiway</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>webuse</code> supports the <code>clear</code> option as well.</p>
 <p>The exercises in this workshop will be using mostly built-in data sets as it makes distribution easy!</p>
 </section>
@@ -264,38 +264,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="opening-data" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="opening-data"><span class="header-section-number">2.2</span> Opening data</h2>
 <p>As you may have deduced from the <code>sysuse</code> and <code>webuse</code> commands above, the command to load local data is <code>use</code>:</p>
-<pre><code>use &lt;filename&gt;</code></pre>
-<p>As discussed in the [working directory][working directory] section, Stata can see only files in its working directory, so only the name of the file needs to be passed. If the file exists in a different directory, you will need to give the full (or relative path). For example, if your working directory is “C:\\” and the file you are looking for, “mydata”, is in the “Project” subfolder, you could open it with any of the following:</p>
-<pre><code>use C:\Documents\Stata\Project\mydata
-use Project\mydata
-cd Project
-use mydata</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> &lt;filename&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As discussed in the <a href="01-the-basics-of-stata.html#working-directory">working directory</a> section, Stata can see only files in its working directory, so only the name of the file needs to be passed. If the file exists in a different directory, you will need to give the full (or relative path). For example, if your working directory is “C:\\” and the file you are looking for, “mydata”, is in the “Project” subfolder, you could open it with any of the following:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> C:\Documents\Stata\Project\mydata</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> Project\mydata</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>cd Project</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> mydata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Note that if the path (or file name) contains any spaces, you need to wrap the entire thing in quotes:</p>
-<pre><code>use "C:\Documents\Stata\My Project\My Data"</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="st">"C:\Documents\Stata\My Project\My Data"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It is never wrong to use quotes (just not always required), so perhaps that’s a safer option.</p>
 <p>If the location of your file is much different than your working directory, it can be quicker just to use the menu “File -&gt; Open” and use the file open dialog box instead. As with all commands, the <code>use</code> command will be echoed in the Results after using the dialog box, allowing you to add it to a Do-file.</p>
 <p>As with <code>sysuse</code> and <code>webuse</code>, the <code>clear</code> option discards the existing data regardless of unsaved changes.</p>
 <section id="loading-subsets-of-the-data" class="level3" data-number="2.2.1">
 <h3 data-number="2.2.1" class="anchored" data-anchor-id="loading-subsets-of-the-data"><span class="header-section-number">2.2.1</span> Loading subsets of the data</h3>
-<p>You can load only a subset of the data into the program at a time. Generally I would recommend loading the full data and then [discarding][discarding data] the extraneous information. However, if your data is very large, it might be handy to only load in some of it rather than the entire thing. As this is a lesser-used option we won’t go into too much detail, but as an example, if I wanted to load only the variables named “bp”, “heartrate” and “date” from the data set “patientdata”, restricted to male patients, I might use something like</p>
-<pre><code>use bp heartrate date if gender == "male" using patientdata</code></pre>
+<p>You can load only a subset of the data into the program at a time. Generally I would recommend loading the full data and then <a href="04-data-manipulation.html#discarding-data">discarding</a> the extraneous information. However, if your data is very large, it might be handy to only load in some of it rather than the entire thing. As this is a lesser-used option we won’t go into too much detail, but as an example, if I wanted to load only the variables named “bp”, “heartrate” and “date” from the data set “patientdata”, restricted to male patients, I might use something like</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> bp heartrate <span class="fu">date</span> <span class="kw">if</span> gender == <span class="st">"male"</span> <span class="kw">using</span> patientdata</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here, <code>using</code> and <code>if</code> are subcommands, which we will see used more as the day goes on.</p>
-<p>The statement <code>gender == "male"</code> is a conditional statement which only loads male patients. We’ll discuss later about [conditional statements][Restricting commands to subsets].</p>
+<p>The statement <code>gender == "male"</code> is a conditional statement which only loads male patients. We’ll discuss later about <a href="04-data-manipulation.html#restricting-commands-to-subsets">conditional statements</a>.</p>
 <p>Alternatively, if you have a very large data set, you can load in a small chunk of it.</p>
-<pre><code>use patientdata in 1/100</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> patientdata <span class="kw">in</span> 1/100</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This loads just the first 100 rows (<code>a/b</code> is a “numlist” counting from “a” to “b” by integers).</p>
 <p>For further details, see <code>help use</code>, specifically the <a href="https://www.stata.com/manuals/duse.pdf">manual</a> which has the full documentation.</p>
 </section>
 </section>
 <section id="editing-data-manually" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="editing-data-manually"><span class="header-section-number">2.3</span> Editing data manually</h2>
-<p>We will discuss in [Data Manipulation][data manipulation] how to edit your data on a larger scale and in an automated fashion, but Stata does support modifying a spreadsheet of your data similar to Excel. At the top of the main window, you’ll see two buttons, “Data Editor” and “Data Browser”. These open the same new Data window, the only difference is that Stata is protecting you from yourself and if you open the “Data Browser” (or switch to it in the Data window), you cannot modify the data.</p>
+<p>We will discuss in <a href="04-data-manipulation.html">Data Manipulation</a> how to edit your data on a larger scale and in an automated fashion, but Stata does support modifying a spreadsheet of your data similar to Excel. At the top of the main window, you’ll see two buttons, “Data Editor” and “Data Browser”. These open the same new Data window, the only difference is that Stata is protecting you from yourself and if you open the “Data Browser” (or switch to it in the Data window), you cannot modify the data.</p>
 <p>Once in the Data window, you can select cells and edit them as desired. Note that whenever you make a modification in the Data Editor, there is a corresponding command produced which actually performs the modification.</p>
-<pre><code>. replace age = 27 in 11
-(1 real change made)</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">replace</span> age = 27 <span class="kw">in</span> 11</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>(1 <span class="fu">real</span> change made)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="colors-as-variable-type" class="level3" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="colors-as-variable-type"><span class="header-section-number">2.3.1</span> Colors as variable type</h3>
-<p>When viewing the data, the color of each column’s text provides information about the type of variable. We’ll go into more details [later][describing the data] what these types mean. Below, for the <code>auto</code> data, you can see the <code>make</code> variable is red, indicating a string, the <code>foreign</code> variable is blue indicating a variable with an attached [value label][labeling values] and the remainder of the variables are black for numeric.</p>
+<p>When viewing the data, the color of each column’s text provides information about the type of variable. We’ll go into more details <a href="03-data-management.html#describing-the-data">later</a> what these types mean. Below, for the <code>auto</code> data, you can see the <code>make</code> variable is red, indicating a string, the <code>foreign</code> variable is blue indicating a variable with an attached <a href="03-data-management.html#labeling-values">value label</a> and the remainder of the variables are black for numeric.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="./images/datacolors.png"><img src="./images/datacolors.png" class="img-fluid figure-img"></a></p>
@@ -306,11 +306,11 @@ use mydata</code></pre>
 <section id="saving-data" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="saving-data"><span class="header-section-number">2.4</span> Saving data</h2>
 <p>Saving data is done with the <code>save</code> command. There are two variations of running.</p>
-<pre><code>save, replace</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In this first variation, by not giving a file name and passing the <code>replace</code> option, Stata will overwrite whichever file you loaded with <code>use</code>. (It will error if you loaded a file via <code>sysuse</code> or <code>webuse</code>.)</p>
 <p>The second variation takes a file name:</p>
-<pre><code>save newfile
-save newfile, replace</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span> newfile</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span> newfile, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here, <code>save</code> will save a copy named “newfile.dta” in the working directory. You can pass it a full path just like with <code>use</code> to refer to a location outside of the working directory. By default, <code>save</code> will not overwrite existing files, but can be overwritten with the <code>replace</code> option.</p>
 <p>As before, wrap the file name in quotes if it (or the path) includes any spaces.</p>
 <p>Prior to Stata 14, the save format was different. If you need to save a data set in the older format (perhaps to pass to a collaborator who is woefully behind the times), check <code>help saveold</code>.</p>
@@ -318,7 +318,7 @@ save newfile, replace</code></pre>
 <section id="importing-data" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="importing-data"><span class="header-section-number">2.5</span> Importing data</h2>
 <p>The need often arises to import data from another format (such as Excel or SPSS). Stata has a suite of very useful commands for importing data sets having other formats. To see the types of data that Stata can import, select “File -&gt; Import”.</p>
-<p>While there are commands to do the importing (such as <code>import excel file.xlsx</code>), the dialog boxes for importation provide a preview of the imported data, making it easier to ensure that the importation will go smoothly. Just as with <a href="#editing-data-manually">editing the data</a>, after performing an import with the dialog box, the corresponding command is executed in the results window and can be copied in a Do-file for reproducibility.</p>
+<p>While there are commands to do the importing (such as <code>import excel file.xlsx</code>), the dialog boxes for importation provide a preview of the imported data, making it easier to ensure that the importation will go smoothly. Just as with <a href="02-working-with-data-sets.html#editing-data-manually">editing the data</a>, after performing an import with the dialog box, the corresponding command is executed in the results window and can be copied in a Do-file for reproducibility.</p>
 <section id="importing-excel-data" class="level3" data-number="2.5.1">
 <h3 data-number="2.5.1" class="anchored" data-anchor-id="importing-excel-data"><span class="header-section-number">2.5.1</span> Importing Excel data</h3>
 <p>Data stored in Excel can be ported into Stata easily. To make your life easier, make sure the data adheres to these general principals. While technically none of these are “required”, ignoring them will lead to a lot more work down the road!</p>
@@ -347,16 +347,16 @@ save newfile, replace</code></pre>
 <section id="importing-a-csv-file" class="level3" data-number="2.5.2">
 <h3 data-number="2.5.2" class="anchored" data-anchor-id="importing-a-csv-file"><span class="header-section-number">2.5.2</span> Importing a CSV File</h3>
 <p>CSV files (comma separated values) are a very useful format for passing data between software. Files specific for software (e.g.&nbsp;.dta for Stata, .xlsx for Excel, .sav for SPSS) carry a lot of overhead information - very useful when working exclusively within that software, but confusing for other software. The import menu in Stata (and other software) can often address this, but a CSV file bypasses this. Data in CSV format might look like</p>
-<pre><code>id,salary,exprior,market,admin,yearsdg,rank,male
-1,38361.75,0,.72,0,14,2,0
-2,68906,2,1,,31,3,1</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>id,salary,exprior,market,admin,yearsdg,rank,male</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>1,38361.75,0,.72,0,14,2,0</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>2,68906,2,1,,31,3,1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The first row is the variable names, all separated by commas. The 2nd row starts the data, where each variable is again separated by commas. Multiple commas in a row indicate a missing value.</p>
 <p>The downside of CSV files is we lose any auxiliary information, such as descriptive titles, labels etc. Often, if you are obtaining CSV files from an online resource, they will provide a Do-file alongside the data that reads in the CSV file and applies labels, titles, etc. If not you’ll have to do this yourself!</p>
 <p>A CSV files can be imported using “File -&gt; Import -&gt; Text Data (delimited, *.csv, …)”</p>
 <p>Important options include:</p>
 <ul>
 <li><em>Delimiter</em> - There are other _SV types of files, such as tab or white space. Generally you can leave this at Automatic, but may need to be precise if your data has a lot of strings in it.</li>
-<li><em>Treat sequential delimiters as one</em> - If you have missing data, it will appear as <code>5,4,,2,1</code>. If this option is <strong>not</strong> selected, Stata will recognize the missing third entry. On the other hand, if your deliminator is white space, you may have data like <code>3 1    2 5</code>. If you want that to be four variables instead of a bunch of other missing entries, select this option.</li>
+<li><em>Treat sequential delimiters as one</em> - If you have missing data, it will appear as <code>5,4,,2,1</code>. If this option is <strong>not</strong> selected, Stata will recognize the missing third entry. On the other hand, if your deliminator is white space, you may have data like <code>3 1 2 5</code>. If you want that to be four variables instead of a bunch of other missing entries, select this option.</li>
 <li><em>Use first row for variable names</em> - Same as the Excel version.</li>
 </ul>
 </section>
@@ -366,22 +366,22 @@ save newfile, replace</code></pre>
 <p>First, try opening the the data in a word processor and see if it is delimited instead of more complicated (e.g.&nbsp;a CSV file with a different file extension). This is a long shot, but the easiest! If you open it in something like Word, make sure you don’t save it in .doc format! Instead, rename the file “.txt” or “.csv” and try importing it as that.</p>
 <p>Second, see if the software which created the data can write it into Stata (.dta) format. Some software such as R supports this, though some software (such as SPSS) only supports writing to older versions of Stata. You can still try this, though be sure to double check that nothing went wrong, and re-save your data (which saves it as the new save format).</p>
 <p>Finally, see if you can open the data in the other software and export it into CSV or a similar common format.</p>
-<p>If all else fails, there is software Stat Transfer, https://www.stattransfer.com, which can transfer between all sorts of formats with a click, but is not free. Your department or organization may offer access to it.</p>
+<p>If all else fails, there is software Stat Transfer, <a href="https://www.stattransfer.com" class="uri">https://www.stattransfer.com</a>, which can transfer between all sorts of formats with a click, but is not free. Your department or organization may offer access to it.</p>
 </section>
 </section>
 <section id="switching-between-data-sets" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="switching-between-data-sets"><span class="header-section-number">2.6</span> Switching between data sets</h2>
-<p>Here we’ll discuss two ways to switch between data sets. Later we’ll discuss the third way to work with multiple data sets, [merging][Merging Files].</p>
+<p>Here we’ll discuss two ways to switch between data sets. Later we’ll discuss the third way to work with multiple data sets, <a href="04-data-manipulation.html#merging-files">merging</a>.</p>
 <section id="temporarily-preserving-and-restoring-data" class="level3" data-number="2.6.1">
 <h3 data-number="2.6.1" class="anchored" data-anchor-id="temporarily-preserving-and-restoring-data"><span class="header-section-number">2.6.1</span> Temporarily preserving and restoring data</h3>
-<p>Say you want to carry out a destructive operation on your data, temporarily. This could be either to close your data and load another, or to make a change to the current data.For example, say you want to [remove][discarding data] some subset of your observations. One workflow to use would be:</p>
-<pre><code>sysuse auto
-&lt;modify data set as desired&gt;
-save tmp
-&lt;subset data&gt;
-&lt;obtain results&gt;
-use tmp, clear
-&lt;delete the tmp file manually&gt;</code></pre>
+<p>Say you want to carry out a destructive operation on your data, temporarily. This could be either to close your data and load another, or to make a change to the current data.For example, say you want to <a href="04-data-manipulation.html#discarding-data">remove</a> some subset of your observations. One workflow to use would be:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sysuse</span> auto</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>&lt;modify <span class="kw">data</span> <span class="kw">set</span> <span class="kw">as</span> desired&gt;</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span> tmp</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>&lt;subset <span class="kw">data</span>&gt;</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>&lt;obtain results&gt;</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> tmp, <span class="kw">clear</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">delete</span> the tmp file manually&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Alternatively, the <code>preserve</code> and <code>restore</code> commands perform the same set of operations in a more automated fashion:</p>
 <pre><code>sysuse auto
 &lt;modify data set as desired&gt;
@@ -390,7 +390,7 @@ preserve
 &lt;obtain results&gt;
 restore</code></pre>
 <p>The <code>preserve</code> command saves an image of the data as they are now, and the <code>restore</code> command reloads the image of the data, discarding any interim changes. There can only be a single image of the data preserved at a time, so if you <code>preserve</code>, then make a change and want to <code>preserve</code> again (without an intervening <code>restore</code>), you can pass the option <code>not</code> to <code>restore</code> to discard the preserved image of the data.</p>
-<pre><code>restore, not</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">restore</span>, <span class="kw">not</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>One thing to note about the use of <code>preserve</code> and <code>restore</code> in Do-files: If you run a chunk of commands which include a <code>preserve</code> statement, after the code executes <code>restore</code> is automatically run <em>even if <code>restore</code> was not in the set of commands you ran</em>!</p>
 </section>
 <section id="frames" class="level3" data-number="2.6.2">
@@ -463,22 +463,22 @@ restore</code></pre>
 </section>
 <section id="linking-data-sets" class="level4" data-number="2.6.2.3">
 <h4 data-number="2.6.2.3" class="anchored" data-anchor-id="linking-data-sets"><span class="header-section-number">2.6.2.3</span> Linking data sets</h4>
-<p>We’re not going to go into it now, but please see the <a href="#linking-data-sets">section</a> in the [Programming &amp; Advanced Features] section for details. You can link data sets between frames to either enable moving variables across frames, or if the data are at different units of analysis (e.g.&nbsp;a patient file and a clinic file), to easily merge the files together.</p>
+<p>We’re not going to go into it now, but please see the section in the Programming &amp; Advanced Features section for details on <a href="05-programming.html#linking-data-sets">linking data sets</a> if interested. You can link data sets between frames to either enable moving variables across frames, or if the data are at different units of analysis (e.g.&nbsp;a patient file and a clinic file), to easily merge the files together.</p>
 </section>
 </section>
 </section>
 <section id="exercise-1" class="level2" data-number="2.7">
 <h2 data-number="2.7" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">2.7</span> Exercise 1</h2>
 <ol type="1">
-<li>Load the <a href="#built-in-data">built-in</a> data set “lifeexp”.</li>
-<li>Open the Data Editor window. <a href="#editing-data-manually">Modify</a> at least one of the cells.</li>
+<li>Load the <a href="02-working-with-data-sets.html#built-in-data">built-in</a> data set “lifeexp”.</li>
+<li>Open the Data Editor window. <a href="02-working-with-data-sets.html#editing-data-manually">Modify</a> at least one of the cells.</li>
 <li>Close the Data window. Load the built-in data set “sandstone”. Don’t forget to <code>clear</code> or pass the <code>clear</code> option.</li>
-<li><a href="#saving-data">Save a copy</a> of this data to your computer.
+<li><a href="02-working-with-data-sets.html#saving-data">Save a copy</a> of this data to your computer.
 <ol type="1">
-<li>Check your [working directory][working directory]. Make sure it is set somewhere convenient.</li>
+<li>Check your <a href="01-the-basics-of-stata.html#working-directory">working directory</a>. Make sure it is set somewhere convenient.</li>
 <li>Use <code>save</code>. Make sure to give it a name!</li>
 </ol></li>
-<li>If you haven’t already, play with <a href="#temporarily-preserving-and-restoring-data"><code>preserve</code> and <code>restore</code></a>. Preserve the data, modify some values, then observe what happens when you restore.</li>
+<li>If you haven’t already, play with <a href="02-working-with-data-sets.html#temporarily-preserving-and-restoring-data"><code>preserve</code> and <code>restore</code></a>. Preserve the data, modify some values, then observe what happens when you restore.</li>
 </ol>
 
 
