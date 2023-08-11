@@ -1,4 +1,7 @@
-dyndocs = stata.qmd
+dyndocs = 02-the-basics-of-stata.qmd	03-working-with-data-sets.qmd \
+					04-data-management.qmd	05-data-manipulation.qmd	\
+					06-programming.qmd 07-appendix.qmd
+
 
 .PHONY:default
 default: $(dyndocs)

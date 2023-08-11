@@ -8,7 +8,7 @@ book:
   date: date-modified
   chapters:
     - index.qmd
-    - 02-the-basics-of-stata.dyndoc.qmd
+    - 02-the-basics-of-stata.qmd
     - 03-working-with-data-sets.qmd
     - 04-data-management.qmd
     - 05-data-manipulation.qmd

@@ -9,3 +9,5 @@ rsconnect
 *.log
 .DS_Store
 mycensus9.dta
+
+/.quarto/
