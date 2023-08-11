@@ -2,28 +2,33 @@
 
 These notes are split into four primary sections:
 
-- [Chapter 2: The Basics of Stata](the-basics-of-stata.html) - Interacting with Stata.
-- [Chapter 3: Working with Data Sets](working-with-data-sets.html) - Importing, opening, and saving data sets.
-- [Chapter 4: Data Management](data-management.html) - The basics of maintaining and exploring a data set.
-- [Chapter 5: Data Manipulation](data-manipulation.html) - Creating and modifying variables and other ways of manipulating your data.
+- [Chapter 2: The Basics of Stata](02-the-basics-of-stata.html) - Interacting
+  with Stata.
+- [Chapter 3: Working with Data Sets](03-working-with-data-sets.html) -
+  Importing, opening, and saving data sets.
+- [Chapter 4: Data Management](04-data-management.html) - The basics of
+  maintaining and exploring a data set.
+- [Chapter 5: Data Manipulation](05-data-manipulation.html) - Creating and
+  modifying variables and other ways of manipulating your data.
 
-These sections will generally be presented in sequence. The discussion will alternate between theory and practice. The format will alternate between
-lecture and exercises. Please ask questions as soon as they arise in your mind. Please provide feedback or voice concerns.
+These sections will generally be presented in sequence. The discussion will
+alternate between theory and practice. The format will alternate between lecture
+and exercises. Please ask questions as soon as they arise in your mind. Please
+provide feedback or voice concerns.
 
 There are two additional sections:
 
-- [Chapter 6: Programming & Advanced Topics](programming-advanced-features.html) - Topics for users who wish to move beyond the basics.
-- [Appendix](appendix.html) - Houses the exercise solutions.
+- [Chapter 6: Programming & Advanced Topics](06-programming.html) - Topics for
+  users who wish to move beyond the basics.
+- [Appendix](07-appendix.html) - Houses the exercise solutions.
 
-## How to use this document
+## Creation of this document
 
-These notes are published in [bookdown](https://bookdown.org/) format which enables easy creation of longform documents (using a mixture of
-[markdown](https://daringfireball.net/projects/markdown/), [R](https://www.r-project.org/), and for these notes specifically,
-[Stata](http://www.stata.com/)'s [dyndoc](http://www.stata.com/manuals/pdyndoc.pdf), which was added in Stata 15). The source for these documents can be found at [https://github.com/CSCAR/workshop-stata-intro](https://github.com/CSCAR/workshop-stata-intro) for the curious.
-
-The table of contents is found on the left hand side, with subsections expanding below the current section. At the top of the page are four icons,
-from left to right they 1) Hide/show the table of contents, 2) Search this document, 3) Change the font the book is displayed in, and 4) Display
-keyboard shortcuts.
+These notes are published using [Quarto](https://quarto.org). The Stata code is
+first rendered using a Stata [dynamic
+document](https://www.stata.com/manuals/rptdynamicdocumentsintro.pdf). The
+source code for these notes can be found at
+<https://github.com/CSCAR/workshop-stata-intro> for the curious.
 
 All images should link to full-size versions to see detail if needed.
 
@@ -31,23 +36,31 @@ All images should link to full-size versions to see detail if needed.
 
 ### CSCAR
 
-http://cscar.research.umich.edu/
+<http://cscar.research.umich.edu/>
 
-CSCAR is available for free consultations with PhD statisticians (email deskpeople@umich.edu to request a consultation).
+CSCAR is available for free consultations with PhD statisticians (email
+deskpeople@umich.edu to request a consultation).
 
-CSCAR also has GSRAs available for more immediate help. Walk-ins to our office in Rackham are welcomed Monday-Friday 9am to 5pm (Closed Tuesdays
-12-1pm). Alternatively, on our website, you can self-schedule into an hour consultation with the graduate students, which can be either remote or
-in-person (these are usually available same- or next-day).
+CSCAR also has GSRAs available for more immediate help. Walk-ins to our office
+in Rackham are welcomed Monday-Friday 9am to 5pm (Closed Tuesdays 12-1pm).
+Alternatively, on our website, you can self-schedule into an hour consultation
+with the graduate students, which can be either remote or in-person (these are
+usually available same-day or next-day).
 
-CSCAR operates a email for help with statistical questions, feel free to send concise questions to stats-consulting@umich.edu.
+CSCAR operates a email for help with statistical questions, feel free to send
+concise questions to stats-consulting@umich.edu.
 
-The current contact for questions about the notes: Josh Errickson (jerrick@umich.edu).
+The current contact for questions about the notes: Josh Errickson
+(jerrick@umich.edu).
 
 
 ## Acknowledgments
 
-These notes have evolved over the years thanks to many CSCAR statisticians, including Josh Errickson, Giselle Kolenic, Brady West, Heidi Reichert, and
+These notes have evolved over the years thanks to many CSCAR statisticians,
+including Josh Errickson, Giselle Kolenic, Brady West, Heidi Reichert, and
 Lingling Zhang.
 
-This material was created for use in workshops and short courses presented by faculty and staff from the Consulting for Statistics, Computing \&
-Analytics Research (CSCAR) at the University of Michigan. No part of this material may be used for other purposes, copied, changed, or sold.
+This material was created for use in workshops and short courses presented by
+faculty and staff from the Consulting for Statistics, Computing & Analytics
+Research (CSCAR) at the University of Michigan. No part of this material may be
+used for other purposes, copied, changed, or sold.

@@ -18,4 +18,3 @@ book:
 format:
   html:
     theme: flatly # Choose from https://bootswatch.com
-    css: style.css

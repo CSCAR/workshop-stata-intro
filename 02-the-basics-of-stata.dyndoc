@@ -150,7 +150,7 @@ help](02-the-basics-of-stata.html#stata-help) for them.
 Version 15 of Stata introduced dynamic tags and the `dyndoc` and `dyntext`
 commands which allows you to weave together narrative text and Stata code to
 produce a high-quality output (html, word or pdf). This document is written ([in
-part](index.html#how-to-use-this-document)) in Dynamic Tags. It is extremely
+part](index.html#creation-of-this-document)) in Dynamic Tags. It is extremely
 powerful but is well outside the mandate of this class. If you are interested in
 this functionality, I'd be happy to help. [This Stata
 manual](https://www.stata.com/manuals/rptdynamicdocumentsintro.pdf) is a good
