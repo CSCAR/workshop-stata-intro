@@ -1,0 +1,341 @@
+# Appendix
+
+## Solutions
+
+### Exercise 1 Solution
+
+[Exercise 1][Exercise 1]
+
+1:
+```
+sysuse lifeexp
+```
+
+3:
+```
+sysuse sandstone, clear
+```
+or
+```
+clear
+sysuse sandstone
+```
+
+4:
+If the working directory isn't convenient, change it using the dialogue box. Then, `save sandstone`.
+
+### Exercise 2 Solution
+
+[Exercise 2][Exercise 2]
+
+1:
+
+```
+webuse census9, clear
+```
+
+2: Data is from the 1980 census, which we can see by the label (visible in `describe, simple`). We've got two identifiers of state, death rate,
+   population, median age and census region.
+
+3: Since there data has 50 rows, it's a good guess there are no missing sates.
+
+4: Looking at `describe`, we see that the two state identifiers are strings, the rest numeric.
+
+5: `compress`. Nothing saved! Because Stata already did it before posting it!
+
+### Exercise 3 Solution
+
+[Exercise 3][Exercise 3]
+
+1:
+
+```stata
+. webuse census9, clear
+(1980 Census data by state)
+
+. save mycensus9
+file mycensus9.dta saved
+
+```~
+
+2:
+
+```stata
+. rename drate deathrate
+
+. label variable deathrate "Death rate per 10,000"
+
+```
+
+3:
+
+```stata
+. tab region
+
+     Census |
+     region |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         NE |          9       18.00       18.00
+    N Cntrl |         12       24.00       42.00
+      South |         16       32.00       74.00
+       West |         13       26.00      100.00
+------------+-----------------------------------
+      Total |         50      100.00
+
+. label list cenreg
+cenreg:
+           1 NE
+           2 N Cntrl
+           3 South
+           4 West
+
+. label define region_label 1 "Northeast" 2 "North Central" 3 "South" 4 "West"
+
+. label values region region_label
+
+. label drop cenreg
+
+. label list
+region_label:
+           1 Northeast
+           2 North Central
+           3 South
+           4 West
+
+. tab region
+
+Census region |      Freq.     Percent        Cum.
+--------------+-----------------------------------
+    Northeast |          9       18.00       18.00
+North Central |         12       24.00       42.00
+        South |         16       32.00       74.00
+         West |         13       26.00      100.00
+--------------+-----------------------------------
+        Total |         50      100.00
+
+```
+
+4:
+
+```stata
+. save, replace
+file mycensus9.dta saved
+
+```
+
+### Exercise 4 Solution
+
+[Exercise 4][Exercise 4]
+
+1: Use `summarize` and `codebook` to take a look at the mean/max/min. No errors
+detected.
+
+2:
+
+```stata
+. codebook, compact
+
+Variable   Obs Unique     Mean     Min       Max  Label
+-------------------------------------------------------------------------------
+state       50     50        .       .         .  State
+state2      50     50        .       .         .  Two-letter state abbreviation
+deathrate   50     30     84.3      40       107  Death rate per 10,000
+pop         50     50  4518149  401851  2.37e+07  Population
+medage      50     37    29.54    24.2      34.7  Median age
+region      50      4     2.66       1         4  Census region
+-------------------------------------------------------------------------------
+
+```
+
+`deathrate` and `medage` both have less than 50 unique values. This is due to
+both being heavily rounded. If we saw more precision, there would be more unique
+entires.
+
+3:
+
+```stata
+. codebook, problems
+
+Potential problems in dataset mycensus9.dta
+
+               Potential problem   Variables
+--------------------------------------------------
+string vars with embedded blanks   state
+--------------------------------------------------
+
+```
+
+This just flags spaces (" ") in the data. Not a real problem!
+
+### Exercise 5 Solution
+
+[Exercise 5][Exercise 5]
+
+1:
+
+```stata
+. gen deathperc = deathrate/10000
+
+. label variable deathperc "Percentage of population deceeased in 1980"
+
+. list death* in 1/5
+
+     +---------------------+
+     | deathr~e   deathp~c |
+     |---------------------|
+  1. |       91      .0091 |
+  2. |       40       .004 |
+  3. |       78      .0078 |
+  4. |       99      .0099 |
+  5. |       79      .0079 |
+     +---------------------+
+
+```
+
+2:
+
+```stata
+. gen agecat = 1 if medage < .
+
+. replace agecat = 2 if medage > 26.2 & medage <= 30.1
+(30 real changes made)
+
+. replace agecat = 3 if medage > 30.1 & medage <= 32.8
+(17 real changes made)
+
+. replace agecat = 4 if medage > 32.8
+(1 real change made)
+
+. label define agecat_label 1 "Significantly below national average" ///
+>                           2 "Below national average" ///
+>                           3 "Above national average" ///
+>                           4 "Significantly above national average"
+
+. label values agecat agecat_label
+
+. tab agecat, mi
+
+                              agecat |      Freq.     Percent        Cum.
+-------------------------------------+-----------------------------------
+Significantly below national average |          2        4.00        4.00
+              Below national average |         30       60.00       64.00
+              Above national average |         17       34.00       98.00
+Significantly above national average |          1        2.00      100.00
+-------------------------------------+-----------------------------------
+                               Total |         50      100.00
+
+```
+
+We have no missing data (seen with `summarize` and `codebook` in the previous
+exercise) but it's good practice to check for them anyways.
+
+3:
+
+```stata
+. bysort agecat: summarize deathrate
+
+-------------------------------------------------------------------------------
+-> agecat = Significantly below national average
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+   deathrate |          2        47.5     10.6066         40         55
+
+-------------------------------------------------------------------------------
+-> agecat = Below national average
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+   deathrate |         30    81.76667    9.761583         50         94
+
+-------------------------------------------------------------------------------
+-> agecat = Above national average
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+   deathrate |         17    91.76471    8.422659         73        104
+
+-------------------------------------------------------------------------------
+-> agecat = Significantly above national average
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+   deathrate |          1         107           .        107        107
+
+
+```
+
+We see that the groups with the higher median age tend to have higher deathrates.
+
+4:
+
+```stata
+. preserve
+
+. gsort -deathrate
+
+. list state deathrate in 1
+
+     +--------------------+
+     | state     deathr~e |
+     |--------------------|
+  1. | Florida        107 |
+     +--------------------+
+
+. gsort +deathrate
+
+. list state deathrate in 1
+
+     +-------------------+
+     | state    deathr~e |
+     |-------------------|
+  1. | Alaska         40 |
+     +-------------------+
+
+. gsort -medage
+
+. list state medage in 1
+
+     +------------------+
+     | state     medage |
+     |------------------|
+  1. | Florida    34.70 |
+     +------------------+
+
+. gsort +medage
+
+. list state medage in 1
+
+     +----------------+
+     | state   medage |
+     |----------------|
+  1. | Utah     24.20 |
+     +----------------+
+
+. restore
+
+```
+
+5:
+
+```stata
+. encode state2, gen(statecodes)
+
+. codebook statecodes
+
+-------------------------------------------------------------------------------
+statecodes                                        Two-letter state abbreviation
+-------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+                 Label: statecodes
+
+                 Range: [1,50]                        Units: 1
+         Unique values: 50                        Missing .: 0/50
+
+              Examples: 10    GA
+                        20    MD
+                        30    NH
+                        40    SC
+
+```

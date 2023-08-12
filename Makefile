@@ -1,26 +1,19 @@
-md = $(shell find stata_markdown -name "*.md")
-Stata_Rmd = $(md:.md=.Rmd)
+dyndocs = 01-the-basics-of-stata.qmd	02-working-with-data-sets.qmd \
+					03-data-management.qmd	04-data-manipulation.qmd	\
+					05-programming.qmd appendix.qmd
 
-stata_markdown/%.Rmd: stata_markdown/%.md
-	@rm -f mycensus9.dta
-	@echo "$< -> $@"
-	@/Applications/Stata/StataSE.app/Contents/MacOS/stata-se -b 'dyntext "$<", saving("$@") replace nostop'
-#	Using <<dd_do: quiet>> produces empty codeblocks in output, remove them
-	@perl -0777 -i -pe 's/~~~~\n~~~~//g' $@
 
-docs/index.html: index.Rmd $(Stata_Rmd)
-	@echo "$< -> $@"
-#	Bring images temporarily up to main directory
-	@cp $(stata_file_path)/*.svg . 2>/dev/null || :
-	@Rscript -e "bookdown::render_book('$<', 'bookdown::gitbook')"
-#	Remove any images copied up
-	@rm -rf *.svg
+.PHONY:default
+default: $(dyndocs)
+	quarto render
 
-default: $(Stata_Rmd)  docs/index.html
+.PHONY:quarto-prerender
+quarto-prerender: $(dyndocs)
+	@echo > /dev/null
 
-.PHONY:clean
-clean:
-	@git clean -xdf
+$(dyndocs): %.qmd: %.dyndoc
+	/Applications/Stata/StataSE.app/Contents/MacOS/stata-se -b 'dyntext "$<", saving("$@") replace nostop'
 
+.PHONY:open
 open:
 	@open docs/index.html

@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to Stata - 1&nbsp; The Basics of Stata</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02-working-with-data-sets.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-the-basics-of-stata.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Basics of Stata</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Stata</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-the-basics-of-stata.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Basics of Stata</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-working-with-data-sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Working with Data Sets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-data-management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-data-manipulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Manipulation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-programming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Programming &amp; Advanced Features</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-stata-environment" id="toc-the-stata-environment" class="nav-link active" data-scroll-target="#the-stata-environment"><span class="header-section-number">1.1</span> The Stata Environment</a>
+  <ul class="collapse">
+  <li><a href="#alternate-layout" id="toc-alternate-layout" class="nav-link" data-scroll-target="#alternate-layout"><span class="header-section-number">1.1.1</span> Alternate Layout</a></li>
+  </ul></li>
+  <li><a href="#one-data" id="toc-one-data" class="nav-link" data-scroll-target="#one-data"><span class="header-section-number">1.2</span> One Data</a></li>
+  <li><a href="#give-stata-a-command" id="toc-give-stata-a-command" class="nav-link" data-scroll-target="#give-stata-a-command"><span class="header-section-number">1.3</span> Give Stata a command</a>
+  <ul class="collapse">
+  <li><a href="#saving-results" id="toc-saving-results" class="nav-link" data-scroll-target="#saving-results"><span class="header-section-number">1.3.1</span> Saving Results</a></li>
+  <li><a href="#dynamic-tags" id="toc-dynamic-tags" class="nav-link" data-scroll-target="#dynamic-tags"><span class="header-section-number">1.3.2</span> Dynamic Tags</a></li>
+  </ul></li>
+  <li><a href="#updating" id="toc-updating" class="nav-link" data-scroll-target="#updating"><span class="header-section-number">1.4</span> Updating</a></li>
+  <li><a href="#installing-user-written-commands" id="toc-installing-user-written-commands" class="nav-link" data-scroll-target="#installing-user-written-commands"><span class="header-section-number">1.5</span> Installing user-written commands</a></li>
+  <li><a href="#do-files" id="toc-do-files" class="nav-link" data-scroll-target="#do-files"><span class="header-section-number">1.6</span> Do-files</a>
+  <ul class="collapse">
+  <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments"><span class="header-section-number">1.6.1</span> Comments</a></li>
+  <li><a href="#version-control" id="toc-version-control" class="nav-link" data-scroll-target="#version-control"><span class="header-section-number">1.6.2</span> Version control</a></li>
+  </ul></li>
+  <li><a href="#exercise-0" id="toc-exercise-0" class="nav-link" data-scroll-target="#exercise-0"><span class="header-section-number">1.7</span> Exercise 0</a></li>
+  <li><a href="#basic-command-syntax" id="toc-basic-command-syntax" class="nav-link" data-scroll-target="#basic-command-syntax"><span class="header-section-number">1.8</span> Basic command syntax</a></li>
+  <li><a href="#stata-help" id="toc-stata-help" class="nav-link" data-scroll-target="#stata-help"><span class="header-section-number">1.9</span> Stata Help</a>
+  <ul class="collapse">
+  <li><a href="#short-commands" id="toc-short-commands" class="nav-link" data-scroll-target="#short-commands"><span class="header-section-number">1.9.1</span> Short commands</a></li>
+  </ul></li>
+  <li><a href="#working-directory" id="toc-working-directory" class="nav-link" data-scroll-target="#working-directory"><span class="header-section-number">1.10</span> Working directory</a>
+  <ul class="collapse">
+  <li><a href="#file-paths" id="toc-file-paths" class="nav-link" data-scroll-target="#file-paths"><span class="header-section-number">1.10.1</span> File paths</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Basics of Stata</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="the-stata-environment" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="the-stata-environment"><span class="header-section-number">1.1</span> The Stata Environment</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./images/stata_main_screen.png"><img src="./images/stata_main_screen.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<p>When a user first opens Stata, there are five panes that will appear in the main window:</p>
+<ul>
+<li>The Results Pane
+<ul>
+<li>All commands which are run are echoed out here, as well as any output they produce. Not all commands produce output though most do (e.g.&nbsp;obtaining summaries of the data or running a statistical procedure). Items that appear in the results pane in <span style="color:blue">blue</span> are clickable.</li>
+</ul></li>
+<li>The Command Pane
+<ul>
+<li>This pane is where users can interactively type Stata commands and submit them to Stata for processing. Everything that one can do in Stata is based on a set of Stata commands. Stata commands are case sensitive. All Stata commands and options are in lower case. When variables are used in any command, the variable names are also case sensitive.</li>
+</ul></li>
+<li>The Variables Pane
+<ul>
+<li>This pane displays all of the variables in the data set that is currently open in Stata, and users can click on variable names in this pane to carry the variables over into Stata commands in the Command pane. Note that Stata allows only <a href="01-the-basics-of-stata.html#one-data">one data-set</a> to be open in a session.</li>
+</ul></li>
+<li>The History Pane
+<ul>
+<li>Stata will keep a running record of all Stata commands that have been submitted in the current session in this pane. Users can simply click on previous commands in this pane to recall them in the Command pane.</li>
+</ul></li>
+<li>The Properties Pane
+<ul>
+<li>This pane allows variable properties and data-set properties to be managed. <a href="03-data-management.html#renaming-variables">Variable names</a>, <a href="03-data-management.html#labeling-variables">labels</a>, <a href="03-data-management.html#labeling-values">value labels</a>, <a href="03-data-management.html#describing-the-data">display formats</a>, and <a href="03-data-management.html#describing-the-data">storage types</a> can be viewed and modified here.</li>
+</ul></li>
+</ul>
+<p>Each of these five panes will be nested within the main Stata session, which contains menus and tool bars. There are additional windows that users can access from the Window menu, which include the Graph window (which will open when graphs have been created), the Viewer window (which is primarily used for <a href="01-the-basics-of-stata.html#stata-help">help</a> features and Stata news), the Data Editor window (for use when <a href="02-working-with-data-sets.html#editing-data-manually">viewing data sets</a>), and the Do-file Editor window (for use when writing <a href="01-the-basics-of-stata.html#do-files">.do files</a>).</p>
+<p>In the lower left-hand corner of the main Stata window (below the panes), there will be a directory displayed. This is known as the <a href="01-the-basics-of-stata.html#working-directory">working directory</a>, and is where Stata will look to find data files and other associated Stata files unless the user specifies another directory. We will cover examples of changing the working directory.</p>
+<section id="alternate-layout" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="alternate-layout"><span class="header-section-number">1.1.1</span> Alternate Layout</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./images/stata_main_screen_alt.png"><img src="./images/stata_main_screen_alt.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<p>An alternate layout (found in View -&gt; Layout) places the History and Variables pane in tabs on the right hand side instead.</p>
+<p>(Note that this screenshot is taken on a Mac, as opposed to the original screenshot on Windows, just for comparison.)</p>
+</section>
+</section>
+<section id="one-data" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="one-data"><span class="header-section-number">1.2</span> One Data</h2>
+<p>One functionality where Stata differs than most other statistical or data analysis software is that Stata can only work with a single data set at a time.</p>
+<p>Any command you run knows to operate on the data set you have open. For example, there is a command <a href="03-data-management.html#summarizing-the-data"><code>summarize</code></a> which provides summary information about variables. The command is simply <code>summarize</code>, there is no need to direct it towards a specific data set.</p>
+<p>If you have multiple data sets you need to work with, you can either</p>
+<ol type="1">
+<li><p>Switch between the two data sets as needed. This can be burdensome, though tools such as <a href="02-working-with-data-sets.html#temporarily-preserving-and-restoring-data"><code>preserve</code></a> or <a href="02-working-with-data-sets.html#frames"><code>frames</code></a> help greatly.</p></li>
+<li><p>Merge the data sets, the better option. We’ll discuss <a href="04-data-manipulation.html#merging-files">merging</a> towards the end of the course.</p></li>
+</ol>
+</section>
+<section id="give-stata-a-command" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="give-stata-a-command"><span class="header-section-number">1.3</span> Give Stata a command</h2>
+<p>Let’s try running a Stata command. In the command pane, type (or copy and paste) the following:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The following should appear in the Results pane:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">version</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">version</span> 18.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The first line proceeded by the <code>.</code> indicates the command that was written, <code>version</code>, and the rest is the output. Here, I am running Stata version 18.0 (your version may vary).</p>
+<p>In this document, if you see a single command without a period, it indicates something that was not run - either it’s not designed to be run (it’s fake code designed to illustrate a point), or more likely, the output is not interesting or unnecessary. If you instead see a Results output where the first line is the command prefaced by the <code>.</code>, that was run in Stata and only the Results are included since they include the command. The command can still be run, <em>but should be run without the <code>.</code></em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<section id="saving-results" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="saving-results"><span class="header-section-number">1.3.1</span> Saving Results</h3>
+<p>Any output that appears in the Results pane (including the echoed commands and any errors) can be copied and pasted into another location, such as Word. In addition, if you highlight text and right-click, you also have the options:</p>
+<ul>
+<li>“Copy table”: Useful for exporting to Excel. This can be tempermental; if the selected table is less “regular”, this may not produce the best results. It is most useful for text which comes naturally as a table rather than results which are forced into a table for display purposes.</li>
+<li>“Copy table as HTML”: You can paste this into a plaintext editor (Notepad.exe or TextEdit, <em>not</em> Word) and save it as a *.html to produce a webpage. If you paste this into Excel you get a slightly different table than the layout for “Copy table” which may be more useful.</li>
+<li>“Copy as picture”: Does exactly what it says - equivalent to taking a screenshot. Very handy!</li>
+</ul>
+<p>There are a few commands that can be useful for saving results which we will not cover in this workshop, if you are interested, you can look into <a href="01-the-basics-of-stata.html#stata-help">the help</a> for them.</p>
+<ul>
+<li><code>log</code>: Saves a file consisting of everything printed to the Results pane.</li>
+<li><code>putexcel</code>: Adds to a spreadsheet specific strings or output.</li>
+<li><code>outreg2</code>: A <a href="01-the-basics-of-stata.html#installing-user-written-commands">user-written</a> command to output the results of a model (e.g.&nbsp;regression) in a clean format.</li>
+</ul>
+</section>
+<section id="dynamic-tags" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="dynamic-tags"><span class="header-section-number">1.3.2</span> Dynamic Tags</h3>
+<p>Version 15 of Stata introduced dynamic tags and the <code>dyndoc</code> and <code>dyntext</code> commands which allows you to weave together narrative text and Stata code to produce a high-quality output (html, word or pdf). This document is written (<a href="index.html#creation-of-this-document">in part</a>) in Dynamic Tags. It is extremely powerful but is well outside the mandate of this class. If you are interested in this functionality, I’d be happy to help. <a href="https://www.stata.com/manuals/rptdynamicdocumentsintro.pdf">This Stata manual</a> is a good introduction.</p>
+</section>
+</section>
+<section id="updating" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="updating"><span class="header-section-number">1.4</span> Updating</h2>
+<p>If you have administrative access on your computer (e.g.&nbsp;if it is your personal machine, or your IT department has given you the ability), you can update Stata freely. Major point upgrades such as the newly released 18.0 require purchase and re-installation, but minor upgrades (such as the 16.1 and 16.2 updates) as well as minor internal updates are free.</p>
+<p>To check for updates, you can run</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>update <span class="kw">query</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If any updates are available (regardless of whether you ran a query first), you can obtain all updates with</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>update <span class="ot">all</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you do not have administrative access on your computer, you’ll need to reach out to your IT administrators to update.</p>
+</section>
+<section id="installing-user-written-commands" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="installing-user-written-commands"><span class="header-section-number">1.5</span> Installing user-written commands</h2>
+<p>In addition to built in commands, Stata supports user-written programs, know as “ado-files”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Once installed, these user-written programs operate identically to any built-in command, with the caveat that they may not be quite as polished or complete since they’re volunteer written. Documentation is rarely up to <a href="01-the-basics-of-stata.html#stata-help">Stata standards</a> and often relegates details to a manuscript.</p>
+<p>We won’t be covering any ado-files in these notes, but if you wanted to install a program named <code>newcommand</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ssc</span> install newcommand</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can remove a program with</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ssc</span> uninstall newcommand</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Finally, to see a list of all user-written programs you have installed, used</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ado</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="01-the-basics-of-stata.html#updating">Updating Stata</a> will not update any ado-files, instead you can run</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>adoupdate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>to list all available updates and</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>adoupdate, update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>to perform all updates.</p>
+</section>
+<section id="do-files" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="do-files"><span class="header-section-number">1.6</span> Do-files</h2>
+<p>We <a href="01-the-basics-of-stata.html#give-stata-a-command">saw</a> that commands can be typed interactively, one command at a time, and the results immediately observed. From this, the output can be copied/exported/printed, or the results can be saved. However, a better paradigm would save all the commands run separately so that the analysis is <a href="https://en.wikipedia.org/wiki/Reproducibility#Reproducible_research">reproducible</a>.</p>
+<p>For this purpose, Stata has Do-files (named because they are saved with the .do extension, such as <code>analysis.do</code>) which are scripts containing only commands and <a href="01-the-basics-of-stata.html#comments">comments</a>. We can then run any subset of the commands (including the entire file), re-running parts or all of the analysis. Additionally you can easily save and/or share this command, allowing yourself or a colleague to re-run the analysis.</p>
+<p>There are several ways to start a new Do-file.</p>
+<ul>
+<li>File -&gt; New -&gt; Do-file</li>
+<li>Click the “Do-file Editor” button in the main window</li>
+<li>You can enter the command:</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>doedit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>If you select some commands in the History pane, you can right click and choose “Send select to Do-file Editor”.</li>
+</ul>
+<p>For the last option there, note that performing that twice will create two separate Do-files instead of appending the commands. Instead, you can copy and paste from the History pane to add to an existing Do-file.</p>
+<p>Let’s manually add some commands to a Do-file to see how to execute the commands. In a Do-file editor, enter the following</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sysuse</span> auto, <span class="kw">clear</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">summarize</span> price</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">tabulate</span> foreign</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once the lines are in the editor, highlight the commands (you do not need to highlight the entire line, you merely need to ensure your selection includes part of every line you want run) and press the “Execute/Do” (on Windows) or “Do” (on Mac) button. You should see the following appear in your Results pane.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">sysuse</span> auto, <span class="kw">clear</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>(1978 automobile <span class="kw">data</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>. <span class="kw">summarize</span> price</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    Variable |        Obs        Mean    Std. <span class="kw">dev</span>.       Min        Max</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>-------------+---------------------------------------------------------</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>       price |         74    6165.257    2949.496       3291      15906</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>. <span class="kw">tabulate</span> foreign</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a> Car origin |      Freq.     Percent        Cum.</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>------------+-----------------------------------</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>   Domestic |         52       70.27       70.27</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    Foreign |         22       29.73      100.00</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>------------+-----------------------------------</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>      Total |         74      100.00</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We will cover in later sections what each of these commands does (<a href="02-working-with-data-sets.html#built-in-data"><code>sysuse</code></a>, <a href="03-data-management.html#summarizing-the-data"><code>summarize</code></a>, and <a href="03-data-management.html#labeling-values"><code>tabulate</code></a>).</p>
+<section id="comments" class="level3" data-number="1.6.1">
+<h3 data-number="1.6.1" class="anchored" data-anchor-id="comments"><span class="header-section-number">1.6.1</span> Comments</h3>
+<p>Comments are information in a Do-file which Stata will ignore. They can be used to stop a command from running without deleting it, or more usefully, to add information about the code which may be useful for others (or yourself in the future) to understand how some code works or to justify why you made certain choices. In general, comments can also help readability. There are three different ways to enter comments (and one additional special way).</p>
+<p>First, to comment out an entire line, precede it by <code>*</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>. * This is a comment</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Second, you can add a comment to the end of a line with <code>//</code></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">version</span> <span class="co">// Returns the Stata version number</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">version</span> 18.0</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>. <span class="co">// You can also use it to comment out an entire line.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There must be a space before the <code>//</code> if it comes after a command:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">version</span><span class="co">// Returns the Stata version number</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>invalid <span class="kw">syntax</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">r</span>(198);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Thirdly, you can comment out a section by wrapping it in <code>/\*</code> and <code>\*/</code></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>. <span class="co">/* Here's a several</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">&gt; line comment.</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">&gt; It just keeps going. */</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>. <span class="kw">summarize</span> <span class="co">/* comment in the middle of a command! */</span> price</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    Variable |        Obs        Mean    Std. <span class="kw">dev</span>.       Min        Max</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>-------------+---------------------------------------------------------</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>       price |         74    6165.257    2949.496       3291      15906</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that when a command wraps to more than one line in the Results pane (either due to a manual line break like this or a command that’s too wide for the Results pane), the prefix changes from <code>.</code> to <code>&gt;</code> to indicate that its all one command.</p>
+<p>Finally, there’s the special comment, <code>///</code>. Stata commands must be on a single line. However, complicated commands may get very long, such that its hard to read them on a single line. Using <code>///</code> instead of <code>//</code> allows wrapping onto the next line.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">summarize</span> <span class="co">///</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>&gt; price</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    Variable |        Obs        Mean    Std. <span class="kw">dev</span>.       Min        Max</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>-------------+---------------------------------------------------------</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>       price |         74    6165.257    2949.496       3291      15906</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As with <code>//</code>, there needs to be a space before the <code>///</code>.</p>
+<p>Only the <code>*</code> works on interactive commands entered in the Command pane. All four versions work in Do-files.</p>
+</section>
+<section id="version-control" class="level3" data-number="1.6.2">
+<h3 data-number="1.6.2" class="anchored" data-anchor-id="version-control"><span class="header-section-number">1.6.2</span> Version control</h3>
+<p>When writing a Do-file, you generally are creating it while using a single version of Stata. If a new version of Stata were released, its possible that your code may operate differently with the new version. If you add</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">version</span> 14.2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you’ve updated to Stata 17. This works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 17 when you only have Stata 14 installed.)</p>
+<p>Note that this <code>version</code> is the same command as the <code>version</code> we’ve been discussing <a href="01-the-basics-of-stata.html#give-stata-a-command">before</a>. It operates in this special fashion only when included at the top of a Do-file.</p>
+<p>Best practices is to always include a <code>version ##.#</code> line at the top of each Do-file, but if its code that will continue to see use, you should test it with the newer releases and update the code as necessary!</p>
+</section>
+</section>
+<section id="exercise-0" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="exercise-0"><span class="header-section-number">1.7</span> Exercise 0</h2>
+<p>Get familiar with the Stata interface. If you’ve been following along, you may have already done all these!</p>
+<ol type="1">
+<li>If you haven’t already, open Stata. (You should be able to do this by clicking on the “Start” menu in the bottom left of the screen, then typing “Stata”.)</li>
+<li>The <a href="01-the-basics-of-stata.html#the-stata-environment">use of each pane</a> will become much clearer when we start opening data in the <a href="02-working-with-data-sets.html">next section</a>, but take a look at each.</li>
+<li>Give Stata a command: <code>query memory</code>. This lists some settings related to memory usage in Stata, for example, <code>maxvar</code> is the maximum number of variables in a model; <code>matsize</code> is the largest number of predictors allowed in a model.</li>
+<li>Open a <a href="01-the-basics-of-stata.html#do-files">Do file</a>. Place a <a href="01-the-basics-of-stata.html#version-control"><code>version</code> command</a> at the top of the file corresponding to the version on your computer. Place the <code>query memory</code> command from the last step in the Do file.</li>
+<li>Be sure you know how to run these commands from the Do file.</li>
+<li><a href="01-the-basics-of-stata.html#comments">Comment</a> out the <code>query memory</code> command; we won’t need it anymore.</li>
+</ol>
+</section>
+<section id="basic-command-syntax" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="basic-command-syntax"><span class="header-section-number">1.8</span> Basic command syntax</h2>
+<p>Most Stata commands which operate on variables (as opposed to system commands such as <code>version</code>, <code>update</code>, <code>query</code>, etc.) follow the same general format. Recognizing this format will make it easier to understand new commands to which you are introduced.</p>
+<p>The basic syntax is</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>command &lt;<span class="kw">variable</span>(<span class="fu">s</span>)&gt;, &lt;options&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The command can take on more than one word; e.g.&nbsp;to create a scatter plot, the command is <code>graph twoway scatter</code>.</p>
+<p>Depending on the command, the list of variables can contain 0 variables, 1 variable, or many variables separated by spaces. Whether the order of variables matters depends on the specific command.</p>
+<p>Above, in the do-file, we ran three lines of code. The first, <code>sysuse auto</code>, is a system command that we’ll discuss later.</p>
+<p>The second and third lines, <code>summarize price mpg</code> and <code>tabulate foreign</code>, follow the basic syntax - “<code>summarize</code>” and “<code>tabulate</code>” are the commands. “<code>summarize</code>” is operating on two variables, “price” and “mpg”; the order in which the variables appear in the command controls the order in which they appear in the table. “<code>tabulate</code>” is operating on a single variable, creating a one-way table; putting a second variable transforms it into a two-way table.</p>
+<p>The options are not required (none of the above commands have options), but if they are given, they too are separated by spaces. There are some options that are consistent across a number of commands, and some options are specific to commands.</p>
+</section>
+<section id="stata-help" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="stata-help"><span class="header-section-number">1.9</span> Stata Help</h2>
+<p>Stata has, hands down, the best built-in help files of any of the “Big 4” statistical software.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Stata’s help should be your first stop for any of the following:</p>
+<ul>
+<li>Understanding the syntax of a command</li>
+<li>Exploring the options available for a given command</li>
+<li>Looking at examples of the command in use</li>
+<li>Understanding the theoretical statistics behind the command.</li>
+</ul>
+<p>Help can be accessed by calling <code>help &lt;command&gt;</code>, such as</p>
+<pre><code>help summarize</code></pre>
+<p>Each help page has numerous features, I will merely point out a few here.</p>
+<ol type="1">
+<li>The “Title” section contains a link (in <span style="color:blue">blue</span>) to a PDF which contains the Manual, which has more detail and examples than the help file alone.</li>
+<li>The syntax section shows the basic syntax. Any part written in square brackets (<code>[...]</code>) are optional.</li>
+<li>The examples in the help are great but basic; the PDF help (see #1) usually has more detailed examples.</li>
+<li>We will discuss the “Stored results” in the [Programming][programming] section.</li>
+</ol>
+<p><code>help</code> can also be used to search for the appropriate command. For example, if you wanted help merging some data together (which we will cover [later][merging files]), you might try running</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">help</span> merging</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>merging</code> is not a valid Stata command, so instead Stata performs a search of the help files. This search is often not great. I would recommend searching online for the appropriate command to use (just search “Stata” and what you are trying to do), then using the built-in help for details on using the command.</p>
+<p>Finally, <code>help help</code> works and brings up some more information on the <code>help</code> command.</p>
+<section id="short-commands" class="level3" data-number="1.9.1">
+<h3 data-number="1.9.1" class="anchored" data-anchor-id="short-commands"><span class="header-section-number">1.9.1</span> Short commands</h3>
+<p>You’ll frequently see commands with partial underlining; for example <code>summarize</code> has the “su” underlined. Only the underlined part needs to be given for Stata to understand the command; e.g.&nbsp;the following are all equivalent:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">summarize</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>summ</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>su</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is often true for options as well; <code>detail</code> (to report far more summary details) has the “d” underlined. So these are equivalent:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">summarize</span>, <span class="kw">detail</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>su, <span class="kw">detail</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">summarize</span>, <span class="kw">d</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>su, <span class="kw">d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The short commands are very useful for quickly writing commands, but not so great at reading them. If you came across someone else’s Stata Do-file and saw <code>su, d</code>, you might have trouble figuring that out unless you already knew that short command. Thankfully, the short commands can be used with <code>help</code>, so <code>help su</code> will bring up the full <code>summarize</code> documentation.</p>
+</section>
+</section>
+<section id="working-directory" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="working-directory"><span class="header-section-number">1.10</span> Working directory</h2>
+<p>We mentioned <a href="01-the-basics-of-stata.html#the-stata-environment">earlier</a> the notion of a “working directory”, the current one you can see in the bottom left of the Stata window. You can think of a working directory as an open folder inside Windows Explorer (or Finder if you’re on a Mac). You can easily access any file within that folder without any additional trouble. You can access files in other folders (directories), but it requires moving to that folder.</p>
+<p>In the same sense, when referring to files, any file in the working directory can be referred to buy its name. For example, to open a file (we’ll go into detail about doing this <a href="02-working-with-data-sets.html#opening data">later</a>) named “mydata.dta” which is in your current working directory, you need only enter</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> mydata.dta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>(Technically you could just run <code>use mydata</code> as Stata will search for a file with the appropriate “.dta” extension automatically.)</p>
+<p>If you were in a different working directory, you need to specify the full path to the file:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> C:\Documents\Stata\Project\mydata.dta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Similarly, when saving files, the working directory is the default choice.</p>
+<p>If your file path has <em>any</em> spaces, you must wrap it in quotations:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="st">"C:\Documents\Stata\My Project\mydata.dta"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The working directory can be viewed with the <code>pwd</code> command (Print Working Directory)</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>. pwd</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>C:\Documents</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can change the working directory by passing a path to <code>cd</code> (Change Directory):</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>cd C:\Documents\Stata\Project</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Alternatively and perhaps more easily, you can change the working directory by the menus, choosing “Files -&gt; Change working directory”. After selecting the appropriate directory, the full <code>cd</code> command will be printed in the Results, so you can save it in a Do-file for later use.</p>
+<section id="file-paths" class="level3" data-number="1.10.1">
+<h3 data-number="1.10.1" class="anchored" data-anchor-id="file-paths"><span class="header-section-number">1.10.1</span> File paths</h3>
+<p>There are some distinctions between Windows and Mac in regards to file paths, the most blatant that Windows uses forward slash (<code>\\</code>) whereas Mac uses back slashes (<code>\/</code>). You can see full details of this by running <code>help filename</code>.</p>
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Stata can handle commands that are prefaced by <code>.</code> (with a space between the period and comand) so you can copy/paste the <code>. version</code> and run it as is. However, don’t get used to that habit! The correct command is just <code>version</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>As we’ll see in <a href="01-the-basics-of-stata.html#do-files">a bit</a>, you can save Stata commands in a “do-file”. While I’ve never seen an official definition, I tend to think of “ado” as “automatic do”.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>I consider the “Big 4” as Stata, SAS, SPSS, and R. SPSS has terrible help; SAS’s is good but dense and difficult to navigate if you don’t already know what you’re looking for; R’s is very hit-or-miss depending on who wrote it.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02-working-with-data-sets.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Working with Data Sets</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
