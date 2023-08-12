@@ -150,8 +150,8 @@ help formats
 ```
 
 "value label" and "variable label" are used to display more information when
-running analyses using these variables. See [the
-label](03-data-management.html#labels) section for further details.
+running analyses using these variables. See the
+[label](03-data-management.html#labels) section for further details.
 
 Finally, if the data is sorted, `describe` will provide information about the
 sorting.

@@ -247,12 +247,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>(1978 automobile <span class="kw">data</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="restricting-commands-to-subsets" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="restricting-commands-to-subsets"><span class="header-section-number">4.1</span> Restricting commands to subsets</h2>
-<p>We’ll discuss operating on subsets of the data in far more detail a bit <a href="#subsetting">later</a>, but first we’ll discuss how to modify the [basic command syntax][basic command syntax] to run a command only on some rows of data.</p>
+<p>We’ll discuss operating on subsets of the data in far more detail a bit <a href="04-data-manipulation.html#subsetting">later</a>, but first we’ll discuss how to modify the <a href="01-the-basics-of-stata.html#basic-command-syntax">basic command syntax</a> to run a command only on some rows of data.</p>
 <p>Recall the basic command syntax,</p>
-<pre><code>command &lt;variable(s)&gt;, &lt;options&gt;</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>command &lt;<span class="kw">variable</span>(<span class="fu">s</span>)&gt;, &lt;options&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>By default, this will use all rows of the data it can. However, we can restrict this.</p>
-<pre><code>command &lt;variable(s)&gt; in &lt;number list&gt;, &lt;options&gt;
-command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>command &lt;<span class="kw">variable</span>(<span class="fu">s</span>)&gt; <span class="kw">in</span> &lt;number <span class="ot">list</span>&gt;, &lt;options&gt;</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>command &lt;<span class="kw">variable</span>(<span class="fu">s</span>)&gt; <span class="kw">if</span> &lt;condition&gt;, &lt;options&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Both are optional (obviously), but you can include them if desired.</p>
 <p>Using <code>in</code>, we pass a number list which consists of a lower bound, a <code>/</code>, and an upper bound. For example, if we wanted to summarize the first 10 rows for a variable, we could run:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">summarize</span> <span class="kw">weight</span></span>
@@ -276,16 +276,16 @@ command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
 <p>Remembering back to middle school math classes that <span class="math inline">\(\gt\)</span> means “greater than”, clearly the first statement is true and the second statement is false. We can assign values of true and false to any such conditional statements, which use the following set of conditional operators:</p>
 <table class="table">
 <colgroup>
-<col style="width: 10%">
-<col style="width: 27%">
-<col style="width: 31%">
-<col style="width: 30%">
+<col style="width: 8%">
+<col style="width: 33%">
+<col style="width: 28%">
+<col style="width: 29%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Sign</th>
 <th style="text-align: left;">Definition</th>
-<th style="text-align: center;">True example</th>
+<th style="text-align: left;">True example</th>
 <th style="text-align: center;">False example</th>
 </tr>
 </thead>
@@ -293,49 +293,49 @@ command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(==\)</span></td>
 <td style="text-align: left;">equality</td>
-<td style="text-align: center;"><span class="math inline">\(3 == 3\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(3 == 3\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(3 == 2\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(!=\)</span></td>
 <td style="text-align: left;">not equal</td>
-<td style="text-align: center;"><span class="math inline">\(3 != 4\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(3 != 4\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(3 != 3\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\gt\)</span></td>
 <td style="text-align: left;">greater than</td>
-<td style="text-align: center;"><span class="math inline">\(4 \gt 2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(4 \gt 2\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(1 \gt 2\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\lt\)</span></td>
 <td style="text-align: left;">less than</td>
-<td style="text-align: center;"><span class="math inline">\(1 \lt 2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(1 \lt 2\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(4 \lt 2\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(\gt=\)</span></td>
 <td style="text-align: left;">greater than or equal to</td>
-<td style="text-align: center;"><span class="math inline">\(4 \gt= 4\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(4 \gt= 4\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(1 \gt= 2\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\lt=\)</span></td>
 <td style="text-align: left;">less than or equal to</td>
-<td style="text-align: center;"><span class="math inline">\(1 \lt= 1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(1 \lt= 1\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(4 \lt= 2\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">&amp;</td>
 <td style="text-align: left;">and (both statements are true)</td>
-<td style="text-align: center;"><span class="math inline">\((4 \gt 2)\)</span> &amp; <span class="math inline">\((3 == 3)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((4 \gt 2)\)</span> &amp; <span class="math inline">\((3 == 3)\)</span></td>
 <td style="text-align: center;"><span class="math inline">\((4 \gt 2)\)</span> &amp; <span class="math inline">\((1 \gt 2)\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(\|\)</span></td>
 <td style="text-align: left;">or (either statement is true)</td>
-<td style="text-align: center;"><span class="math inline">\((3 == 2) \| (1 \lt= 2)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((3 == 2) \| (1 \lt= 2)\)</span></td>
 <td style="text-align: center;"><span class="math inline">\((4 \lt 2) \| (1 \gt 2)\)</span></td>
 </tr>
 </tbody>
@@ -353,7 +353,7 @@ command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>-------------+---------------------------------------------------------</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>      <span class="kw">weight</span> |         41    2505.122     585.291       1760       4290</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Note in the second example we used parentheses to evaluate a more complex expression; we follow order of operations (remember PEMBAS?) and evaluate the inner-most parantheses first. So first <code>mpg &gt; 20 &amp; headroom &lt; 10</code> gets evaluated and returns <code>TRUE</code> or <code>FALSE</code>; then following that, we evaluate either <code>foreign == 1 | TRUE</code> or <code>foreign == 1 | FALSE</code> depending on what the first result was.</p>
-<p>We saw the usage of this earlier when discussing [loading subsets of the data][loading subsets of the data].</p>
+<p>We saw the usage of this earlier when discussing <a href="02-working-with-data-sets.html#loading-subsets-of-the-data">loading subsets of the data</a>.</p>
 </section>
 <section id="generating-new-variables" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="generating-new-variables"><span class="header-section-number">4.2</span> Generating new variables</h2>
@@ -365,7 +365,7 @@ command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>-------------------------------------------------------------------------------</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">weight</span>          <span class="kw">int</span>     %8.0gc                Weight (lbs.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s create a second weight variable measured in tons. The syntax for <code>generate</code> is straightforward,</p>
-<pre><code>generate &lt;new varname&gt; = &lt;function of old variables&gt;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">generate</span> &lt;<span class="kw">new</span> varname&gt; = &lt;<span class="kw">function</span> <span class="kw">of</span> old variables&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">generate</span> weight2 = <span class="kw">weight</span>/2000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>list</code> command can be used to output some data, let’s use it here to output the first 5 rows’ <code>weight</code> and <code>weight2</code> variables:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>. <span class="ot">list</span> <span class="kw">weight</span>* <span class="kw">in</span> 1/5</span>
@@ -411,19 +411,19 @@ command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
 <ul>
 <li><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>: Standard arithmetic</li>
 <li><code>abs( )</code>: returns the absolute value</li>
-<li><code>exp( )</code>: returns the exponential function of (e^x)</li>
+<li><code>exp( )</code>: returns the exponential function of <span class="math inline">\(e^x\)</span></li>
 <li><code>log( )</code> or <code>ln( )</code>: returns the natural logarithm of the argument<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
 <li><code>round( )</code>, <code>ceil( )</code>, <code>floor( )</code>: returns the rounded value (rounded to nearest integer, rounded up, and rounded down)</li>
 <li><code>sqrt( )</code>: returns the square root</li>
 </ul>
 <p>You can see a full accounting of all functions you can use in this setting in</p>
-<pre><code>help functions</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">help</span> functions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="creating-dummies" class="level3" data-number="4.2.1">
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="creating-dummies"><span class="header-section-number">4.2.1</span> Creating dummies</h3>
 <p>Dummy variables (also known as indicator variables or binary variables) are variables which take on two values, 0 and 1<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. These are typically used in a setting where the 0 represents an absence of something (or an answer of “no”) and 1 represents the presence (or an answer of “yes”). When naming dummy variables, you should keep this in mind to make understanding the variable easier, as well as extracting interpretations regarding the variable in a model.</p>
-<p>For example, “highschool” is a poor dummy variable - what does 0 highschool or 1 highschool represent? Obviously we could (and should) use [value labels][labeling values] to associate 0 and 1 with informative labels, but it is more straightforward to use a variable name such as “highschool_graduate” or “graduateded_highschool) - a 0 represents”no” to the question of “graduated high school?”, hence a non-high school graduate; and a 1 represents a “yes”, hence a high school graduate.</p>
+<p>For example, “highschool” is a poor dummy variable - what does 0 highschool or 1 highschool represent? Obviously we could (and should) use <a href="03-data-management.html#labeling-values">value labels</a> to associate 0 and 1 with informative labels, but it is more straightforward to use a variable name such as “highschool_graduate” or “graduateded_highschool) - a 0 represents”no” to the question of “graduated high school?”, hence a non-high school graduate; and a 1 represents a “yes”, hence a high school graduate.</p>
 <p>If you are collecting data, consider collecting data as dummies where appropriate - if the question has a binary response, encode it as a dummy instead of strings. If a question has categorical responses, consider encoding them as a series of dummy variables instead (e.g.&nbsp;“Are you from MI?”, “Are you from OH?” etc). These changes will (usually) need to be made later anyways.</p>
-<p>Now here’s the trick: In Stata<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, <a href="#restricting-commands-to-subsets">conditional statements</a> return 1 (True) and 0 (False). So we can use them in <code>generate</code> statements to create binary variables easily.</p>
+<p>Now here’s the trick: In Stata<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, <a href="04-data-manipulation.html#restricting-commands-to-subsets">conditional statements</a> return 1 (True) and 0 (False). So we can use them in <code>generate</code> statements to create binary variables easily.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">generate</span> price4k = price &gt; 4000</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>. <span class="ot">list</span> price* <span class="kw">in</span> 1/5</span>
@@ -437,7 +437,7 @@ command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  4. | 4,816         1 |</span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  5. | 7,827         1 |</span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>     +-----------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Note that this is NOT the same thing as using <a href="#restricting-commands-to-subsets"><code>if</code></a>. E.g., we see the following error:</p>
+<p>Note that this is NOT the same thing as using <a href="04-data-manipulation.html#restricting-commands-to-subsets"><code>if</code></a>. E.g., we see the following error:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">generate</span> price4k2 = <span class="kw">if</span> price &gt; 4000</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">if</span> <span class="kw">not</span> found</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">r</span>(111);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -462,9 +462,9 @@ command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
 </section>
 <section id="system-variables" class="level3" data-number="4.2.2">
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="system-variables"><span class="header-section-number">4.2.2</span> System Variables</h3>
-<p>In Stata, under the [One Data][one data] principal, any information in the data<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> must be in a variable. This includes the System Variables of <code>_n</code> and <code>_N</code>. You can imagine that every data st you ever open has two additional columns of data, one for <code>_n</code> and one for <code>_N</code>.</p>
+<p>In Stata, under the <a href="01-the-basics-of-stata.html#one-data">One Data</a> principal, any information in the data<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> must be in a variable. This includes the System Variables of <code>_n</code> and <code>_N</code>. You can imagine that every data st you ever open has two additional columns of data, one for <code>_n</code> and one for <code>_N</code>.</p>
 <p><code>_n</code> represents the row number, currently. “Currently” means if the data is re-sorted, <code>_n</code> can change.</p>
-<p><code>_N</code> represents the total number of rows in the data, hence this is the same for every row. Again, if the data changes (e.g.&nbsp;you <a href="#discarding-data">drop</a> some data) then <code>_N</code> may be updated.</p>
+<p><code>_N</code> represents the total number of rows in the data, hence this is the same for every row. Again, if the data changes (e.g.&nbsp;you <a href="04-data-manipulation.html#discarding-data">drop</a> some data) then <code>_N</code> may be updated.</p>
 <p>While you cannot access these System Variables normally (e.g.&nbsp;they don’t appear in the Data Browser), you can use them in generating variables or conditional statements. For example, we’ve seen that <code>list</code> can use <code>in</code> to restrict the rows it outputs, and we’ve seen that it can use <code>if</code> to choose conditionally. We can combine these:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>. <span class="ot">list</span> make <span class="kw">in</span> 1/2</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -483,7 +483,7 @@ command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  1. | AMC Concord |</span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  2. | AMC Pacer   |</span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>     +-------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>A more useful example is to save the initial row numbering in your data. When we discuss <a href="#sorting">sorting</a> later, it may be useful to be able to return to the original ordering. Since <code>_n</code> changes when the data is re-sorted, if we save the initial row numbers to a permanent variable, we can always re-sort by it later. <code>_N</code> is slightly less useful but can be used similarly.</p>
+<p>A more useful example is to save the initial row numbering in your data. When we discuss <a href="04-data-manipulation.html#sorting">sorting</a> later, it may be useful to be able to return to the original ordering. Since <code>_n</code> changes when the data is re-sorted, if we save the initial row numbers to a permanent variable, we can always re-sort by it later. <code>_N</code> is slightly less useful but can be used similarly.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">generate</span> <span class="ot">row</span> = <span class="dt">_n</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>. <span class="kw">generate</span> totalobs = _N</span>
@@ -502,15 +502,15 @@ command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
 </section>
 <section id="extensions-to-generate" class="level3" data-number="4.2.3">
 <h3 data-number="4.2.3" class="anchored" data-anchor-id="extensions-to-generate"><span class="header-section-number">4.2.3</span> Extensions to generate</h3>
-<p>The command <code>egen</code> offers some functionality that <code>generate</code> lacks, for example creating the mean of several variables</p>
-<pre><code>egen &lt;newvar&gt; = rowmean(var1, var2, var3)</code></pre>
+<p>The command <code>egen</code><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> offers some functionality that <code>generate</code> lacks, for example creating the mean of several variables</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">egen</span> &lt;newvar&gt; = <span class="fu">rowmean</span>(var1, var2, var3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The functions which <code>egen</code> support are fairly random; you can see the full list in the help:</p>
-<pre><code>help egen</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">help</span> <span class="kw">egen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="replacing-existing-variables" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="replacing-existing-variables"><span class="header-section-number">4.3</span> Replacing existing variables</h2>
-<p><a href="#generating-new-variables">Earlier</a> we created the <code>weight2</code> variable which changed the units on weight from pounds to tons. What if, instead of creating a new variable, we tried to just change the existing <code>weight</code> variable.</p>
+<p><a href="04-data-manipulation.html#generating-new-variables">Earlier</a> we created the <code>weight2</code> variable which changed the units on weight from pounds to tons. What if, instead of creating a new variable, we tried to just change the existing <code>weight</code> variable.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">generate</span> <span class="kw">weight</span> = <span class="kw">weight</span>/2000</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">variable</span> <span class="kw">weight</span> already defined</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">r</span>(110);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -530,7 +530,7 @@ command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
 <span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  4. |  1.625 |</span>
 <span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  5. |   2.04 |</span>
 <span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>     +--------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>replace</code> features syntax identical to <code>generate</code>.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p><code>replace</code> features syntax identical to <code>generate</code>.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 <section id="conditional-variable-generation" class="level3" data-number="4.3.1">
 <h3 data-number="4.3.1" class="anchored" data-anchor-id="conditional-variable-generation"><span class="header-section-number">4.3.1</span> Conditional variable generation</h3>
 <p>(We’re going to reload the <code>auto</code> data set at this point to ensure all data is as originally saved.)</p>
@@ -539,9 +539,9 @@ command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
 <p>One frequent task is recoding variables. This can be “binning” continuous variables into a few categories, re-ordering an ordinal variables, or collapsing categories in an already-categorical variable. There are also multi-variable versions; e.g.&nbsp;combining multiple variables into one.</p>
 <p>The general workflow with these cases will be to optionally use <code>generate</code> to create the new variable, then use <code>replace</code> to conditional replace the original or new variable.</p>
 <p>As an example, let’s generate a new variable which categorizes cars into light, medium weight, and heavy cars. We’ll define light cars as a weight below 1 ton (2000 lbs), and heavy cars as having a weight of 2 tons (4000 lbs) or more.</p>
-<p>Before we do this, we’ve learned that the weight reported for the Pont. Grand Prix was incorrect - we don’t know what the correct weight is, but we know the presented one is wrong, so let’s make it missing. We could of course do this manually - open the data editor and delete the value of <code>weight</code> corresponding to the Pont. Grand Prix. As we saw earlier, <a href="working-with-data-sets.html#editing-data-manually">manually editing</a> the data like this produces a <code>replace</code> call that we can move into our <a href="the-basics-of-stata.html#do-files">Do file for reproducibility</a>. However, this <code>replace</code> call would refer to a row number, something like</p>
-<pre><code>replace weight = . in 49</code></pre>
-<p>What would happen if our data was shuffled prior to running this command? It would no longer be applied to the correct row. Therefore, it will be safer to use a <a href="#restricting-commands-to-subsets">conditional statement</a> to identify the row corresponding to <code>"Pont. Grand Prix"</code>.</p>
+<p>Before we do this, we’ve learned that the weight reported for the Pont. Grand Prix was incorrect - we don’t know what the correct weight is, but we know the presented one is wrong, so let’s make it missing. We could of course do this manually - open the data editor and delete the value of <code>weight</code> corresponding to the Pont. Grand Prix. As we saw earlier, <a href="02-working-with-data-sets.html#editing-data-manually">manually editing</a> the data like this produces a <code>replace</code> call that we can move into our <a href="01-the-basics-of-stata.html#do-files">Do file for reproducibility</a>. However, this <code>replace</code> call would refer to a row number, something like</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> <span class="kw">weight</span> = . <span class="kw">in</span> 49</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What would happen if our data was shuffled prior to running this command? It would no longer be applied to the correct row. Therefore, it will be safer to use a <a href="04-data-manipulation.html#restricting-commands-to-subsets">conditional statement</a> to identify the row corresponding to <code>"Pont. Grand Prix"</code>.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">replace</span> <span class="kw">weight</span> = . <span class="kw">if</span> make == <span class="st">"Pont. Grand Prix"</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>(1 <span class="fu">real</span> change made, 1 to <span class="fu">missing</span>)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -605,7 +605,7 @@ command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
 <span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>      Total |         74      100.00</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There’s one additional complication. Stata represents missing values by <code>.</code>, and <code>.</code> has a value of positive infinity. That means that</p>
 <p><span class="math display">\[
-  400 \lt .
+400 \lt .
 \]</span></p>
 <p>is true! There is some discussion <a href="http://www.stata.com/support/faqs/data-management/logical-expressions-and-missing-values/">on the Stata FAQs</a> that goes into the rationale behind it, but the short version is that this slightly complicates variable generation but greatly simplifies and protects some data management tasks.</p>
 <p>The complication referred to can be seen in the row corresponding to the Pont. Grand Prix</p>
@@ -637,21 +637,21 @@ command &lt;variable(s)&gt; if &lt;condition&gt;, &lt;options&gt;</code></pre>
 <p>The <code>missing()</code> function returns true for each row with a missing value, and false for each row with an observed value, for the variable inside the parantheses (in this case, <code>weight</code>).</p>
 <p>You may occasionally see <code>if weight != .</code> or <code>if weight &lt;= .</code> instead of the <code>missing()</code> function. Recall that missing values are sorted to be larger than the largest observed value, so this works just as well as <code>missing()</code>. However, Stata allows you to define “reasons” for missing, specifically <code>.a</code>, <code>.b</code>, all the way through <code>.z</code>. These are sorted such that <code>.</code> &lt; <code>.a</code> &lt; <code>.b</code> &lt; … &lt; <code>.z</code>. For this reason, <code>!= .</code> is not suggested, as while <code>.</code> will be captured as missing, <code>.a</code>, etc will not be. Using <code>missing()</code> removes the temptation to write <code>!=</code> instead of <code>&lt;=</code>.</p>
 <p>The <code>missing()</code> function can be proceeded with an exclamation point to indicate not missing. For example</p>
-<pre><code>replace x = 2 if !missing(y)</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> x = 2 <span class="kw">if</span> !<span class="fu">missing</span>(<span class="fu">y</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>missing</code> option to <code>tab</code> forces it to show a row for any missing values. Without it, missing rows are suppressed.</p>
 <p>To summarize, we used the following commands:</p>
-<pre><code>generate weight_cat = 1
-replace weight_cat = 2 if weight &gt;= 2000 &amp; weight &lt; 4000
-replace weight_cat = 3 if weight &gt;= 4000
-replace weight_cat = . if missing(weight)</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">generate</span> weight_cat = 1</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> weight_cat = 2 <span class="kw">if</span> <span class="kw">weight</span> &gt;= 2000 &amp; <span class="kw">weight</span> &lt; 4000</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> weight_cat = 3 <span class="kw">if</span> <span class="kw">weight</span> &gt;= 4000</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> weight_cat = . <span class="kw">if</span> <span class="fu">missing</span>(<span class="kw">weight</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There are various other ways it could have been done, such as</p>
-<pre><code>generate weight_cat = 1 if weight &lt; 2000
-replace weight_cat = 2 if weight &gt;= 2000 &amp; weight &lt; 4000
-replace weight_cat = 3 if weight &gt;= 4000 &amp; !missing(weight)</code></pre>
-<pre><code>generate weight_cat = .
-replace weight_cat = 1 if weight &lt; 2000
-replace weight_cat = 2 if weight &gt;= 2000 &amp; weight &lt;= 4000
-replace weight_cat = 3 if weight &gt; 4000 &amp; !missing(weight)</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">generate</span> weight_cat = 1 <span class="kw">if</span> <span class="kw">weight</span> &lt; 2000</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> weight_cat = 2 <span class="kw">if</span> <span class="kw">weight</span> &gt;= 2000 &amp; <span class="kw">weight</span> &lt; 4000</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> weight_cat = 3 <span class="kw">if</span> <span class="kw">weight</span> &gt;= 4000 &amp; !<span class="fu">missing</span>(<span class="kw">weight</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">generate</span> weight_cat = .</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> weight_cat = 1 <span class="kw">if</span> <span class="kw">weight</span> &lt; 2000</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> weight_cat = 2 <span class="kw">if</span> <span class="kw">weight</span> &gt;= 2000 &amp; <span class="kw">weight</span> &lt;= 4000</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> weight_cat = 3 <span class="kw">if</span> <span class="kw">weight</span> &gt; 4000 &amp; !<span class="fu">missing</span>(<span class="kw">weight</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Of course, we could also generate it in the reverse order (3 to 1) or even mixed up (3, 1, 2). There are also alternate ways to write the various conditionals, such as replacing <code>weight &gt; 4000</code> with <code>weight &gt;= 4001</code>. There are usually multiple correct ways to specify any conditional.</p>
 </section>
 </section>
@@ -659,20 +659,32 @@ replace weight_cat = 3 if weight &gt; 4000 &amp; !missing(weight)</code></pre>
 <h2 data-number="4.4" class="anchored" data-anchor-id="more-complicated-replaces"><span class="header-section-number">4.4</span> More complicated replaces</h2>
 <p>The above example for <code>replace</code> was fairly simplistic, but you can imagine the need for a much more complicated replacing structure (perhaps based on the value of multiple variables). If, however, you do have something this simple, the <code>recode</code> command could be used instead.</p>
 <p>The <code>recode</code> command syntax is fairly simple,</p>
-<pre><code>recode &lt;oldvar&gt; (&lt;rule 1&gt;) (&lt;rule 2&gt;) ...., generate(&lt;newvar&gt;)</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">recode</span> &lt;oldvar&gt; (&lt;rule 1&gt;) (&lt;rule 2&gt;) ...., <span class="kw">generate</span>(&lt;newvar&gt;)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The different rules define the recoding to take place. For example, the above creation of <code>weight_cat</code> can be written as</p>
-<pre><code>recode weight (1/1999 = 1) (2000/4000 = 2) (4001/99999999 = 3) (missing = .), generate(weight_cat)</code></pre>
-<p>Each rule has the form of <code>old value(s) = new value</code>, where the old values can be either a single number (<code>(5 = 2)</code>), several numbers (either listed as above in a <a href="Restricting commands to subsets">numlist</a> [note the use of a very large non-missing value for the upper bound], or just a space-separated list of values (<code>(1 5 10 = 4)</code>), the phrases “missing”, “nonmissing” or “else” to capture anything not elsewhere defined. The new value must be a single number or a missing value (<code>.</code> or <code>.a</code>, etc). “else” cannot be used if “missing” or “nonmissing” is defined (and vice-versa), and all of those must be the last rules defined. E.g.,</p>
-<pre><code>recode x (missing = 5) (2 = 4) (else = 3) (1 = 2), generate(y)</code></pre>
-<p>will not run because “missing” and “else” are both simultaneously defined, and the <code>1 = 2</code> rule is last instead of “else” or “missing”.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">recode</span> <span class="kw">weight</span> (1/1999 = 1) (2000/4000 = 2) (4001/99999999 = 3) <span class="co">///</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>              (<span class="fu">missing</span> = .), <span class="kw">generate</span>(weight_cat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Each rule has the form of <code>old value(s) = new value</code>, where the old values can be any of:</p>
+<ul>
+<li>A single number, e.g.&nbsp;<code>(5 = 2)</code>.</li>
+<li>several numbers, either
+<ul>
+<li>a <a href="02-working-with-data-sets.html#loading-subsets-of-the-data">numlist</a> as in this example (note the use of a very large non-missing value for the upper bound)</li>
+<li>a space-separated list of values, e.g.&nbsp;<code>(1 5 10 = 4)</code></li>
+<li>Mixture of the those two, e.g.&nbsp;<code>(6 10 12/25 31 = 17)</code></li>
+</ul></li>
+<li>the phrases <code>missing</code>, <code>nonmissing</code> or <code>else</code> to capture anything not elsewhere defined.</li>
+</ul>
+<p>The new value must be a single number or a missing value (<code>.</code> or <code>.a</code>, etc). <code>else</code> cannot be used if <code>missing</code> or <code>nonmissing</code> is defined (and vice-versa), and all of those must be the last rules defined. E.g.,</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">recode</span> x (<span class="fu">missing</span> = 5) (2 = 4) (<span class="kw">else</span> = 3) (1 = 2), <span class="kw">generate</span>(<span class="fu">y</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>will not run because “missing” and “else” are both simultaneously defined, and because the <code>1 = 2</code> rule is last instead of <code>else</code> or <code>missing</code>.</p>
 <p>Note that if you see older code you may see either the parantheses or the <code>generate</code> option excluded. You should include both of these.</p>
 <p>Finally, the rules are executed left-to-right. So if you have two rules referring to the same values, the first one is used, and the second is not. For example,</p>
-<pre><code>recode x (1/5 = 7) (2 = 4), generate(y)</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">recode</span> x (1/5 = 7) (2 = 4), <span class="kw">generate</span>(<span class="fu">y</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>2 = 4</code> rule will never take place because 2 is already recoded to 7 in the <code>1/5 = 7</code> rule.</p>
 </section>
 <section id="subsetting" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="subsetting"><span class="header-section-number">4.5</span> Subsetting</h2>
-<p>Almost any Stata command which operates on variables can operate on a subset of the data instead of the entire data, <a href="Restricting commands to subsets">as we saw before</a>, by using the <code>if</code> or <code>in</code> statements in the command. This is equivalent to throwing away some data and then performing the command. In general, you should avoid discarding data as you never know when you will possible use it. Of course, you could use [<code>preserve</code> and <code>restore</code>][Temporarily preserving and restoring data] to temporarily remove the data, but using the conditional subsetting is more straightforward.</p>
+<p>Almost any Stata command which operates on variables can operate on a subset of the data instead of the entire data, <a href="04-data-manipulation.html#restricting-commands-to-subsets">as we saw before</a>, by using the <code>if</code> or <code>in</code> statements in the command. This is equivalent to throwing away some data and then performing the command. In general, you should avoid discarding data as you never know when you will possible use it. Of course, you could use <a href="02-working-with-data-sets.html#temporarily-preserving-and-restoring-data"><code>preserve</code> and <code>restore</code></a> to temporarily remove the data, but using the conditional subsetting is more straightforward.</p>
 <p>If the conditional logic we want to use involves subsets of the data, we could use this to give us results within each group.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">summarize</span> price</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -691,7 +703,7 @@ replace weight_cat = 3 if weight &gt; 4000 &amp; !missing(weight)</code></pre>
 <span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>    Variable |        Obs        Mean    Std. <span class="kw">dev</span>.       Min        Max</span>
 <span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>-------------+---------------------------------------------------------</span>
 <span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>       price |         22    6384.682    2621.915       3748      12990</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Keep track of the number of observations, “Obs”, to see that the second and third commands are in fact operating on the subsets. We see here that American cars are cheaper on average<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p>
+<p>Keep track of the number of observations, <code>Obs</code>, to see that the second and third commands are in fact operating on the subsets. We see here that American cars are cheaper on average<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>.</p>
 <section id="repeat-commands-on-subsets" class="level3" data-number="4.5.1">
 <h3 data-number="4.5.1" class="anchored" data-anchor-id="repeat-commands-on-subsets"><span class="header-section-number">4.5.1</span> Repeat commands on subsets</h3>
 <p>To look at the average price for American and foreign cars, we ran two individual commands. If we wanted to look at the summaries by <code>rep78</code>, that would take 6 commands (values 1 through 5 and <code>.</code>)!</p>
@@ -713,9 +725,9 @@ replace weight_cat = 3 if weight &gt; 4000 &amp; !missing(weight)</code></pre>
 <span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>       price |         22    6384.682    2621.915       3748      12990</span>
 <span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There is a strong assumption here that the data is already sorted by the variables we are splitting <code>by</code> on (e.g.&nbsp;<code>foreign</code>). If <code>foreign</code> were not sorted (or if you simply did not want to check/assume it was), you could instead use</p>
-<pre><code>bysort foreign: summ price</code></pre>
-<p><code>bysort</code> is identical to sorting (which we’ll discuss <a href="#sorting">later</a>) first and running the <code>by</code> statement afterwards. In general, it is recommended to always use <code>bysort</code> instead of <code>by</code>, <em>unless</em> you believe the data is already sorted and want an error if that assumption is violated.</p>
-<p>Before running these commands, consider generating a <a href="#system-variables">original ordering variable</a> first.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">bysort</span> foreign: summ price</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>bysort</code> is identical to sorting (which we’ll discuss <a href="04-data-manipulation.html#sorting">later</a>) first and running the <code>by</code> statement afterwards. In general, it is recommended to always use <code>bysort</code> instead of <code>by</code>, <em>unless</em> you believe the data is already sorted and want an error if that assumption is violated.</p>
+<p>Before running these commands, consider generating a <a href="04-data-manipulation.html#system-variables">original ordering variable</a> first.</p>
 <p><code>bysort</code>’s variables cannot be conditional statements, so if you wanted to for example get summaries by low and high mileage cars, you’d need to generate a dummy variable first.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">gen</span> highmileage = mpg &gt; 20</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -767,17 +779,17 @@ replace weight_cat = 3 if weight &gt; 4000 &amp; !missing(weight)</code></pre>
 <span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a>       price |         17    5539.412    1686.472       3748       9735</span>
 <span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>When specifying <code>bysort</code>, you can optionally specify a variable to sort on but not to group by. For example, let’s say your data consisted of doctors visits for patients, where patients may have more than one appointment. You want to generate a variable indicating whether a visit is the first by the patient. Say <code>id</code> stores the patient id, <code>date</code> stores the date of the visit.</p>
-<pre><code>bysort id (date): gen firstvisit = _n == 1</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">bysort</span> id (<span class="fu">date</span>): <span class="kw">gen</span> firstvisit = <span class="dt">_n</span> == 1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>By placing <code>date</code> in parentheses, this ensures that within each <code>id</code>, the data is sorted by <code>date</code>. Therefore the first row for each patient is their first visit, so <code>_n == 1</code> evaluates to 1 only in that first row and 0 zero otherwise.</p>
 </section>
 <section id="discarding-data" class="level3" data-number="4.5.2">
 <h3 data-number="4.5.2" class="anchored" data-anchor-id="discarding-data"><span class="header-section-number">4.5.2</span> Discarding data</h3>
 <p>If you do want to discard data, you can use <code>keep</code> or <code>drop</code> to do so. They each can perform on variables:</p>
-<pre><code>keep &lt;var1&gt; &lt;var2&gt; ...
-drop &lt;var1&gt; &lt;var2&gt; ...</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span> &lt;var1&gt; &lt;var2&gt; ...</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> &lt;var1&gt; &lt;var2&gt; ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>or on observations:</p>
-<pre><code>keep if &lt;conditional&gt;
-drop if &lt;conditional&gt;</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span> <span class="kw">if</span> &lt;conditional&gt;</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> <span class="kw">if</span> &lt;conditional&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Note that these <em>cannot</em> be combined:</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">drop</span> turn <span class="kw">if</span> mpg &gt; 20</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>invalid <span class="kw">syntax</span></span>
@@ -830,7 +842,7 @@ drop if &lt;conditional&gt;</code></pre>
 </section>
 <section id="sorting" class="level2" data-number="4.7">
 <h2 data-number="4.7" class="anchored" data-anchor-id="sorting"><span class="header-section-number">4.7</span> Sorting</h2>
-<p>We already saw sorting <a href="#repeat-commands-on-subsets">in the context of <code>bysort</code></a>. We can also sort as a standalone operation. As before, consider generating a <a href="#system-variables">original ordering variable</a> first.</p>
+<p>We already saw sorting <a href="04-data-manipulation.html#repeat-commands-on-subsets">in the context of <code>bysort</code></a>. We can also sort as a standalone operation. As before, consider generating a <a href="04-data-manipulation.html#system-variables">original ordering variable</a> first.</p>
 <p>We’ll switch back to “auto” first.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">sysuse</span> auto, <span class="kw">clear</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>(1978 automobile <span class="kw">data</span>)</span>
@@ -865,18 +877,18 @@ drop if &lt;conditional&gt;</code></pre>
 <span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>  4. |     2    6,342 |</span>
 <span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>  5. |     2    5,886 |</span>
 <span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>     +----------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Recall that missing values (<code>.</code>) are <a href="#conditional-variable-generation">larger than any other values</a>. When sorting with missing values, they follow this rule as well. If you want to treat missing values as smaller than all other values, you can pass the <code>mfirst</code> option to <code>gsort</code>. Note this does <em>not</em> make missingness “less than” anywhere else, only for the purposes of the current sort.</p>
-<p>Sorting strings does work and is done alphabetically. All capital letters are “less than” all lower case letters, and a blank string (““) is the”smallest”. For example, if you have the strings “DBC”, “Daa”, ““,”EEE”, the sorted ascending order would be ““,”DBC”, “Daa”, “EEE”. The blank is first; the two strings starting with “D” are before the string “EEE”, and the upper case “B” precedes the lower case “a”.</p>
+<p>Recall that missing values (<code>.</code>) are <a href="04-data-manipulation.html#conditional-variable-generation">larger than any other values</a>. When sorting with missing values, they follow this rule as well. If you want to treat missing values as smaller than all other values, you can pass the <code>mfirst</code> option to <code>gsort</code>. Note this does <em>not</em> make missingness “less than” anywhere else, only for the purposes of the current sort.</p>
+<p>Sorting strings does work and is done alphabetically. All capital letters are “less than” all lower case letters, and a blank string (<code>""</code>) is the “smallest”. For example, if you have the strings <code>DBC</code>, <code>Daa</code>, <code>""</code><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>, <code>EEE</code>, the sorted ascending order would be <code>""</code>, <code>DBC</code>, <code>Daa</code>, <code>EEE</code>. The blank is first; the two strings starting with “D” are before the string <code>EEE</code>, and the upper case “B” precedes the lower case “a”.</p>
 <p>As a side note, there is an additional command, <code>sort</code>, which can perform sorting. It does not allow sorting in descending order, however it does allow you to sort only a certain number of rows; that is, passing something like <code>sort &lt;varname&gt; in 100/200</code> would sort only rows 100 through 200, leaving the remaining rows remain <em>in their exact same position</em>.</p>
 </section>
 <section id="working-with-strings-and-categorical-variables" class="level2" data-number="4.8">
 <h2 data-number="4.8" class="anchored" data-anchor-id="working-with-strings-and-categorical-variables"><span class="header-section-number">4.8</span> Working with strings and categorical variables</h2>
-<p>String variables are commonly used during data collection but are ultimately not very useful from a statistical point of view. Typically string variables should be represented as [categorical variables with value labels][labeling values] as we’ve previously discussed. Here are some useful commands for operating on strings and categorical variables.</p>
+<p>String variables are commonly used during data collection but are ultimately not very useful from a statistical point of view. Typically string variables should be represented as <a href="03-data-management.html#labeling-values">categorical variables with value labels</a> as we’ve previously discussed. Here are some useful commands for operating on strings and categorical variables.</p>
 <section id="converting-between-string-and-numeric" class="level3" data-number="4.8.1">
 <h3 data-number="4.8.1" class="anchored" data-anchor-id="converting-between-string-and-numeric"><span class="header-section-number">4.8.1</span> Converting between string and numeric</h3>
 <p>These two commands convert strings and numerics between each other.</p>
-<pre><code>destring &lt;variable&gt;, gen(&lt;newvar&gt;)
-tostring &lt;variable&gt;, replace</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">destring</span> &lt;<span class="kw">variable</span>&gt;, <span class="kw">gen</span>(&lt;newvar&gt;)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="kw">tostring</span> &lt;<span class="kw">variable</span>&gt;, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Both commands can take the options <code>replace</code> (to replace the existing variable with the new one) or <code>gen( )</code> (to generate a new variable). I would recommend always using <code>gen</code> to double-check that the conversion worked as expected, then using <code>drop</code>, <code>rename</code> and <code>order</code> to replace the existing variable.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">desc</span> mpg</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -947,8 +959,8 @@ tostring &lt;variable&gt;, replace</code></pre>
 <span id="cb56-32"><a href="#cb56-32" aria-hidden="true" tabindex="-1"></a>. <span class="kw">rename</span> mpg2 mpg</span>
 <span id="cb56-33"><a href="#cb56-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-34"><a href="#cb56-34" aria-hidden="true" tabindex="-1"></a>. <span class="kw">order</span> mpg, after(price)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>And we’re back to the original set-up.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
-<p>When using <code>destring</code> to convert a string variable (that it storing numeric data as strings - “13”, “14”) to a numeric variable, if there are <em>any</em> non-numeric entries, <code>destring</code> will fail. For example, lets replace one the car “make” with a numeric.</p>
+<p>And we’re back to the original set-up.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<p>When using <code>destring</code> to convert a string variable (that it storing numeric data as strings - “13”, “14”) to a numeric variable, if there are <em>any</em> non-numeric entries, <code>destring</code> will fail. For example, lets replace one entry in the <code>make</code> variable with a numeric.</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">replace</span> make = <span class="st">"1"</span> <span class="kw">in</span> 1</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>(1 <span class="fu">real</span> change made)</span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -972,8 +984,8 @@ tostring &lt;variable&gt;, replace</code></pre>
 </section>
 <section id="converting-strings-into-labeled-numbers" class="level3" data-number="4.8.2">
 <h3 data-number="4.8.2" class="anchored" data-anchor-id="converting-strings-into-labeled-numbers"><span class="header-section-number">4.8.2</span> Converting strings into labeled numbers</h3>
-<p>If we have a string variable which has non-numerical values (e.g.&nbsp;<code>race</code> with values “white”, “black”, “Hispanic”, etc), the ideal way to store it is as numerical with [value labels][labeling values] attached. While we could do this manually using a combination of <code>gen</code> and <code>replace</code> with some conditionals, a less tedious way to do so is via <code>encode</code>.</p>
-<p>We’ll switch to the “hbp2” data set from the Stata website, records some blood pressure measurements. (Remember this will erase any existing unsaved changes! You will not need any modifications you’ve made to other built-in datasets going forward [except <code>census9</code> from [Exercise 3][exercise 3]], but if you do want to save it, do so first!)</p>
+<p>If we have a string variable which has non-numerical values (e.g.&nbsp;<code>race</code> with values “white”, “black”, “Hispanic”, etc), the ideal way to store it is as numerical with <a href="03-data-management.html#labeling-values">value labels</a> attached. While we could do this manually using a combination of <code>gen</code> and <code>replace</code> with some conditionals, a less tedious way to do so is via <code>encode</code>.</p>
+<p>We’ll switch to the “hbp2” data set from the Stata website, records some blood pressure measurements. Remember this will erase any existing unsaved changes! You will not need any modifications you’ve made to other built-in datasets going forward (except <code>census9</code> from <a href="03-data-management.html#exercise-3">Exercise 3</a> which you should already have saved), but if you do want to save it, do so first!</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">webuse</span> hbp2, <span class="kw">clear</span></span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>. <span class="kw">tab</span> sex, <span class="fu">missing</span></span>
@@ -1104,12 +1116,12 @@ tostring &lt;variable&gt;, replace</code></pre>
 <ul>
 <li><code>strlen</code>: Returns the number of characters in the string</li>
 <li><code>wordcount</code>: Returns the number of whitespace-separated words.</li>
-<li>“<code>+</code>”: Adding two strings together concatenates them (e.g.&nbsp;“abc” + “def” = “abcdef”).</li>
+<li><code>+</code>: Adding two strings together concatenates them (e.g.&nbsp;<code>abc + def</code> = <code>abcdef</code>).</li>
 <li><code>strupper</code> and <code>strlower</code>: Converts to lower/upper case.</li>
-<li><code>strtrim</code>: Removes white space before and after strings (e.g.&nbsp;<code>strtrim(" string ") = "string"</code>). To remove only left (preceding) or right (following) spaces, use <code>strltrim</code> or <code>strrtrim</code>.</li>
-<li><code>substr</code>: Returns the substring starting at an index for a given number of characters (e.g.&nbsp;`substr(“abcdefg”, 2, 3) = “bcd”).</li>
+<li><code>strtrim</code>: Removes white space preceding and following non-string characters in a string (e.g.&nbsp;<code>strtrim("  string   ") = "string"</code>). To remove only left (preceding) or right (following) spaces, use <code>strltrim</code> or <code>strrtrim</code>.</li>
+<li><code>substr</code>: Returns the substring starting at an index for a given number of characters (e.g.&nbsp;<code>substr("abcdefg", 2, 3) = "bcd"</code>).</li>
 </ul>
-<p>These are used inside <code>gen</code> and <code>replace</code>, e.g.</p>
+<p>These can be used inside <code>gen</code> and <code>replace</code>, e.g.</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">gen</span> sexupper = <span class="fu">strupper</span>(sex)</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>(2 <span class="fu">missing</span> <span class="kw">values</span> generated)</span>
 <span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1134,16 +1146,16 @@ tostring &lt;variable&gt;, replace</code></pre>
 <p>Open the <em>saved</em> version of “census9” with <code>use</code>, not the original version with <code>webuse</code>.</p>
 <ol type="1">
 <li>Generate a new variable, <code>deathperc</code>, which is the percentage of deaths in each state. (Remember that <code>deathrate</code> is deaths per 10,000.)</li>
-<li>The average age of all Americans in 1980 is roughly 30.11 years of age. <a href="#conditional-variable-generation">Generate a categorical</a> with four values as described before, with appropriate [value labels][labeling values].
+<li>The average age of all Americans in 1980 is roughly 30.11 years of age. <a href="04-data-manipulation.html#conditional-variable-generation">Generate a categorical</a> with four values as described before, with appropriate <a href="03-data-management.html#labeling-values">value labels</a>.
 <ul>
 <li>Significantly below national average: <code>medage</code> equal to 26.20 or less</li>
 <li>Below national average: <code>medage</code> greater than 26.20 and less than or equal to 30.10.</li>
 <li>Above national average: <code>medage</code> greater than 30.10 and less than or equal to 32.80.</li>
 <li>Significantly above national average: <code>medage</code> greater than 32.80.</li>
 </ul></li>
-<li>What is the death rate in <a href="#repeat-commands-on-subsets">each of those four categories</a>? (You can use <code>summarize</code> to obtain the means.) Does there appear to be any pattern?</li>
-<li>What state has the <a href="#sorting">lowest</a> death rate? The highest? The lowest average age? The highest?</li>
-<li>Each state has a single observation here, but if we had multiple years of data, then we could have <a href="#reshaping-files">“long data”</a> with multiple rows per state. To prepare for this sort of data, <a href="#converting-strings-into-labeled-numbers">encode</a> the two-letter state abbreviation into a numeric value with value labels.</li>
+<li>What is the death rate in <a href="04-data-manipulation.html#repeat-commands-on-subsets">each of those four categories</a>? (You can use <code>summarize</code> to obtain the means.) Does there appear to be any pattern?</li>
+<li>What state has the <a href="04-data-manipulation.html#sorting">lowest</a> death rate? The highest? The lowest average age? The highest?</li>
+<li>Each state has a single observation here, but if we had multiple years of data, then we could have <a href="04-data-manipulation.html#reshaping-files">“long data”</a> with multiple rows per state. To prepare for this sort of data, <a href="04-data-manipulation.html#converting-strings-into-labeled-numbers">encode</a> the two-letter state abbreviation into a numeric value with value labels.</li>
 </ol>
 </section>
 <section id="merging-files" class="level2" data-number="4.10">
@@ -1151,7 +1163,7 @@ tostring &lt;variable&gt;, replace</code></pre>
 <p>When managing data sets, the need often arises to merge two data sets together, either by matching two files together according to values on certain variables, or by adding cases to an existing data set. We’ll start with the simpler case of adding cases to an existing data set.</p>
 <section id="appending-files" class="level3" data-number="4.10.1">
 <h3 data-number="4.10.1" class="anchored" data-anchor-id="appending-files"><span class="header-section-number">4.10.1</span> Appending Files</h3>
-<p>Appending is straightforward. Observations in a new data set (called the “using” data) are appended to the current data set (called the “master” data), matching variable names. If a variable in the using data exists already in the master data, its values are entered there. If a variable in the using data does not exist in the master, the new variable is added to the appended data set which is missing for all members of the master data. This is easiest to visualize. There are two data sets on [Stata’s website][stata website data] which we can append, “odd” and “even”.</p>
+<p>Appending is straightforward. Observations in a new data set (called the “using” data) are appended to the current data set (called the “master” data), matching variable names. If a variable in the using data exists already in the master data, its values are entered there. If a variable in the using data does not exist in the master, the new variable is added to the appended data set which is missing for all members of the master data. This is easiest to visualize. There are two data sets on <a href="02-working-with-data-sets.html#stata-website-data">Stata’s website</a> which we can append, “odd” and “even”.</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">webuse</span> odd, <span class="kw">clear</span></span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>(First five odd numbers)</span>
 <span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1179,8 +1191,8 @@ tostring &lt;variable&gt;, replace</code></pre>
 <span id="cb65-25"><a href="#cb65-25" aria-hidden="true" tabindex="-1"></a>  2. |      7     14 |</span>
 <span id="cb65-26"><a href="#cb65-26" aria-hidden="true" tabindex="-1"></a>  3. |      8     16 |</span>
 <span id="cb65-27"><a href="#cb65-27" aria-hidden="true" tabindex="-1"></a>     +---------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It does not truly matter which data set is the master data and which is the using data (it will later in <a href="#match-merging-data">match-merging</a>), it will only affect the sorted order (the data in master is sorted first). The syntax is simply</p>
-<pre><code>append using &lt;using data&gt;</code></pre>
+<p>It does not truly matter which data set is the master data and which is the using data (it will later in <a href="04-data-manipulation.html#match-merging-data">match-merging</a>), it will only affect the sorted order (the data in master is sorted first). The syntax is simply</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="kw">append</span> <span class="kw">using</span> &lt;<span class="kw">using</span> <span class="kw">data</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb67"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">webuse</span> even</span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>(6th through 8th even numbers)</span>
 <span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1202,10 +1214,10 @@ tostring &lt;variable&gt;, replace</code></pre>
 <span id="cb67-19"><a href="#cb67-19" aria-hidden="true" tabindex="-1"></a>  7. |      4      .     7 |</span>
 <span id="cb67-20"><a href="#cb67-20" aria-hidden="true" tabindex="-1"></a>  8. |      5      .     9 |</span>
 <span id="cb67-21"><a href="#cb67-21" aria-hidden="true" tabindex="-1"></a>     +---------------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>(We must specify the complete path to the data instead of the <code>webuse</code> shorthand of just the data name. Of course, with real data that you locally have on your computer, you follow the [working directory][working directory] rules; if the file exists in your working directory you just give the name, otherwise give the complete path. I obtained that path by visiting the Stata data website and finding the link to “odd”.)</p>
+<p>(We must specify the complete path to the data instead of the <code>webuse</code> shorthand of just the data name. Of course, with real data that you locally have on your computer, you follow the <a href="01-the-basics-of-stata.html#working-directory">working directory</a> rules; if the file exists in your working directory you just give the name, otherwise give the complete path. I obtained that path by visiting the Stata data website and finding the link to “odd”.)</p>
 <p>Note that the “number” variable, which exists in both data sets, has complete data, while “even” and “odd” both have missing data as expected. The <code>using</code> part of the command is where the term the “using data” comes from.</p>
 <p>Stata is case sensitive in its variable names, so “varname” and “Varname” are two unique variables. We could always fix this later with something like</p>
-<pre><code>replace varname = Varname if varname == .</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> varname = Varname <span class="kw">if</span> varname == .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>but it is better to ensure before appending that the shared variables have identical names.</p>
 </section>
 <section id="match-merging-data" class="level3" data-number="4.10.2">
@@ -1245,7 +1257,7 @@ tostring &lt;variable&gt;, replace</code></pre>
 <span id="cb69-28"><a href="#cb69-28" aria-hidden="true" tabindex="-1"></a>  5. |    Audi Fox    6295       3 |</span>
 <span id="cb69-29"><a href="#cb69-29" aria-hidden="true" tabindex="-1"></a>     +-----------------------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now we can perform the merge using the syntax.</p>
-<pre><code>merge 1:1 &lt;variables to match on&gt; using &lt;using data set&gt;</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="kw">merge</span> 1:1 &lt;variables to <span class="fu">match</span> <span class="kw">on</span>&gt; <span class="kw">using</span> &lt;<span class="kw">using</span> <span class="kw">data</span> <span class="kw">set</span>&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>All that needs to be specified is the variable to match cases by and the name of the data set with variables to be added. We could replace <code>1:1</code> with <code>m:1</code> or <code>1:m</code> as desired.</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">merge</span> 1:1 make <span class="kw">using</span> http:<span class="co">//www.stata-press.com/data/r16/autosize</span></span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1268,7 +1280,7 @@ tostring &lt;variable&gt;, replace</code></pre>
 <span id="cb71-19"><a href="#cb71-19" aria-hidden="true" tabindex="-1"></a>  5. |   Audi Fox    6295       3        .        .   Master only (1) |</span>
 <span id="cb71-20"><a href="#cb71-20" aria-hidden="true" tabindex="-1"></a>  6. |   BMW 320i    9735       4    2,650      177       Matched (3) |</span>
 <span id="cb71-21"><a href="#cb71-21" aria-hidden="true" tabindex="-1"></a>     +----------------------------------------------------------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>(Again, we use the full path but for local files, following [working directory][working directory] rules.)</p>
+<p>(Again, we use the full path but for local files, following <a href="01-the-basics-of-stata.html#working-directory">working directory</a> rules.)</p>
 <p>First, take a look at the output of the merge command. We see that 68 cars were not matched, which means they exist in only one of the two data sets. In this case, they all exist in master data, but in general you could see a mix of the two. The remaining 6 observations were appropriately matched. This is a terrible merge! Hopefully with your real data, the majority of data is matched and only a few outliers are not matched.</p>
 <p>Notice the <code>(_merge==#)</code> tags. When you perform a merge, a new variable <code>_merge</code> is added which indicates the source for each row: 1 and 2 indicate the data was only found in the master data or using data respectively, while 3 indicates a match. There are two other possible values (4 and 5) which occur rarely, see the documentation at <code>help merge</code> for details.</p>
 <p>A few notes:</p>
@@ -1288,21 +1300,21 @@ tostring &lt;variable&gt;, replace</code></pre>
 <p><a href="./images/wide-vs-long.png"><img src="./images/wide-vs-long.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
-<p>In this example, the wide format of the data has each row representing a single observation. The variables “X1”, “X2” and “X3” are what make this “wide”. These are typically variables measured at different time points, but don’t have to be. In the long format, each row represents an observation <em>at a specific index</em>.</p>
+<p>In this example, the wide format of the data has each row representing a single observation. The variables <code>X1</code>, <code>X2</code> and <code>X3</code> are what make this “wide”. These are typically variables measured at different time points, but don’t have to be. In the long format, each row represents an observation <em>at a specific index</em>.</p>
 <p>A nice feature of Stata’s <code>reshape</code> command is that the syntax to convert from wide-to-long or from long-to-wide are identical, except for desired format (<code>long</code> vs <code>wide</code>).</p>
 <p>Convert to long:</p>
-<pre><code>reshape long &lt;stub&gt;, i(&lt;ivar&gt;) j(&lt;jvar&gt;)</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reshape</span> <span class="kw">long</span> &lt;stub&gt;, i(&lt;ivar&gt;) j(&lt;jvar&gt;)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Convert to wide:</p>
-<pre><code>reshape wide &lt;stub&gt;, i(&lt;ivar&gt;) j(&lt;jvar&gt;)</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reshape</span> <span class="kw">wide</span> &lt;stub&gt;, i(&lt;ivar&gt;) j(&lt;jvar&gt;)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We need to identify three components, the <code>stub</code>, <code>ivar</code> and <code>jvar</code>.</p>
 <ul>
-<li>“stub”: The stub in wide format is the common prefix of the repeated variables names. In the illustration above, “X1”, “X2” and “X3” have the common prefix “X”. In the long format, the stub is simply the name of the variable which is repeated. In the illustration above, “X” is this variable. Hence the stub is <code>X</code> for both.</li>
+<li>“stub”: The stub in wide format is the common prefix of the repeated variables names. In the illustration above, <code>X1</code>, <code>X2</code> and <code>X3</code> have the common prefix “X”. In the long format, the stub is simply the name of the variable which is repeated. In the illustration above, <code>X</code> is this variable. Hence the stub is <code>X</code> for both.</li>
 <li>“ivar”: The ivar is the id variable. In the long format, this should be constant across individuals. In both formats above, the id is <code>ID</code>.</li>
-<li>“jvar”: The jvar in long format is the variable that distinguishes which index each repeated measure is from. In the illustration above, “Index” fills this role. In wide format, this does not exist. So when converting from wide to long, you can use any name for the jvar.</li>
+<li>“jvar”: The jvar in long format is the variable that distinguishes which index each repeated measure is from. In the illustration above, <code>Index</code> fills this role. In wide format, this does not exist. So when converting from wide to long, you can use any name for the jvar.</li>
 </ul>
 <p>Putting this all together together, the two commands to convert between the illustrations above would be:</p>
-<pre><code>reshape long X, i(ID) j(Index)
-reshape wide X, i(ID) j(Index)</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reshape</span> <span class="kw">long</span> X, i(ID) j(Index)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="kw">reshape</span> <span class="kw">wide</span> X, i(ID) j(Index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>As an example, we’ll use the built-in data set “bplong”</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">sysuse</span> bplong, <span class="kw">clear</span></span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>(Fictional blood-pressure <span class="kw">data</span>)</span>
@@ -1380,11 +1392,11 @@ reshape wide X, i(ID) j(Index)</code></pre>
 <span id="cb77-22"><a href="#cb77-22" aria-hidden="true" tabindex="-1"></a>  5. |       3   Before   153   Male    30-45 |</span>
 <span id="cb77-23"><a href="#cb77-23" aria-hidden="true" tabindex="-1"></a>     +----------------------------------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The variables are slightly out of order, but we’ve completely recovered the original data.</p>
-<p>After you’ve run a single <code>reshape</code> command, and assuming nothing has changed (you do not want to change “stub”, “ivar” or “jvar”, and the variables in the data are the same), you can convert between wide and long without specifying anything. Try it:</p>
-<pre><code>reshape wide
-reshape long</code></pre>
+<p>After you’ve run a single <code>reshape</code> command, and assuming nothing has changed (you do not want to change <code>stub</code>, <code>ivar</code> or <code>jvar</code>, and the variables in the data are the same), you can convert between wide and long without specifying anything. Try it:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="kw">reshape</span> <span class="kw">wide</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="kw">reshape</span> <span class="kw">long</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now, notice that when we reshaped the original long data into wide format, the two “bp” variables where <code>bp1</code> and <code>bp2</code>, not something like <code>bp_before</code> and <code>bp_after</code>. In most cases this is fine (as the common use case for this is repeated measures over time), but not always - what if we wanted to save the “before” and “after” labels? Do note that thankfully Stata saves these labels, so when converting back to long, it restores the “Before” and “After” tags.</p>
-<p>If you do want to save the text instead of the count, you need to use strings. We’ll use <a href="#converting-strings-into-labeled-numbers"><code>decode</code></a> to convert to a string, then use that as the jvar.</p>
+<p>If you do want to save the text instead of the count, you need to use strings. We’ll use <a href="04-data-manipulation.html#converting-strings-into-labeled-numbers"><code>decode</code></a> to convert to a string, then use that as the jvar.</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">decode</span> when, <span class="kw">gen</span>(when2)</span>
 <span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>. <span class="kw">drop</span> when</span>
@@ -1455,7 +1467,7 @@ drop if &lt;varname&gt; == .</code></pre>
 <li><p>More than one stub can be entered if you have more than one repeated measurement. For example, if the variables were {“id”, “x1”, “x2”, “y1”, “y2”}, you could enter</p>
 <pre><code>reshape long x y, i(id) j(index)</code></pre>
 <p>Note that they technically don’t have to have the same indices (e.g.&nbsp;you could have “x1”, “x2”, “y3”, “y4”) although that would create a weird result where each row of index 1 or 2 is missing <code>y</code> and each row of index 3 or 4 is missing <code>x</code>.</p></li>
-<li><p>If you have wide data and many time-varying variables, there is no shorthand for entering all the stubs. For large data, this is <strong>extremely</strong> frustrating. I’d recommend using <code>describe, simple</code> to get a list of all variable names, then using find &amp; replace to remove the indices. If you know a better way, [let me know][contact information]!</p></li>
+<li><p>If you have wide data and many time-varying variables, there is no shorthand for entering all the stubs. For large data, this is <strong>extremely</strong> frustrating. I’d recommend using <code>describe, simple</code> to get a list of all variable names, then using find &amp; replace to remove the indices. If you know a better way, <a href="index.html#contact-information">let me know</a>!</p></li>
 </ul>
 
 
@@ -1466,10 +1478,12 @@ drop if &lt;varname&gt; == .</code></pre>
 <li id="fn1"><p>If you want log with a different base, you can use the transformation that dividing by <code>log(b)</code> is equivalent to using <code>b</code> as a base. In other words, if you need log base 10, use <code>gen newvar = log(oldvar)/log(10)</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Technically and mathematically they can take on any two values, but your life will be easier if you stick with the 0/1 convention.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>This is true of most statistical software in fact.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>We’ll see some exceptions to this in the <a href="programming-advanced-features.html">programming</a> section.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p><code>generate</code> has a few features we do not discuss which <code>replace</code> does not support. Namely, <code>generate</code> can set the [type][describing the data] manually (instead of letting Stata choose the best type [automatically][compressing data]), and <code>generate</code> can place the new variable as desired rather than [using <code>order</code>][changing variable ordering]. Clearly, neither of these features are needed for <code>replace</code>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>Note that this is not a statistical claim, we would have to do a two-sample t-test to make any statistical claim.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>If you are sharp-eyed, you may have noticed that the original <code>mpg</code> was an “int” whereas the final one is a “byte”. If we had called [<code>compress</code>][compressing data] on the original data, it would have done that type conversion anyways - so we’re ok!<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>We’ll see some exceptions to this in the <a href="05-programming.html">programming</a> section.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><code>egen</code> is <strong>not</strong> a <a href="01-the-basics-of-stata.html#short-commands">short command</a> for “egenerate”; the full command name is simply “<code>egen</code>”.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><code>generate</code> has a few features we do not discuss which <code>replace</code> does not support. Namely, <code>generate</code> can set the <a href="03-data-management.html#describing-the-data">type</a> manually (instead of letting Stata choose the best type <a href="03-data-management.html#compressing-data">automatically</a>), and <code>generate</code> can place the new variable as desired rather than <a href="03-data-management.html#changing-variable-ordering">using <code>order</code></a>. Clearly, neither of these features are needed for <code>replace</code>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Note that this is not a statistical claim, we would have to do a two-sample t-test to make any statistical claim.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>I’m explcitly writing the quotations here as otherwise it would just look missing. The quotations aren’t part of the saved string.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>If you are sharp-eyed, you may have noticed that the original <code>mpg</code> was an “int” whereas the final one is a “byte”. If we had called <a href="03-data-management.html#compressing-data"><code>compress</code></a> on the original data, it would have done that type conversion anyways - so we’re ok!<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
