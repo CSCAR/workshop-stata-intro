@@ -4,48 +4,42 @@
 
 ### Exercise 1 Solution {.unnumbered}
 
-[Exercise 1][Exercise 1]
+[Exercise 1](02-working-with-data-sets.html#exercise-1)
 
 1:
-```
-sysuse lifeexp
+
+```stata
+. sysuse lifeexp
+(Life expectancy, 1998)
+
 ```
 
 3:
+
+```stata
+. sysuse sandstone, clear
+(Subsea elevation of Lamont sandstone in an area of Ohio)
+
 ```
-sysuse sandstone, clear
-```
+
 or
-```
-clear
-sysuse sandstone
+
+```stata
+. clear
+
+. sysuse sandstone
+(Subsea elevation of Lamont sandstone in an area of Ohio)
+
 ```
 
 4:
-If the working directory isn't convenient, change it using the dialogue box. Then, `save sandstone`.
+
+If the working directory isn't convenient, change it using the dialogue box.
+Then, `save sandstone`.
 
 ### Exercise 2 Solution {.unnumbered}
 
-[Exercise 2][Exercise 2]
-
-1:
-
-```
-webuse census9, clear
-```
-
-2: Data is from the 1980 census, which we can see by the label (visible in `describe, simple`). We've got two identifiers of state, death rate,
-   population, median age and census region.
-
-3: Since there data has 50 rows, it's a good guess there are no missing sates.
-
-4: Looking at `describe`, we see that the two state identifiers are strings, the rest numeric.
-
-5: `compress`. Nothing saved! Because Stata already did it before posting it!
-
-### Exercise 3 Solution {.unnumbered}
-
-[Exercise 3][Exercise 3]
+[Exercise 2](03-data-management.html#exercise-2)
 
 1:
 
@@ -53,11 +47,35 @@ webuse census9, clear
 . webuse census9, clear
 (1980 Census data by state)
 
-. save mycensus9
-file mycensus9.dta already exists
-r(602);
+```
 
-```~
+2: Data is from the 1980 census, which we can see by the label (visible in
+`describe, simple`). We've got two identifiers of state, death rate, population,
+median age and census region.
+
+3: Since there data has 50 rows, it's a good guess there are no missing sates.
+
+4: Looking at `describe`, we see that the two state identifiers are strings, the
+rest numeric.
+
+5: `compress`. Nothing saved! Because Stata already did it before posting it!
+
+### Exercise 3 Solution {.unnumbered}
+
+[Exercise 3](03-data-management.html#exercise-3)
+
+1:
+
+```stata
+. webuse census9, clear
+(1980 Census data by state)
+
+. save mycensus9, replace
+file mycensus9.dta saved
+
+```
+
+The `replace` option is added in case I run it twice.
 
 2:
 
@@ -120,14 +138,19 @@ North Central |         12       24.00       42.00
 
 ```stata
 . save, replace
-may not write files over Internet
-r(633);
+file mycensus9.dta saved
 
 ```
 
 ### Exercise 4 Solution {.unnumbered}
 
-[Exercise 4][Exercise 4]
+[Exercise 4](03-data-management.html#exercise-4)
+
+```stata
+. use mycensus9, clear
+(1980 Census data by state)
+
+```
 
 1: Use `summarize` and `codebook` to take a look at the mean/max/min. No errors
 detected.
@@ -158,7 +181,7 @@ entires.
 ```stata
 . codebook, problems
 
-Potential problems in dataset https://www.stata-press.com/data/r18/census9.dta
+Potential problems in dataset mycensus9.dta
 
                Potential problem   Variables
 --------------------------------------------------
@@ -167,16 +190,22 @@ string vars with embedded blanks   state
 
 ```
 
-This just flags spaces (" ") in the data. Not a real problem!
+This just flags spaces (` `) in the data. Not a real problem!
 
 ### Exercise 5 Solution {.unnumbered}
 
-[Exercise 5][Exercise 5]
+[Exercise 5](04-data-manipulation.html#exercise-5)
+
+```stata
+. use mycensus9, clear
+(1980 Census data by state)
+
+```
 
 1:
 
 ```stata
-. gen deathperc = deathrate/10000
+. generate deathperc = deathrate/10000
 
 . label variable deathperc "Percentage of population deceeased in 1980"
 
@@ -197,7 +226,7 @@ This just flags spaces (" ") in the data. Not a real problem!
 2:
 
 ```stata
-. gen agecat = 1 if medage < .
+. generate agecat = 1 if medage < .
 
 . replace agecat = 2 if medage > 26.2 & medage <= 30.1
 (30 real changes made)
@@ -267,7 +296,8 @@ exercise) but it's good practice to check for them anyways.
 
 ```
 
-We see that the groups with the higher median age tend to have higher deathrates.
+We see that the groups with the higher median age tend to have higher
+deathrates.
 
 4:
 

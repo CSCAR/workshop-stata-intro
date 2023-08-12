@@ -4,57 +4,75 @@
 
 ### Exercise 1 Solution {.unnumbered}
 
-[Exercise 1][Exercise 1]
+[Exercise 1](02-working-with-data-sets.html#exercise-1)
 
 1:
-```
+
+```stata
+<<dd_do>>
 sysuse lifeexp
+<</dd_do>>
 ```
 
 3:
-```
+
+```stata
+<<dd_do>>
 sysuse sandstone, clear
+<</dd_do>>
 ```
+
 or
-```
+
+```stata
+<<dd_do>>
 clear
 sysuse sandstone
+<</dd_do>>
 ```
 
 4:
-If the working directory isn't convenient, change it using the dialogue box. Then, `save sandstone`.
+
+If the working directory isn't convenient, change it using the dialogue box.
+Then, `save sandstone`.
 
 ### Exercise 2 Solution {.unnumbered}
 
-[Exercise 2][Exercise 2]
-
-1:
-
-```
-webuse census9, clear
-```
-
-2: Data is from the 1980 census, which we can see by the label (visible in `describe, simple`). We've got two identifiers of state, death rate,
-   population, median age and census region.
-
-3: Since there data has 50 rows, it's a good guess there are no missing sates.
-
-4: Looking at `describe`, we see that the two state identifiers are strings, the rest numeric.
-
-5: `compress`. Nothing saved! Because Stata already did it before posting it!
-
-### Exercise 3 Solution {.unnumbered}
-
-[Exercise 3][Exercise 3]
+[Exercise 2](03-data-management.html#exercise-2)
 
 1:
 
 ```stata
 <<dd_do>>
 webuse census9, clear
-save mycensus9
 <</dd_do>>
-```~
+```
+
+2: Data is from the 1980 census, which we can see by the label (visible in
+`describe, simple`). We've got two identifiers of state, death rate, population,
+median age and census region.
+
+3: Since there data has 50 rows, it's a good guess there are no missing sates.
+
+4: Looking at `describe`, we see that the two state identifiers are strings, the
+rest numeric.
+
+5: `compress`. Nothing saved! Because Stata already did it before posting it!
+
+### Exercise 3 Solution {.unnumbered}
+
+[Exercise 3](03-data-management.html#exercise-3)
+
+1:
+
+```stata
+<<dd_do>>
+webuse census9, clear
+save mycensus9, replace
+<</dd_do>>
+```
+
+The `replace` option is added in case I run it twice.
 
 2:
 
@@ -89,7 +107,13 @@ save, replace
 
 ### Exercise 4 Solution {.unnumbered}
 
-[Exercise 4][Exercise 4]
+[Exercise 4](03-data-management.html#exercise-4)
+
+```stata
+<<dd_do>>
+use mycensus9, clear
+<</dd_do>>
+```
 
 1: Use `summarize` and `codebook` to take a look at the mean/max/min. No errors
 detected.
@@ -114,17 +138,23 @@ codebook, problems
 <</dd_do>>
 ```
 
-This just flags spaces (" ") in the data. Not a real problem!
+This just flags spaces (` `) in the data. Not a real problem!
 
 ### Exercise 5 Solution {.unnumbered}
 
-[Exercise 5][Exercise 5]
+[Exercise 5](04-data-manipulation.html#exercise-5)
+
+```stata
+<<dd_do>>
+use mycensus9, clear
+<</dd_do>>
+```
 
 1:
 
 ```stata
 <<dd_do>>
-gen deathperc = deathrate/10000
+generate deathperc = deathrate/10000
 label variable deathperc "Percentage of population deceeased in 1980"
 list death* in 1/5
 <</dd_do>>
@@ -134,7 +164,7 @@ list death* in 1/5
 
 ```stata
 <<dd_do>>
-gen agecat = 1 if medage < .
+generate agecat = 1 if medage < .
 replace agecat = 2 if medage > 26.2 & medage <= 30.1
 replace agecat = 3 if medage > 30.1 & medage <= 32.8
 replace agecat = 4 if medage > 32.8
@@ -158,7 +188,8 @@ bysort agecat: summarize deathrate
 <</dd_do>>
 ```
 
-We see that the groups with the higher median age tend to have higher deathrates.
+We see that the groups with the higher median age tend to have higher
+deathrates.
 
 4:
 

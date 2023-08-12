@@ -663,7 +663,9 @@ blanks.") More serious problems that it can detect include:
 ## Exercise 4
 
 Using [`summarize` and `codebook`](03-data-management.html#summarizing-the-data)
-to explore the "census9" data and answer the following questions:
+to explore the "census9" data (use the version you saved
+[earlier](03-data-management.html#exercise-3)!) and answer the following
+questions:
 
 1. Are there any values which seem to be errors?
 2. I'd expect each state to have their own unique value of death rate,
