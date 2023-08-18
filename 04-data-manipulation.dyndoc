@@ -12,9 +12,9 @@ sysuse auto, clear
 ## Restricting commands to subsets
 
 We'll discuss operating on subsets of the data in far more detail a bit
-[later](04-data-manipulation.html#subsetting), but first we'll discuss how to
+[later](04-data-manipulation.qmd#subsetting), but first we'll discuss how to
 modify the [basic command
-syntax](01-the-basics-of-stata.html#basic-command-syntax) to run a command only
+syntax](01-the-basics-of-stata.qmd#basic-command-syntax) to run a command only
 on some rows of data.
 
 Recall the basic command syntax,
@@ -91,7 +91,7 @@ and returns `TRUE` or `FALSE`; then following that, we evaluate either `foreign
 == 1 | TRUE` or `foreign == 1 | FALSE` depending on what the first result was.
 
 We saw the usage of this earlier when discussing [loading subsets of the
-data](02-working-with-data-sets.html#loading-subsets-of-the-data).
+data](02-working-with-data-sets.qmd#loading-subsets-of-the-data).
 
 ## Generating new variables
 
@@ -197,7 +197,7 @@ regarding the variable in a model.
 
 For example, "highschool" is a poor dummy variable - what does 0 highschool or 1
 highschool represent? Obviously we could (and should) use [value
-labels](03-data-management.html#labeling-values) to associate 0 and 1 with
+labels](03-data-management.qmd#labeling-values) to associate 0 and 1 with
 informative labels, but it is more straightforward to use a variable name such
 as "highschool_graduate" or "graduateded_highschool) - a 0 represents "no" to
 the question of "graduated high school?", hence a non-high school graduate; and
@@ -211,7 +211,7 @@ from OH?" etc). These changes will (usually) need to be made later anyways.
 
 Now here's the trick: In Stata^[This is true of most statistical software in
 fact.], [conditional
-statements](04-data-manipulation.html#restricting-commands-to-subsets) return 1
+statements](04-data-manipulation.qmd#restricting-commands-to-subsets) return 1
 (True) and 0 (False). So we can use them in `generate` statements to create
 binary variables easily.
 
@@ -223,7 +223,7 @@ list price* in 1/5
 ```
 
 Note that this is NOT the same thing as using
-[`if`](04-data-manipulation.html#restricting-commands-to-subsets). E.g., we see
+[`if`](04-data-manipulation.qmd#restricting-commands-to-subsets). E.g., we see
 the following error:
 
 ```stata
@@ -254,9 +254,9 @@ are cheap because of the maintenance costs.
 
 ### System Variables
 
-In Stata, under the [One Data](01-the-basics-of-stata.html#one-data) principal,
+In Stata, under the [One Data](01-the-basics-of-stata.qmd#one-data) principal,
 any information in the data^[We'll see some exceptions to this in the
-[programming](05-programming.html) section.] must be in a variable. This
+[programming](05-programming.qmd) section.] must be in a variable. This
 includes the System Variables of `_n` and `_N`. You can imagine that every data
 st you ever open has two additional columns of data, one for `_n` and one for
 `_N`.
@@ -266,7 +266,7 @@ re-sorted, `_n` can change.
 
 `_N` represents the total number of rows in the data, hence this is the same for
 every row. Again, if the data changes (e.g. you
-[drop](04-data-manipulation.html#discarding-data) some data) then `_N` may be
+[drop](04-data-manipulation.qmd#discarding-data) some data) then `_N` may be
 updated.
 
 While you cannot access these System Variables normally (e.g. they don't appear
@@ -283,7 +283,7 @@ list make if _n <= 2
 ```
 
 A more useful example is to save the initial row numbering in your data. When we
-discuss [sorting](04-data-manipulation.html#sorting) later, it may be useful to
+discuss [sorting](04-data-manipulation.qmd#sorting) later, it may be useful to
 be able to return to the original ordering. Since `_n` changes when the data is
 re-sorted, if we save the initial row numbers to a permanent variable, we can
 always re-sort by it later. `_N` is slightly less useful but can be used
@@ -300,7 +300,7 @@ list row totalobs in 1/5
 ### Extensions to generate
 
 The command `egen`^[`egen` is **not** a [short
-command](01-the-basics-of-stata.html#short-commands) for "egenerate"; the full
+command](01-the-basics-of-stata.qmd#short-commands) for "egenerate"; the full
 command name is simply "`egen`".] offers some functionality that `generate`
 lacks, for example creating the mean of several variables
 
@@ -317,7 +317,7 @@ help egen
 
 ## Replacing existing variables
 
-[Earlier](04-data-manipulation.html#generating-new-variables) we created the
+[Earlier](04-data-manipulation.qmd#generating-new-variables) we created the
 `weight2` variable which changed the units on weight from pounds to tons. What
 if, instead of creating a new variable, we tried to just change the existing
 `weight` variable.
@@ -340,11 +340,11 @@ list weight in 1/5
 
 `replace` features syntax identical to `generate`.^[`generate` has a few
 features we do not discuss which `replace` does not support. Namely, `generate`
-can set the [type](03-data-management.html#describing-the-data) manually
+can set the [type](03-data-management.qmd#describing-the-data) manually
 (instead of letting Stata choose the best type
-[automatically](03-data-management.html#compressing-data)), and `generate` can
+[automatically](03-data-management.qmd#compressing-data)), and `generate` can
 place the new variable as desired rather than [using
-`order`](03-data-management.html#changing-variable-ordering). Clearly, neither
+`order`](03-data-management.qmd#changing-variable-ordering). Clearly, neither
 of these features are needed for `replace`.]
 
 ### Conditional variable generation
@@ -376,9 +376,9 @@ Prix was incorrect - we don't know what the correct weight is, but we know the
 presented one is wrong, so let's make it missing. We could of course do this
 manually - open the data editor and delete the value of `weight` corresponding
 to the Pont. Grand Prix. As we saw earlier, [manually
-editing](02-working-with-data-sets.html#editing-data-manually) the data like
+editing](02-working-with-data-sets.qmd#editing-data-manually) the data like
 this produces a `replace` call that we can move into our [Do file for
-reproducibility](01-the-basics-of-stata.html#do-files). However, this `replace`
+reproducibility](01-the-basics-of-stata.qmd#do-files). However, this `replace`
 call would refer to a row number, something like
 
 ```stata
@@ -388,7 +388,7 @@ replace weight = . in 49
 What would happen if our data was shuffled prior to running this command? It
 would no longer be applied to the correct row. Therefore, it will be safer to
 use a [conditional
-statement](04-data-manipulation.html#restricting-commands-to-subsets) to
+statement](04-data-manipulation.qmd#restricting-commands-to-subsets) to
 identify the row corresponding to `"Pont. Grand Prix"`.
 
 ```stata
@@ -563,7 +563,7 @@ be any of:
 
 - A single number, e.g. `(5 = 2)`.
 - several numbers, either
-    - a [numlist](02-working-with-data-sets.html#loading-subsets-of-the-data) as
+    - a [numlist](02-working-with-data-sets.qmd#loading-subsets-of-the-data) as
       in this example (note the use of a very large non-missing value for the
       upper bound)
     - a space-separated list of values, e.g. `(1 5 10 = 4)`
@@ -600,12 +600,12 @@ The `2 = 4` rule will never take place because 2 is already recoded to 7 in the
 
 Almost any Stata command which operates on variables can operate on a subset of
 the data instead of the entire data, [as we saw
-before](04-data-manipulation.html#restricting-commands-to-subsets), by using the
+before](04-data-manipulation.qmd#restricting-commands-to-subsets), by using the
 `if` or `in` statements in the command. This is equivalent to throwing away some
 data and then performing the command. In general, you should avoid discarding
 data as you never know when you will possible use it. Of course, you could use
 [`preserve` and
-`restore`](02-working-with-data-sets.html#temporarily-preserving-and-restoring-data)
+`restore`](02-working-with-data-sets.qmd#temporarily-preserving-and-restoring-data)
 to temporarily remove the data, but using the conditional subsetting is more
 straightforward.
 
@@ -650,13 +650,13 @@ bysort foreign: summ price
 ```
 
 `bysort` is identical to sorting (which we'll discuss
-[later](04-data-manipulation.html#sorting)) first and running the `by` statement
+[later](04-data-manipulation.qmd#sorting)) first and running the `by` statement
 afterwards. In general, it is recommended to always use `bysort` instead of
 `by`, *unless* you believe the data is already sorted and want an error if that
 assumption is violated.
 
 Before running these commands, consider generating a [original ordering
-variable](04-data-manipulation.html#system-variables) first.
+variable](04-data-manipulation.qmd#system-variables) first.
 
 `bysort`'s variables cannot be conditional statements, so if you wanted to for
 example get summaries by low and high mileage cars, you'd need to generate a
@@ -787,9 +787,9 @@ Other useful commands include
 ## Sorting
 
 We already saw sorting [in the context of
-`bysort`](04-data-manipulation.html#repeat-commands-on-subsets). We can also
+`bysort`](04-data-manipulation.qmd#repeat-commands-on-subsets). We can also
 sort as a standalone operation. As before, consider generating a [original
-ordering variable](04-data-manipulation.html#system-variables) first.
+ordering variable](04-data-manipulation.qmd#system-variables) first.
 
 We'll switch back to "auto" first.
 
@@ -824,7 +824,7 @@ list rep78 price in 1/5
 ```
 
 Recall that missing values (`.`) are [larger than any other
-values](04-data-manipulation.html#conditional-variable-generation). When sorting
+values](04-data-manipulation.qmd#conditional-variable-generation). When sorting
 with missing values, they follow this rule as well. If you want to treat missing
 values as smaller than all other values, you can pass the `mfirst` option to
 `gsort`. Note this does *not* make missingness "less than" anywhere else, only
@@ -849,7 +849,7 @@ remaining rows remain *in their exact same position*.
 String variables are commonly used during data collection but are ultimately not
 very useful from a statistical point of view. Typically string variables should
 be represented as [categorical variables with value
-labels](03-data-management.html#labeling-values) as we've previously discussed.
+labels](03-data-management.qmd#labeling-values) as we've previously discussed.
 Here are some useful commands for operating on strings and categorical
 variables.
 
@@ -902,7 +902,7 @@ order mpg, after(price)
 
 And we're back to the original set-up.^[If you are sharp-eyed, you may have
 noticed that the original `mpg` was an "int" whereas the final one is a "byte".
-If we had called [`compress`](03-data-management.html#compressing-data) on the
+If we had called [`compress`](03-data-management.qmd#compressing-data) on the
 original data, it would have done that type conversion anyways - so we're ok!]
 
 When using `destring` to convert a string variable (that it storing numeric data
@@ -935,14 +935,14 @@ it with `destring` either!).
 
 If we have a string variable which has non-numerical values (e.g. `race` with
 values "white", "black", "Hispanic", etc), the ideal way to store it is as
-numerical with [value labels](03-data-management.html#labeling-values) attached.
+numerical with [value labels](03-data-management.qmd#labeling-values) attached.
 While we could do this manually using a combination of `gen` and `replace` with
 some conditionals, a less tedious way to do so is via `encode`.
 
 We'll switch to the "hbp2" data set from the Stata website, records some blood
 pressure measurements. Remember this will erase any existing unsaved changes!
 You will not need any modifications you've made to other built-in datasets going
-forward (except `census9` from [Exercise 3](03-data-management.html#exercise-3)
+forward (except `census9` from [Exercise 3](03-data-management.qmd#exercise-3)
 which you should already have saved), but if you do want to save it, do so
 first!
 
@@ -1045,23 +1045,23 @@ Open the *saved* version of "census9" with `use`, not the original version with
    each state. (Remember that `deathrate` is deaths per 10,000.)
 2. The average age of all Americans in 1980 is roughly 30.11 years of age.
    [Generate a
-   categorical](04-data-manipulation.html#conditional-variable-generation) with
+   categorical](04-data-manipulation.qmd#conditional-variable-generation) with
    four values as described before, with appropriate [value
-   labels](03-data-management.html#labeling-values).
+   labels](03-data-management.qmd#labeling-values).
     - Significantly below national average: `medage` equal to 26.20 or less
     - Below national average: `medage` greater than 26.20 and less than or equal to 30.10.
     - Above national average: `medage` greater than 30.10 and less than or equal to 32.80.
     - Significantly above national average: `medage` greater than 32.80.
 3. What is the death rate in [each of those four
-   categories](04-data-manipulation.html#repeat-commands-on-subsets)? (You can
+   categories](04-data-manipulation.qmd#repeat-commands-on-subsets)? (You can
    use `summarize` to obtain the means.) Does there appear to be any pattern?
-4. What state has the [lowest](04-data-manipulation.html#sorting) death rate?
+4. What state has the [lowest](04-data-manipulation.qmd#sorting) death rate?
    The highest? The lowest average age? The highest?
 5. Each state has a single observation here, but if we had multiple years of
    data, then we could have ["long
-   data"](04-data-manipulation.html#reshaping-files) with multiple rows per
+   data"](04-data-manipulation.qmd#reshaping-files) with multiple rows per
    state. To prepare for this sort of data,
-   [encode](04-data-manipulation.html#converting-strings-into-labeled-numbers)
+   [encode](04-data-manipulation.qmd#converting-strings-into-labeled-numbers)
    the two-letter state abbreviation into a numeric value with value labels.
 
 ## Merging Files
@@ -1080,7 +1080,7 @@ data, its values are entered there. If a variable in the using data does not
 exist in the master, the new variable is added to the appended data set which is
 missing for all members of the master data. This is easiest to visualize. There
 are two data sets on [Stata's
-website](02-working-with-data-sets.html#stata-website-data) which we can append,
+website](02-working-with-data-sets.qmd#stata-website-data) which we can append,
 "odd" and "even".
 
 ```stata
@@ -1094,7 +1094,7 @@ list
 
 It does not truly matter which data set is the master data and which is the
 using data (it will later in
-[match-merging](04-data-manipulation.html#match-merging-data)), it will only
+[match-merging](04-data-manipulation.qmd#match-merging-data)), it will only
 affect the sorted order (the data in master is sorted first). The syntax is
 simply
 
@@ -1113,7 +1113,7 @@ list
 (We must specify the complete path to the data instead of the `webuse` shorthand
 of just the data name. Of course, with real data that you locally have on your
 computer, you follow the [working
-directory](01-the-basics-of-stata.html#working-directory) rules; if the file
+directory](01-the-basics-of-stata.qmd#working-directory) rules; if the file
 exists in your working directory you just give the name, otherwise give the
 complete path. I obtained that path by visiting the Stata data website and
 finding the link to "odd".)
@@ -1185,7 +1185,7 @@ list in 3/6
 ```
 
 (Again, we use the full path but for local files, following [working
-directory](01-the-basics-of-stata.html#working-directory) rules.)
+directory](01-the-basics-of-stata.qmd#working-directory) rules.)
 
 First, take a look at the output of the merge command. We see that 68 cars were
 not matched, which means they exist in only one of the two data sets. In this
@@ -1337,7 +1337,7 @@ so when converting back to long, it restores the "Before" and "After" tags.
 
 If you do want to save the text instead of the count, you need to use strings.
 We'll use
-[`decode`](04-data-manipulation.html#converting-strings-into-labeled-numbers) to
+[`decode`](04-data-manipulation.qmd#converting-strings-into-labeled-numbers) to
 convert to a string, then use that as the jvar.
 
 ```stata
@@ -1396,4 +1396,4 @@ A few notes:
   for entering all the stubs. For large data, this is **extremely** frustrating.
   I'd recommend using `describe, simple` to get a list of all variable names,
   then using find \& replace to remove the indices. If you know a better way,
-  [let me know](index.html#contact-information)!
+  [let me know](index.qmd#contact-information)!

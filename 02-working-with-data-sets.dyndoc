@@ -5,7 +5,7 @@
 Before we turn to using your own data, it is useful to know that Stata comes
 with a collection of sample data sets which you can use to try the Stata
 commands. Additionally, most (if not all) of the examples in [Stata
-help](01-the-basics-of-stata.html#stata-help) will use these data sets.
+help](01-the-basics-of-stata.qmd#stata-help) will use these data sets.
 
 To see a list of the built-in data sets, use
 
@@ -66,7 +66,7 @@ use <filename>
 ```
 
 As discussed in the [working
-directory](01-the-basics-of-stata.html#working-directory) section, Stata can see
+directory](01-the-basics-of-stata.qmd#working-directory) section, Stata can see
 only files in its working directory, so only the name of the file needs to be
 passed. If the file exists in a different directory, you will need to give the
 full (or relative path). For example, if your working directory is
@@ -102,7 +102,7 @@ regardless of unsaved changes.
 
 You can load only a subset of the data into the program at a time. Generally I
 would recommend loading the full data and then
-[discarding](04-data-manipulation.html#discarding-data) the extraneous
+[discarding](04-data-manipulation.qmd#discarding-data) the extraneous
 information. However, if your data is very large, it might be handy to only load
 in some of it rather than the entire thing. As this is a lesser-used option we
 won't go into too much detail, but as an example, if I wanted to load only the
@@ -118,7 +118,7 @@ goes on.
 
 The statement `gender == "male"` is a conditional statement which only loads
 male patients. We'll discuss later about [conditional
-statements](04-data-manipulation.html#restricting-commands-to-subsets).
+statements](04-data-manipulation.qmd#restricting-commands-to-subsets).
 
 Alternatively, if you have a very large data set, you can load in a small chunk
 of it.
@@ -136,7 +136,7 @@ documentation.
 
 ## Editing data manually
 
-We will discuss in [Data Manipulation](04-data-manipulation.html) how to edit
+We will discuss in [Data Manipulation](04-data-manipulation.qmd) how to edit
 your data on a larger scale and in an automated fashion, but Stata does support
 modifying a spreadsheet of your data similar to Excel. At the top of the main
 window, you'll see two buttons, "Data Editor" and "Data Browser". These open the
@@ -157,10 +157,10 @@ corresponding command produced which actually performs the modification.
 
 When viewing the data, the color of each column's text provides information
 about the type of variable. We'll go into more details
-[later](03-data-management.html#describing-the-data) what these types mean.
+[later](03-data-management.qmd#describing-the-data) what these types mean.
 Below, for the `auto` data, you can see the `make` variable is red, indicating a
 string, the `foreign` variable is blue indicating a variable with an attached
-[value label](03-data-management.html#labeling-values) and the remainder of the
+[value label](03-data-management.qmd#labeling-values) and the remainder of the
 variables are black for numeric.
 
 [![](./images/datacolors.png)](./images/datacolors.png)
@@ -207,7 +207,7 @@ Import".
 While there are commands to do the importing (such as `import excel file.xlsx`),
 the dialog boxes for importation provide a preview of the imported data, making
 it easier to ensure that the importation will go smoothly. Just as with [editing
-the data](02-working-with-data-sets.html#editing-data-manually), after
+the data](02-working-with-data-sets.qmd#editing-data-manually), after
 performing an import with the dialog box, the corresponding command is executed
 in the results window and can be copied in a Do-file for reproducibility.
 
@@ -329,14 +329,14 @@ to it.
 
 Here we'll discuss two ways to switch between data sets. Later we'll discuss the
 third way to work with multiple data sets,
-[merging](04-data-manipulation.html#merging-files).
+[merging](04-data-manipulation.qmd#merging-files).
 
 ### Temporarily preserving and restoring data
 
 Say you want to carry out a destructive operation on your data, temporarily.
 This could be either to close your data and load another, or to make a change to
 the current data.For example, say you want to
-[remove](04-data-manipulation.html#discarding-data) some subset of your
+[remove](04-data-manipulation.qmd#discarding-data) some subset of your
 observations. One workflow to use would be:
 
 ```stata
@@ -482,27 +482,27 @@ frame or copy into a new name.
 
 We're not going to go into it now, but please see the section in the Programming
 & Advanced Features section for details on [linking data
-sets](05-programming.html#linking-data-sets) if interested. You can link data
+sets](05-programming.qmd#linking-data-sets) if interested. You can link data
 sets between frames to either enable moving variables across frames, or if the
 data are at different units of analysis (e.g. a patient file and a clinic file),
 to easily merge the files together.
 
 ## Exercise 1
 
-1. Load the [built-in](02-working-with-data-sets.html#built-in-data) data set
+1. Load the [built-in](02-working-with-data-sets.qmd#built-in-data) data set
    "lifeexp".
 2. Open the Data Editor window.
-   [Modify](02-working-with-data-sets.html#editing-data-manually) at least one
+   [Modify](02-working-with-data-sets.qmd#editing-data-manually) at least one
    of the cells.
 3. Close the Data window. Load the built-in data set "sandstone". Don't forget
    to `clear` or pass the `clear` option.
-4. [Save a copy](02-working-with-data-sets.html#saving-data) of this data to
+4. [Save a copy](02-working-with-data-sets.qmd#saving-data) of this data to
    your computer.
     1. Check your [working
-       directory](01-the-basics-of-stata.html#working-directory). Make sure it
+       directory](01-the-basics-of-stata.qmd#working-directory). Make sure it
        is set somewhere convenient.
     2. Use `save`. Make sure to give it a name!
 5. If you haven't already, play with [`preserve` and
-   `restore`](02-working-with-data-sets.html#temporarily-preserving-and-restoring-data).
+   `restore`](02-working-with-data-sets.qmd#temporarily-preserving-and-restoring-data).
    Preserve the data, modify some values, then observe what happens when you
    restore.

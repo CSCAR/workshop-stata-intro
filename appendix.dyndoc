@@ -4,7 +4,7 @@
 
 ### Exercise 1 Solution {.unnumbered}
 
-[Exercise 1](02-working-with-data-sets.html#exercise-1)
+[Exercise 1](02-working-with-data-sets.qmd#exercise-1)
 
 1:
 
@@ -38,7 +38,7 @@ Then, `save sandstone`.
 
 ### Exercise 2 Solution {.unnumbered}
 
-[Exercise 2](03-data-management.html#exercise-2)
+[Exercise 2](03-data-management.qmd#exercise-2)
 
 1:
 
@@ -61,7 +61,7 @@ rest numeric.
 
 ### Exercise 3 Solution {.unnumbered}
 
-[Exercise 3](03-data-management.html#exercise-3)
+[Exercise 3](03-data-management.qmd#exercise-3)
 
 1:
 
@@ -107,7 +107,7 @@ save, replace
 
 ### Exercise 4 Solution {.unnumbered}
 
-[Exercise 4](03-data-management.html#exercise-4)
+[Exercise 4](03-data-management.qmd#exercise-4)
 
 ```stata
 <<dd_do>>
@@ -142,7 +142,7 @@ This just flags spaces (` `) in the data. Not a real problem!
 
 ### Exercise 5 Solution {.unnumbered}
 
-[Exercise 5](04-data-manipulation.html#exercise-5)
+[Exercise 5](04-data-manipulation.qmd#exercise-5)
 
 ```stata
 <<dd_do>>

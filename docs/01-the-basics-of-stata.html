@@ -254,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>The Variables Pane
 <ul>
-<li>This pane displays all of the variables in the data set that is currently open in Stata, and users can click on variable names in this pane to carry the variables over into Stata commands in the Command pane. Note that Stata allows only <a href="01-the-basics-of-stata.html#one-data">one data-set</a> to be open in a session.</li>
+<li>This pane displays all of the variables in the data set that is currently open in Stata, and users can click on variable names in this pane to carry the variables over into Stata commands in the Command pane. Note that Stata allows only <a href="./01-the-basics-of-stata.html#one-data">one data-set</a> to be open in a session.</li>
 </ul></li>
 <li>The History Pane
 <ul>
@@ -262,11 +262,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>The Properties Pane
 <ul>
-<li>This pane allows variable properties and data-set properties to be managed. <a href="03-data-management.html#renaming-variables">Variable names</a>, <a href="03-data-management.html#labeling-variables">labels</a>, <a href="03-data-management.html#labeling-values">value labels</a>, <a href="03-data-management.html#describing-the-data">display formats</a>, and <a href="03-data-management.html#describing-the-data">storage types</a> can be viewed and modified here.</li>
+<li>This pane allows variable properties and data-set properties to be managed. <a href="./03-data-management.html#renaming-variables">Variable names</a>, <a href="./03-data-management.html#labeling-variables">labels</a>, <a href="./03-data-management.html#labeling-values">value labels</a>, <a href="./03-data-management.html#describing-the-data">display formats</a>, and <a href="./03-data-management.html#describing-the-data">storage types</a> can be viewed and modified here.</li>
 </ul></li>
 </ul>
-<p>Each of these five panes will be nested within the main Stata session, which contains menus and tool bars. There are additional windows that users can access from the Window menu, which include the Graph window (which will open when graphs have been created), the Viewer window (which is primarily used for <a href="01-the-basics-of-stata.html#stata-help">help</a> features and Stata news), the Data Editor window (for use when <a href="02-working-with-data-sets.html#editing-data-manually">viewing data sets</a>), and the Do-file Editor window (for use when writing <a href="01-the-basics-of-stata.html#do-files">.do files</a>).</p>
-<p>In the lower left-hand corner of the main Stata window (below the panes), there will be a directory displayed. This is known as the <a href="01-the-basics-of-stata.html#working-directory">working directory</a>, and is where Stata will look to find data files and other associated Stata files unless the user specifies another directory. We will cover examples of changing the working directory.</p>
+<p>Each of these five panes will be nested within the main Stata session, which contains menus and tool bars. There are additional windows that users can access from the Window menu, which include the Graph window (which will open when graphs have been created), the Viewer window (which is primarily used for <a href="./01-the-basics-of-stata.html#stata-help">help</a> features and Stata news), the Data Editor window (for use when <a href="./02-working-with-data-sets.html#editing-data-manually">viewing data sets</a>), and the Do-file Editor window (for use when writing <a href="./01-the-basics-of-stata.html#do-files">.do files</a>).</p>
+<p>In the lower left-hand corner of the main Stata window (below the panes), there will be a directory displayed. This is known as the <a href="./01-the-basics-of-stata.html#working-directory">working directory</a>, and is where Stata will look to find data files and other associated Stata files unless the user specifies another directory. We will cover examples of changing the working directory.</p>
 <section id="alternate-layout" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="alternate-layout"><span class="header-section-number">1.1.1</span> Alternate Layout</h3>
 <div class="quarto-figure quarto-figure-center">
@@ -281,11 +281,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="one-data" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="one-data"><span class="header-section-number">1.2</span> One Data</h2>
 <p>One functionality where Stata differs than most other statistical or data analysis software is that Stata can only work with a single data set at a time.</p>
-<p>Any command you run knows to operate on the data set you have open. For example, there is a command <a href="03-data-management.html#summarizing-the-data"><code>summarize</code></a> which provides summary information about variables. The command is simply <code>summarize</code>, there is no need to direct it towards a specific data set.</p>
+<p>Any command you run knows to operate on the data set you have open. For example, there is a command <a href="./03-data-management.html#summarizing-the-data"><code>summarize</code></a> which provides summary information about variables. The command is simply <code>summarize</code>, there is no need to direct it towards a specific data set.</p>
 <p>If you have multiple data sets you need to work with, you can either</p>
 <ol type="1">
-<li><p>Switch between the two data sets as needed. This can be burdensome, though tools such as <a href="02-working-with-data-sets.html#temporarily-preserving-and-restoring-data"><code>preserve</code></a> or <a href="02-working-with-data-sets.html#frames"><code>frames</code></a> help greatly.</p></li>
-<li><p>Merge the data sets, the better option. We’ll discuss <a href="04-data-manipulation.html#merging-files">merging</a> towards the end of the course.</p></li>
+<li><p>Switch between the two data sets as needed. This can be burdensome, though tools such as <a href="./02-working-with-data-sets.html#temporarily-preserving-and-restoring-data"><code>preserve</code></a> or <a href="./02-working-with-data-sets.html#frames"><code>frames</code></a> help greatly.</p></li>
+<li><p>Merge the data sets, the better option. We’ll discuss <a href="./04-data-manipulation.html#merging-files">merging</a> towards the end of the course.</p></li>
 </ol>
 </section>
 <section id="give-stata-a-command" class="level2" data-number="1.3">
@@ -302,19 +302,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Any output that appears in the Results pane (including the echoed commands and any errors) can be copied and pasted into another location, such as Word. In addition, if you highlight text and right-click, you also have the options:</p>
 <ul>
 <li>“Copy table”: Useful for exporting to Excel. This can be tempermental; if the selected table is less “regular”, this may not produce the best results. It is most useful for text which comes naturally as a table rather than results which are forced into a table for display purposes.</li>
-<li>“Copy table as HTML”: You can paste this into a plaintext editor (Notepad.exe or TextEdit, <em>not</em> Word) and save it as a *.html to produce a webpage. If you paste this into Excel you get a slightly different table than the layout for “Copy table” which may be more useful.</li>
+<li>“Copy table as HTML”: You can paste this into a plaintext editor (Notepad.exe or TextEdit, <em>not</em> Word) and save it as a *.qmd to produce a webpage. If you paste this into Excel you get a slightly different table than the layout for “Copy table” which may be more useful.</li>
 <li>“Copy as picture”: Does exactly what it says - equivalent to taking a screenshot. Very handy!</li>
 </ul>
-<p>There are a few commands that can be useful for saving results which we will not cover in this workshop, if you are interested, you can look into <a href="01-the-basics-of-stata.html#stata-help">the help</a> for them.</p>
+<p>There are a few commands that can be useful for saving results which we will not cover in this workshop, if you are interested, you can look into <a href="./01-the-basics-of-stata.html#stata-help">the help</a> for them.</p>
 <ul>
 <li><code>log</code>: Saves a file consisting of everything printed to the Results pane.</li>
 <li><code>putexcel</code>: Adds to a spreadsheet specific strings or output.</li>
-<li><code>outreg2</code>: A <a href="01-the-basics-of-stata.html#installing-user-written-commands">user-written</a> command to output the results of a model (e.g.&nbsp;regression) in a clean format.</li>
+<li><code>outreg2</code>: A <a href="./01-the-basics-of-stata.html#installing-user-written-commands">user-written</a> command to output the results of a model (e.g.&nbsp;regression) in a clean format.</li>
 </ul>
 </section>
 <section id="dynamic-tags" class="level3" data-number="1.3.2">
 <h3 data-number="1.3.2" class="anchored" data-anchor-id="dynamic-tags"><span class="header-section-number">1.3.2</span> Dynamic Tags</h3>
-<p>Version 15 of Stata introduced dynamic tags and the <code>dyndoc</code> and <code>dyntext</code> commands which allows you to weave together narrative text and Stata code to produce a high-quality output (html, word or pdf). This document is written (<a href="index.html#creation-of-this-document">in part</a>) in Dynamic Tags. It is extremely powerful but is well outside the mandate of this class. If you are interested in this functionality, I’d be happy to help. <a href="https://www.stata.com/manuals/rptdynamicdocumentsintro.pdf">This Stata manual</a> is a good introduction.</p>
+<p>Version 15 of Stata introduced dynamic tags and the <code>dyndoc</code> and <code>dyntext</code> commands which allows you to weave together narrative text and Stata code to produce a high-quality output (html, word or pdf). This document is written (<a href="./index.html#creation-of-this-document">in part</a>) in Dynamic Tags. It is extremely powerful but is well outside the mandate of this class. If you are interested in this functionality, I’d be happy to help. <a href="https://www.stata.com/manuals/rptdynamicdocumentsintro.pdf">This Stata manual</a> is a good introduction.</p>
 </section>
 </section>
 <section id="updating" class="level2" data-number="1.4">
@@ -328,14 +328,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="installing-user-written-commands" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="installing-user-written-commands"><span class="header-section-number">1.5</span> Installing user-written commands</h2>
-<p>In addition to built in commands, Stata supports user-written programs, know as “ado-files”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Once installed, these user-written programs operate identically to any built-in command, with the caveat that they may not be quite as polished or complete since they’re volunteer written. Documentation is rarely up to <a href="01-the-basics-of-stata.html#stata-help">Stata standards</a> and often relegates details to a manuscript.</p>
+<p>In addition to built in commands, Stata supports user-written programs, know as “ado-files”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Once installed, these user-written programs operate identically to any built-in command, with the caveat that they may not be quite as polished or complete since they’re volunteer written. Documentation is rarely up to <a href="./01-the-basics-of-stata.html#stata-help">Stata standards</a> and often relegates details to a manuscript.</p>
 <p>We won’t be covering any ado-files in these notes, but if you wanted to install a program named <code>newcommand</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ssc</span> install newcommand</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can remove a program with</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ssc</span> uninstall newcommand</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Finally, to see a list of all user-written programs you have installed, used</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ado</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a href="01-the-basics-of-stata.html#updating">Updating Stata</a> will not update any ado-files, instead you can run</p>
+<p><a href="./01-the-basics-of-stata.html#updating">Updating Stata</a> will not update any ado-files, instead you can run</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>adoupdate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>to list all available updates and</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>adoupdate, update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -343,8 +343,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="do-files" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="do-files"><span class="header-section-number">1.6</span> Do-files</h2>
-<p>We <a href="01-the-basics-of-stata.html#give-stata-a-command">saw</a> that commands can be typed interactively, one command at a time, and the results immediately observed. From this, the output can be copied/exported/printed, or the results can be saved. However, a better paradigm would save all the commands run separately so that the analysis is <a href="https://en.wikipedia.org/wiki/Reproducibility#Reproducible_research">reproducible</a>.</p>
-<p>For this purpose, Stata has Do-files (named because they are saved with the .do extension, such as <code>analysis.do</code>) which are scripts containing only commands and <a href="01-the-basics-of-stata.html#comments">comments</a>. We can then run any subset of the commands (including the entire file), re-running parts or all of the analysis. Additionally you can easily save and/or share this command, allowing yourself or a colleague to re-run the analysis.</p>
+<p>We <a href="./01-the-basics-of-stata.html#give-stata-a-command">saw</a> that commands can be typed interactively, one command at a time, and the results immediately observed. From this, the output can be copied/exported/printed, or the results can be saved. However, a better paradigm would save all the commands run separately so that the analysis is <a href="https://en.wikipedia.org/wiki/Reproducibility#Reproducible_research">reproducible</a>.</p>
+<p>For this purpose, Stata has Do-files (named because they are saved with the .do extension, such as <code>analysis.do</code>) which are scripts containing only commands and <a href="./01-the-basics-of-stata.html#comments">comments</a>. We can then run any subset of the commands (including the entire file), re-running parts or all of the analysis. Additionally you can easily save and/or share this command, allowing yourself or a colleague to re-run the analysis.</p>
 <p>There are several ways to start a new Do-file.</p>
 <ul>
 <li>File -&gt; New -&gt; Do-file</li>
@@ -378,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    Foreign |         22       29.73      100.00</span>
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>------------+-----------------------------------</span>
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>      Total |         74      100.00</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>We will cover in later sections what each of these commands does (<a href="02-working-with-data-sets.html#built-in-data"><code>sysuse</code></a>, <a href="03-data-management.html#summarizing-the-data"><code>summarize</code></a>, and <a href="03-data-management.html#labeling-values"><code>tabulate</code></a>).</p>
+<p>We will cover in later sections what each of these commands does (<a href="./02-working-with-data-sets.html#built-in-data"><code>sysuse</code></a>, <a href="./03-data-management.html#summarizing-the-data"><code>summarize</code></a>, and <a href="./03-data-management.html#labeling-values"><code>tabulate</code></a>).</p>
 <section id="comments" class="level3" data-number="1.6.1">
 <h3 data-number="1.6.1" class="anchored" data-anchor-id="comments"><span class="header-section-number">1.6.1</span> Comments</h3>
 <p>Comments are information in a Do-file which Stata will ignore. They can be used to stop a command from running without deleting it, or more usefully, to add information about the code which may be useful for others (or yourself in the future) to understand how some code works or to justify why you made certain choices. In general, comments can also help readability. There are three different ways to enter comments (and one additional special way).</p>
@@ -418,7 +418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>When writing a Do-file, you generally are creating it while using a single version of Stata. If a new version of Stata were released, its possible that your code may operate differently with the new version. If you add</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">version</span> 14.2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you’ve updated to Stata 17. This works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 17 when you only have Stata 14 installed.)</p>
-<p>Note that this <code>version</code> is the same command as the <code>version</code> we’ve been discussing <a href="01-the-basics-of-stata.html#give-stata-a-command">before</a>. It operates in this special fashion only when included at the top of a Do-file.</p>
+<p>Note that this <code>version</code> is the same command as the <code>version</code> we’ve been discussing <a href="./01-the-basics-of-stata.html#give-stata-a-command">before</a>. It operates in this special fashion only when included at the top of a Do-file.</p>
 <p>Best practices is to always include a <code>version ##.#</code> line at the top of each Do-file, but if its code that will continue to see use, you should test it with the newer releases and update the code as necessary!</p>
 </section>
 </section>
@@ -427,11 +427,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Get familiar with the Stata interface. If you’ve been following along, you may have already done all these!</p>
 <ol type="1">
 <li>If you haven’t already, open Stata. (You should be able to do this by clicking on the “Start” menu in the bottom left of the screen, then typing “Stata”.)</li>
-<li>The <a href="01-the-basics-of-stata.html#the-stata-environment">use of each pane</a> will become much clearer when we start opening data in the <a href="02-working-with-data-sets.html">next section</a>, but take a look at each.</li>
+<li>The <a href="./01-the-basics-of-stata.html#the-stata-environment">use of each pane</a> will become much clearer when we start opening data in the <a href="./02-working-with-data-sets.html">next section</a>, but take a look at each.</li>
 <li>Give Stata a command: <code>query memory</code>. This lists some settings related to memory usage in Stata, for example, <code>maxvar</code> is the maximum number of variables in a model; <code>matsize</code> is the largest number of predictors allowed in a model.</li>
-<li>Open a <a href="01-the-basics-of-stata.html#do-files">Do file</a>. Place a <a href="01-the-basics-of-stata.html#version-control"><code>version</code> command</a> at the top of the file corresponding to the version on your computer. Place the <code>query memory</code> command from the last step in the Do file.</li>
+<li>Open a <a href="./01-the-basics-of-stata.html#do-files">Do file</a>. Place a <a href="./01-the-basics-of-stata.html#version-control"><code>version</code> command</a> at the top of the file corresponding to the version on your computer. Place the <code>query memory</code> command from the last step in the Do file.</li>
 <li>Be sure you know how to run these commands from the Do file.</li>
-<li><a href="01-the-basics-of-stata.html#comments">Comment</a> out the <code>query memory</code> command; we won’t need it anymore.</li>
+<li><a href="./01-the-basics-of-stata.html#comments">Comment</a> out the <code>query memory</code> command; we won’t need it anymore.</li>
 </ol>
 </section>
 <section id="basic-command-syntax" class="level2" data-number="1.8">
@@ -483,8 +483,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="working-directory" class="level2" data-number="1.10">
 <h2 data-number="1.10" class="anchored" data-anchor-id="working-directory"><span class="header-section-number">1.10</span> Working directory</h2>
-<p>We mentioned <a href="01-the-basics-of-stata.html#the-stata-environment">earlier</a> the notion of a “working directory”, the current one you can see in the bottom left of the Stata window. You can think of a working directory as an open folder inside Windows Explorer (or Finder if you’re on a Mac). You can easily access any file within that folder without any additional trouble. You can access files in other folders (directories), but it requires moving to that folder.</p>
-<p>In the same sense, when referring to files, any file in the working directory can be referred to buy its name. For example, to open a file (we’ll go into detail about doing this <a href="02-working-with-data-sets.html#opening data">later</a>) named “mydata.dta” which is in your current working directory, you need only enter</p>
+<p>We mentioned <a href="./01-the-basics-of-stata.html#the-stata-environment">earlier</a> the notion of a “working directory”, the current one you can see in the bottom left of the Stata window. You can think of a working directory as an open folder inside Windows Explorer (or Finder if you’re on a Mac). You can easily access any file within that folder without any additional trouble. You can access files in other folders (directories), but it requires moving to that folder.</p>
+<p>In the same sense, when referring to files, any file in the working directory can be referred to buy its name. For example, to open a file (we’ll go into detail about doing this <a href="./02-working-with-data-sets.html#opening data">later</a>) named “mydata.dta” which is in your current working directory, you need only enter</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> mydata.dta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>(Technically you could just run <code>use mydata</code> as Stata will search for a file with the appropriate “.dta” extension automatically.)</p>
 <p>If you were in a different working directory, you need to specify the full path to the file:</p>
@@ -509,7 +509,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <ol>
 <li id="fn1"><p>Stata can handle commands that are prefaced by <code>.</code> (with a space between the period and comand) so you can copy/paste the <code>. version</code> and run it as is. However, don’t get used to that habit! The correct command is just <code>version</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>As we’ll see in <a href="01-the-basics-of-stata.html#do-files">a bit</a>, you can save Stata commands in a “do-file”. While I’ve never seen an official definition, I tend to think of “ado” as “automatic do”.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>As we’ll see in <a href="./01-the-basics-of-stata.html#do-files">a bit</a>, you can save Stata commands in a “do-file”. While I’ve never seen an official definition, I tend to think of “ado” as “automatic do”.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>I consider the “Big 4” as Stata, SAS, SPSS, and R. SPSS has terrible help; SAS’s is good but dense and difficult to navigate if you don’t already know what you’re looking for; R’s is very hit-or-miss depending on who wrote it.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>

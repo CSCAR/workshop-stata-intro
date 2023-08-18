@@ -207,14 +207,14 @@ very bottom of any help file, it will say something like "`summarize` stores the
 following in `r()`:" or "`mean` stores the following in `e()`:", corresponding
 to `return` and `ereturn` respectively.
 
-Along with the [One Data](01-the-basics-of-stata.html#one-data) principal, Stata
+Along with the [One Data](01-the-basics-of-stata.qmd#one-data) principal, Stata
 also follows the One _-class principal - meaning you can only view the `return`
 or `ereturn` for the most recent command of that class. So if you run a
 `summarize` command, then do a bunch of n-class calls (`gsort` for example), the
 `return list` call will still give you the returns for that first `summarize`.
 However, as soon as you run another r-class command, you lose access to the
 first one. You can save any piece of it using a
-[macro](05-programming.html#macros). For example, to calculate the average
+[macro](05-programming.qmd#macros). For example, to calculate the average
 difference in price between foreign and domestic cars^[There are obviously other
 ways to compute this, but this gives a flavor of the use.]:
 
@@ -977,7 +977,7 @@ turn i.rep78 i.foreign i.rep78#c.turn i.foreign#c.turn
 Note the call to `vl rebuild`. Among other things, it will re-generate the
 factor-variable lists. (It produces a `vl dir` output without an option to
 suppress it, hence the use of
-[`quiet`](05-programming.html#quieting-the-output).)
+[`quiet`](05-programming.qmd#quieting-the-output).)
 
 ### Stored Statistics
 
@@ -1015,7 +1015,7 @@ gear_r~o | $mylist3        noninteger                 2.19      3.89         74
 
 ```
 
-This is similar to [`codebook`](03-data-management.html#summarizing-the-data)
+This is similar to [`codebook`](03-data-management.qmd#summarizing-the-data)
 except faster; these characteristics are saved at the time the variable list is
 created or modified and not updated automatically. If the data changes, this
 does *not* get updated.
@@ -1178,7 +1178,7 @@ Links are tracked by the variables, we can see the current status of a link via
 
   History:
   -----------------------------------------------------------------------------
-    Link variable diet created on 12 Aug 2023 by
+    Link variable diet created on 18 Aug 2023 by
 
     . frlink 1:1 seqn, frame(diet)
 
@@ -1342,14 +1342,14 @@ Let's breakdown each piece of the command. The command syntax for `foreach` is
 foreach <new macroname> of varlist <list of variables>
 ```
 
-The loop will create a [macro](05-programming.html#macros) that you name (in the
+The loop will create a [macro](05-programming.qmd#macros) that you name (in the
 example above, it was named "race"), and repeatedly set it to each subsequent
 entry in the list of variables. So in the code above, first "race" is set to
 "total", then the two `generate` commands are run. Next, "race" is set to
 "white", then the two commands are run. Etc.
 
 Within each of the `generate` commands, we use the backtick-quote notation just
-like with [macros](05-programming.html#macros).
+like with [macros](05-programming.qmd#macros).
 
 Finally, we end the `foreach` line with an open curly brace, `{`, and the line
 after the last command within the loop has the matching close curly brace, `}`.
@@ -1418,7 +1418,7 @@ foreach race in total-island
 then Stata would set "race" to "total-island" and the `generate` command would
 run once! By using "of varlist", you are telling Stata that before it sets
 "race" to anything, expand the varlist using the [rules such as `*` and
-`-`](03-data-management.html#referring-to-variables).
+`-`](03-data-management.qmd#referring-to-variables).
 
 There is also
 
@@ -1455,7 +1455,7 @@ Imagine the following scenario. You want to write a Do-file that generates a new
 variable. However, you may need to re-run chunks of the Do-file repeatedly, so
 that the `generate` statement is hit repeatedly. After the first `generate`, we
 can't call it again and [need to use `replace`
-instead](04-data-manipulation.html#replacing-existing-variables). However, if we
+instead](04-data-manipulation.qmd#replacing-existing-variables). However, if we
 used `replace`, it wouldn't work the first time! One solution is to `drop` the
 variable before we `generate` it:
 
@@ -1566,7 +1566,7 @@ if _rc > 0 {
 
 `quietly` does the same basic thing as `capture`, except it does not hide
 errors. It can be useful combined with [the
-returns](05-programming.html#class-and-return):
+returns](05-programming.qmd#class-and-return):
 
 ```stata
 . quietly summarize price

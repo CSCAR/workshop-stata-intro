@@ -12,7 +12,7 @@ with Stata. It can be loaded via
 You can reload it as necessary (if you modify it and want the original) by
 re-running this with the `clear` option. Feel free to make frequent use of
 [`preserve` and
-`restore`](02-working-with-data-sets.html#temporarily-preserving-and-restoring-data).
+`restore`](02-working-with-data-sets.qmd#temporarily-preserving-and-restoring-data).
 
 Whenever you first begin working with a data set, you'll want to spend some time
 getting familiar with it. You should be able to answer the following questions
@@ -42,7 +42,7 @@ of your data.
 ## Referring to variables
 
 When we discussed [basic command
-syntax](01-the-basics-of-stata.html#basic-command-syntax), we said that the
+syntax](01-the-basics-of-stata.qmd#basic-command-syntax), we said that the
 optional list of variables can include any number of variables (for some
 commands). Writing out all the variables can get very tedious as the number of
 variables increases. Thankfully there are two alternatives.
@@ -62,12 +62,12 @@ data (e.g. in the Variables pane), we can refer to a list of them. Say the
 variables `x1` through `x25` are in ordered in the logical fashion. We could
 refer to the whole list of them as `x1-x25`. This includes both `x1` and `x25`,
 as well as any variable in between them. We will discuss the
-[`order`](03-data-management.html#changing-variable-ordering) command later to
+[`order`](03-data-management.qmd#changing-variable-ordering) command later to
 re-order variables.
 
 Finally, you often don't need to give the entire name of the variable, just
 enough characters for Stata to be able to uniquely identify it (similar to
-[short names](01-the-basics-of-stata.html#short-commands)). We'll see in a
+[short names](01-the-basics-of-stata.qmd#short-commands)). We'll see in a
 minute more about the `describe` command, but for example,
 
 ```stata
@@ -134,11 +134,11 @@ Next, there is a table listing each variable in the data and some information
 about them. The "storage type" can be one of `byte`, `int`, `long`, `float`,
 `double`; all of which are simply numbers. We'll touch on the differences
 between these when we discuss
-[`compress`](03-data-management.html#compressing-data), but for now they all
+[`compress`](03-data-management.qmd#compressing-data), but for now they all
 represent numeric variables. String variables are represented as `str##` where
 the `##` represent the number of characters that the string can be, e.g. `str18`
 shows that `make` has a maximum of 18 letters. (This limit is irrelevant, again,
-see [`compress`](03-data-management.html#compressing-data) for details.)
+see [`compress`](03-data-management.qmd#compressing-data) for details.)
 
 The "display format" column contains format information about each variable
 which only control how the variables are displayed in data view. For the most
@@ -151,7 +151,7 @@ help formats
 
 "value label" and "variable label" are used to display more information when
 running analyses using these variables. See the
-[label](03-data-management.html#labels) section for further details.
+[label](03-data-management.qmd#labels) section for further details.
 
 Finally, if the data is sorted, `describe` will provide information about the
 sorting.
@@ -203,7 +203,7 @@ mpg           trunk         turn          foreign
 
 ## Compressing data
 
-As mentioned [above](03-data-management.html#describing the data), there are
+As mentioned [above](03-data-management.qmd#describing the data), there are
 different ways to store a number variable, such as `byte` and `long`. The
 various options take more space to save - types which take less space can store
 only smaller numbers whereas types that take more space can store larger
@@ -295,7 +295,7 @@ We see here a very modest saving (370 bytes, about 12%), but sometimes you can
 see much more significant gains.
 
 (When running Stata, instead of using `memory`, you can look at the "Size" entry
-in the [properties pane](01-the-basics-of-stata.html#the-stata-environment).)
+in the [properties pane](01-the-basics-of-stata.qmd#the-stata-environment).)
 
 Don't be afraid of artificially restricting yourself going forward; if one of
 your values exceeds the limitations its type supports, Stata will automatically
@@ -305,14 +305,14 @@ some manipulations.
 ## Exercise 2
 
 1. "census9" is accesible via
-   [`webuse`](02-working-with-data-sets.html#stata-website-data). Load it.
+   [`webuse`](02-working-with-data-sets.qmd#stata-website-data). Load it.
 2. Spend a minute looking at the data. What does this data seem to represent?
    What variables do we have?
-   ([`describe`](03-data-management.html#describing-the-data) will come in handy
+   ([`describe`](03-data-management.qmd#describing-the-data) will come in handy
    here!)
 3. Are there any missing states?
 4. What variables (if any) are numeric and what variables (if any) are strings?
-5. [Compress](03-data-management.html#compressing-data) the data. How much space
+5. [Compress](03-data-management.qmd#compressing-data) the data. How much space
    is saved? Why do you think this is?
 
 
@@ -450,7 +450,7 @@ foreign         byte    %8.0g      origin     Car origin
 
 Additionally, if you look at the data through Data Editor or Data Browser, you
 see that instead of `foreign` being red (as a string) it is blue, as we
-discussed [earlier](02-working-with-data-sets.html#colors-as-variable-type).
+discussed [earlier](02-working-with-data-sets.qmd#colors-as-variable-type).
 
 Let's look at that table ignoring the value labels:
 
@@ -589,7 +589,7 @@ them) or they'll be lost!
 
 In Stata, managing the names and order of variables is important to make
 entering commands easier due to the [shortcuts for referring to
-variables](03-data-management.html#referring-to-variables). Recall that
+variables](03-data-management.qmd#referring-to-variables). Recall that
 variables can be referred to using wildcards (e.g. `a*` to include `age`,
 `address` or `a10`, or using `var1-var10` to include all variables between
 `var1` and `var10` as they are ordered). Of course, you may also want to rename
@@ -699,19 +699,19 @@ price         length        trunk         weight
 If you've changed to a different data set, load "census9" back up with `webuse`.
 
 1. Going forward, we'll be using a version of "census9" with changes we're
-   making. [Save](02-working-with-data-sets.html#saving-data) a copy of the data
+   making. [Save](02-working-with-data-sets.qmd#saving-data) a copy of the data
    to somewhere convenient (such as your Desktop). Don't forget to give it a
    name!
 2. The `drate` variable is a bit vague - the name of the variable provides no
    clue that "d" = "death", and the values (e.g. 75) are ambiguous.
-    1. [Rename](03-data-management.html#renaming-variables) `drate` to
+    1. [Rename](03-data-management.qmd#renaming-variables) `drate` to
        `deathrate`.
     2. The rate is actually per 10,000 individuals.
-       [Label](03-data-management.html#labeling-variables) `dearthrate` to
+       [Label](03-data-management.qmd#labeling-variables) `dearthrate` to
        include this information.
 3. The variable `region` has a value label associated with it ("cenreg"). It has
    some inconsistent choices, namely "NE" and "N Cntrl". Fix this.
-    1. [Create a new value label](03-data-management.html#labeling-values) which
+    1. [Create a new value label](03-data-management.qmd#labeling-values) which
        uses "Northeast" and "North Central" instead of "NE" and "N Cntrl".
     2. Attach this new value label to `region`.
     3. Remove the existing value label "cenreg".
@@ -761,7 +761,7 @@ The table reports the total number of non-missing values (`make` appears to be
 entirely missing because it is non-numeric), the mean (the average value), the
 standard deviation (a measure of how spread out the data is) and the minimum and
 maximum non-missing^[As we discuss
-[later](04-data-manipulation.html#conditional-variable-generation), in Stata,
+[later](04-data-manipulation.qmd#conditional-variable-generation), in Stata,
 missing values (represented by `.` in the data) are considered to be higher than
 any other number (so 99999 < .).] values observed.
 
@@ -945,9 +945,9 @@ blanks.") More serious problems that it can detect include:
 
 ## Exercise 4
 
-Using [`summarize` and `codebook`](03-data-management.html#summarizing-the-data)
+Using [`summarize` and `codebook`](03-data-management.qmd#summarizing-the-data)
 to explore the "census9" data (use the version you saved
-[earlier](03-data-management.html#exercise-3)!) and answer the following
+[earlier](03-data-management.qmd#exercise-3)!) and answer the following
 questions:
 
 1. Are there any values which seem to be errors?

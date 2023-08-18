@@ -23,7 +23,7 @@ window:
     - This pane displays all of the variables in the data set that is currently
       open in Stata, and users can click on variable names in this pane to carry
       the variables over into Stata commands in the Command pane. Note that
-      Stata allows only [one data-set](01-the-basics-of-stata.html#one-data) to
+      Stata allows only [one data-set](01-the-basics-of-stata.qmd#one-data) to
       be open in a session.
 - The History Pane
     - Stata will keep a running record of all Stata commands that have been
@@ -31,26 +31,26 @@ window:
       previous commands in this pane to recall them in the Command pane.
 - The Properties Pane
     - This pane allows variable properties and data-set properties to be
-      managed. [Variable names](03-data-management.html#renaming-variables),
-      [labels](03-data-management.html#labeling-variables), [value
-      labels](03-data-management.html#labeling-values), [display
-      formats](03-data-management.html#describing-the-data), and [storage
-      types](03-data-management.html#describing-the-data) can be viewed and
+      managed. [Variable names](03-data-management.qmd#renaming-variables),
+      [labels](03-data-management.qmd#labeling-variables), [value
+      labels](03-data-management.qmd#labeling-values), [display
+      formats](03-data-management.qmd#describing-the-data), and [storage
+      types](03-data-management.qmd#describing-the-data) can be viewed and
       modified here.
 
 Each of these five panes will be nested within the main Stata session, which
 contains menus and tool bars. There are additional windows that users can access
 from the Window menu, which include the Graph window (which will open when
 graphs have been created), the Viewer window (which is primarily used for
-[help](01-the-basics-of-stata.html#stata-help) features and Stata news), the
+[help](01-the-basics-of-stata.qmd#stata-help) features and Stata news), the
 Data Editor window (for use when [viewing data
-sets](02-working-with-data-sets.html#editing-data-manually)), and the Do-file
+sets](02-working-with-data-sets.qmd#editing-data-manually)), and the Do-file
 Editor window (for use when writing [.do
-files](01-the-basics-of-stata.html#do-files)).
+files](01-the-basics-of-stata.qmd#do-files)).
 
 In the lower left-hand corner of the main Stata window (below the panes), there
 will be a directory displayed. This is known as the [working
-directory](01-the-basics-of-stata.html#working-directory), and is where Stata
+directory](01-the-basics-of-stata.qmd#working-directory), and is where Stata
 will look to find data files and other associated Stata files unless the user
 specifies another directory. We will cover examples of changing the working
 directory.
@@ -71,7 +71,7 @@ One functionality where Stata differs than most other statistical or data
 analysis software is that Stata can only work with a single data set at a time.
 
 Any command you run knows to operate on the data set you have open. For example,
-there is a command [`summarize`](03-data-management.html#summarizing-the-data)
+there is a command [`summarize`](03-data-management.qmd#summarizing-the-data)
 which provides summary information about variables. The command is simply
 `summarize`, there is no need to direct it towards a specific data set.
 
@@ -79,11 +79,11 @@ If you have multiple data sets you need to work with, you can either
 
 1. Switch between the two data sets as needed. This can be burdensome, though
    tools such as
-   [`preserve`](02-working-with-data-sets.html#temporarily-preserving-and-restoring-data)
-   or [`frames`](02-working-with-data-sets.html#frames) help greatly.
+   [`preserve`](02-working-with-data-sets.qmd#temporarily-preserving-and-restoring-data)
+   or [`frames`](02-working-with-data-sets.qmd#frames) help greatly.
 
 2. Merge the data sets, the better option. We'll discuss
-   [merging](04-data-manipulation.html#merging-files) towards the end of the
+   [merging](04-data-manipulation.qmd#merging-files) towards the end of the
    course.
 
 ## Give Stata a command
@@ -129,7 +129,7 @@ addition, if you highlight text and right-click, you also have the options:
   most useful for text which comes naturally as a table rather than results
   which are forced into a table for display purposes.
 - "Copy table as HTML": You can paste this into a plaintext editor (Notepad.exe
-  or TextEdit, *not* Word) and save it as a *.html to produce a webpage. If you
+  or TextEdit, *not* Word) and save it as a *.qmd to produce a webpage. If you
   paste this into Excel you get a slightly different table than the layout for
   "Copy table" which may be more useful.
 - "Copy as picture": Does exactly what it says - equivalent to taking a
@@ -137,12 +137,12 @@ addition, if you highlight text and right-click, you also have the options:
 
 There are a few commands that can be useful for saving results which we will not
 cover in this workshop, if you are interested, you can look into [the
-help](01-the-basics-of-stata.html#stata-help) for them.
+help](01-the-basics-of-stata.qmd#stata-help) for them.
 
 - `log`: Saves a file consisting of everything printed to the Results pane.
 - `putexcel`: Adds to a spreadsheet specific strings or output.
 - `outreg2`: A
-  [user-written](01-the-basics-of-stata.html#installing-user-written-commands)
+  [user-written](01-the-basics-of-stata.qmd#installing-user-written-commands)
   command to output the results of a model (e.g. regression) in a clean format.
 
 ### Dynamic Tags
@@ -150,7 +150,7 @@ help](01-the-basics-of-stata.html#stata-help) for them.
 Version 15 of Stata introduced dynamic tags and the `dyndoc` and `dyntext`
 commands which allows you to weave together narrative text and Stata code to
 produce a high-quality output (html, word or pdf). This document is written ([in
-part](index.html#creation-of-this-document)) in Dynamic Tags. It is extremely
+part](index.qmd#creation-of-this-document)) in Dynamic Tags. It is extremely
 powerful but is well outside the mandate of this class. If you are interested in
 this functionality, I'd be happy to help. [This Stata
 manual](https://www.stata.com/manuals/rptdynamicdocumentsintro.pdf) is a good
@@ -183,13 +183,13 @@ out to your IT administrators to update.
 ## Installing user-written commands
 
 In addition to built in commands, Stata supports user-written programs, know as
-"ado-files"^[As we'll see in [a bit](01-the-basics-of-stata.html#do-files), you
+"ado-files"^[As we'll see in [a bit](01-the-basics-of-stata.qmd#do-files), you
 can save Stata commands in a "do-file". While I've never seen an official
 definition, I tend to think of "ado" as "automatic do".]. Once installed, these
 user-written programs operate identically to any built-in command, with the
 caveat that they may not be quite as polished or complete since they're
 volunteer written. Documentation is rarely up to [Stata
-standards](01-the-basics-of-stata.html#stata-help) and often relegates details
+standards](01-the-basics-of-stata.qmd#stata-help) and often relegates details
 to a manuscript.
 
 We won't be covering any ado-files in these notes, but if you wanted to install
@@ -211,7 +211,7 @@ Finally, to see a list of all user-written programs you have installed, used
 ado
 ```
 
-[Updating Stata](01-the-basics-of-stata.html#updating) will not update any
+[Updating Stata](01-the-basics-of-stata.qmd#updating) will not update any
 ado-files, instead you can run
 
 
@@ -229,7 +229,7 @@ to perform all updates.
 
 ## Do-files
 
-We [saw](01-the-basics-of-stata.html#give-stata-a-command) that commands can be
+We [saw](01-the-basics-of-stata.qmd#give-stata-a-command) that commands can be
 typed interactively, one command at a time, and the results immediately
 observed. From this, the output can be copied/exported/printed, or the results
 can be saved. However, a better paradigm would save all the commands run
@@ -238,7 +238,7 @@ separately so that the analysis is
 
 For this purpose, Stata has Do-files (named because they are saved with the .do
 extension, such as `analysis.do`) which are scripts containing only commands and
-[comments](01-the-basics-of-stata.html#comments). We can then run any subset of
+[comments](01-the-basics-of-stata.qmd#comments). We can then run any subset of
 the commands (including the entire file), re-running parts or all of the
 analysis. Additionally you can easily save and/or share this command, allowing
 yourself or a colleague to re-run the analysis.
@@ -283,9 +283,9 @@ tabulate foreign
 ```
 
 We will cover in later sections what each of these commands does
-([`sysuse`](02-working-with-data-sets.html#built-in-data),
-[`summarize`](03-data-management.html#summarizing-the-data), and
-[`tabulate`](03-data-management.html#labeling-values)).
+([`sysuse`](02-working-with-data-sets.qmd#built-in-data),
+[`summarize`](03-data-management.qmd#summarizing-the-data), and
+[`tabulate`](03-data-management.qmd#labeling-values)).
 
 ### Comments
 
@@ -370,7 +370,7 @@ the way back to Stata 2. (Obviously, this will not work if you try to run as
 Stata 17 when you only have Stata 14 installed.)
 
 Note that this `version` is the same command as the `version` we've been
-discussing [before](01-the-basics-of-stata.html#give-stata-a-command). It
+discussing [before](01-the-basics-of-stata.qmd#give-stata-a-command). It
 operates in this special fashion only when included at the top of a Do-file.
 
 Best practices is to always include a `version ##.#` line at the top of each
@@ -385,19 +385,19 @@ have already done all these!
 1. If you haven't already, open Stata. (You should be able to do this by
    clicking on the "Start" menu in the bottom left of the screen, then typing
    "Stata".)
-2. The [use of each pane](01-the-basics-of-stata.html#the-stata-environment)
+2. The [use of each pane](01-the-basics-of-stata.qmd#the-stata-environment)
    will become much clearer when we start opening data in the [next
-   section](02-working-with-data-sets.html), but take a look at each.
+   section](02-working-with-data-sets.qmd), but take a look at each.
 3. Give Stata a command: `query memory`. This lists some settings related to
    memory usage in Stata, for example, `maxvar` is the maximum number of
    variables in a model; `matsize` is the largest number of predictors allowed
    in a model.
-4. Open a [Do file](01-the-basics-of-stata.html#do-files). Place a [`version`
-   command](01-the-basics-of-stata.html#version-control) at the top of the file
+4. Open a [Do file](01-the-basics-of-stata.qmd#do-files). Place a [`version`
+   command](01-the-basics-of-stata.qmd#version-control) at the top of the file
    corresponding to the version on your computer. Place the `query memory`
    command from the last step in the Do file.
 5. Be sure you know how to run these commands from the Do file.
-6. [Comment](01-the-basics-of-stata.html#comments) out the `query memory`
+6. [Comment](01-the-basics-of-stata.qmd#comments) out the `query memory`
    command; we won't need it anymore.
 
 ## Basic command syntax
@@ -512,7 +512,7 @@ su` will bring up the full `summarize` documentation.
 
 ## Working directory
 
-We mentioned [earlier](01-the-basics-of-stata.html#the-stata-environment) the
+We mentioned [earlier](01-the-basics-of-stata.qmd#the-stata-environment) the
 notion of a "working directory", the current one you can see in the bottom left
 of the Stata window. You can think of a working directory as an open folder
 inside Windows Explorer (or Finder if you're on a Mac). You can easily access
@@ -521,7 +521,7 @@ in other folders (directories), but it requires moving to that folder.
 
 In the same sense, when referring to files, any file in the working directory
 can be referred to buy its name. For example, to open a file (we'll go into
-detail about doing this [later](02-working-with-data-sets.html#opening data))
+detail about doing this [later](02-working-with-data-sets.qmd#opening data))
 named "mydata.dta" which is in your current working directory, you need only
 enter
 
