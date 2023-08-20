@@ -1,8 +1,38 @@
 /*-- scss:defaults --*/
-// Base document colors
-$body-bg: #181818;
+$base03: #002b36;
+$base02: #073642;
+$base01: #586e75;
+$base00: #657b83;
+$base0: #839496;
+$base1: #93a1a1;
+$base2: #eee8d5;
+$base3: #fdf6e3;
+$cyellow: #b58900;
+$corange: #cb4b16;
+$cred: #dc322f;
+$cmagenta: #d33682;
+$cviolet: #6c71c4;
+$cblue: #268bd2;
+$ccyan: #2aa198;
+$cgreen: #859900;
+
+$body-bg: $base02;;
 $body-color: white;
 $link-color: #75AADB;
-
-// Code blocks
+$navbar-bg: $base03;
+$dropdown-bg: $base03;
+$dropdown-link-color: $base1;
+$nav-tabs-link-active-bg: $base01;
+$nav-tabs-link-active-color: $base02;
 $code-block-bg-alpha: -.8;
+$code-color: $ccyan;
+
+/*-- scss:rules --*/
+/* Based on http://jmclawson.net/posts/quarto-css/ */
+img {
+  filter: sepia(50%) hue-rotate(30deg) saturate(500%) invert(0.9);
+}
+
+img:hover {
+  filter: sepia(0%) hue-rotate(0deg) saturate(100%) invert(0) !important;
+}

@@ -17,3 +17,7 @@ $(dyndocs): %.qmd: %.dyndoc
 .PHONY:open
 open:
 	@open docs/index.html
+
+.PHONY:preview
+preview:
+	quarto preview
