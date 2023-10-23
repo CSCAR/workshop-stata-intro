@@ -38,6 +38,10 @@ source code for these notes can be found at
 
 All images should link to full-size versions to see detail if needed.
 
+Dark mode can be toggled on via the switch in the top left corner. Images are
+color-reversed in dark mode to avoid brightness; mouse over them (or click on
+mobile) to display originals.
+
 ## Contact information {.unnumbered}
 
 ### CSCAR {.unnumbered}
