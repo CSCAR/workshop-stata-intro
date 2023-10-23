@@ -16,23 +16,11 @@ $cblue: #268bd2;
 $ccyan: #2aa198;
 $cgreen: #859900;
 
-$body-bg: $base02;;
-$body-color: white;
-$link-color: #75AADB;
-$navbar-bg: $base03;
-$dropdown-bg: $base03;
-$dropdown-link-color: $base1;
-$nav-tabs-link-active-bg: $base01;
-$nav-tabs-link-active-color: $base02;
-$code-block-bg-alpha: -.8;
-$code-color: $ccyan;
-
 /*-- scss:rules --*/
-/* Based on http://jmclawson.net/posts/quarto-css/ */
 img {
-  filter: sepia(50%) hue-rotate(30deg) saturate(500%) invert(0.9);
+    filter: sepia(50%) hue-rotate(30deg) saturate(500%) invert(0.9);
 }
 
 img:hover {
-  filter: sepia(0%) hue-rotate(0deg) saturate(100%) invert(0) !important;
+    filter: sepia(0%) hue-rotate(0deg) saturate(100%) invert(0) !important;
 }

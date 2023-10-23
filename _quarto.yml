@@ -19,6 +19,6 @@ book:
 format:
   html:
     theme:
-      light: cosmo
-      dark: [cosmo, theme-dark.scss]
+      light: [cosmo, style.scss, theme-light.scss]
+      dark: [cosmo, style.scss, theme-dark.scss]
     callout-appearance: simple

@@ -11,7 +11,7 @@
     "href": "index.html#creation-of-this-document",
     "title": "Introduction to Stata",
     "section": "Creation of this document",
-    "text": "Creation of this document\nThese notes are published using Quarto. The Stata code is first rendered using a Stata dynamic document. The source code for these notes can be found at https://github.com/CSCAR/workshop-stata-intro for the curious.\nAll images should link to full-size versions to see detail if needed."
+    "text": "Creation of this document\nThese notes are published using Quarto. The Stata code is first rendered using a Stata dynamic document. The source code for these notes can be found at https://github.com/CSCAR/workshop-stata-intro for the curious.\nAll images should link to full-size versions to see detail if needed.\nDark mode can be toggled on-off with the switch underneath the title on the left table of contents. While in dark mode, images are color inverted until moused over - mouse over them (or tap on them on mobile devices) to show the original colors."
   },
   {
     "objectID": "index.html#contact-information",
