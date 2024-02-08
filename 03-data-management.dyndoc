@@ -57,6 +57,11 @@ variables existed. It can also be used in the middle or beginning, e.g.:
 - `c*t` would match `cat`, `caught` and `ct`
 - `*2` would match `age2`, `gender2` and `salary2012`.
 
+Multiple `*` can also be used, e.g.:
+
+- `*age*` would match `birthage`, `age_last` or `latest_age_given`. (It would
+  also match `wages`, so be careful with this!)
+
 Alternatively, if the variables we want to include are next to each other in the
 data (e.g. in the Variables pane), we can refer to a list of them. Say the
 variables `x1` through `x25` are in ordered in the logical fashion. We could
