@@ -679,18 +679,93 @@ bysort foreign highmileage: summ price
 ```
 
 When specifying `bysort`, you can optionally specify a variable to sort on but
-not to group by. For example, let's say your data consisted of doctors visits
-for patients, where patients may have more than one appointment. You want to
-generate a variable indicating whether a visit is the first by the patient. Say
-`id` stores the patient id, `date` stores the date of the visit.
+not to group by. To see this in action, let's switch to the "nlswork" data set.
 
 ```stata
-bysort id (date): gen firstvisit = _n == 1
+<<dd_do>>
+webuse nlswork, clear
+list idcode year age ln_wage in 1/5
+list idcode year age ln_wage in 11/15
+<</dd_do>>
 ```
 
-By placing `date` in parentheses, this ensures that within each `id`, the data
-is sorted by `date`. Therefore the first row for each patient is their first
-visit, so `_n == 1` evaluates to 1 only in that first row and 0 zero otherwise.
+The file contains information from the National Longitudinal Survey of Young
+Women. Each woman enters the data at a different age. First, let's obtain a
+version of the data that contains only the first row for each woman.
+
+```stata
+<<dd_do>>
+bysort idcode (year): generate rownum = _n
+list idcode year rownum if inlist(_n, 1, 2, 12, 13, 14)
+<</dd_do>>
+```
+
+(I use `if inlist(` instead of `in` to be able to view a non-continuous set of
+rows; `inlist` evaluates to "True" only if the first entry (`_n` in this case)
+is equal to any of the following entires (1, 2, 12, 13, or 14).)
+
+Since we are essentially splitting the whole dataset into separate smaller ones
+based upon `idcode`, the row numbers in each of those smaller data sets starts
+at 1 again. Sorting by `year` (via `(year)`) ensures we get a proper ordering.
+
+We could then do something like this
+
+```stata
+<<dd_do>>
+generate firstyear = rownum == 1
+list idcode year firstyear in 1/5
+<</dd_do>>
+```
+
+or even
+
+```stata
+<<dd_do>>
+keep if rownum == 1
+list idcode year in 1/5
+<</dd_do>>
+```
+
+Loading the full data back up, let's see a more advanced example. Let's create a
+variable that contains the age of the woman at entrance to the data.
+
+```stata
+<<dd_do>>
+webuse nlswork, clear
+bysort idcode (year): gen age_at_first_year = age[1]
+list idcode year age age_at_first_year if inlist(_n, 1, 2, 12, 13, 14)
+<</dd_do>>
+```
+
+The square bracket notation (`[1]`) refers to row numbers; this extracts the
+first row (per `idcode`) from `age`. We can also use `_n` inside the square
+brackets to refer to following or preceding rows:
+
+```stata
+<<dd_do>>
+bysort idcode (year): gen wave_prev_yr = ln_wage[_n-1]
+list idcode year ln_wage wave_prev_yr if inlist(_n, 1, 2, 12, 13, 14)
+<</dd_do>>
+```
+
+Note that both these examples would run without complaint if we excluded by
+`bysort`, but then `[1]` and `[_n-1]` would correspond to the whole data - for
+`age_at_first_year`, the `1` would refer to the very first row for the whole
+data. For `wave_prev_yr` it'd be more insidious - specifically, as written
+above, the first row per `idcode` has no value of `wave_prev_yr`, whereas
+excluding `bysort` would assign the previous `idcode`'s *final* value of
+`ln_wage` asn the *first* value of `wave_prev_yr` for the next `id_code`:
+
+```stata
+<<dd_do>>
+webuse nlswork, clear
+gen wave_prev_yr = ln_wage[_n-1]
+list idcode year ln_wage wave_prev_yr if inlist(_n, 1, 2, 12, 13, 14)
+<</dd_do>>
+```
+
+A lot of data manipulation operations, when dealing with repeated measures or
+otherwise clustered data, can be accomplished easily with `bysort`.
 
 ### Discarding data
 

@@ -913,18 +913,183 @@ unique combination of the variable. For example,
 ```
 
 When specifying `bysort`, you can optionally specify a variable to sort on but
-not to group by. For example, let's say your data consisted of doctors visits
-for patients, where patients may have more than one appointment. You want to
-generate a variable indicating whether a visit is the first by the patient. Say
-`id` stores the patient id, `date` stores the date of the visit.
+not to group by. To see this in action, let's switch to the "nlswork" data set.
 
 ```stata
-bysort id (date): gen firstvisit = _n == 1
+. webuse nlswork, clear
+(National Longitudinal Survey of Young Women, 14-24 years old in 1968)
+
+. list idcode year age ln_wage in 1/5
+
+     +--------------------------------+
+     | idcode   year   age    ln_wage |
+     |--------------------------------|
+  1. |      1     70    18   1.451214 |
+  2. |      1     71    19    1.02862 |
+  3. |      1     72    20   1.589977 |
+  4. |      1     73    21   1.780273 |
+  5. |      1     75    23   1.777012 |
+     +--------------------------------+
+
+. list idcode year age ln_wage in 11/15
+
+     +--------------------------------+
+     | idcode   year   age    ln_wage |
+     |--------------------------------|
+ 11. |      1     87    35   2.536374 |
+ 12. |      1     88    37   2.462927 |
+ 13. |      2     71    19   1.360348 |
+ 14. |      2     72    20   1.206198 |
+ 15. |      2     73    21   1.549883 |
+     +--------------------------------+
+
 ```
 
-By placing `date` in parentheses, this ensures that within each `id`, the data
-is sorted by `date`. Therefore the first row for each patient is their first
-visit, so `_n == 1` evaluates to 1 only in that first row and 0 zero otherwise.
+The file contains information from the National Longitudinal Survey of Young
+Women. Each woman enters the data at a different age. First, let's obtain a
+version of the data that contains only the first row for each woman.
+
+```stata
+. bysort idcode (year): generate rownum = _n
+
+. list idcode year rownum if inlist(_n, 1, 2, 12, 13, 14)
+
+       +------------------------+
+       | idcode   year   rownum |
+       |------------------------|
+    1. |      1     70        1 |
+    2. |      1     71        2 |
+   12. |      1     88       12 |
+   13. |      2     71        1 |
+   14. |      2     72        2 |
+       +------------------------+
+
+```
+
+(I use `if inlist(` instead of `in` to be able to view a non-continuous set of
+rows; `inlist` evaluates to "True" only if the first entry (`_n` in this case)
+is equal to any of the following entires (1, 2, 12, 13, or 14).)
+
+Since we are essentially splitting the whole dataset into separate smaller ones
+based upon `idcode`, the row numbers in each of those smaller data sets starts
+at 1 again. Sorting by `year` (via `(year)`) ensures we get a proper ordering.
+
+We could then do something like this
+
+```stata
+. generate firstyear = rownum == 1
+
+. list idcode year firstyear in 1/5
+
+     +--------------------------+
+     | idcode   year   firsty~r |
+     |--------------------------|
+  1. |      1     70          1 |
+  2. |      1     71          0 |
+  3. |      1     72          0 |
+  4. |      1     73          0 |
+  5. |      1     75          0 |
+     +--------------------------+
+
+```
+
+or even
+
+```stata
+. keep if rownum == 1
+(23,823 observations deleted)
+
+. list idcode year in 1/5
+
+     +---------------+
+     | idcode   year |
+     |---------------|
+  1. |      1     70 |
+  2. |      2     71 |
+  3. |      3     68 |
+  4. |      4     70 |
+  5. |      5     68 |
+     +---------------+
+
+```
+
+Loading the full data back up, let's see a more advanced example. Let's create a
+variable that contains the age of the woman at entrance to the data.
+
+```stata
+. webuse nlswork, clear
+(National Longitudinal Survey of Young Women, 14-24 years old in 1968)
+
+. bysort idcode (year): gen age_at_first_year = age[1]
+(4 missing values generated)
+
+. list idcode year age age_at_first_year if inlist(_n, 1, 2, 12, 13, 14)
+
+       +--------------------------------+
+       | idcode   year   age   age_at~r |
+       |--------------------------------|
+    1. |      1     70    18         18 |
+    2. |      1     71    19         18 |
+   12. |      1     88    37         18 |
+   13. |      2     71    19         19 |
+   14. |      2     72    20         19 |
+       +--------------------------------+
+
+```
+
+The square bracket notation (`[1]`) refers to row numbers; this extracts the
+first row (per `idcode`) from `age`. We can also use `_n` inside the square
+brackets to refer to following or preceding rows:
+
+```stata
+. bysort idcode (year): gen wave_prev_yr = ln_wage[_n-1]
+(4,711 missing values generated)
+
+. list idcode year ln_wage wave_prev_yr if inlist(_n, 1, 2, 12, 13, 14)
+
+       +-------------------------------------+
+       | idcode   year    ln_wage   wave_p~r |
+       |-------------------------------------|
+    1. |      1     70   1.451214          . |
+    2. |      1     71    1.02862   1.451214 |
+   12. |      1     88   2.462927   2.536374 |
+   13. |      2     71   1.360348          . |
+   14. |      2     72   1.206198   1.360348 |
+       +-------------------------------------+
+
+```
+
+Note that both these examples would run without complaint if we excluded by
+`bysort`, but then `[1]` and `[_n-1]` would correspond to the whole data - for
+`age_at_first_year`, the `1` would refer to the very first row for the whole
+data. For `wave_prev_yr` it'd be more insidious - specifically, as written
+above, the first row per `idcode` has no value of `wave_prev_yr`, whereas
+excluding `bysort` would assign the previous `idcode`'s *final* value of
+`ln_wage` asn the *first* value of `wave_prev_yr` for the next `id_code`:
+
+```stata
+. webuse nlswork, clear
+(National Longitudinal Survey of Young Women, 14-24 years old in 1968)
+
+. gen wave_prev_yr = ln_wage[_n-1]
+(1 missing value generated)
+
+. list idcode year ln_wage wave_prev_yr if inlist(_n, 1, 2, 12, 13, 14)
+
+       +-------------------------------------+
+       | idcode   year    ln_wage   wave_p~r |
+       |-------------------------------------|
+    1. |      1     70   1.451214          . |
+    2. |      1     71    1.02862   1.451214 |
+   12. |      1     88   2.462927   2.536374 |
+   13. |      2     71   1.360348   2.462927 |
+   14. |      2     72   1.206198   1.360348 |
+       +-------------------------------------+
+
+```
+
+A lot of data manipulation operations, when dealing with repeated measures or
+otherwise clustered data, can be accomplished easily with `bysort`.
 
 ### Discarding data
 
@@ -947,8 +1112,8 @@ Note that these *cannot* be combined:
 
 ```stata
 . drop turn if mpg > 20
-invalid syntax
-r(198);
+variable turn not found
+r(111);
 
 ```
 
