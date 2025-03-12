@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.556">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to Stata - 1&nbsp; The Basics of Stata</title>
+<title>1&nbsp; The Basics of Stata – Introduction to Stata</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,12 +71,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-626149efe8f5d16e1d391ba177679bf0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-bf4479530437be86e83ef5d7ff1d44ad.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -114,13 +114,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-the-basics-of-stata.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Basics of Stata</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -300,8 +300,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The following should appear in the Results pane:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">version</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">version</span> 18.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The first line proceeded by the <code>.</code> indicates the command that was written, <code>version</code>, and the rest is the output. Here, I am running Stata version 18.0 (your version may vary).</p>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">version</span> 18.5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The first line proceeded by the <code>.</code> indicates the command that was written, <code>version</code>, and the rest is the output. Here, I am running Stata version 18.5 (your version may vary).</p>
 <p>In this document, if you see a single command without a period, it indicates something that was not run - either it’s not designed to be run (it’s fake code designed to illustrate a point), or more likely, the output is not interesting or unnecessary. If you instead see a Results output where the first line is the command prefaced by the <code>.</code>, that was run in Stata and only the Results are included since they include the command. The command can still be run, <em>but should be run without the <code>.</code></em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <section id="saving-results" class="level3" data-number="1.3.1">
 <h3 data-number="1.3.1" class="anchored" data-anchor-id="saving-results"><span class="header-section-number">1.3.1</span> Saving Results</h3>
@@ -315,17 +315,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><code>log</code>: Saves a file consisting of everything printed to the Results pane.</li>
 <li><code>putexcel</code>: Adds to a spreadsheet specific strings or output.</li>
+<li><code>dtable</code>: A very complex command that can create complete tables. Take a look at <a href="https://blog.stata.com/2023/06/26/creating-tables-of-descriptive-statistics-in-stata-18-the-new-dtable-command/">this blog post</a> on the Stata blog for more ideas of how it can be used.</li>
 <li><code>outreg2</code>: A <a href="./01-the-basics-of-stata.html#installing-user-written-commands">user-written</a> command to output the results of a model (e.g.&nbsp;regression) in a clean format.</li>
 </ul>
 </section>
 <section id="dynamic-tags" class="level3" data-number="1.3.2">
 <h3 data-number="1.3.2" class="anchored" data-anchor-id="dynamic-tags"><span class="header-section-number">1.3.2</span> Dynamic Tags</h3>
-<p>Version 15 of Stata introduced dynamic tags and the <code>dyndoc</code> and <code>dyntext</code> commands which allows you to weave together narrative text and Stata code to produce a high-quality output (html, word or pdf). This document is written (<a href="./index.html#creation-of-this-document">in part</a>) in Dynamic Tags. It is extremely powerful but is well outside the mandate of this class. If you are interested in this functionality, I’d be happy to help. <a href="https://www.stata.com/manuals/rptdynamicdocumentsintro.pdf">This Stata manual</a> is a good introduction.</p>
+<p>Dynamic tags and the <code>dyndoc</code> and <code>dyntext</code> commands which allows you to weave together narrative text and Stata code to produce a high-quality output (html, word or pdf). This document is written (<a href="./index.html#creation-of-this-document">in part</a>) in Dynamic Tags. It is extremely powerful but is well outside the mandate of this class. If you are interested in this functionality, I’d be happy to help. <a href="https://www.stata.com/manuals/rptdynamicdocumentsintro.pdf">This Stata manual</a> is a good introduction.</p>
 </section>
 </section>
 <section id="updating" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="updating"><span class="header-section-number">1.4</span> Updating</h2>
-<p>If you have administrative access on your computer (e.g.&nbsp;if it is your personal machine, or your IT department has given you the ability), you can update Stata freely. Major point upgrades such as the newly released 18.0 require purchase and re-installation, but minor upgrades (such as the 16.1 and 16.2 updates) as well as minor internal updates are free.</p>
+<p>If you have administrative access on your computer (e.g.&nbsp;if it is your personal machine, or your IT department has given you the ability), you can update Stata freely. Major point upgrades such as 18.0 require purchase and re-installation, but minor upgrades (such as the 16.1 and 16.2 updates) as well as minor internal updates are usually free.</p>
 <p>To check for updates, you can run</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>update <span class="kw">query</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If any updates are available (regardless of whether you ran a query first), you can obtain all updates with</p>
@@ -392,7 +393,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>. * This is a comment</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Second, you can add a comment to the end of a line with <code>//</code></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>. <span class="kw">version</span> <span class="co">// Returns the Stata version number</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">version</span> 18.0</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">version</span> 18.5</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>. <span class="co">// You can also use it to comment out an entire line.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There must be a space before the <code>//</code> if it comes after a command:</p>
@@ -423,7 +424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="1.6.2" class="anchored" data-anchor-id="version-control"><span class="header-section-number">1.6.2</span> Version control</h3>
 <p>When writing a Do-file, you generally are creating it while using a single version of Stata. If a new version of Stata were released, its possible that your code may operate differently with the new version. If you add</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">version</span> 14.2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you’ve updated to Stata 17. This works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 17 when you only have Stata 14 installed.)</p>
+<p>to the beginning of your Do-file, Stata will execute the commands as if it were still running version 14.2, even if you’ve updated to Stata 18. This works all the way back to Stata 2. (Obviously, this will not work if you try to run as Stata 18 when you only have Stata 14 installed.)</p>
 <p>Note that this <code>version</code> is the same command as the <code>version</code> we’ve been discussing <a href="./01-the-basics-of-stata.html#give-stata-a-command">before</a>. It operates in this special fashion only when included at the top of a Do-file.</p>
 <p>Best practices is to always include a <code>version ##.#</code> line at the top of each Do-file, but if its code that will continue to see use, you should test it with the newer releases and update the code as necessary!</p>
 </section>
@@ -700,18 +701,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -743,7 +733,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -751,7 +761,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -848,7 +858,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

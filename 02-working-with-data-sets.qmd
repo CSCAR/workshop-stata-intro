@@ -64,8 +64,8 @@ makes distribution easy!
 
 ## Opening data
 
-As you may have deduced from the `sysuse` and `webuse` commands above, the
-command to load local data is `use`:
+You may have guessed from the `sysuse` and `webuse` commands that the command to
+load local data is `use`:
 
 ```stata
 use <filename>
@@ -76,7 +76,7 @@ directory](01-the-basics-of-stata.qmd#working-directory) section, Stata can see
 only files in its working directory, so only the name of the file needs to be
 passed. If the file exists in a different directory, you will need to give the
 full (or relative path). For example, if your working directory is
-"C\:\\\Documents\\\Stata" and the file you are looking for, "mydata", is in the
+"C\:\\Documents\\Stata" and the file you are looking for, "mydata", is in the
 "Project" subfolder, you could open it with any of the following:
 
 ```stata
@@ -357,7 +357,7 @@ use tmp, clear
 
 Alternatively, the `preserve` and `restore` commands perform the same set of operations in a more automated fashion:
 
-```
+```stata
 sysuse auto
 <modify data set as desired>
 preserve

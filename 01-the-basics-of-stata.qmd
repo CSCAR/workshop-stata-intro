@@ -99,12 +99,12 @@ The following should appear in the Results pane:
 
 ```stata
 . version
-version 18.0
+version 18.5
 
 ```
 
 The first line proceeded by the `.` indicates the command that was written,
-`version`, and the rest is the output. Here, I am running Stata version 18.0
+`version`, and the rest is the output. Here, I am running Stata version 18.5
 (your version may vary).
 
 In this document, if you see a single command without a period, it indicates
@@ -141,15 +141,19 @@ help](01-the-basics-of-stata.qmd#stata-help) for them.
 
 - `log`: Saves a file consisting of everything printed to the Results pane.
 - `putexcel`: Adds to a spreadsheet specific strings or output.
+- `dtable`: A very complex command that can create complete tables. Take a look
+  at [this blog
+  post](https://blog.stata.com/2023/06/26/creating-tables-of-descriptive-statistics-in-stata-18-the-new-dtable-command/)
+  on the Stata blog for more ideas of how it can be used.
 - `outreg2`: A
   [user-written](01-the-basics-of-stata.qmd#installing-user-written-commands)
   command to output the results of a model (e.g. regression) in a clean format.
 
 ### Dynamic Tags
 
-Version 15 of Stata introduced dynamic tags and the `dyndoc` and `dyntext`
-commands which allows you to weave together narrative text and Stata code to
-produce a high-quality output (html, word or pdf). This document is written ([in
+Dynamic tags and the `dyndoc` and `dyntext` commands which allows you to weave
+together narrative text and Stata code to produce a high-quality output (html,
+word or pdf). This document is written ([in
 part](index.qmd#creation-of-this-document)) in Dynamic Tags. It is extremely
 powerful but is well outside the mandate of this class. If you are interested in
 this functionality, I'd be happy to help. [This Stata
@@ -160,9 +164,9 @@ introduction.
 
 If you have administrative access on your computer (e.g. if it is your personal
 machine, or your IT department has given you the ability), you can update Stata
-freely. Major point upgrades such as the newly released 18.0 require purchase
-and re-installation, but minor upgrades (such as the 16.1 and 16.2 updates) as
-well as minor internal updates are free.
+freely. Major point upgrades such as 18.0 require purchase and re-installation,
+but minor upgrades (such as the 16.1 and 16.2 updates) as well as minor internal
+updates are usually free.
 
 To check for updates, you can run
 
@@ -319,7 +323,7 @@ Second, you can add a comment to the end of a line with `//`
 
 ```stata
 . version // Returns the Stata version number
-version 18.0
+version 18.5
 
 . // You can also use it to comment out an entire line.
 ```
@@ -383,9 +387,9 @@ version 14.2
 ```
 
 to the beginning of your Do-file, Stata will execute the commands as if it were
-still running version 14.2, even if you've updated to Stata 17. This works all
+still running version 14.2, even if you've updated to Stata 18. This works all
 the way back to Stata 2. (Obviously, this will not work if you try to run as
-Stata 17 when you only have Stata 14 installed.)
+Stata 18 when you only have Stata 14 installed.)
 
 Note that this `version` is the same command as the `version` we've been
 discussing [before](01-the-basics-of-stata.qmd#give-stata-a-command). It

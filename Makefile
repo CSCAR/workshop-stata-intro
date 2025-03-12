@@ -4,20 +4,24 @@ dyndocs = 01-the-basics-of-stata.qmd	02-working-with-data-sets.qmd \
 
 
 .PHONY:default
-default: $(dyndocs)
+default: $(dyndocs) ## Build the workshop notes
 	quarto render
 
 .PHONY:quarto-prerender
-quarto-prerender: $(dyndocs)
+quarto-prerender: $(dyndocs) ## Rebuild only qmd from Stata files
 	@echo > /dev/null
 
-$(dyndocs): %.qmd: %.dyndoc
+$(dyndocs): %.qmd: %.dyndoc ## @ignore
 	/Applications/Stata/StataSE.app/Contents/MacOS/stata-se -b 'dyntext "$<", saving("$@") replace nostop'
 
 .PHONY:open
-open:
+open: ## Open built workshop
 	@open docs/index.html
 
 .PHONY:preview
-preview:
+preview: ## Quarto Preview
 	quarto preview
+
+.PHONY:clean
+clean: ## Remove build files
+	rm -rf docs/ $(dyndocs)

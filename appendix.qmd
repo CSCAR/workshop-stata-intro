@@ -71,6 +71,7 @@ rest numeric.
 (1980 Census data by state)
 
 . save mycensus9, replace
+(file mycensus9.dta not found)
 file mycensus9.dta saved
 
 ```
